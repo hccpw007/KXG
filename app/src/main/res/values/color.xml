@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="red">#FF0000</color>
+    <color name="transparency">#00000000</color>
+
+    <!--黑色字体/图片-->
+    <color name="myblack">#666666</color>
+    <!--灰色字体/图片-->
+    <color name="mygray">#b2b0b0</color>
+    <!--红色字体/图片-->
+    <color name="myred">#ff5d5e</color>
+    <!--页面背景色-->
+    <color name="mylayoutbg">#f7f7f7</color>
+    <!--组件灰色背景-->
+    <color name="myviewbg">#ebebeb</color>
+</resources>

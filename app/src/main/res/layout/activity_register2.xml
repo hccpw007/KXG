@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/myred"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".center.Register1Activity">
+
+    <include
+        layout="@layout/include_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mylayoutbg"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="10dp"
+            android:background="@color/myviewbg"/>
+        <TextView
+            android:layout_marginLeft="15dp"
+            android:textColor="@color/mygray"
+            style="@style/text_15sp_black"
+            android:text="请输入123456565收到的短信验证码:"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.base.views.MyEditText
+                android:paddingLeft="5dp"
+                style="@style/text_15sp_black"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_mytagview_bg"
+                android:digits="abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                android:hint="@string/register_smscode"
+                android:maxLength="6"
+                android:textColor="@color/myblack"
+                android:textColorHint="@color/mygray"/>
+
+            <Button
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                style="@style/text_16sp_black"
+                android:layout_width="120dp"
+                android:layout_height="35dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/bg_shape_red_to_gray"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="ASDF"
+                android:textColor="@color/mygray"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/myviewbg"/>
+
+        <Button
+            android:id="@+id/register_btn"
+            style="@style/text_16sp_white"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/bg_shape_red_to_gray"
+            android:gravity="center"
+            android:text="免费注册"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/myred"
+              android:clipToPadding="true"
+              android:fitsSystemWindows="true"
+              android:orientation="vertical"
+              tools:context=".main.NgtAty">
+
+    <com.base.views.MyViewPager
+        android:id="@+id/ngt_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+    </com.base.views.MyViewPager>
+
+    <RadioGroup
+        android:id="@+id/ngt_rg"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/ngt_rb1"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"
+            android:drawableTop="@drawable/sl_ngt_rb1"
+            android:gravity="center_horizontal|bottom"
+            android:paddingBottom="2dp"
+            android:text="主页"
+            android:textColor="@drawable/sl_ngt_text"
+            android:textSize="12sp"/>
+
+        <RadioButton
+            android:id="@+id/ngt_rb2"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/sl_ngt_rb2"
+            android:gravity="center_horizontal|bottom"
+            android:paddingBottom="2dp"
+            android:text="9块9"
+            android:textColor="@drawable/sl_ngt_text"
+            android:textSize="12sp"/>
+
+        <RadioButton
+            android:id="@+id/ngt_rb3"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/sl_ngt_rb3"
+            android:gravity="center_horizontal|bottom"
+            android:paddingBottom="2dp"
+            android:text="分类"
+            android:textColor="@drawable/sl_ngt_text"
+            android:textSize="12sp"/>
+
+        <RadioButton
+            android:id="@+id/ngt_rb4"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/sl_ngt_rb4"
+            android:gravity="center_horizontal|bottom"
+            android:paddingBottom="2dp"
+            android:text="积分"
+            android:textColor="@drawable/sl_ngt_text"
+            android:textSize="12sp"/>
+
+        <RadioButton
+            android:id="@+id/ngt_rb5"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/sl_ngt_rb5"
+            android:gravity="center_horizontal|bottom"
+            android:paddingBottom="2dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="10dp"
+            android:paddingTop="2dp"
+            android:text="个人中心"
+            android:textColor="@drawable/sl_ngt_text"
+            android:textSize="12sp"/>
+    </RadioGroup>
+
+</LinearLayout>
