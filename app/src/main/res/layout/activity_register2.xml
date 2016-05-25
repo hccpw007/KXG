@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/myred"
+    android:background="@color/mybg"
     android:clipToPadding="true"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
@@ -13,75 +13,109 @@
     <include
         layout="@layout/include_title"/>
 
+    <TextView
+        style="@style/text_14sp_black"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="12dp"
+        android:text="验证短信已发送至 139 2232 2323"
+        android:textColor="@color/mygray"
+        android:id="@+id/register2_phone_tv"/>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/mybg"
-        android:orientation="vertical">
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginTop="10dp"
-            android:background="@color/myline"/>
         <TextView
-            android:layout_marginLeft="15dp"
-            android:textColor="@color/mygray"
             style="@style/text_15sp_black"
-            android:text="请输入123456565收到的短信验证码:"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:text="验证码"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/white"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <com.base.views.MyEditText
-                android:paddingLeft="5dp"
-                style="@style/text_15sp_black"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_marginLeft="15dp"
-                android:layout_weight="1"
-                android:background="@drawable/shape_mytagview_bg"
-                android:digits="abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                android:hint="请输入验证码"
-                android:maxLength="6"
-                android:textColor="@color/black"
-                android:textColorHint="@color/mygray"/>
-
-            <Button
-                android:gravity="center"
-                android:layout_marginLeft="10dp"
-                style="@style/text_16sp_black"
-                android:layout_width="120dp"
-                android:layout_height="35dp"
-                android:layout_marginRight="15dp"
-                android:background="@drawable/bg_shape_red_to_gray"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:text="ASDF"
-                android:textColor="@color/mygray"/>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/myline"/>
-
-        <Button
-            android:id="@+id/register_btn"
-            style="@style/text_16sp_white"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+        <com.base.views.MyEditText
+            style="@style/text_15sp_black"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="40dp"
-            android:background="@drawable/bg_shape_red_to_gray"
-            android:gravity="center"
-            android:text="免费注册"/>
+            android:layout_weight="1"
+            android:inputType="number"
+            android:background="@color/transparency"
+            android:hint="短信验证码"
+            android:maxLength="6"
+            android:paddingLeft="5dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/myhint"
+            android:id="@+id/register2_code_et"/>
+        <View
+            android:layout_marginLeft="12dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="3dp"
+            android:background="@color/myline"
+            android:layout_width="1px"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:gravity="center_vertical|right"
+            android:enabled="false"
+            android:layout_marginRight="12dp"
+            android:textColor="@drawable/sl_count_text"
+            style="@style/text_15sp_black"
+            android:text="秒后重新获取"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:id="@+id/register2_count_tv"/>
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_15sp_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:text="邀请码"/>
+
+        <com.base.views.MyEditText
+            style="@style/text_15sp_black"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:background="@color/transparency"
+            android:inputType="number"
+            android:hint="如有注册邀请码请输入"
+            android:maxLength="8"
+            android:paddingLeft="5dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/myhint"
+            android:id="@+id/register2_invite_et"/>
+    </LinearLayout>
+    <TextView
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="10dp"
+        style="@style/text_14sp_black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="添加邀请码可以获得注册奖励，没有可不填写。"/>
+    <Button
+        android:textSize="18sp"
+        android:id="@+id/register2_register_btn"
+        style="@style/text_16sp_white"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_shape_red_to_gray"
+        android:gravity="center"
+        android:text="注册"/>
 </LinearLayout>

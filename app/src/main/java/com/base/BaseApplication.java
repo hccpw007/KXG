@@ -42,7 +42,7 @@ public class BaseApplication extends Application {
 		DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true)
 				.build();
 		ImageLoaderConfiguration defaultconfig = new ImageLoaderConfiguration.Builder(getBaseContext())
-				.defaultDisplayImageOptions(defaultOptions).threadPriority(Thread.NORM_PRIORITY - 2)
+				.defaultDisplayImageOptions(defaultOptions).threadPriority(Thread.NORM_PRIORITY - 2).writeDebugLogs()
 				.denyCacheImageMultipleSizesInMemory().diskCacheFileNameGenerator(new Md5FileNameGenerator())
 				.tasksProcessingOrder(QueueProcessingType.LIFO).build();
 		ImageLoader.getInstance().init(defaultconfig);

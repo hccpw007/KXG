@@ -3,6 +3,7 @@
 
   sl_ngt_rb(1-5) 导航页的RadioButton的图片跟随选中状态的改变
   sl_ngt_text    导航页的RadioButton的文字颜色跟随选中状态的改变
+  sl_count_text    倒计时的enabled状态改变文字颜色改变
   sl_viewpager_dot 导航页viewpager的圆点切换
   shape_f8f8f8_rectangle 首页搜索的灰色 2dp角度的背景
   shape_ebebeb_rectangle 分类页面 搜索底色

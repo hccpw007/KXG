@@ -21,12 +21,6 @@
         android:paddingLeft="12dp"
         android:text="我们将发送验证码到你的手机"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/mybg"
-        android:orientation="vertical">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -42,6 +36,7 @@
                 android:text="帐号"/>
 
             <com.base.views.MyEditText
+                android:id="@+id/register1_phone_et"
                 style="@style/text_15sp_black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -50,14 +45,15 @@
                 android:inputType="phone"
                 android:maxLength="11"
                 android:textColor="@color/black"
-                android:textColorHint="@color/myhint"
-                android:id="@+id/register1_phone_et"/>
+                android:textColorHint="@color/myhint"/>
         </LinearLayout>
 
-        <View
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/myline"/>
+            android:background="@color/white"
+            android:paddingLeft="12dp"
+            android:src="@color/myline"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -74,18 +70,26 @@
                 android:text="密码"/>
 
             <com.base.views.MyEditText
+                android:inputType="textPassword"
+                android:id="@+id/register1_pswd_et"
                 style="@style/text_15sp_black"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/transparency"
-                android:digits="abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                android:digits="0123456789abcdefjghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:hint="请输入登录密码"
-                android:maxLength="4"
+                android:maxLength="24"
                 android:textColor="@color/black"
-                android:textColorHint="@color/myhint"
-                android:id="@+id/register1_pswd_et"/>
+                android:textColorHint="@color/myhint"/>
         </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/white"
+            android:paddingLeft="12dp"
+            android:src="@color/myline"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -102,43 +106,52 @@
                 android:text="验证码"/>
 
             <com.base.views.MyEditText
+                android:id="@+id/register1_code_et"
                 style="@style/text_15sp_black"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/transparency"
-                android:digits="abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                android:digits="abcdefghijgklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
                 android:hint="请输入右侧验证码"
                 android:maxLength="4"
                 android:textColor="@color/black"
-                android:textColorHint="@color/myhint"
-                android:id="@+id/register1_code_et"/>
+                android:textColorHint="@color/myhint"/>
+
+            <ImageView
+                android:padding="-20dp"
+                android:id="@+id/register1_code_img"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="5dp"
+                android:scaleType="fitCenter"/>
 
             <TextView
-                style="@style/text_16sp_black"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_marginRight="15dp"
-                android:background="@drawable/shape_phonecode"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:text="ASDF"
-                android:textColor="@color/mygray"
-                android:id="@+id/register1_code_tv"/>
-
-            <TextView
+                android:enabled="false"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                android:gravity="center"
+                android:textColor="@drawable/sl_count_text"
+                android:id="@+id/register1_change_tv"
                 style="@style/text_15sp_red"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="30dp"
-                android:text="换一张"
-                android:id="@+id/register1_change_tv"/>
+                android:layout_marginRight="12dp"
+                android:text="获取验证码"/>
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/myline"/>
+
+        <TextView
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="10dp"
+            style="@style/text_14sp_black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="在开心购久久商城网站注册过的用户请直接登录。"/>
 
         <Button
             android:id="@+id/register1_register_btn"
@@ -147,10 +160,10 @@
             android:layout_height="50dp"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/bg_shape_red_to_gray"
             android:gravity="center"
-            android:text="注册"
+            android:text="下一步"
             android:textSize="18sp"/>
 
         <LinearLayout
@@ -168,6 +181,7 @@
                 android:textColor="@color/mygray"/>
 
             <TextView
+                android:id="@+id/register1_login_tv"
                 style="@style/text_14sp_black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -179,8 +193,6 @@
                 android:paddingRight="6dp"
                 android:paddingTop="2dp"
                 android:text="登录"
-                android:textColor="@color/mygray"
-                android:id="@+id/register1_login_tv"/>
+                android:textColor="@color/mygray"/>
         </LinearLayout>
     </LinearLayout>
-</LinearLayout>

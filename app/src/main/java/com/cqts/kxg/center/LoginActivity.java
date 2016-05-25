@@ -55,7 +55,7 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login_regist_tv: //注册
-                toRegister();
+                startActivity(new Intent(this,Register1Activity.class));
                 break;
             case R.id.lgoin_forget_tv: //忘记密码
                 break;
@@ -67,13 +67,6 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
             default:
                 break;
         }
-    }
-
-    /**
-     * 点击前去注册
-     */
-    private void toRegister() {
-
     }
 
     /**
@@ -95,7 +88,8 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
         MyHttp.signin(http, null, userName, pswd, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
-                if (code!=0)showToast(msg);
+                SigninInfo signinInfo = (SigninInfo) bean;
+                System.out.println(signinInfo.getToken());
             }
         });
     }

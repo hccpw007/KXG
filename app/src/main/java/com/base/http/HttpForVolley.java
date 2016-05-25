@@ -22,132 +22,144 @@ import com.base.BaseValue;
 import com.base.utils.Logger;
 
 public class HttpForVolley {
-	private StringRequest request;
-	HttpTodo todo;
-	Activity activity;
+    private StringRequest request;
+    HttpTodo todo;
+    Activity activity;
 
-	public HttpForVolley(Activity activity) {
-		this.activity = activity;
-	}
-
-
-	public String getName(){
-		return activity.getClass().getName();
-	}
+    public HttpForVolley(Activity activity) {
+        this.activity = activity;
+    }
 
 
-	/** 正常的请求数据接口 */
-	public void goTo(int Method,Integer which, HashMap<String, String> httpMap, String url,
-			HttpTodo todo) {
-		this.todo = todo;
-		if (null != request && url.equals(request.getUrl())) {
-			request.cancel();
-		}
-		toHttp(Method,which, httpMap, url);
-	}
+    public String getName() {
+        return activity.getClass().getName();
+    }
 
-	/** Base64上传图片 */
-	public void postBase64(int Method,Integer which, HashMap<String, String> httpMap,
-			String imgPath, String url, HttpTodo todo) {
-		this.todo = todo;
-		FileInputStream fis = null;
-		try {
 
-			fis = new FileInputStream(new File(imgPath));
-			byte[] buffer = new byte[fis.available()];
-			fis.read(buffer);
-			String encodeToString = Base64.encodeToString(buffer,
-					Base64.DEFAULT);
-			httpMap.put("base64File", encodeToString);
-			httpMap.put("ext", "jpg");
-			if (null == request) {
-				toHttp(Method,which, httpMap, url);
-			} else {
-				if (url.equals(request.getUrl())) {
-					request.cancel();
-				}
-				toHttp(Method,which, httpMap, url);
-			}
-		} catch (Exception e) {
-			JSONObject object = new JSONObject();
-			try {
-				object.put("msg", "发生错误");
-				object.put("code", "404");
-				todo.httpTodo(which, object);
-			} catch (JSONException e1) {
-			}
-			return;
-		} finally {
-			try {
-				fis.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+    /**
+     * 正常的请求数据接口
+     */
+    public void goTo(int Method, Integer which, HashMap<String, String> httpMap, String url,
+                     HttpTodo todo) {
+        this.todo = todo;
+        if (null != request && url.equals(request.getUrl())) {
+            request.cancel();
+        }
+        toHttp(Method, which, httpMap, url);
+    }
 
-	private void toHttp(int Method,final Integer which, final HashMap<String, String> httpMap,
-			final String url) {
-		request = new StringRequest(Method, url, new Listener<String>() {
+    /**
+     * Base64上传图片
+     */
+    public void postBase64(int Method, Integer which, HashMap<String, String> httpMap,
+                           String imgPath, String url, HttpTodo todo) {
+        this.todo = todo;
+        FileInputStream fis = null;
+        try {
 
-			@Override
-			public void onResponse(String response) {
-				try {
-					if (BaseValue.isDebug) {
-						Logger.json(response);
-					}
-					JSONObject result = new JSONObject(response);
-					todo.httpTodo(which, result);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}, new ErrorListener() {
-			@Override
-			public void onErrorResponse(VolleyError error) {
-				try {
-					JSONObject object = new JSONObject();
-					object.put("msg", "网络错误");
-					object.put("code", "404");
-					todo.httpTodo(which, object);
+            fis = new FileInputStream(new File(imgPath));
+            byte[] buffer = new byte[fis.available()];
+            fis.read(buffer);
+            String encodeToString = Base64.encodeToString(buffer,
+                    Base64.DEFAULT);
+            httpMap.put("base64File", encodeToString);
+            httpMap.put("ext", "jpg");
+            if (null == request) {
+                toHttp(Method, which, httpMap, url);
+            } else {
+                if (url.equals(request.getUrl())) {
+                    request.cancel();
+                }
+                toHttp(Method, which, httpMap, url);
+            }
+        } catch (Exception e) {
+            JSONObject object = new JSONObject();
+            try {
+                object.put("msg", "发生错误");
+                object.put("code", "404");
+                todo.httpTodo(which, object);
+            } catch (JSONException e1) {
+            }
+            return;
+        } finally {
+            try {
+                fis.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
-					if (BaseValue.isDebug) {
-						Logger.json(object.toString());
-					}
+    private void toHttp(int Method, final Integer which, final HashMap<String, String> httpMap,
+                        final String url) {
+        HashMap<String, String> map = new HashMap<String, String>();
+        if (null != httpMap){
+            map = httpMap;
+        }
+        if (BaseValue.isDebug) {
+            try {
+                Logger.json(new JSONObject(map).put("url", url).put("activity",
+                        activity.getClass().getName()).toString());
+            } catch (JSONException e) {
+            }
+        }
 
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-			}
-		}) {
-			@Override
-			protected Map<String, String> getParams() throws AuthFailureError {
-				if (BaseValue.isDebug) {
-					try {
-						Logger.json(new JSONObject(httpMap).put("url",url).put("activity",activity.getClass().getName()).toString());
-					} catch (JSONException e) {
-					}
-				}
-				return httpMap;
-			}
-		};
-		request.setTag(activity);
-		BaseValue.mQueue.add(request);
-	}
+        request = new StringRequest(Method, url, new Listener<String>() {
 
-	/**
-	 * 网络请求结束后todo
-	 */
-	public interface HttpTodo {
-		/**
-		 * 网络请求结果返回
-		 * 
-		 * @param which
-		 *            msg.which 用于标识请求来源 which ==404表示网络错误
-		 * @param response
-		 *            请求具体结果 JSONObject 格式
-		 */
-		public void httpTodo(Integer which, JSONObject response);
-	}
+            @Override
+            public void onResponse(String response) {
+                try {
+                    if (BaseValue.isDebug) {
+                        Logger.json(response);
+                    }
+                    JSONObject result = new JSONObject(response);
+                    todo.httpTodo(which, result);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                try {
+                    JSONObject object = new JSONObject();
+                    object.put("msg", "网络错误");
+                    object.put("code", "404");
+                    todo.httpTodo(which, object);
+
+                    if (BaseValue.isDebug) {
+                        Logger.json(object.toString());
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                if (null == httpMap){
+                    return new HashMap<String, String>();
+                }else{
+                    return httpMap;
+                }
+            }
+        };
+        request.setTag(activity);
+        BaseValue.mQueue.add(request);
+    }
+
+    /**
+     * 网络请求结束后todo
+     */
+    public interface HttpTodo {
+        /**
+         * 网络请求结果返回
+         *
+         * @param which    msg.which 用于标识请求来源 which ==404表示网络错误
+         * @param response 请求具体结果 JSONObject 格式
+         */
+        public void httpTodo(Integer which, JSONObject response);
+    }
 
 }

@@ -107,7 +107,7 @@ public class MyEditText extends EditText {
     }
 
     //简化TextChanged方法,只需要执行interface 的textChanged 方法即可
-    public void addTextChangedListener(final TextChanged newTextChanged) {
+    public void addMyTextChangedListener(final TextChanged newTextChanged) {
         this.textChanged = newTextChanged;
     }
 

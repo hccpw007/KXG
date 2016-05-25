@@ -1,22 +1,15 @@
 package com.cqts.kxg.utils;
 
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.base.BaseValue;
 import com.base.http.HttpForVolley;
 import com.cqts.kxg.bean.SceneInfo;
 import com.cqts.kxg.bean.SigninInfo;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -46,7 +39,7 @@ public class MyHttp {
             public void httpTodo(Integer which, JSONObject response) {
                 Object data = null;
                 if (null != bean) {
-//                    data = BaseValue.gson.fromJson(response.optString("data"), bean);
+                    data = BaseValue.gson.fromJson(response.optString("data"), bean);
                 }
                 myHttpResult.httpResult(which, response.optInt("code", 1), response.optString
                         ("msg", "发生错误"), data);
@@ -78,8 +71,42 @@ public class MyHttp {
     public static void scene(HttpForVolley http, Integer which,
                              final MyHttpResult myHttpResult) {
         String httpUrl = url + "home/scene";
+        Type type = new TypeToken<List<SceneInfo>>() {
+        }.getType();
+        toBean(Request.Method.GET, http, which, null, httpUrl, myHttpResult, type);
+    }
+
+    /**
+     * 注册用户<p>
+     * 注册用户，需要通过图形验证码获取到短信验证码，然后携带短信验证码过来注册。<br>
+     * captcha 短信验证码<br>
+     * imgcaptcha 图片验证码<br>
+     * mobile_phone 手机号码<br>
+     * password 密码<br>
+     * invite_code 邀请码，可选<br>
+     */
+    public static void signup(HttpForVolley http, Integer which, String captcha, String
+            imgcaptcha, String mobile_phone, String password, String invite_code,
+                              final MyHttpResult myHttpResult) {
+        String httpUrl = url + "user/signup";
         httpMap.clear();
-        Type type = new TypeToken<List<SceneInfo>>() {}.getType();
-        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type);
+        httpMap.put("captcha", captcha);
+        httpMap.put("imgcaptcha", imgcaptcha);
+        httpMap.put("mobile_phone", mobile_phone);
+        httpMap.put("password", password);
+        httpMap.put("invite_code", invite_code);
+        toBean(Request.Method.POST, http, which, httpMap, httpUrl, myHttpResult, null);
+    }
+
+    /**
+     * 短信验证码<p>
+     * phone 手机号<br>
+     * captcha 图形验证码<br>
+     * act 行为，获取登录验证码 2 = login，注册验证码 1 = register
+     */
+    public static void sms(HttpForVolley http, Integer which, String phone, String captcha, int act,
+                           final MyHttpResult myHttpResult) {
+        String httpUrl = url + "captcha/sms?phone=" + phone + "&captcha=" + captcha + "&act=" + act;
+        toBean(Request.Method.GET, http, which, null, httpUrl, myHttpResult, null);
     }
 }
