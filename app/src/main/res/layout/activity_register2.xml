@@ -48,7 +48,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/shape_mytagview_bg"
                 android:digits="abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                android:hint="@string/register_smscode"
+                android:hint="请输入验证码"
                 android:maxLength="6"
                 android:textColor="@color/black"
                 android:textColorHint="@color/mygray"/>

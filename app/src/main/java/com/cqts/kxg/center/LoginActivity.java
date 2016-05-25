@@ -55,7 +55,7 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login_regist_tv: //注册
-                startActivity(new Intent(this, Register1Activity.class));
+                toRegister();
                 break;
             case R.id.lgoin_forget_tv: //忘记密码
                 break;
@@ -67,6 +67,13 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
             default:
                 break;
         }
+    }
+
+    /**
+     * 点击前去注册
+     */
+    private void toRegister() {
+
     }
 
     /**

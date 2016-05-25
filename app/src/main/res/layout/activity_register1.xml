@@ -50,7 +50,8 @@
                 android:inputType="phone"
                 android:maxLength="11"
                 android:textColor="@color/black"
-                android:textColorHint="@color/myhint"/>
+                android:textColorHint="@color/myhint"
+                android:id="@+id/register1_phone_et"/>
         </LinearLayout>
 
         <View
@@ -82,7 +83,8 @@
                 android:hint="请输入登录密码"
                 android:maxLength="4"
                 android:textColor="@color/black"
-                android:textColorHint="@color/myhint"/>
+                android:textColorHint="@color/myhint"
+                android:id="@+id/register1_pswd_et"/>
         </LinearLayout>
 
         <LinearLayout
@@ -109,7 +111,8 @@
                 android:hint="请输入右侧验证码"
                 android:maxLength="4"
                 android:textColor="@color/black"
-                android:textColorHint="@color/myhint"/>
+                android:textColorHint="@color/myhint"
+                android:id="@+id/register1_code_et"/>
 
             <TextView
                 style="@style/text_16sp_black"
@@ -120,13 +123,16 @@
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:text="ASDF"
-                android:textColor="@color/mygray"/>
+                android:textColor="@color/mygray"
+                android:id="@+id/register1_code_tv"/>
+
             <TextView
-                android:layout_marginRight="30dp"
                 style="@style/text_15sp_red"
-                android:text="换一张"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:layout_marginRight="30dp"
+                android:text="换一张"
+                android:id="@+id/register1_change_tv"/>
         </LinearLayout>
 
         <View
@@ -135,7 +141,7 @@
             android:background="@color/myline"/>
 
         <Button
-            android:id="@+id/register_btn"
+            android:id="@+id/register1_register_btn"
             style="@style/text_16sp_white"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -144,6 +150,37 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/bg_shape_red_to_gray"
             android:gravity="center"
-            android:text="注册"/>
+            android:text="注册"
+            android:textSize="18sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_14sp_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="已有帐号?"
+                android:textColor="@color/mygray"/>
+
+            <TextView
+                style="@style/text_14sp_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/shape_login_register_bg"
+                android:paddingBottom="2dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:paddingTop="2dp"
+                android:text="登录"
+                android:textColor="@color/mygray"
+                android:id="@+id/register1_login_tv"/>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
