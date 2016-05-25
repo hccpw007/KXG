@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/myred"
+    android:background="@color/mybg"
     android:clipToPadding="true"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
@@ -13,74 +13,103 @@
     <include
         layout="@layout/include_title"/>
 
+
+    <TextView
+        style="@style/text_15sp_black"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingLeft="12dp"
+        android:text="我们将发送验证码到你的手机"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/mylayoutbg"
+        android:background="@color/mybg"
         android:orientation="vertical">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginTop="10dp"
-            android:background="@color/myviewbg"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="10dp"
-                android:src="@mipmap/register_phone"/>
+            <TextView
+                style="@style/text_15sp_black"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="12dp"
+                android:text="帐号"/>
 
             <com.base.views.MyEditText
                 style="@style/text_15sp_black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="30dp"
                 android:background="@color/transparency"
-                android:hint="@string/register_phone"
+                android:hint="请输入你的手机号"
                 android:inputType="phone"
                 android:maxLength="11"
-                android:textColor="@color/myblack"
-                android:textColorHint="@color/mygray"/>
+                android:textColor="@color/black"
+                android:textColorHint="@color/myhint"/>
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/myviewbg"/>
+            android:background="@color/myline"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="15dp"
-                android:src="@mipmap/register_code"/>
+            <TextView
+                style="@style/text_15sp_black"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="12dp"
+                android:text="密码"/>
 
             <com.base.views.MyEditText
                 style="@style/text_15sp_black"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="25dp"
                 android:layout_weight="1"
                 android:background="@color/transparency"
                 android:digits="abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                android:hint="@string/register_code"
+                android:hint="请输入登录密码"
                 android:maxLength="4"
-                android:textColor="@color/myblack"
-                android:textColorHint="@color/mygray"/>
+                android:textColor="@color/black"
+                android:textColorHint="@color/myhint"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_15sp_black"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="12dp"
+                android:text="验证码"/>
+
+            <com.base.views.MyEditText
+                style="@style/text_15sp_black"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/transparency"
+                android:digits="abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                android:hint="请输入右侧验证码"
+                android:maxLength="4"
+                android:textColor="@color/black"
+                android:textColorHint="@color/myhint"/>
 
             <TextView
                 style="@style/text_16sp_black"
@@ -92,23 +121,29 @@
                 android:paddingRight="15dp"
                 android:text="ASDF"
                 android:textColor="@color/mygray"/>
+            <TextView
+                android:layout_marginRight="30dp"
+                style="@style/text_15sp_red"
+                android:text="换一张"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/myviewbg"/>
+            android:background="@color/myline"/>
 
         <Button
             android:id="@+id/register_btn"
             style="@style/text_16sp_white"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/bg_shape_red_to_gray"
             android:gravity="center"
-            android:text="免费注册"/>
+            android:text="注册"/>
     </LinearLayout>
 </LinearLayout>

@@ -5,14 +5,18 @@
     <color name="red">#FF0000</color>
     <color name="transparency">#00000000</color>
 
-    <!--黑色字体/图片-->
-    <color name="myblack">#666666</color>
-    <!--灰色字体/图片-->
-    <color name="mygray">#b2b0b0</color>
     <!--红色字体/图片-->
-    <color name="myred">#ff5d5e</color>
+    <color name="myblack">#323232</color>
+    <!--红色字体/图片-->
+    <color name="myred">#ff2233</color>
     <!--页面背景色-->
-    <color name="mylayoutbg">#f7f7f7</color>
-    <!--组件灰色背景-->
-    <color name="myviewbg">#ebebeb</color>
+    <color name="mybg">#f2f3f4</color>
+    <!--分割线-->
+    <color name="myline">#c7c8cc</color>
+    <!--输入框hint-->
+    <color name="myhint">#aaaaaa</color>
+    <!--灰色字体/图片-->
+    <color name="mygray">#646464</color>
+    <!--蓝色字体-->
+    <color name="myblue">#0066bc</color>
 </resources>

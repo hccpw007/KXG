@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mylayoutbg"
+    android:background="@color/mybg"
     android:orientation="vertical"
     tools:context="com.cqts.kxg.center.FavoriteActivity">
 
@@ -16,7 +16,7 @@
 
         <TextView
             android:layout_marginLeft="10dp"
-            android:textColor="@color/myblack"
+            android:textColor="@color/black"
             android:textSize="16sp"
             android:layout_weight="1"
             android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
 
         <TextView
             android:layout_marginRight="10dp"
-            android:textColor="@color/myblack"
+            android:textColor="@color/black"
             android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -34,7 +34,7 @@
             android:text="编辑" />
     </LinearLayout>
     <View
-        android:background="@color/myviewbg"
+        android:background="@color/myline"
         android:layout_width="match_parent"
         android:layout_height="1px"/>
 </LinearLayout>

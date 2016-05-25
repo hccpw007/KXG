@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mylayoutbg"
+    android:background="@color/mybg"
     android:orientation="vertical">
 
     <LinearLayout
@@ -62,7 +62,7 @@
             android:id="@+id/classify_rv1"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
-            android:background="@color/myviewbg"></android.support.v7.widget.RecyclerView>
+            android:background="@color/myline"></android.support.v7.widget.RecyclerView>
 
         <TextView
             android:id="@+id/classify_child_tv"
@@ -73,7 +73,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
             android:text="热门分类"
-            android:textColor="@color/myblack"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <android.support.v7.widget.RecyclerView

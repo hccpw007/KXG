@@ -66,7 +66,7 @@ public class ClassifyRecyclerViewAdapter1 extends RecyclerView.Adapter<ClassifyR
             }
         } else {
             myViewHolder.item_classify_view.setVisibility(View.GONE);
-            myViewHolder.itemView.setBackgroundResource(R.color.myviewbg);
+            myViewHolder.itemView.setBackgroundResource(R.color.myline);
             myViewHolder.item_classify_view1.setVisibility(View.VISIBLE);
             myViewHolder.item_classify_view2.setVisibility(View.GONE);
             myViewHolder.item_classify_view3.setVisibility(View.GONE);

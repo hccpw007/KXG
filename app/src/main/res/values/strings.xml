@@ -10,9 +10,6 @@
     <string name="refresh_fail">刷新失败</string>
     <string name="more">更多</string>
     <string name="loading">正在加载...</string>
-    <string name="login_user"><font size="15">用户名</font></string>
-    <string name="login_pswd"><font size="15">密码</font></string>
-    <string name="register_phone"><font size="14">请输入你的手机号码</font></string>
-    <string name="register_code"><font size="14">请输入图片中的验证码</font></string>
-    <string name="register_smscode"><font size="14">请输入短信验证码</font></string>
+    <string name="login_user"><font size="15">请输入手机号/用户名</font></string>
+    <string name="login_pswd"><font size="15">请输入登录密码</font></string>
 </resources>

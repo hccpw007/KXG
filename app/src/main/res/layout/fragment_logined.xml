@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mylayoutbg"
+    android:background="@color/mybg"
     android:orientation="vertical">
 
     <LinearLayout
@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_marginTop="10dp"
-        android:background="@color/myviewbg" />
+        android:background="@color/myline" />
 
     <TextView
         android:layout_width="match_parent"
@@ -40,13 +40,13 @@
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
         android:text="全部订单"
-        android:textColor="@color/myblack"
+        android:textColor="@color/black"
         android:textSize="14sp" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/myviewbg" />
+        android:background="@color/myline" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -97,7 +97,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="我的订单"
-            android:textColor="@color/myblack"
+            android:textColor="@color/black"
             android:textSize="14sp" />
 
         <TextView
@@ -106,7 +106,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="购物车"
-            android:textColor="@color/myblack"
+            android:textColor="@color/black"
             android:textSize="14sp" />
 
         <TextView
@@ -115,7 +115,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="物流信息"
-            android:textColor="@color/myblack"
+            android:textColor="@color/black"
             android:textSize="14sp" />
 
         <TextView
@@ -124,20 +124,20 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="退款/售后"
-            android:textColor="@color/myblack"
+            android:textColor="@color/black"
             android:textSize="14sp" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/myviewbg" />
+        android:background="@color/myline" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_marginTop="10dp"
-        android:background="@color/myviewbg" />
+        android:background="@color/myline" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -163,7 +163,7 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:text="我的收藏"
-            android:textColor="@color/myblack"
+            android:textColor="@color/black"
             android:textSize="14sp" />
 
         <TextView
@@ -186,7 +186,7 @@
         android:layout_height="1px"
         android:layout_marginLeft="56dp"
         android:layout_marginRight="20dp"
-        android:background="@color/myviewbg" />
+        android:background="@color/myline" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -207,7 +207,7 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:text="积分记录"
-            android:textColor="@color/myblack"
+            android:textColor="@color/black"
             android:textSize="14sp" />
 
         <TextView
@@ -229,13 +229,13 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/myviewbg" />
+        android:background="@color/myline" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_marginTop="10dp"
-        android:background="@color/myviewbg" />
+        android:background="@color/myline" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -256,7 +256,7 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:text="帮助中心"
-            android:textColor="@color/myblack"
+            android:textColor="@color/black"
             android:textSize="14sp" />
 
         <ImageView
@@ -269,7 +269,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/myviewbg" />
+        android:background="@color/myline" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -289,7 +289,7 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:text="意见反馈"
-            android:textColor="@color/myblack"
+            android:textColor="@color/black"
             android:textSize="14sp" />
 
         <ImageView
@@ -302,5 +302,5 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/myviewbg" />
+        android:background="@color/myline" />
 </LinearLayout>

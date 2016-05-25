@@ -173,7 +173,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="潮流女装"
-                    android:textColor="@color/myblack"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
@@ -182,7 +182,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="箱包首饰"
-                    android:textColor="@color/myblack"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
@@ -191,7 +191,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="男女鞋靴"
-                    android:textColor="@color/myblack"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
@@ -200,7 +200,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="母婴童装"
-                    android:textColor="@color/myblack"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -252,7 +252,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="美妆个护"
-                    android:textColor="@color/myblack"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
@@ -261,7 +261,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="家电数码"
-                    android:textColor="@color/myblack"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
@@ -270,7 +270,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="家居家具"
-                    android:textColor="@color/myblack"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
@@ -279,7 +279,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="更多分类"
-                    android:textColor="@color/myblack"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
             </LinearLayout>
 

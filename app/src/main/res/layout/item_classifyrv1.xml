@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/myviewbg">
+    android:background="@color/myline">
     <View
         android:visibility="gone"
         android:id="@+id/item_classify_view2"
@@ -25,7 +25,7 @@
         android:layout_height="60dp"
         android:gravity="center"
         android:singleLine="true"
-        android:textColor="@color/myblack"
+        android:textColor="@color/black"
         android:textSize="16sp" />
 
     <View

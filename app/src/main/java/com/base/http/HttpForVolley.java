@@ -30,18 +30,24 @@ public class HttpForVolley {
 		this.activity = activity;
 	}
 
+
+	public String getName(){
+		return activity.getClass().getName();
+	}
+
+
 	/** 正常的请求数据接口 */
-	public void post(int which, HashMap<String, String> httpMap, String url,
+	public void goTo(int Method,Integer which, HashMap<String, String> httpMap, String url,
 			HttpTodo todo) {
 		this.todo = todo;
 		if (null != request && url.equals(request.getUrl())) {
 			request.cancel();
 		}
-		toHttp(which, httpMap, url);
+		toHttp(Method,which, httpMap, url);
 	}
 
 	/** Base64上传图片 */
-	public void postBase64(int which, HashMap<String, String> httpMap,
+	public void postBase64(int Method,Integer which, HashMap<String, String> httpMap,
 			String imgPath, String url, HttpTodo todo) {
 		this.todo = todo;
 		FileInputStream fis = null;
@@ -55,18 +61,18 @@ public class HttpForVolley {
 			httpMap.put("base64File", encodeToString);
 			httpMap.put("ext", "jpg");
 			if (null == request) {
-				toHttp(which, httpMap, url);
+				toHttp(Method,which, httpMap, url);
 			} else {
 				if (url.equals(request.getUrl())) {
 					request.cancel();
 				}
-				toHttp(which, httpMap, url);
+				toHttp(Method,which, httpMap, url);
 			}
 		} catch (Exception e) {
 			JSONObject object = new JSONObject();
 			try {
 				object.put("msg", "发生错误");
-				object.put("status", "404");
+				object.put("code", "404");
 				todo.httpTodo(which, object);
 			} catch (JSONException e1) {
 			}
@@ -80,9 +86,9 @@ public class HttpForVolley {
 		}
 	}
 
-	private void toHttp(final int which, final HashMap<String, String> httpMap,
+	private void toHttp(int Method,final Integer which, final HashMap<String, String> httpMap,
 			final String url) {
-		request = new StringRequest(Method.POST, url, new Listener<String>() {
+		request = new StringRequest(Method, url, new Listener<String>() {
 
 			@Override
 			public void onResponse(String response) {
@@ -102,7 +108,7 @@ public class HttpForVolley {
 				try {
 					JSONObject object = new JSONObject();
 					object.put("msg", "网络错误");
-					object.put("status", "404");
+					object.put("code", "404");
 					todo.httpTodo(which, object);
 
 					if (BaseValue.isDebug) {
@@ -117,8 +123,10 @@ public class HttpForVolley {
 			@Override
 			protected Map<String, String> getParams() throws AuthFailureError {
 				if (BaseValue.isDebug) {
-					Logger.d(url);
-					Logger.json(new JSONObject(httpMap).toString());
+					try {
+						Logger.json(new JSONObject(httpMap).put("url",url).put("activity",activity.getClass().getName()).toString());
+					} catch (JSONException e) {
+					}
 				}
 				return httpMap;
 			}
@@ -139,7 +147,7 @@ public class HttpForVolley {
 		 * @param response
 		 *            请求具体结果 JSONObject 格式
 		 */
-		public void httpTodo(int which, JSONObject response);
+		public void httpTodo(Integer which, JSONObject response);
 	}
 
 }

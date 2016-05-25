@@ -7,6 +7,7 @@
   shape_f8f8f8_rectangle 首页搜索的灰色 2dp角度的背景
   shape_ebebeb_rectangle 分类页面 搜索底色
   shape_mytagview_bg 搜索标签的textview背景
+  shape_login_register_bg 登录页注册按钮的背景
   shape_phonecode 验证码
   bg_red_to_gray 无钝角 red-gray 的 selector
   bg_white_to_gray 无钝角 white-gray 的 selector
