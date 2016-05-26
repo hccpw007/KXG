@@ -13,7 +13,6 @@
     <include
         layout="@layout/include_title"/>
 
-
     <TextView
         style="@style/text_15sp_black"
         android:layout_width="match_parent"
