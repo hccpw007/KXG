@@ -99,7 +99,7 @@ public class SwipeBackLayout extends FrameLayout {
 
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                if (ev.getRawX() > BaseValue.screenwidth / 2){
+                if (ev.getRawX() > BaseValue.screenwidth*2/3){
                     return super.onInterceptTouchEvent(ev);
                 }
                 downX = tempX = (int) ev.getRawX();
@@ -126,7 +126,7 @@ public class SwipeBackLayout extends FrameLayout {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                if (event.getRawX() > BaseValue.screenwidth / 2)
+                if (event.getRawX() > BaseValue.screenwidth*2/3)
                     return false;
                 break;
             case MotionEvent.ACTION_MOVE:

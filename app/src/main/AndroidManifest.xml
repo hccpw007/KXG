@@ -80,6 +80,13 @@
             android:name=".center.Register2Activity"
             android:theme="@style/SwipeBackTheme">
         </activity>
+        <activity
+            android:name=".center.Pswd1Activity"
+            android:theme="@style/SwipeBackTheme">
+        </activity>
+        <activity android:name=".center.Pswd2Activity"
+                  android:theme="@style/SwipeBackTheme">
+        </activity>
     </application>
 
 </manifest>

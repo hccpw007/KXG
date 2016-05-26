@@ -10,7 +10,9 @@ import com.base.views.MyEditText;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.SceneInfo;
 import com.cqts.kxg.bean.SigninInfo;
+import com.cqts.kxg.bean.UserInfo;
 import com.cqts.kxg.main.MyActivity;
+import com.cqts.kxg.main.MyApplication;
 import com.cqts.kxg.utils.MyHttp;
 
 import java.util.ArrayList;
@@ -53,16 +55,24 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.login_regist_tv: //注册
-                startActivity(new Intent(this,Register1Activity.class));
+                intent.setClass(this,Register1Activity.class);
+                startActivity(intent);
                 break;
             case R.id.lgoin_forget_tv: //忘记密码
+                intent.setClass(this,Pswd1Activity.class);
+                intent.putExtra("act",Pswd1Activity.FINDPSWD);
+                startActivity(intent);
                 break;
             case R.id.login_login_btn: //登录
                 login();
                 break;
             case R.id.login_quick_tv: //快捷登录
+                intent.setClass(this,Pswd1Activity.class);
+                intent.putExtra("act",Pswd1Activity.QIUCKLOGIN);
+                startActivity(intent);
                 break;
             default:
                 break;
@@ -76,7 +86,7 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
         String userName = login_user_et.getText().toString().trim();
         String pswd = login_pswd_et.getText().toString().trim();
 
-        if (userName.isEmpty()||userName.length()<6){
+        if (userName.isEmpty()){
             showToast("请输入手机号或用户名");
             return;
         }
@@ -89,8 +99,27 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
                 SigninInfo signinInfo = (SigninInfo) bean;
-                System.out.println(signinInfo.getToken());
+                MyApplication.token = signinInfo.getToken();
+                getUserInfo();
+            }
+
+        });
+    }
+
+    /**
+     * 获取用户信息
+     */
+    private void getUserInfo() {
+        MyHttp.getUserInfo(http, null, MyApplication.token, new MyHttp.MyHttpResult() {
+            @Override
+            public void httpResult(Integer which, int code, String msg, Object bean) {
+                if (code!=0){
+                    showToast(msg);
+                    return;
+                }
+                MyApplication.userInfo = (UserInfo) bean;
             }
         });
     }
+
 }

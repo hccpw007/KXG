@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mybg"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".center.Pswd2Activity">
+
+    <include
+        layout="@layout/include_title"/>
+
+    <TextView
+        style="@style/text_14sp_black"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="12dp"
+        android:text="验证短信已发送至 "
+        android:textColor="@color/mygray"
+        android:id="@+id/pswd2_phone_tv"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_15sp_black"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:text="验证码"/>
+
+        <com.base.views.MyEditText
+            style="@style/text_15sp_black"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:inputType="number"
+            android:background="@color/transparency"
+            android:hint="短信验证码"
+            android:maxLength="6"
+            android:paddingLeft="5dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/myhint"
+            android:id="@+id/pswd2_code_et"/>
+        <View
+            android:layout_marginLeft="12dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="3dp"
+            android:background="@color/myline"
+            android:layout_width="1px"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:gravity="center_vertical|right"
+            android:enabled="false"
+            android:layout_marginRight="12dp"
+            android:textColor="@drawable/sl_count_text"
+            style="@style/text_15sp_black"
+            android:text="秒后重新获取"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:id="@+id/pswd2_count_tv"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_15sp_black"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:text="设置密码"/>
+
+        <com.base.views.MyEditText
+            style="@style/text_15sp_black"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:background="@color/transparency"
+            android:inputType="textPassword"
+            android:hint="新登录密码(6-24位字符)"
+            android:maxLength="24"
+            android:paddingLeft="5dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/myhint"
+            android:id="@+id/pswd2_pswd_et"/>
+    </LinearLayout>
+    <Button
+        android:textSize="18sp"
+        android:id="@+id/pswd2_login_btn"
+        style="@style/text_16sp_white"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_shape_red_to_gray"
+        android:gravity="center"
+        android:text="登录"/>
+</LinearLayout>

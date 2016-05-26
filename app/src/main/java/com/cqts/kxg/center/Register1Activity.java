@@ -52,7 +52,6 @@ public class Register1Activity extends MyActivity implements View.OnClickListene
         register1_change_tv.setOnClickListener(this);
         register1_register_btn.setOnClickListener(this);
         register1_login_tv.setOnClickListener(this);
-
         register1_phone_et.addMyTextChangedListener(this);
 
 
@@ -66,8 +65,8 @@ public class Register1Activity extends MyActivity implements View.OnClickListene
                 GetImageCode.getImageCode(register1_code_img, register1_phone_et.getText()
                         .toString().trim());
                 break;
-            case R.id.register1_register_btn: //注册btn
-                register();
+            case R.id.register1_register_btn: //下一步
+                next();
                 break;
             case R.id.register1_login_tv: //已有帐号登录
                 break;
@@ -79,7 +78,7 @@ public class Register1Activity extends MyActivity implements View.OnClickListene
     /**
      * 注册 发送验证码
      */
-    private void register() {
+    private void next() {
         final String phoneStr = register1_phone_et.getText().toString().trim();
         final String pswdStr = register1_pswd_et.getText().toString().trim();
         final String codeStr = register1_code_et.getText().toString().trim();
@@ -92,10 +91,10 @@ public class Register1Activity extends MyActivity implements View.OnClickListene
             return;
         }
         if (codeStr.isEmpty() || codeStr.length() < 4) {
-            showToast("请输入5位验证码");
+            showToast("请输入4位验证码");
             return;
         }
-        MyHttp.sms(http, null, phoneStr, codeStr, 1, new MyHttp.MyHttpResult() {
+        MyHttp.sms(http, null, phoneStr, codeStr, 1,null,new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
                 if (code != 0) {
@@ -121,7 +120,7 @@ public class Register1Activity extends MyActivity implements View.OnClickListene
             register1_change_tv.setEnabled(true);
             register1_code_et.setEnabled(true);
         } else {
-            register1_change_tv.setText("获取验证码");
+            register1_change_tv.setText("获取");
             register1_change_tv.setEnabled(false);
             register1_code_et.setEnabled(false);
             register1_code_et.setText("");

@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,6 +14,7 @@ import android.app.Activity;
 import android.util.Base64;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
@@ -29,12 +31,6 @@ public class HttpForVolley {
     public HttpForVolley(Activity activity) {
         this.activity = activity;
     }
-
-
-    public String getName() {
-        return activity.getClass().getName();
-    }
-
 
     /**
      * 正常的请求数据接口
@@ -91,18 +87,38 @@ public class HttpForVolley {
     }
 
     private void toHttp(int Method, final Integer which, final HashMap<String, String> httpMap,
-                        final String url) {
+                        String url) {
         HashMap<String, String> map = new HashMap<String, String>();
-        if (null != httpMap){
+        if (null != httpMap) {
             map = httpMap;
         }
         if (BaseValue.isDebug) {
             try {
+                String httpMethod = "";
+                if (Method == Request.Method.GET)
+                    httpMethod = "GET";
+                if (Method == Request.Method.POST)
+                    httpMethod = "POST";
                 Logger.json(new JSONObject(map).put("url", url).put("activity",
-                        activity.getClass().getName()).toString());
+                        activity.getClass().getName()).put("Method",httpMethod).toString());
             } catch (JSONException e) {
             }
         }
+
+        //组装get参数
+        if (Method == Request.Method.GET) {
+            if (httpMap != null && httpMap.size() > 0) {
+                url = url + "?";
+                for (String key : httpMap.keySet()) {
+                    url = url + key + "=" + httpMap.get(key) + "&";
+                }
+            }
+            if (url.endsWith("&")) {
+                url = url.substring(0, url.length() - 1);
+                System.out.println(url);
+            }
+        }
+
 
         request = new StringRequest(Method, url, new Listener<String>() {
 
@@ -138,9 +154,9 @@ public class HttpForVolley {
         }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                if (null == httpMap){
+                if (null == httpMap) {
                     return new HashMap<String, String>();
-                }else{
+                } else {
                     return httpMap;
                 }
             }

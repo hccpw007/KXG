@@ -5,6 +5,7 @@ import com.base.BaseValue;
 import com.base.http.HttpForVolley;
 import com.cqts.kxg.bean.SceneInfo;
 import com.cqts.kxg.bean.SigninInfo;
+import com.cqts.kxg.bean.UserInfo;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONObject;
@@ -102,11 +103,91 @@ public class MyHttp {
      * 短信验证码<p>
      * phone 手机号<br>
      * captcha 图形验证码<br>
-     * act 行为，获取登录验证码 2 = login，注册验证码 1 = register
+     * token 这里如果是重置密码用，那么必须传入 Token ，同时图形验证码不需要传入<br>
+     * act 行为：<br>
+     * 1、注册验证码<br>
+     * 2、登陆验证码<br>
+     * 3、找回密码验证码<br>
+     * 4、重置密码验证码<br>
      */
-    public static void sms(HttpForVolley http, Integer which, String phone, String captcha, int act,
+    public static void sms(HttpForVolley http, Integer which, String phone, String captcha, int
+            act, String token,
                            final MyHttpResult myHttpResult) {
-        String httpUrl = url + "captcha/sms?phone=" + phone + "&captcha=" + captcha + "&act=" + act;
-        toBean(Request.Method.GET, http, which, null, httpUrl, myHttpResult, null);
+        httpMap.clear();
+        httpMap.put("phone",phone);
+        httpMap.put("captcha",captcha);
+        httpMap.put("act",act+"");
+        httpMap.put("token",token);
+        String httpUrl = url + "captcha/sms";
+        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, null);
     }
+
+
+    /**
+     * 快捷登陆<p>
+     * <p/>
+     * 接口和注册一样需要先获取图形验证码，然后获取短信验证码<p>
+     * mobile_phone 手机号码<br>
+     * captcha 短信验证码<br>
+     * imgcaptcha 图片验证码<br>
+     * password 设置的密码， 可选<br>
+     */
+    public static void quickSignin(HttpForVolley http, Integer which, String captcha, String
+            imgcaptcha, String mobile_phone, String password,
+                                   final MyHttpResult myHttpResult) {
+        String httpUrl = url + "user/quicksignin";
+        httpMap.clear();
+        httpMap.put("captcha", captcha);
+        httpMap.put("imgcaptcha", imgcaptcha);
+        httpMap.put("mobile_phone", mobile_phone);
+        httpMap.put("password", password);
+        toBean(Request.Method.POST, http, which, httpMap, httpUrl, myHttpResult, SigninInfo.class);
+    }
+
+
+    /**
+     * 找回密码<br>
+     * 接口和注册一样需要先获取图形验证码，然后获取短信验证码<p>
+     * mobile_phone 手机号码<br>
+     * captcha 短信验证码<br>
+     * imgcaptcha 图片验证码<br>
+     * password 设置的密码<br>
+     */
+    public static void password(HttpForVolley http, Integer which, String captcha, String
+            imgcaptcha, String mobile_phone, String password,
+                                final MyHttpResult myHttpResult) {
+        String httpUrl = url + "user/password";
+        httpMap.clear();
+        httpMap.put("captcha", captcha);
+        httpMap.put("imgcaptcha", imgcaptcha);
+        httpMap.put("mobile_phone", mobile_phone);
+        httpMap.put("password", password);
+        toBean(Request.Method.POST, http, which, httpMap, httpUrl, myHttpResult, null);
+    }
+
+    /**
+     * 获取用户个人资料<br>
+     * 接口用于登陆后获取用户信息， 默认读取缓存中的用户信息（缓存时间5五分钟）<p>
+     * token 登陆的时候获取到的 Token
+     */
+    public static void getUserInfo(HttpForVolley http, Integer which, String token,
+                                   final MyHttpResult myHttpResult) {
+        httpMap.clear();
+        httpMap.put("token",token);
+        String httpUrl = url + "user/profile";
+        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, UserInfo.class);
+    }
+    /**
+     * 获取用户个人资料<br>
+     * 接口用于登陆后获取用户信息， 默认读取缓存中的用户信息（缓存时间5五分钟）<p>
+     * token 登陆的时候获取到的 Token
+     */
+    public static void refreshToken(HttpForVolley http, Integer which, String token,
+                                   final MyHttpResult myHttpResult) {
+        httpMap.clear();
+        httpMap.put("token",token);
+        String httpUrl = url + "user/refresh";
+        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, SigninInfo.class);
+    }
+
 }

@@ -8,6 +8,15 @@ public class SigninInfo {
     String expired_at;
     String created_at;
     String token;
+    boolean bind_mobile;
+
+    public boolean isBind_mobile() {
+        return bind_mobile;
+    }
+
+    public void setBind_mobile(boolean bind_mobile) {
+        this.bind_mobile = bind_mobile;
+    }
 
     public String getExpired_at() {
         return expired_at;

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mybg"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".center.Pswd1Activity">
+
+    <include
+        layout="@layout/include_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_15sp_black"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:text="手机号"/>
+
+        <com.base.views.MyEditText
+            android:id="@+id/pswd1_phone_et"
+            style="@style/text_15sp_black"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparency"
+            android:hint="请输入你的手机号"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:textColor="@color/black"
+            android:textColorHint="@color/myhint"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/white"
+        android:paddingLeft="12dp"
+        android:src="@color/myline"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_15sp_black"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:text="验证码"/>
+
+        <com.base.views.MyEditText
+            android:id="@+id/pswd1_code_et"
+            style="@style/text_15sp_black"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/transparency"
+            android:digits="abcdefghijgklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+            android:hint="请输入右侧验证码"
+            android:maxLength="4"
+            android:textColor="@color/black"
+            android:textColorHint="@color/myhint"/>
+
+        <ImageView
+            android:id="@+id/pswd1_code_img"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="5dp"
+            android:padding="-20dp"
+            android:scaleType="fitCenter"/>
+
+        <TextView
+            android:id="@+id/pswd1_change_tv"
+            style="@style/text_15sp_red"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="12dp"
+            android:enabled="false"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="获取"
+            android:textColor="@drawable/sl_count_text"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/pswd1_next_btn"
+        style="@style/text_16sp_white"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/bg_shape_red_to_gray"
+        android:gravity="center"
+        android:text="下一步"
+        android:textSize="18sp"/>
+</LinearLayout>

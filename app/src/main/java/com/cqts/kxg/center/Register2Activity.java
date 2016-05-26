@@ -78,6 +78,12 @@ public class Register2Activity extends MyActivity implements View.OnClickListene
             return;
         }
 
+        if (inviteCodeStr.length()>0&&inviteCodeStr.length()<7){
+            // TODO: 2016/5/26
+            showToast("请输入完整的邀请码");
+            return;
+        }
+
         MyHttp.signup(http, null, smsCodeStr, codeStr, phoneStr, pswdStr, inviteCodeStr, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
@@ -91,7 +97,7 @@ public class Register2Activity extends MyActivity implements View.OnClickListene
      */
     private void sendAgain() {
         MyApplication.downTimer.going();
-        MyHttp.sms(http, null, phoneStr, codeStr, 1, new MyHttp.MyHttpResult() {
+        MyHttp.sms(http, null, phoneStr, codeStr, 1,null, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
                 if (code != 0) {
