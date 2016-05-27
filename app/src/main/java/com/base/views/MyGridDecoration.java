@@ -5,9 +5,12 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.base.BaseValue;
 
 /**
  * RecyclerView的分割线
@@ -163,7 +166,7 @@ public class MyGridDecoration extends RecyclerView.ItemDecoration {
                 View childAt = parent.getChildAt(0);
                 ViewGroup.LayoutParams layoutParams = parent.getLayoutParams();
                 if (!isFrame) {
-                    layoutParams.height = childAt.getMeasuredHeight() * itemNum + hSize * (itemNum - 1);
+                    layoutParams.height = childAt.getMeasuredHeight() * itemNum + hSize * (itemNum - 1) ;
                 } else {
                     layoutParams.height = childAt.getMeasuredHeight() * itemNum + hSize * (itemNum - 1) + hSize * 2;
                 }

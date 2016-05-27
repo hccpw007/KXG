@@ -1,406 +1,172 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/mybg"
+              android:orientation="vertical">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/myred">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/home_logo"/>
+
+        <ImageView
+            android:id="@+id/home_search_img"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:paddingBottom="7dp"
+            android:paddingLeft="34dp"
+            android:paddingRight="16dp"
+            android:paddingTop="7dp"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/home_search"/>
+    </RelativeLayout>
+
     <com.base.refreshlayout.RefreshLayout
         android:id="@+id/home_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <com.base.views.MyScrollView
-        android:scrollbars="none"
-        android:id="@+id/home_scroll"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="false">
 
-        <LinearLayout
-            android:focusable="true"
-            android:focusableInTouchMode="true"
+        <com.base.views.MyScrollView
+            android:id="@+id/home_scroll"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:fillViewport="false"
+            android:scrollbars="none">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:paddingRight="11dp">
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/home_classify_ic" />
-
-                <LinearLayout
-                    android:id="@+id/home_search"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/shape_f8f8f8_rectangle"
-                    android:gravity="center_vertical">
+                    android:layout_height="120dp"
+                    android:layout_marginTop="1px">
 
-                    <TextView
-                        android:layout_width="0dp"
+                    <com.base.views.MyViewPager
+                        android:id="@+id/home_viewpager"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@color/transparency"
-                        android:gravity="center_vertical"
-                        android:hint="输入你想要的商品"
-                        android:paddingLeft="10dp" />
+                        android:background="@color/white">
+                    </com.base.views.MyViewPager>
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/home_rdbtn1"
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_margin="3dp"
+                            android:background="@drawable/sl_viewpager_dot"
+                            android:button="@null"
+                            android:checked="false"
+                            android:visibility="gone"/>
+
+                        <RadioButton
+                            android:id="@+id/home_rdbtn2"
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_margin="3dp"
+                            android:background="@drawable/sl_viewpager_dot"
+                            android:button="@null"
+                            android:checked="false"
+                            android:visibility="gone"/>
+
+                        <RadioButton
+                            android:id="@+id/home_rdbtn3"
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_margin="3dp"
+                            android:background="@drawable/sl_viewpager_dot"
+                            android:button="@null"
+                            android:checked="false"
+                            android:visibility="gone"/>
+
+                        <RadioButton
+                            android:id="@+id/home_rdbtn4"
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_margin="3dp"
+                            android:background="@drawable/sl_viewpager_dot"
+                            android:button="@null"
+                            android:checked="false"
+                            android:visibility="gone"/>
+                    </RadioGroup>
+                </FrameLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/home_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:background="@color/white">
+                </android.support.v7.widget.RecyclerView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginRight="10dp"
-                        android:src="@mipmap/home_search_ic" />
+                        android:id="@+id/home_img1"
+                        android:layout_width="0px"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/myblue"/>
 
+                    <View
+                        android:layout_width="1px"
+                        android:layout_height="match_parent"
+                        android:background="@color/myline"/>
+
+                    <LinearLayout
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/home_img2"
+                            android:layout_width="160dp"
+                            android:layout_height="60dp"
+                            android:background="@color/myblue"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:background="@color/myline"/>
+
+                        <ImageView
+                            android:id="@+id/home_img3"
+                            android:layout_width="160dp"
+                            android:layout_height="60dp"
+                            android:background="@color/myblue"/>
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-            <FrameLayout
-                android:layout_marginTop="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="160dp">
 
-                <com.base.views.MyViewPager
-                    android:id="@+id/home_viewpager"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/home_rv2"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/white">
-
-                </com.base.views.MyViewPager>
-
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_gravity="bottom"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-                    #F16156
-                    <RadioButton
-                        android:id="@+id/home_rdbtn1"
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:layout_margin="3dp"
-                        android:background="@drawable/sl_viewpager_dot"
-                        android:button="@null"
-                        android:checked="false"
-                        android:visibility="gone" />
-
-                    <RadioButton
-                        android:id="@+id/home_rdbtn2"
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:layout_margin="3dp"
-                        android:background="@drawable/sl_viewpager_dot"
-                        android:button="@null"
-                        android:checked="false"
-                        android:visibility="gone" />
-
-                    <RadioButton
-                        android:id="@+id/home_rdbtn3"
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:layout_margin="3dp"
-                        android:background="@drawable/sl_viewpager_dot"
-                        android:button="@null"
-                        android:checked="false"
-                        android:visibility="gone" />
-
-                    <RadioButton
-                        android:id="@+id/home_rdbtn4"
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:layout_margin="3dp"
-                        android:background="@drawable/sl_viewpager_dot"
-                        android:button="@null"
-                        android:checked="false"
-                        android:visibility="gone" />
-                </RadioGroup>
-            </FrameLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:padding="10dp"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="centerInside"
-                    android:src="@mipmap/home_clnz" />
-
-                <ImageView
-                    android:padding="10dp"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="centerInside"
-                    android:src="@mipmap/home_xbss" />
-
-                <ImageView
-                    android:padding="10dp"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="centerInside"
-                    android:src="@mipmap/home_nnxx" />
-
-                <ImageView
-                    android:padding="10dp"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="centerInside"
-                    android:src="@mipmap/home_mytz" />
+                    android:layout_height="wrap_content"
+                    android:background="@color/myred">
+                </android.support.v7.widget.RecyclerView>
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="潮流女装"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="箱包首饰"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="男女鞋靴"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="母婴童装"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:padding="10dp"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="centerInside"
-                    android:src="@mipmap/home_mzgh" />
-
-                <ImageView
-                    android:padding="10dp"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="centerInside"
-                    android:src="@mipmap/home_jdsm" />
-
-                <ImageView
-                    android:padding="10dp"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="centerInside"
-                    android:src="@mipmap/home_jjjj" />
-
-                <ImageView
-                    android:padding="10dp"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="centerInside"
-                    android:src="@mipmap/home_gdfl" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="美妆个护"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="家电数码"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="家居家具"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="更多分类"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="2dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_weight="1"
-                    android:background="#f96868" />
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:scaleType="fitCenter"
-                    android:src="@mipmap/home_tabdot" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:text="今日推荐"
-                    android:textColor="@color/myred"
-                    android:textSize="25sp" />
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:scaleType="fitCenter"
-                    android:src="@mipmap/home_tabdot" />
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="2dp"
-                    android:layout_marginLeft="-2dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_weight="1"
-                    android:background="#f96868" />
-            </LinearLayout>
-            <TextView
-                android:layout_marginBottom="10dp"
-                android:textSize="12sp"
-                android:textColor="@color/mygray"
-                android:layout_marginTop="-10dp"
-                android:gravity="center"
-                android:text="点击加载更多"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <android.support.v7.widget.RecyclerView
-                android:padding="4dp"
-                android:id="@+id/home_rv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </android.support.v7.widget.RecyclerView>
-
-
-            <LinearLayout
-                android:layout_marginTop="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="2dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_weight="1"
-                    android:background="#f96868" />
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:scaleType="fitCenter"
-                    android:src="@mipmap/home_tabdot" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:text="今日推荐"
-                    android:textColor="@color/myred"
-                    android:textSize="25sp" />
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:scaleType="fitCenter"
-                    android:src="@mipmap/home_tabdot" />
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="2dp"
-                    android:layout_marginLeft="-2dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_weight="1"
-                    android:background="#f96868" />
-            </LinearLayout>
-            <TextView
-                android:layout_marginBottom="10dp"
-                android:textSize="12sp"
-                android:textColor="@color/mygray"
-                android:layout_marginTop="-10dp"
-                android:gravity="center"
-                android:text="点击加载更多"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/home_rv2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </android.support.v7.widget.RecyclerView>
-        </LinearLayout>
-    </com.base.views.MyScrollView>
+        </com.base.views.MyScrollView>
     </com.base.refreshlayout.RefreshLayout>
 </LinearLayout>

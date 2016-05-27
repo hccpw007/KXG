@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="160dp"
+    android:background="@color/mybg">
+
+    <ImageView
+        android:scaleType="fitXY"
+        android:id="@+id/item_img"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:src="@mipmap/articlelist_bg"/>
+
+    <TextView
+        android:gravity="center"
+        style="@style/text_15sp_black"
+        android:text="分蛋糕送给发送给上市发洪水"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@mipmap/articlelist_tvbg"
+        />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="168dp"
+        android:layout_marginBottom="-4dp"
+        android:layout_marginLeft="-4dp"
+        android:layout_marginRight="-4dp"
+        android:layout_marginTop="-4dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/shape_astroke_gray_bg"/>
+</RelativeLayout>

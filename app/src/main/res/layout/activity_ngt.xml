@@ -8,7 +8,6 @@
               android:fitsSystemWindows="true"
               android:orientation="vertical"
               tools:context=".main.NgtAty">
-
     <com.base.views.MyViewPager
         android:id="@+id/ngt_pager"
         android:layout_width="match_parent"
@@ -89,7 +88,7 @@
             android:paddingLeft="2dp"
             android:paddingRight="10dp"
             android:paddingTop="2dp"
-            android:text="个人中心"
+            android:text="我的"
             android:textColor="@drawable/sl_ngt_text"
             android:textSize="12sp"/>
     </RadioGroup>
