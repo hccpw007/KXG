@@ -2,6 +2,7 @@ package com.cqts.kxg.home;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Handler.Callback;
@@ -26,10 +27,13 @@ import com.base.views.MyItemDecoration;
 import com.base.views.MyScrollView;
 import com.base.views.MyViewPager;
 import com.cqts.kxg.R;
+import com.cqts.kxg.bean.ArticleInfo;
 import com.cqts.kxg.bean.SceneInfo;
 import com.cqts.kxg.home.adapter.ArticleClassifyAdapter;
+import com.cqts.kxg.home.adapter.ArticleListAdapter;
 import com.cqts.kxg.home.adapter.HomeRecyclerViewAdapter;
 import com.cqts.kxg.home.adapter.HomeViewpagerAdapter;
+import com.cqts.kxg.utils.MyHttp;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -37,7 +41,6 @@ import java.util.TimerTask;
 
 public class HomeFragment extends BaseFragment implements Callback, MyViewPager
         .OnMyPageChangeListener, View.OnClickListener {
-    private static final String ViewGroup = null;
     private static final int VIEWPAGER = -1;
     private Handler handler;
     private MyViewPager home_viewpager;
@@ -46,7 +49,13 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
     private Timer timer;
     private TimerTask timerTask;
     private RecyclerView home_rv;
+    private RecyclerView home_rv2;
     private MyScrollView home_scroll;
+
+    ArrayList<SceneInfo> sceneInfos = new ArrayList<>();
+    ArrayList<ArticleInfo> articleInfos = new ArrayList<>();
+    private ArticleClassifyAdapter articleClassifyAdapter;
+    private ArticleListAdapter articleListAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,6 +63,7 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
         if (null == view) {
             view = inflater.inflate(R.layout.fragment_home, null);
             InitView();
+            getData();
         }
         return view;
     }
@@ -65,12 +75,34 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
         rdBtn[2] = ((RadioButton) view.findViewById(R.id.home_rdbtn3));
         rdBtn[3] = ((RadioButton) view.findViewById(R.id.home_rdbtn4));
         home_rv = (RecyclerView) view.findViewById(R.id.home_rv);
+        home_rv2 = (RecyclerView) view.findViewById(R.id.home_rv2);
         home_scroll = (MyScrollView) view.findViewById(R.id.home_scroll);
         home_refresh = (RefreshLayout) view.findViewById(R.id.home_refresh);
+        home_scroll.setOverScrollMode(View.OVER_SCROLL_NEVER); //去掉阴影
 
         InitRefresh();
         InitArticleClassify();
+        InitArticleList();
         InitViewPage();
+    }
+    private void getData() {
+        //文章分类
+        MyHttp.scene(http, null, new MyHttp.MyHttpResult() {
+            @Override
+            public void httpResult(Integer which, int code, String msg, Object bean) {
+                ArrayList<SceneInfo> sceneInfos1 = (ArrayList<SceneInfo>) bean;
+                sceneInfos.addAll(sceneInfos1);
+                articleClassifyAdapter.notifyDataSetChanged();
+                if (home_refresh.isRefreshing)
+                home_refresh.setResultState(RefreshLayout.ResultState.success);
+            }
+        });
+
+        MyHttp.articleList(http, null, 1, 5, 1, new MyHttp.MyHttpResult() {
+            @Override
+            public void httpResult(Integer which, int code, String msg, Object bean) {
+            }
+        });
     }
 
     private void InitRefresh() {
@@ -79,11 +111,9 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
         home_refresh.setOnRefreshListener(new RefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
+                getData();
             }
         });
-
-        home_scroll.setOverScrollMode(View.OVER_SCROLL_NEVER);
     }
 
     @Override
@@ -93,13 +123,26 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
 
 
     //文章分类
-    private void InitArticleClassify(){
+    private void InitArticleClassify() {
         FullyGridLayoutManager manager1 = new FullyGridLayoutManager(getActivity(), 5);
         home_rv.setLayoutManager(manager1);
         MyGridDecoration myGridDecoration = new MyGridDecoration(BaseValue.dp2px(0), BaseValue
                 .dp2px(0), Color.WHITE, true);
         home_rv.addItemDecoration(myGridDecoration);
-        home_rv.setAdapter(new ArticleClassifyAdapter(getActivity(),new ArrayList<SceneInfo>()));
+        articleClassifyAdapter = new ArticleClassifyAdapter(getActivity(),
+                sceneInfos);
+        home_rv.setAdapter(articleClassifyAdapter);
+    }
+
+    //文章列表
+    private void InitArticleList() {
+        FullyGridLayoutManager manager1 = new FullyGridLayoutManager(getActivity(), 1);
+        MyGridDecoration myGridDecoration = new MyGridDecoration(BaseValue.dp2px(6), BaseValue
+                .dp2px(0), getResources().getColor(R.color.mybg), true);
+        home_rv2.setLayoutManager(manager1);
+        home_rv2.addItemDecoration(myGridDecoration);
+        articleListAdapter = new ArticleListAdapter(getActivity(), articleInfos);
+        home_rv2.setAdapter(articleListAdapter);
     }
 
     //广告Viewpager

@@ -50,8 +50,8 @@
             android:label="@string/app_name"
             android:theme="@style/AppBaseTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+            <action android:name="android.intent.action.MAIN"/>
+            <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
@@ -71,10 +71,6 @@
             android:name=".home.SearchActivity"
             android:theme="@style/SwipeBackTheme">
         </activity>
-        <activity android:name=".TestActivity">
-        </activity>
-        <activity android:name=".TestActivity2">
-        </activity>
         <activity
             android:name=".center.Register2Activity"
             android:theme="@style/SwipeBackTheme">
@@ -83,9 +79,12 @@
             android:name=".center.Pswd1Activity"
             android:theme="@style/SwipeBackTheme">
         </activity>
-        <activity android:name=".center.Pswd2Activity"
-                  android:theme="@style/SwipeBackTheme">
+        <activity
+            android:name=".center.Pswd2Activity"
+            android:theme="@style/SwipeBackTheme">
         </activity>
+        <!--<activity android:name=".TestImgActivity">-->
+        <!--</activity>-->
     </application>
 
 </manifest>

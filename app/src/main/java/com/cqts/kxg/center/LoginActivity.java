@@ -2,10 +2,13 @@ package com.cqts.kxg.center;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.base.http.HttpForVolley;
 import com.base.views.MyEditText;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.SceneInfo;
@@ -15,7 +18,11 @@ import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.main.MyApplication;
 import com.cqts.kxg.utils.MyHttp;
 
+import org.json.JSONObject;
+
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * 登录

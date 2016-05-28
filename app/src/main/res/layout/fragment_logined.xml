@@ -13,6 +13,7 @@
         android:orientation="vertical">
 
         <com.base.views.MyHeadImageView
+            android:id="@+id/center_img"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="fitXY"

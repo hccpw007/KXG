@@ -37,7 +37,7 @@ public class RefreshLayout extends LinearLayout {
 	private int y_Up;
 	private LayoutParams params;
 	public boolean canRefresh; // 是否能够刷新
-	private boolean isRefreshing; // 是否正在刷新
+	public boolean isRefreshing; // 是否正在刷新
 	private static int headHeight = 0; // head的高度
 	private int viewHeight = 1000; //
 	private RefreshState state = RefreshState.init;
@@ -91,6 +91,7 @@ public class RefreshLayout extends LinearLayout {
 	 * 设置下拉刷新
 	 */
 	public void setOnRefreshListener(OnRefreshListener onRefreshListener) {
+		System.out.println("setOnRefreshListener");
 		this.onRefreshListener = onRefreshListener;
 	}
 

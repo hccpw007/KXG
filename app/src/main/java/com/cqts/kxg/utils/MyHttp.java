@@ -1,5 +1,7 @@
 package com.cqts.kxg.utils;
 
+import android.os.Environment;
+
 import com.android.volley.Request;
 import com.base.BaseValue;
 import com.base.http.HttpForVolley;
@@ -10,6 +12,7 @@ import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONObject;
 
+import java.io.File;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
@@ -114,10 +117,10 @@ public class MyHttp {
             act, String token,
                            final MyHttpResult myHttpResult) {
         httpMap.clear();
-        httpMap.put("phone",phone);
-        httpMap.put("captcha",captcha);
-        httpMap.put("act",act+"");
-        httpMap.put("token",token);
+        httpMap.put("phone", phone);
+        httpMap.put("captcha", captcha);
+        httpMap.put("act", act + "");
+        httpMap.put("token", token);
         String httpUrl = url + "captcha/sms";
         toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, null);
     }
@@ -173,21 +176,49 @@ public class MyHttp {
     public static void getUserInfo(HttpForVolley http, Integer which, String token,
                                    final MyHttpResult myHttpResult) {
         httpMap.clear();
-        httpMap.put("token",token);
+        httpMap.put("token", token);
         String httpUrl = url + "user/profile";
         toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, UserInfo.class);
     }
+
     /**
      * 获取用户个人资料<br>
      * 接口用于登陆后获取用户信息， 默认读取缓存中的用户信息（缓存时间5五分钟）<p>
      * token 登陆的时候获取到的 Token
      */
     public static void refreshToken(HttpForVolley http, Integer which, String token,
-                                   final MyHttpResult myHttpResult) {
+                                    final MyHttpResult myHttpResult) {
         httpMap.clear();
-        httpMap.put("token",token);
+        httpMap.put("token", token);
         String httpUrl = url + "user/refresh";
         toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, SigninInfo.class);
     }
 
+
+    /**
+     * 查询首页推荐文章 <p>
+     * 查询首页推荐文章 <br>
+     */
+    public static void articleList(HttpForVolley http, Integer which, int article_type, int
+            PerPage, int Page,
+                                   final MyHttpResult myHttpResult) {
+        String httpUrl = url + "article/listing";
+        httpMap.clear();
+        httpMap.put("article_type", article_type + "");
+        httpMap.put("PerPage", PerPage + "");
+        httpMap.put("Page", Page + "");
+        Type type = new TypeToken<List<SceneInfo>>() {
+        }.getType();
+        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, null);
+    }
+
+    /**
+     * 上传图片 <p>
+     */
+    public static void uploadImage(HttpForVolley http, Integer which, String path,
+                                   final HttpForVolley.HttpTodo httpTodo) {
+        httpMap.clear();
+        String httpUrl = url + "user/upload_avatar";
+        http.postBase64(Request.Method.POST, null, httpMap, path, httpUrl,httpTodo);
+    }
 }

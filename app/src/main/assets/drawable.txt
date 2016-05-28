@@ -10,8 +10,6 @@
   shape_mytagview_bg 搜索标签的textview背景
   shape_login_register_bg 登录页注册按钮的背景
   shape_phonecode 验证码
-  shape_astroke_gray_bg  灰色钝角
-  shape_astroke_white_bg  白色钝角
   bg_red_to_gray 无钝角 red-gray 的 selector
   bg_white_to_gray 无钝角 white-gray 的 selector
   bg_shape_red_to_gray 有钝角 red-gray 的 selector

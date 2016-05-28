@@ -35,17 +35,23 @@ public class ArticleClassifyAdapter extends RecyclerView.Adapter<ArticleClassify
 
     @Override
     public void onBindViewHolder(MyViewHolder myViewHolder, int i) {
-
+        if (sceneInfos.size() == 0) return;
+        myViewHolder.item_tv.setText(sceneInfos.get(i).getCat_name());
     }
+
     @Override
     public int getItemCount() {
-        return 10;
-//        return sceneInfos.size();
+        if (sceneInfos.size() == 0) {
+            return 10;
+        } else {
+            return sceneInfos.size();
+        }
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView item_img;
         TextView item_tv;
+
         public MyViewHolder(View itemView) {
             super(itemView);
             item_img = (ImageView) itemView.findViewById(R.id.item_img);

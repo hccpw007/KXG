@@ -52,14 +52,13 @@ public class HttpForVolley {
         this.todo = todo;
         FileInputStream fis = null;
         try {
-
             fis = new FileInputStream(new File(imgPath));
             byte[] buffer = new byte[fis.available()];
             fis.read(buffer);
             String encodeToString = Base64.encodeToString(buffer,
                     Base64.DEFAULT);
-            httpMap.put("base64File", encodeToString);
-            httpMap.put("ext", "jpg");
+            httpMap.put("avatar", encodeToString);
+//            httpMap.put("ext", "jpg");
             if (null == request) {
                 toHttp(Method, which, httpMap, url);
             } else {
