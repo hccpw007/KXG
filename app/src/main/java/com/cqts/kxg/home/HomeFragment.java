@@ -1,5 +1,6 @@
 package com.cqts.kxg.home;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 
 import com.base.BaseFragment;
@@ -47,6 +49,7 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
     ArrayList<ArticleInfo> articleInfos = new ArrayList<>();
     private ArticleClassifyAdapter articleClassifyAdapter;
     private ArticleListAdapter articleListAdapter;
+    private ImageView home_search_img;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,7 +57,11 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
         if (null == view) {
             view = inflater.inflate(R.layout.fragment_home, null);
             InitView();
-//            getData();
+            getData();
+            InitRefresh();
+            InitArticleClassify();
+            InitArticleList();
+            InitViewPage();
         }
         return view;
     }
@@ -69,12 +76,21 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
         home_rv2 = (RecyclerView) view.findViewById(R.id.home_rv2);
         home_scroll = (MyScrollView) view.findViewById(R.id.home_scroll);
         home_refresh = (RefreshLayout) view.findViewById(R.id.home_refresh);
+        home_search_img = (ImageView) view.findViewById(R.id.home_search_img);
         home_scroll.setOverScrollMode(View.OVER_SCROLL_NEVER); //去掉阴影
 
-        InitRefresh();
-        InitArticleClassify();
-        InitArticleList();
-        InitViewPage();
+        home_search_img.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.home_search_img:
+                startActivity(new Intent(getActivity(),SearchActivity.class));
+                break;
+            default:
+                break;
+        }
     }
     private void getData() {
         //文章分类
@@ -105,11 +121,6 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
                 getData();
             }
         });
-    }
-
-    @Override
-    public void onClick(View v) {
-
     }
 
 

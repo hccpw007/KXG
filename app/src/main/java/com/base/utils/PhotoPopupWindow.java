@@ -2,19 +2,13 @@ package com.base.utils;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 
 import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Environment;
-import android.provider.MediaStore;
-import android.text.format.DateFormat;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,9 +17,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.Toast;
 
-import com.base.utils.PhotoUtil;
 import com.cqts.kxg.R;
 
 public class PhotoPopupWindow {
@@ -43,7 +35,7 @@ public class PhotoPopupWindow {
 		this.context = context;
 		this.photoUtil = photoUtil;
 		inflater = LayoutInflater.from(context);
-		View view = inflater.inflate(R.layout.pop_photo, null);
+		View view = inflater.inflate(R.layout.view_pop_photo, null);
 		Button pop_btn_camera = (Button) view.findViewById(R.id.pop_btn_camera);
 		Button pop_btn_photo = (Button) view.findViewById(R.id.pop_btn_photo);
 		Button pop_btn_no = (Button) view.findViewById(R.id.pop_btn_no);

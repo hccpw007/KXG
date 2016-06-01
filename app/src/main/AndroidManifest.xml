@@ -84,11 +84,15 @@
             android:name=".center.Pswd2Activity"
             android:theme="@style/SwipeBackTheme">
         </activity>
-        <activity android:name=".TestImgActivity"
-                  android:theme="@style/SwipeBackTheme">
+        <activity
+            android:name=".TestImgActivity"
+            android:theme="@style/SwipeBackTheme">
         </activity>
-        <activity android:name=".main.WebActivity"
-                  android:theme="@style/SwipeBackTheme">
+        <activity
+            android:name=".main.WebActivity"
+            android:theme="@style/SwipeBackTheme">
+        </activity>
+        <activity android:name=".home.SearchResultActivity">
         </activity>
     </application>
 

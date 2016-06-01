@@ -1,12 +1,15 @@
 package com.cqts.kxg.home;
 
-import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.base.BaseValue;
@@ -22,31 +25,37 @@ public class SearchActivity extends MyActivity implements MyTagView.OnTagClickLi
         .OnClickListener, TextView.OnEditorActionListener {
     private MyTagView search_tag;
     private MyEditText search_et;
-    private ImageView search_cart_iv;
     private ImageView search_finish_iv;
+    private TextView search_choice_tv;
+    private TextView search_tv;
+    private PopupWindow popupWindow;
+    private int type = 1;
+    private int type_goods = 1;
+    private int type_article = 2;
+    private int type_shop = 3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         InitView();
     }
-
     private void InitView() {
         search_finish_iv = (ImageView) findViewById(R.id.search_finish_iv);
-        search_cart_iv = (ImageView) findViewById(R.id.search_cart_iv);
         search_tag = (MyTagView) findViewById(R.id.search_tag);
         search_et = (MyEditText) findViewById(R.id.search_et);
+        search_choice_tv = (TextView) findViewById(R.id.search_choice_tv);
+        search_tv = (TextView) findViewById(R.id.search_tv);
 
-        search_cart_iv.setOnClickListener(this);
         search_finish_iv.setOnClickListener(this);
-        search_et.setOnEditorActionListener(this);
+        search_choice_tv.setOnClickListener(this);
+        search_tv.setOnClickListener(this);
 
-        String[] texts = new String[]{"泥沙的", "发点发", "嘎的速度", "嘎帅得", "点噶嗲噶", "235日3", "大傻瓜",
-                "嘎帅得过", "嘎的速度高达", "嘎帅得过", "点噶嗲噶", "泥沙的", "发点发", "嘎的速度高达", "嘎帅得过", "点噶嗲噶",
-                "235日3", "大傻瓜", "嘎帅得过", "嘎的速度高达", "嘎帅得过", "点噶嗲噶", "泥沙的", "发点发", "嘎的速度高达", "嘎帅得过",
-                "点噶嗲噶", "235日3", "大傻瓜", "嘎帅得过", "嘎的速度高达", "嘎帅得过", "点噶嗲噶"};
+        search_et.setOnEditorActionListener(this);
+        String[] texts = new String[]{"泥沙", "发发", "嘎度", "嘎帅", "点噶嗲噶", "235日3", "大傻瓜",
+                "嘎帅得过", "嘎的速度高达", "嘎帅得过", "点噶嗲噶", "泥沙的", "点发"};
         search_tag.setMyTag(texts);
         search_tag.setOnTagClickListener(this);
+        createPop();
     }
 
     @Override
@@ -54,7 +63,7 @@ public class SearchActivity extends MyActivity implements MyTagView.OnTagClickLi
         String text = ((TextView) v).getText().toString().trim();
         search_et.setText(text);
         search_et.setSelection(text.length());
-        BaseValue.imm.showSoftInput(search_et,0);
+        BaseValue.imm.showSoftInput(search_et, 0);//展开输入法
     }
 
     @Override
@@ -63,22 +72,67 @@ public class SearchActivity extends MyActivity implements MyTagView.OnTagClickLi
             case R.id.search_finish_iv: //返回
                 finish();
                 break;
-            case R.id.search_cart_iv: //购物车
+            case R.id.search_tv: //搜索
+                search();
                 break;
+            case R.id.search_choice_tv: //选择类型
+                popupWindow.showAsDropDown(search_choice_tv, BaseValue.dp2px(-6), BaseValue.dp2px
+                        (8));
+                break;
+            case R.id.pop_search_goods: //选择商品
+                type = type_goods;
+                search_choice_tv.setText("商品");
+                popupWindow.dismiss();
+                break;
+            case R.id.pop_search_article: //选择文章
+                type = type_article;
+                search_choice_tv.setText("文章");
+                popupWindow.dismiss();
+                break;
+            case R.id.pop_search_shop: //选择店铺
+                search_choice_tv.setText("店铺");
+                type = type_shop;
+                popupWindow.dismiss();
+                break;
+
             default:
                 break;
         }
     }
-
 
     /**
      * 搜索
      */
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if (actionId == EditorInfo.IME_ACTION_SEARCH){
-
+        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            search();
         }
         return false;
+    }
+
+    private void createPop() {
+        View view = LayoutInflater.from(this).inflate(R.layout.pop_search, null);
+        View pop_search_goods = view.findViewById(R.id.pop_search_goods);
+        View pop_search_article = view.findViewById(R.id.pop_search_article);
+        View pop_search_shop = view.findViewById(R.id.pop_search_shop);
+        pop_search_goods.setOnClickListener(this);
+        pop_search_article.setOnClickListener(this);
+        pop_search_shop.setOnClickListener(this);
+        popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup
+                .LayoutParams.WRAP_CONTENT);
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        popupWindow.setTouchable(true);
+        popupWindow.setFocusable(true);
+        popupWindow.setOutsideTouchable(true);
+    }
+
+    private void search(){
+        String searchStr = search_et.getText().toString().trim();
+        if (searchStr.isEmpty()){
+            return;
+        }
+        Intent intent = new Intent(this,SearchResultActivity.class);
+        startActivity(intent);
     }
 }

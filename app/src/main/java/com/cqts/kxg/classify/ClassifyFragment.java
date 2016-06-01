@@ -36,7 +36,7 @@ public class ClassifyFragment extends BaseFragment {
         if (null == view) {
             view = inflater.inflate(R.layout.fragment_classify, null);
             InitView();
-            getData();
+//            getData();
         }
         return view;
     }

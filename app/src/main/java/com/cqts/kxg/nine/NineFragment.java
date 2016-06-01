@@ -37,7 +37,7 @@ public class NineFragment extends BaseFragment {
     private GridLayoutManager manager;
     private RefreshLayout nine_refresh;
     int pageNum = 1;
-    int pageSize = 20;
+    int pageSize = 25;
     boolean isCanLoadMore = true; //是否可以加载更多
 
     @Override
