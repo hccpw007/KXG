@@ -1,6 +1,5 @@
 package com.cqts.kxg.utils;
 
-import android.os.Environment;
 
 import com.android.volley.Request;
 import com.base.BaseValue;
@@ -8,11 +7,12 @@ import com.base.http.HttpForVolley;
 import com.cqts.kxg.bean.SceneInfo;
 import com.cqts.kxg.bean.SigninInfo;
 import com.cqts.kxg.bean.UserInfo;
+import com.cqts.kxg.classify.bean.ClassifyListInfo;
+import com.cqts.kxg.nine.bean.NineInfo;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONObject;
 
-import java.io.File;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +24,9 @@ import java.util.List;
 public class MyHttp {
     private static HashMap<String, String> httpMap = new HashMap<>();
     private static String url = "http://api.kxg99.com/";
+
+    private MyHttp() {
+    }
 
     /**
      * http请求返回的结果
@@ -51,6 +54,7 @@ public class MyHttp {
         });
     }
 
+
 //--------------------       以下是具体接口           ---------------------
 
     /**
@@ -73,7 +77,7 @@ public class MyHttp {
      * 加载首页场景分类目前只有十个场景分类菜单<br>
      */
     public static void scene(HttpForVolley http, Integer which,
-                             final MyHttpResult myHttpResult) {
+                             MyHttpResult myHttpResult) {
         String httpUrl = url + "home/scene";
         Type type = new TypeToken<List<SceneInfo>>() {
         }.getType();
@@ -171,7 +175,6 @@ public class MyHttp {
     /**
      * 获取用户个人资料<br>
      * 接口用于登陆后获取用户信息， 默认读取缓存中的用户信息（缓存时间5五分钟）<p>
-     * token 登陆的时候获取到的 Token
      */
     public static void getUserInfo(HttpForVolley http, Integer which, String token,
                                    final MyHttpResult myHttpResult) {
@@ -197,11 +200,10 @@ public class MyHttp {
 
     /**
      * 查询首页推荐文章 <p>
-     * 查询首页推荐文章 <br>
      */
     public static void articleList(HttpForVolley http, Integer which, int article_type, int
             PerPage, int Page,
-                                   final MyHttpResult myHttpResult) {
+                                   MyHttpResult myHttpResult) {
         String httpUrl = url + "article/listing";
         httpMap.clear();
         httpMap.put("article_type", article_type + "");
@@ -219,6 +221,29 @@ public class MyHttp {
                                    final HttpForVolley.HttpTodo httpTodo) {
         httpMap.clear();
         String httpUrl = url + "user/upload_avatar";
-        http.postBase64(Request.Method.POST, null, httpMap, path, httpUrl,httpTodo);
+        http.postBase64(Request.Method.POST, null, httpMap, path, httpUrl, httpTodo);
     }
+
+    /**
+     * 9.9包邮接口 <p>
+     * 获取9.9包邮商品列表及banner图（注：当PageNum值为1的时候才会返回banner数据） <br>
+     */
+    public static void jkj(HttpForVolley http, Integer which, int PageSize, int
+            PageNum, MyHttpResult myHttpResult) {
+        String httpUrl = url + "cheap/jkj";
+        httpMap.clear();
+        httpMap.put("PageSize", PageSize + "");
+        httpMap.put("PageNum", PageNum + "");
+        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, NineInfo.class);
+    }
+
+    /**
+     * 分类集合查询 <p>
+     */
+    public static void category(HttpForVolley http, Integer which, MyHttpResult myHttpResult) {
+        String httpUrl = url + "goods/category";
+        Type type = new TypeToken<List<ClassifyListInfo>>() {}.getType();
+        toBean(Request.Method.GET, http, which, null, httpUrl, myHttpResult, type);
+    }
+
 }

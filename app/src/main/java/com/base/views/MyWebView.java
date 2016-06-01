@@ -1,6 +1,7 @@
 package com.base.views;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -15,7 +16,7 @@ public class MyWebView extends WebView {
 	public MyWebView(Context context) {
 		super(context);
 		progressbar = new ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal);
-		progressbar.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, 3, 0, 0));
+		progressbar.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 5, 0, 0));
 		addView(progressbar);
 		setWebChromeClient(new WebChromeClient());
 	}
@@ -23,7 +24,7 @@ public class MyWebView extends WebView {
 	public MyWebView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		progressbar = new ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal);
-		progressbar.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, 3, 0, 0));
+		progressbar.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 5, 0, 0));
 		addView(progressbar);
 		setWebChromeClient(new WebChromeClient());
 	}

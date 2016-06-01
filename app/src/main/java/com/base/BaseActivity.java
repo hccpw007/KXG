@@ -2,7 +2,6 @@ package com.base;
 
 import com.base.http.HttpForVolley;
 import com.base.swipebacklayout.SwipeBackActivity;
-import com.cqts.kxg.R;
 
 import android.content.pm.ActivityInfo;
 import android.os.Build;
@@ -22,6 +21,7 @@ public class BaseActivity extends SwipeBackActivity {
         //屏幕竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         http = new HttpForVolley(this);
+        setTransparencyBar(true);
     }
 
 

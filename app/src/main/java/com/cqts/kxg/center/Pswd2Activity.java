@@ -97,14 +97,14 @@ public class Pswd2Activity extends MyActivity implements View.OnClickListener {
 
 
         if (act == Pswd1Activity.QIUCKLOGIN) {
-            MyHttp.quickSignin(http,act,smsCodeStr,imgcaptcha,phoneStr,pswdStr,myHttpResult);
+           MyHttp.quickSignin(http,act,smsCodeStr,imgcaptcha,phoneStr,pswdStr,myHttpResult);
         }
         if (act == Pswd1Activity.FINDPSWD) {
             if (pswdStr.length()<6){
                 showToast("请输入至少6位登录密码");
                 return;
             }
-            MyHttp.password(http,act,smsCodeStr,imgcaptcha,phoneStr,pswdStr,myHttpResult);
+           MyHttp.password(http,act,smsCodeStr,imgcaptcha,phoneStr,pswdStr,myHttpResult);
         }
     }
 
@@ -113,7 +113,7 @@ public class Pswd2Activity extends MyActivity implements View.OnClickListener {
      */
     private void sendAgain() {
         MyApplication.downTimer.going();
-        MyHttp.sms(http, null, phoneStr, imgcaptcha, act, null, new MyHttp.MyHttpResult() {
+       MyHttp.sms(http, null, phoneStr, imgcaptcha, act, null, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
                 if (code != 0) {

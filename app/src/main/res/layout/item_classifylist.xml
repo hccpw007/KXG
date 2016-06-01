@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBox
+        android:id="@+id/check"
+        android:checked="true"
+        android:gravity="center"
+        android:background="@drawable/sl_classify_bg"
+        android:button="@color/transparency"
+        android:textColor="@drawable/sl_ngt_text"
+        style="@style/text_14sp_black"
+        android:textSize="16sp"
+        android:text="热门分类"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"/>
+
+    </LinearLayout>

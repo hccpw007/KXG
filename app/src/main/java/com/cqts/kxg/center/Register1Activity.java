@@ -94,7 +94,7 @@ public class Register1Activity extends MyActivity implements View.OnClickListene
             showToast("请输入4位验证码");
             return;
         }
-        MyHttp.sms(http, null, phoneStr, codeStr, 1,null,new MyHttp.MyHttpResult() {
+       MyHttp.sms(http, null, phoneStr, codeStr, 1,null,new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
                 if (code != 0) {

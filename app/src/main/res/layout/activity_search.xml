@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:padding="12dp"
             android:scaleType="fitCenter"
-            android:src="@mipmap/toleft"/>
+            android:src="@mipmap/toleft_white"/>
         <LinearLayout
             android:orientation="horizontal"
             android:gravity="center"

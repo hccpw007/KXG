@@ -50,8 +50,9 @@
             android:label="@string/app_name"
             android:theme="@style/AppBaseTheme">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN"/>
-            <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
@@ -83,8 +84,12 @@
             android:name=".center.Pswd2Activity"
             android:theme="@style/SwipeBackTheme">
         </activity>
-        <!--<activity android:name=".TestImgActivity">-->
-        <!--</activity>-->
+        <activity android:name=".TestImgActivity"
+                  android:theme="@style/SwipeBackTheme">
+        </activity>
+        <activity android:name=".main.WebActivity"
+                  android:theme="@style/SwipeBackTheme">
+        </activity>
     </application>
 
 </manifest>

@@ -102,7 +102,7 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
             return;
         }
 
-        MyHttp.signin(http, null, userName, pswd, new MyHttp.MyHttpResult() {
+        MyHttp .signin(http, null, userName, pswd, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
                 SigninInfo signinInfo = (SigninInfo) bean;
@@ -117,7 +117,7 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
      * 获取用户信息
      */
     private void getUserInfo() {
-        MyHttp.getUserInfo(http, null, MyApplication.token, new MyHttp.MyHttpResult() {
+       MyHttp.getUserInfo(http, null, MyApplication.token, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
                 if (code!=0){

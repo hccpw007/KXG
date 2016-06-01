@@ -72,7 +72,7 @@
             android:drawableTop="@drawable/sl_ngt_rb4"
             android:gravity="center_horizontal|bottom"
             android:paddingBottom="2dp"
-            android:text="积分"
+            android:text="热门"
             android:textColor="@drawable/sl_ngt_text"
             android:textSize="12sp"/>
 

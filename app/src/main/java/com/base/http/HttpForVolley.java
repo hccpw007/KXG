@@ -25,7 +25,6 @@ import com.base.utils.Logger;
 
 public class HttpForVolley {
     private StringRequest request;
-    HttpTodo todo;
     Activity activity;
 
     public HttpForVolley(Activity activity) {
@@ -37,11 +36,10 @@ public class HttpForVolley {
      */
     public void goTo(int Method, Integer which, HashMap<String, String> httpMap, String url,
                      HttpTodo todo) {
-        this.todo = todo;
         if (null != request && url.equals(request.getUrl())) {
             request.cancel();
         }
-        toHttp(Method, which, httpMap, url);
+        toHttp(Method, which, httpMap, url,todo);
     }
 
     /**
@@ -49,7 +47,6 @@ public class HttpForVolley {
      */
     public void postBase64(int Method, Integer which, HashMap<String, String> httpMap,
                            String imgPath, String url, HttpTodo todo) {
-        this.todo = todo;
         FileInputStream fis = null;
         try {
             fis = new FileInputStream(new File(imgPath));
@@ -60,12 +57,12 @@ public class HttpForVolley {
             httpMap.put("avatar", encodeToString);
 //            httpMap.put("ext", "jpg");
             if (null == request) {
-                toHttp(Method, which, httpMap, url);
+                toHttp(Method, which, httpMap, url,todo);
             } else {
                 if (url.equals(request.getUrl())) {
                     request.cancel();
                 }
-                toHttp(Method, which, httpMap, url);
+                toHttp(Method, which, httpMap, url,todo);
             }
         } catch (Exception e) {
             JSONObject object = new JSONObject();
@@ -86,7 +83,7 @@ public class HttpForVolley {
     }
 
     private void toHttp(int Method, final Integer which, final HashMap<String, String> httpMap,
-                        String url) {
+                        String url, final HttpTodo todo) {
         HashMap<String, String> map = new HashMap<String, String>();
         if (null != httpMap) {
             map = httpMap;
@@ -114,7 +111,6 @@ public class HttpForVolley {
             }
             if (url.endsWith("&")) {
                 url = url.substring(0, url.length() - 1);
-                System.out.println(url);
             }
         }
 

@@ -21,6 +21,7 @@ import com.cqts.kxg.R;
 import com.cqts.kxg.center.LoginedFragment;
 import com.cqts.kxg.classify.ClassifyFragment;
 import com.cqts.kxg.home.HomeFragment;
+import com.cqts.kxg.nine.NineFragment;
 
 /**
  * 主页 导航页
@@ -66,13 +67,13 @@ public class NgtAty extends FragmentActivity implements OnMyPageChangeListener, 
         ngt_rb[2] = (RadioButton) findViewById(R.id.ngt_rb3);
         ngt_rb[3] = (RadioButton) findViewById(R.id.ngt_rb4);
         ngt_rb[4] = (RadioButton) findViewById(R.id.ngt_rb5);
-
+        
         ngt_rg.setOnCheckedChangeListener(this);
     }
 
     private void InitFragment() {
         list.add(new HomeFragment());
-        list.add(new Fragment2());
+        list.add(new NineFragment());
         list.add(new ClassifyFragment());
         list.add(new Fragment2());
         list.add(new LoginedFragment());

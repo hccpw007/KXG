@@ -18,22 +18,23 @@ import java.util.ArrayList;
  */
 public class ClassifyRecyclerViewAdapter2 extends RecyclerView.Adapter<ClassifyRecyclerViewAdapter2.MyViewHolder> {
     Context context;
-    ArrayList<ClassifyListInfo> list;
+    ArrayList<ClassifyListInfo.ClassifyChildInfo> list;
 
-    public ClassifyRecyclerViewAdapter2(Context context, ArrayList<ClassifyListInfo> list) {
+    public ClassifyRecyclerViewAdapter2(Context context, ArrayList<ClassifyListInfo.ClassifyChildInfo> list) {
         this.context = context;
         this.list = list;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_classifyrv2, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_classifyrv, null);
         view.setTag(viewGroup);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final MyViewHolder myViewHolder, final int p) {
+        myViewHolder.textView.setText(list.get(p).cat_name);
     }
 
     @Override

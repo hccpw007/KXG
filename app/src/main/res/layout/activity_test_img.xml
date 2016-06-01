@@ -9,9 +9,11 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.cqts.kxg.TestImgActivity">
-    <Button
-        android:id="@+id/testbtn"
-        android:text="dsaf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <CheckBox
+        android:button="@color/transparency"
+        android:checked="true"
+        android:text="gdaga"
+        android:background="@drawable/sl_classify_bg"
+        android:layout_width="200dp"
+        android:layout_height="200dp"/>
 </RelativeLayout>

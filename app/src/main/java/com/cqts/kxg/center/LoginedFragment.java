@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import com.base.BaseFragment;
 import com.base.http.HttpForVolley;
 import com.base.utils.PhotoUtil;
-import com.base.views.PhotoPopupWindow;
+import com.base.utils.PhotoPopupWindow;
 import com.cqts.kxg.R;
 import com.cqts.kxg.utils.MyHttp;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -56,7 +56,7 @@ public class LoginedFragment extends BaseFragment {
                 break;
             case PhotoUtil.FromWhere.forfex:
                 if (resultCode == getActivity().RESULT_OK) {
-                    MyHttp.uploadImage(http, null, photoUtil.getForfexPath(), new HttpForVolley
+                   MyHttp.uploadImage(http, null, photoUtil.getForfexPath(), new HttpForVolley
                             .HttpTodo() {
                         @Override
                         public void httpTodo(Integer which, JSONObject response) {

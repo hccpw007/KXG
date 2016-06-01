@@ -1,21 +1,14 @@
 package com.cqts.kxg.home;
 
-import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
 import com.base.BaseFragment;
@@ -23,7 +16,6 @@ import com.base.BaseValue;
 import com.base.refreshlayout.RefreshLayout;
 import com.base.views.FullyGridLayoutManager;
 import com.base.views.MyGridDecoration;
-import com.base.views.MyItemDecoration;
 import com.base.views.MyScrollView;
 import com.base.views.MyViewPager;
 import com.cqts.kxg.R;
@@ -31,7 +23,6 @@ import com.cqts.kxg.bean.ArticleInfo;
 import com.cqts.kxg.bean.SceneInfo;
 import com.cqts.kxg.home.adapter.ArticleClassifyAdapter;
 import com.cqts.kxg.home.adapter.ArticleListAdapter;
-import com.cqts.kxg.home.adapter.HomeRecyclerViewAdapter;
 import com.cqts.kxg.home.adapter.HomeViewpagerAdapter;
 import com.cqts.kxg.utils.MyHttp;
 
@@ -63,7 +54,7 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
         if (null == view) {
             view = inflater.inflate(R.layout.fragment_home, null);
             InitView();
-            getData();
+//            getData();
         }
         return view;
     }
@@ -87,7 +78,7 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
     }
     private void getData() {
         //文章分类
-        MyHttp.scene(http, null, new MyHttp.MyHttpResult() {
+       MyHttp.scene(http, 1, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
                 ArrayList<SceneInfo> sceneInfos1 = (ArrayList<SceneInfo>) bean;
@@ -98,7 +89,7 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
             }
         });
 
-        MyHttp.articleList(http, null, 1, 5, 1, new MyHttp.MyHttpResult() {
+       MyHttp.articleList(http, 2, 1, 5, 1, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
             }
@@ -106,7 +97,7 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
     }
 
     private void InitRefresh() {
-        home_refresh.setScrollView(home_scroll);
+        home_refresh.setScrollView(home_scroll,null);
 
         home_refresh.setOnRefreshListener(new RefreshLayout.OnRefreshListener() {
             @Override
