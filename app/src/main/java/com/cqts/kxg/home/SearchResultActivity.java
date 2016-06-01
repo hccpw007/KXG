@@ -23,5 +23,6 @@ public class SearchResultActivity extends MyActivity {
         FragmentTransaction beginTransaction = fm.beginTransaction();
         beginTransaction.add(R.id.framelayout,fragment);
         beginTransaction.commit();
+
     }
 }
