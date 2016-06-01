@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/mybg"
+              android:orientation="vertical">
+
+    <TextView
+        style="@style/text_14sp_white"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@color/myred"
+        android:gravity="center"
+        android:text="9.9元包邮"
+        android:textSize="22sp"/>
+<com.base.refreshlayout.RefreshLayout
+    android:id="@+id/nine_refresh"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:id="@+id/nine_img"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/nine_rv">
+    </android.support.v7.widget.RecyclerView>
+</com.base.refreshlayout.RefreshLayout>
+</LinearLayout>
