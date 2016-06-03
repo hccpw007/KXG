@@ -86,26 +86,27 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.home_search_img:
-                startActivity(new Intent(getActivity(),SearchActivity.class));
+                startActivity(new Intent(getActivity(), SearchActivity.class));
                 break;
             default:
                 break;
         }
     }
+
     private void getData() {
-        //文章分类
-       MyHttp.scene(http, 1, new MyHttp.MyHttpResult() {
+//        //文章分类
+        MyHttp.scene(http, 1, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
                 ArrayList<SceneInfo> sceneInfos1 = (ArrayList<SceneInfo>) bean;
                 sceneInfos.addAll(sceneInfos1);
                 articleClassifyAdapter.notifyDataSetChanged();
                 if (home_refresh.isRefreshing)
-                home_refresh.setResultState(RefreshLayout.ResultState.success);
+                    home_refresh.setResultState(RefreshLayout.ResultState.success);
             }
         });
 
-       MyHttp.articleList(http, 2, 1, 5, 1, new MyHttp.MyHttpResult() {
+        MyHttp.articleList(http, 2, 1, 5, 1, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
             }
@@ -113,7 +114,7 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
     }
 
     private void InitRefresh() {
-        home_refresh.setScrollView(home_scroll,null);
+        home_refresh.setScrollView(home_scroll, null);
 
         home_refresh.setOnRefreshListener(new RefreshLayout.OnRefreshListener() {
             @Override

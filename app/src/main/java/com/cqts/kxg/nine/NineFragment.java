@@ -46,7 +46,7 @@ public class NineFragment extends BaseFragment {
         if (null == view) {
             view = inflater.inflate(R.layout.fragment_nine, null);
             InitView();
-//            getData();
+            getData();
         }
         return view;
     }

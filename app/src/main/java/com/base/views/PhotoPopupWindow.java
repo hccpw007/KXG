@@ -43,7 +43,7 @@ public class PhotoPopupWindow {
 		this.context = context;
 		this.photoUtil = photoUtil;
 		inflater = LayoutInflater.from(context);
-		View view = inflater.inflate(R.layout.pop_photo, null);
+		View view = inflater.inflate(R.layout.view_pop_photo, null);
 		Button pop_btn_camera = (Button) view.findViewById(R.id.pop_btn_camera);
 		Button pop_btn_photo = (Button) view.findViewById(R.id.pop_btn_photo);
 		Button pop_btn_no = (Button) view.findViewById(R.id.pop_btn_no);

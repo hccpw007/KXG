@@ -2,6 +2,7 @@ package com.base;
 
 import android.app.Application;
 import android.content.Context;
+import android.graphics.Path;
 import android.util.DisplayMetrics;
 import android.view.inputmethod.InputMethodManager;
 
@@ -11,7 +12,7 @@ import com.google.gson.Gson;
 
 public class BaseValue {
 	
-	public final static boolean isDebug = true;// 调试开关
+	public static boolean isDebug = true;// 调试开关
 	public static int screenwidth;// 屏幕宽度
 	public static int screenHeight;// 屏幕高度
 	public static float density;// 屏幕密度
@@ -19,7 +20,11 @@ public class BaseValue {
 	public static Gson gson;
 	public static RequestQueue mQueue;
 	public static InputMethodManager imm; //输入法管理器
-	
+	public static Path roundPath = null;
+	public static float roundLayoutRadius = 0;
+	public static int bgColor = 0;
+
+
 	public static void setInit(Application application) {
 		DisplayMetrics displayMetrics = new DisplayMetrics();
 		displayMetrics = application.getResources().getDisplayMetrics();
