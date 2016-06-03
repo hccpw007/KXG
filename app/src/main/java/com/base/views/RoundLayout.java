@@ -18,7 +18,7 @@ import com.cqts.kxg.R;
  * 所有view/布局-都可以用
  */
 public class RoundLayout extends LinearLayout {
-    private float roundLayoutRadius = 20f;
+    private float roundLayoutRadius = 0f;
     private int bgColor;
     Context context;
     AttributeSet attrs;

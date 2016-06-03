@@ -13,6 +13,7 @@
     <include layout="@layout/include_red_title"/>
 
     <com.base.views.MyWebView
+        android:scrollbars="none"
         android:id="@+id/webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

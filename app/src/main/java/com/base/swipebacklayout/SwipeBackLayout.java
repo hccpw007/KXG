@@ -92,16 +92,11 @@ public class SwipeBackLayout extends FrameLayout {
 
         // 处理ViewPager冲突问题
         ViewPager mViewPager = getTouchViewPager(mViewPagers, ev);
-
         if (mViewPager != null && mViewPager.getCurrentItem() != 0) {
             return super.onInterceptTouchEvent(ev);
         }
-
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                if (ev.getRawX() > BaseValue.screenwidth*2/3){
-                    return super.onInterceptTouchEvent(ev);
-                }
                 downX = tempX = (int) ev.getRawX();
                 downY = (int) ev.getRawY();
                 break;
@@ -126,8 +121,9 @@ public class SwipeBackLayout extends FrameLayout {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                if (event.getRawX() > BaseValue.screenwidth*2/3)
+                if (event.getRawX() > BaseValue.screenwidth*2/3){
                     return false;
+                }
                 break;
             case MotionEvent.ACTION_MOVE:
                 int moveX = (int) event.getRawX();

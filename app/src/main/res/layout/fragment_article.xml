@@ -5,8 +5,9 @@
               android:layout_height="match_parent">
     <include layout="@layout/include_httpresult"/>
     <android.support.v7.widget.RecyclerView
-        android:background="@color/mybg"
         android:id="@+id/fragment_rclv"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </android.support.v7.widget.RecyclerView>

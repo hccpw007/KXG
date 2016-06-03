@@ -61,15 +61,13 @@ public class RefreshLayout extends LinearLayout {
     ListView listview;
     ScrollView scrollView;
     RecyclerView recyclerView;
+    private int urlNum = 0; //用于记录当前页面url的个数,方便关闭刷新
 
     //移动的状态
     private static final int  gotoTop = -1;
     private static final int  gotoBottom = -2;
     private static final int  move = -3;
     private static final int  stop = -4;
-
-
-
 
     public RefreshLayout(Context context) {
         super(context);
@@ -85,6 +83,14 @@ public class RefreshLayout extends LinearLayout {
         if (initRefresh) {
             viewOnLayout(context);
         }
+    }
+
+    public int getUrlNum() {
+        return urlNum;
+    }
+
+    public void setUrlNum() {
+        urlNum++;
     }
 
     /**
@@ -363,6 +369,7 @@ public class RefreshLayout extends LinearLayout {
                 refreshingView.startAnimation(refreshingAnimation);
                 refreshStateTextView.setText(R.string.refreshing);
                 onRefreshListener.onRefresh();
+                urlNum = 0;
                 break;
             default:
                 break;
