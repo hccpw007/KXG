@@ -8,8 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.base.BaseValue;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.SceneInfo;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -36,7 +38,9 @@ public class ArticleClassifyAdapter extends RecyclerView.Adapter<ArticleClassify
     @Override
     public void onBindViewHolder(MyViewHolder myViewHolder, int i) {
         if (sceneInfos.size() == 0) return;
-        myViewHolder.item_tv.setText(sceneInfos.get(i).getCat_name());
+        myViewHolder.item_tv.setText(sceneInfos.get(i).cat_name);
+        ImageLoader.getInstance().displayImage(sceneInfos.get(i).cover_img,myViewHolder.item_img,
+                BaseValue.getOptions(R.mipmap.home_articleclassify));
     }
 
     @Override

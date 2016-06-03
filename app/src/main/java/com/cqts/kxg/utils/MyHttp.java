@@ -5,8 +5,10 @@ import com.android.volley.Request;
 import com.base.BaseValue;
 import com.base.http.HttpForVolley;
 import com.cqts.kxg.bean.ArticleInfo;
+import com.cqts.kxg.bean.BannerInfo;
 import com.cqts.kxg.bean.GoodsInfo;
 import com.cqts.kxg.bean.SceneInfo;
+import com.cqts.kxg.bean.ShopInfo;
 import com.cqts.kxg.bean.SigninInfo;
 import com.cqts.kxg.bean.UserInfo;
 import com.cqts.kxg.bean.ClassifyListInfo;
@@ -87,6 +89,18 @@ public class MyHttp {
     }
 
     /**
+     * 首页banner图 <p>
+     * 加载首页场景分类目前只有十个场景分类菜单<br>
+     */
+    public static void homeBanner(HttpForVolley http, Integer which,
+                                  MyHttpResult myHttpResult) {
+        String httpUrl = url + "home/banner";
+        Type type = new TypeToken<List<BannerInfo>>() {
+        }.getType();
+        toBean(Request.Method.GET, http, which, null, httpUrl, myHttpResult, type);
+    }
+
+    /**
      * 注册用户<p>
      * 注册用户，需要通过图形验证码获取到短信验证码，然后携带短信验证码过来注册。<br>
      * captcha 短信验证码<br>
@@ -134,7 +148,7 @@ public class MyHttp {
 
     /**
      * 快捷登陆<p>
-     * <p/>
+     * <p>
      * 接口和注册一样需要先获取图形验证码，然后获取短信验证码<p>
      * mobile_phone 手机号码<br>
      * captcha 短信验证码<br>
@@ -209,7 +223,7 @@ public class MyHttp {
         String httpUrl = url + "article/listing";
         httpMap.clear();
         httpMap.put("article_type", article_type + "");
-        httpMap.put("share_sum","desc");
+        httpMap.put("share_sum", "desc");
         httpMap.put("add_time", "desc");
         httpMap.put("perPage", PerPage + "");
         httpMap.put("page", Page + "");
@@ -246,34 +260,56 @@ public class MyHttp {
      */
     public static void category(HttpForVolley http, Integer which, MyHttpResult myHttpResult) {
         String httpUrl = url + "goods/category";
-        Type type = new TypeToken<List<ClassifyListInfo>>() {}.getType();
+        Type type = new TypeToken<List<ClassifyListInfo>>() {
+        }.getType();
         toBean(Request.Method.GET, http, which, null, httpUrl, myHttpResult, type);
     }
 
     /**
      * 搜索商品 <p>
      */
-    public static void searchGoods(HttpForVolley http, Integer which,int PageSize,int PageNum,String keyword,String sort, String order,MyHttpResult myHttpResult) {
+    public static void searchGoods(HttpForVolley http, Integer which, int PageSize, int PageNum,
+                                   String keyword, String sort, String order, MyHttpResult
+                                           myHttpResult) {
         String httpUrl = url + "search/goods";
         httpMap.clear();
-        httpMap.put("PageSize",PageSize+"");
-        httpMap.put("PageNum",PageNum+"");
-        httpMap.put("keyword",keyword);
-        httpMap.put("sort",sort);
-        httpMap.put("order",order);
-        Type type = new TypeToken<List<GoodsInfo>>() {}.getType();
+        httpMap.put("PageSize", PageSize + "");
+        httpMap.put("PageNum", PageNum + "");
+        httpMap.put("keyword", keyword);
+        httpMap.put("sort", sort);
+        httpMap.put("order", order);
+        Type type = new TypeToken<List<GoodsInfo>>() {
+        }.getType();
         toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type);
     }
+
     /**
      * 搜索文章 <p>
      */
-    public static void searchArticle(HttpForVolley http, Integer which,int PageSize,int PageNum,String keyword,MyHttpResult myHttpResult) {
+    public static void searchArticle(HttpForVolley http, Integer which, int PageSize, int
+            PageNum, String keyword, MyHttpResult myHttpResult) {
         String httpUrl = url + "search/article";
         httpMap.clear();
-        httpMap.put("PageSize",PageSize+"");
-        httpMap.put("PageNum",PageNum+"");
-        httpMap.put("keyword",keyword);
-        Type type = new TypeToken<List<ArticleInfo>>() {}.getType();
+        httpMap.put("PageSize", PageSize + "");
+        httpMap.put("PageNum", PageNum + "");
+        httpMap.put("keyword", keyword);
+        Type type = new TypeToken<List<ArticleInfo>>() {
+        }.getType();
+        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type);
+    }
+
+    /**
+     * 搜索店铺 <p>
+     */
+    public static void searchShop(HttpForVolley http, Integer which, int PageSize, int PageNum,
+                                  String keyword, MyHttpResult myHttpResult) {
+        String httpUrl = url + "search/shops";
+        httpMap.clear();
+        httpMap.put("PageSize", PageSize + "");
+        httpMap.put("PageNum", PageNum + "");
+        httpMap.put("keyword", keyword);
+        Type type = new TypeToken<List<ShopInfo>>() {
+        }.getType();
         toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type);
     }
 }

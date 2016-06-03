@@ -1,6 +1,7 @@
 package com.cqts.kxg.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +10,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.base.BaseValue;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.ArticleInfo;
+import com.cqts.kxg.main.WebActivity;
 import com.cqts.kxg.views.FavoriteAnimation;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -29,12 +33,12 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_home_articlelist, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_article, null);
         return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder myViewHolder, int i) {
+    public void onBindViewHolder(final MyViewHolder myViewHolder, final int i) {
         myViewHolder.item_collect_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,6 +46,20 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
                 myViewHolder.item_collect_img.startAnimation(animation);
             }
         });
+
+        myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, WebActivity.class);
+                intent.putExtra("title", articleInfos.get(i).title);
+                intent.putExtra("url", articleInfos.get(i).article_url);
+                context.startActivity(intent);
+            }
+        });
+
+        myViewHolder.item_collect_tv.setText(articleInfos.get(i).love);
+        myViewHolder.item_tv.setText(articleInfos.get(i).title);
+        ImageLoader.getInstance().displayImage(articleInfos.get(i).cover_img,myViewHolder.item_img, BaseValue.getOptions(R.mipmap.solid_article));
     }
 
     @Override

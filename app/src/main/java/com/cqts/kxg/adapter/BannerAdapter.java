@@ -8,37 +8,36 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
+import com.cqts.kxg.R;
+import com.cqts.kxg.bean.BannerInfo;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/4/18.
  */
-public class HomeViewpagerAdapter extends PagerAdapter {
-    String[] imgUrl = {"http://pic25.nipic.com/20121108/9252150_160744284000_2.jpg",
-            "http://pic20.nipic.com/20120428/5455122_162725484388_2.jpg",
-            "http://img3.redocn.com/tupian/20150411/shouhuixiantiaopingguoshiliang_4042458.jpg"
-    };
+public class BannerAdapter extends PagerAdapter {
     private ImageView[] imageViews;
     Context context;
     RadioButton[] rdBtn;
-    private ArrayList<String> imgUrls;
+    private List<BannerInfo> imgUrls  = new ArrayList<>();
+    DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).showImageOnLoading(R.mipmap.solid_banner)
+            .showImageOnFail(R.mipmap.solid_banner).build();
 
-    public HomeViewpagerAdapter(Context context, RadioButton[] rdBtn) {
+    public BannerAdapter(Context context, RadioButton[] rdBtn, List<BannerInfo> imgUrl) {
         this.context = context;
         this.rdBtn = rdBtn;
+        this.imgUrls .addAll(imgUrl);
 
-        imgUrls = new ArrayList<String>();
-        imgUrls.add(imgUrl[0]);
-        imgUrls.add(imgUrl[1]);
-        imgUrls.add(imgUrl[2]);
-
-        imgUrls.add(0, imgUrl[2]);
-        imgUrls.add(imgUrl[0]);
-
-        imageViews = new ImageView[imgUrls.size()];
-        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        if (imgUrls.size() > 0) {
+            imgUrls.add(imgUrls.get(0));
+            imgUrls.add(0, imgUrls.get(imgUrls.size() - 2));
+            imageViews = new ImageView[imgUrls.size()];
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams
+                .MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         for (int i = 0; i < imgUrls.size(); i++) {
             if (i < imgUrls.size() - 2) {
                 rdBtn[i].setVisibility(View.VISIBLE);
@@ -46,6 +45,7 @@ public class HomeViewpagerAdapter extends PagerAdapter {
             imageViews[i] = new ImageView(context);
             imageViews[i].setLayoutParams(params);
             imageViews[i].setScaleType(ImageView.ScaleType.FIT_XY);
+        }
         }
     }
 
@@ -67,7 +67,7 @@ public class HomeViewpagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         ((ViewPager) container).addView(imageViews[position]);
-        ImageLoader.getInstance().displayImage(imgUrls.get(position), imageViews[position]);
+        ImageLoader.getInstance().displayImage(imgUrls.get(position).ad_code, imageViews[position],defaultOptions);
         return imageViews[position];
     }
 }

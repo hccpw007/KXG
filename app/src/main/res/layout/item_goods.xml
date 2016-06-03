@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="170dp"
         android:scaleType="fitXY"
-        android:src="@mipmap/home_rv"/>
+        android:src="@mipmap/solid_goods"/>
 
     <TextView
         android:paddingRight="10dp"
@@ -47,9 +47,11 @@
             android:id="@+id/item_money_tv"/>
 
         <ImageView
-            android:layout_width="22dp"
+            android:scaleType="fitCenter"
+            android:layout_width="18dp"
             android:layout_height="match_parent"
             android:src="@mipmap/flow"/>
+
         <TextView
             android:layout_marginLeft="3dp"
             style="@style/text_14sp_white"

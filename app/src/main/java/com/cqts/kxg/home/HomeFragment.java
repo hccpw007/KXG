@@ -22,20 +22,22 @@ import com.base.views.MyScrollView;
 import com.base.views.MyViewPager;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.ArticleInfo;
+import com.cqts.kxg.bean.BannerInfo;
 import com.cqts.kxg.bean.SceneInfo;
 import com.cqts.kxg.adapter.ArticleClassifyAdapter;
 import com.cqts.kxg.adapter.ArticleListAdapter;
-import com.cqts.kxg.adapter.HomeViewpagerAdapter;
+import com.cqts.kxg.adapter.BannerAdapter;
 import com.cqts.kxg.utils.MyHttp;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class HomeFragment extends BaseFragment implements Callback, MyViewPager
         .OnMyPageChangeListener, View.OnClickListener {
     private static final int VIEWPAGER = -1;
-    private static final int urlNum = 2; //当前页面是刷新的url数量
+    private static final int urlNum = 3; //当前页面是刷新的url数量
     private Handler handler;
     private MyViewPager home_viewpager;
     private RefreshLayout home_refresh;
@@ -50,7 +52,7 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
     private ArticleClassifyAdapter articleClassifyAdapter;
     private ArticleListAdapter articleListAdapter;
     private ImageView home_search_img;
-
+    List<BannerInfo> bannerInfos;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -61,7 +63,6 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
             InitRefresh();
             InitArticleClassify();
             InitArticleList();
-            InitViewPage();
         }
         return view;
     }
@@ -78,7 +79,6 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
         home_refresh = (RefreshLayout) view.findViewById(R.id.home_refresh);
         home_search_img = (ImageView) view.findViewById(R.id.home_search_img);
         home_scroll.setOverScrollMode(View.OVER_SCROLL_NEVER); //去掉阴影
-
         home_search_img.setOnClickListener(this);
     }
 
@@ -132,6 +132,20 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
             }
         });
 
+
+        MyHttp.homeBanner(http, null, new MyHttp.MyHttpResult() {
+            @Override
+            public void httpResult(Integer which, int code, String msg, Object bean) {
+                home_refresh.setUrlNum();
+                if (code!=0){
+                    showToast(msg);
+                    if (home_refresh.isRefreshing && home_refresh.getUrlNum() == urlNum)
+                        home_refresh.setResultState(RefreshLayout.ResultState.failed);
+                    return;
+                }
+                InitViewPage(bean);
+            }
+        });
     }
 
     private void InitRefresh() {
@@ -171,9 +185,16 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
     }
 
     //广告Viewpager
-    private void InitViewPage() {
+    private void InitViewPage(Object bean) {
         home_viewpager.setOnMyPageChangeListener(this);
-        home_viewpager.setAdapter(new HomeViewpagerAdapter(getActivity(), rdBtn));
+        ArrayList<BannerInfo> bannerBeans = (ArrayList<BannerInfo>) bean;
+
+        if (bannerBeans.size()>4){
+            bannerInfos = bannerBeans.subList(0,3);
+        }else {
+            bannerInfos = bannerBeans;
+        }
+        home_viewpager.setAdapter(new BannerAdapter(getActivity(), rdBtn, bannerInfos));
         home_viewpager.setOffscreenPageLimit(3);
         home_viewpager.setCurrentItem(1, false);
 
@@ -200,8 +221,8 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
     @Override
     public void OnMyPageSelected(int arg0) {
         if (arg0 == 0) {
-            home_viewpager.setCurrentItem(3, false);
-        } else if (arg0 == 4) {
+            home_viewpager.setCurrentItem(bannerInfos.size(), false);
+        } else if (arg0 == bannerInfos.size()+1) {
             home_viewpager.setCurrentItem(1, false);
         } else {
             rdBtn[(arg0 - 1)].setChecked(true);

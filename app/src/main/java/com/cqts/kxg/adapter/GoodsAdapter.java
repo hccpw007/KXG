@@ -32,7 +32,7 @@ public class GoodsAdapter extends RecyclerView.Adapter<GoodsAdapter.MyViewHolder
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_nine, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_goods, null);
         return new MyViewHolder(view);
     }
 

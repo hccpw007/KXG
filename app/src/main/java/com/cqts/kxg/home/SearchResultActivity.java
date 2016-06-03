@@ -12,21 +12,23 @@ import android.widget.TextView;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.ArticleInfo;
 import com.cqts.kxg.bean.GoodsInfo;
+import com.cqts.kxg.bean.ShopInfo;
 import com.cqts.kxg.main.MyActivity;
+import com.cqts.kxg.main.MyFragment;
 import com.cqts.kxg.utils.MyHttp;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-public class SearchResultActivity extends MyActivity implements View.OnClickListener {
+public class SearchResultActivity extends MyActivity implements View.OnClickListener{
 
-    private int PageSize = 20;
+    private int PageSize = 50;
     private int PageNum = 1;
     private int type;
     private String keyword = "";
     private String sort = "add_time";
     private String order = "DESC";
-    private GoodsFragment goodsFragment;
     private ImageView search_finish_iv;
     private TextView type_tv;
     private TextView keywords_tv;
@@ -36,9 +38,13 @@ public class SearchResultActivity extends MyActivity implements View.OnClickList
     private LinearLayout money_layout;
     private TextView money_tv;
     private ImageView money_img;
-    private List<GoodsInfo> shopInfos = new ArrayList<GoodsInfo>();
-    private  List<ArticleInfo> articleInfos = new ArrayList<ArticleInfo>();
+    private List<GoodsInfo> goodsInfos = new ArrayList<GoodsInfo>();
+    private List<ArticleInfo> articleInfos = new ArrayList<ArticleInfo>();
+    private List<ShopInfo> shopInfos = new ArrayList<>();
+
     private ArticleFragment articleFragment;
+    private GoodsFragment goodsFragment;
+    private ShopFragment shopFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +98,7 @@ public class SearchResultActivity extends MyActivity implements View.OnClickList
      */
     void setGoodsTab(int which) {
         //数据清空
-        shopInfos.clear();
+        goodsInfos.clear();
         PageNum = 1;
         all_tv.setTextColor(getResources().getColor(R.color.black));
         sales_tv.setTextColor(getResources().getColor(R.color.black));
@@ -112,10 +118,10 @@ public class SearchResultActivity extends MyActivity implements View.OnClickList
             case R.id.money_layout: //价格
                 money_tv.setTextColor(getResources().getColor(R.color.myred));
                 sort = "shop_price";
-                if (order.equals("DESC")){
+                if (order.equals("DESC")) {
                     order = "ASC";
                     money_img.setImageResource(R.mipmap.sort_asc);
-                }else {
+                } else {
                     order = "DESC";
                     money_img.setImageResource(R.mipmap.sort_desc);
                 }
@@ -142,6 +148,8 @@ public class SearchResultActivity extends MyActivity implements View.OnClickList
                 break;
             case SearchActivity.type_shop:
                 goods_layout.setVisibility(View.GONE);
+                shopFragment = new ShopFragment();
+                showFragment(shopFragment);
                 type_tv.setText("店铺");
             default:
                 break;
@@ -169,10 +177,54 @@ public class SearchResultActivity extends MyActivity implements View.OnClickList
                 getArticleData();
                 break;
             case SearchActivity.type_shop:
+                shopFragment.setGotoBottom(new ShopFragment.GotoDottom() {
+                    @Override
+                    public void loadMore() {
+                        getShopData();
+                    }
+                });
+                getShopData();
                 break;
             default:
                 break;
         }
+    }
+
+    /**
+     * 获得店铺数据
+     */
+    private void getShopData() {
+        MyHttp.searchShop(http, type, PageSize, PageNum, keyword, new MyHttp.MyHttpResult() {
+            @Override
+            public void httpResult(Integer which, int code, String msg, Object bean) {
+                if (code == 404){
+                    shopFragment.setHttpFail(new MyFragment.HttpFail() {
+                        @Override
+                        public void toHttpAgain() {
+                            getShopData();
+                        }
+                    });
+                    return;
+                }
+                if (code != 0) {
+                    showToast(msg);
+                    return;
+                }
+                shopInfos.addAll((Collection<? extends ShopInfo>) bean);
+                if (shopInfos.size() == 0) {
+                    shopFragment.setHttpNotData(new MyFragment.HttpFail() {
+                        @Override
+                        public void toHttpAgain() {
+                            getShopData();
+                        }
+                    });
+                    return;
+                }
+                shopFragment.setHttpSuccess();
+                shopFragment.setNotify(shopInfos);
+                PageNum++;
+            }
+        });
     }
 
     private void getGoodsData() {
@@ -180,12 +232,31 @@ public class SearchResultActivity extends MyActivity implements View.OnClickList
                 .MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
+                if (code == 404){
+                    goodsFragment.setHttpFail(new MyFragment.HttpFail() {
+                        @Override
+                        public void toHttpAgain() {
+                            getGoodsData();
+                        }
+                    });
+                    return;
+                }
                 if (code != 0) {
                     showToast(msg);
                     return;
                 }
-                shopInfos.addAll((ArrayList<GoodsInfo>) bean);
-                goodsFragment.setNotify(shopInfos);
+                goodsInfos.addAll((ArrayList<GoodsInfo>) bean);
+                if (goodsInfos.size() == 0) {
+                    goodsFragment.setHttpNotData(new MyFragment.HttpFail() {
+                        @Override
+                        public void toHttpAgain() {
+                            getGoodsData();
+                        }
+                    });
+                    return;
+                }
+                goodsFragment.setHttpSuccess();
+                goodsFragment.setNotify(goodsInfos);
                 PageNum++;
             }
         });
@@ -196,20 +267,35 @@ public class SearchResultActivity extends MyActivity implements View.OnClickList
                 .MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
+                if (code == 404){
+                    articleFragment.setHttpFail(new MyFragment.HttpFail() {
+                        @Override
+                        public void toHttpAgain() {
+                            getArticleData();
+                        }
+                    });
+                    return;
+                }
                 if (code != 0) {
                     showToast(msg);
                     return;
                 }
                 articleInfos.addAll((ArrayList<ArticleInfo>) bean);
+                if (articleInfos.size() == 0) {
+                    articleFragment.setHttpNotData(new MyFragment.HttpFail() {
+                        @Override
+                        public void toHttpAgain() {
+                            getArticleData();
+                        }
+                    });
+                    return;
+                }
+                articleFragment.setHttpSuccess();
                 articleFragment.setNotify(articleInfos);
                 PageNum++;
             }
         });
     }
-
-
-
-
 
     private void showFragment(Fragment fragment) {
         FragmentManager fm = getSupportFragmentManager();

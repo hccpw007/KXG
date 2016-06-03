@@ -13,6 +13,7 @@ import com.base.views.MyGridDecoration;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.ArticleInfo;
 import com.cqts.kxg.adapter.ArticleListAdapter;
+import com.cqts.kxg.main.MyFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/6/1.
  */
-public class ArticleFragment extends BaseFragment {
+public class ArticleFragment extends MyFragment {
     private RecyclerView fragment_rclv;
     private ArticleListAdapter adapter;
     private  List<ArticleInfo> articleInfos = new ArrayList<ArticleInfo>();
@@ -43,8 +44,6 @@ public class ArticleFragment extends BaseFragment {
     private void InitView() {
         fragment_rclv = (RecyclerView) view.findViewById(R.id.fragment_rclv);
         fragment_rclv.setOverScrollMode(View.OVER_SCROLL_NEVER);
-
-
 
         manager = new GridLayoutManager(getActivity(), 1);
         MyGridDecoration myGridDecoration = new MyGridDecoration(BaseValue.dp2px(6), BaseValue

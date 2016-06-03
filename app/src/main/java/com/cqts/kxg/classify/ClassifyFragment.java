@@ -13,7 +13,7 @@ import com.base.BaseValue;
 import com.base.views.MyGridDecoration;
 import com.cqts.kxg.R;
 import com.cqts.kxg.adapter.ClassifyListAdapter;
-import com.cqts.kxg.adapter.ClassifyRecyclerViewAdapter2;
+import com.cqts.kxg.adapter.ClassifyRVAdapter;
 import com.cqts.kxg.bean.ClassifyListInfo;
 import com.cqts.kxg.bean.ClassifyListInfo.ClassifyChildInfo;
 import com.cqts.kxg.utils.MyHttp;
@@ -28,7 +28,7 @@ public class ClassifyFragment extends BaseFragment {
     private RecyclerView classify_rv;
     private ListView classify_list;
     private ClassifyListAdapter listAdapter;
-    private ClassifyRecyclerViewAdapter2 adapter2;
+    private ClassifyRVAdapter adapter2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -123,7 +123,7 @@ public class ClassifyFragment extends BaseFragment {
                 getResources().getColor(R.color.white), false);
         classify_rv.addItemDecoration(myGridDecoration);
         adapter2 = new
-                ClassifyRecyclerViewAdapter2(getActivity(), classifyChildInfos);
+                ClassifyRVAdapter(getActivity(), classifyChildInfos);
         classify_rv.setAdapter(adapter2);
     }
 }

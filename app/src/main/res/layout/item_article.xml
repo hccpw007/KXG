@@ -5,12 +5,11 @@
     android:layout_height="160dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/mybg">
-
     <com.base.views.MyOvalImageView
         app:myradius="4dp"
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:src="@mipmap/articlelist_bg"
+        android:src="@mipmap/solid_article"
         android:id="@+id/item_img"/>
     <TextView
         android:id="@+id/item_tv"
@@ -22,7 +21,6 @@
         android:gravity="center"
         android:text="分蛋糕送给发送给上市发洪水"
         />
-
     <LinearLayout
         android:id="@+id/item_collect_layout"
         android:layout_width="40dp"
@@ -34,6 +32,7 @@
         android:orientation="vertical">
 
         <ImageView
+            android:scaleType="fitXY"
             android:id="@+id/item_collect_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,7 +43,6 @@
             style="@style/text_14sp_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:text="0"
             android:textSize="11sp"/>
     </LinearLayout>

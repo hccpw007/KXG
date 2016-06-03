@@ -13,6 +13,7 @@ import com.base.views.MyGridDecoration;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.GoodsInfo;
 import com.cqts.kxg.adapter.GoodsAdapter;
+import com.cqts.kxg.main.MyFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +21,10 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/6/1.
  */
-public class GoodsFragment extends BaseFragment {
+public class GoodsFragment extends MyFragment {
     private RecyclerView fragment_rclv;
     private GoodsAdapter adapter;
-    private  List<GoodsInfo> shopInfos = new ArrayList<GoodsInfo>();
+    private  List<GoodsInfo> goodsInfos = new ArrayList<GoodsInfo>();
     private GridLayoutManager manager;
     private GotoDottom gotoDottom;
     public GoodsFragment() {
@@ -48,9 +49,8 @@ public class GoodsFragment extends BaseFragment {
                 .dp2px(8), getResources().getColor(R.color.mybg), false);
         myGridDecoration.setImageView(R.id.item_nine_img, 1);
         fragment_rclv.addItemDecoration(myGridDecoration);
-        adapter = new GoodsAdapter(getActivity(), shopInfos);
+        adapter = new GoodsAdapter(getActivity(), goodsInfos);
         fragment_rclv.setAdapter(adapter);
-
         fragment_rclv.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -66,9 +66,9 @@ public class GoodsFragment extends BaseFragment {
         });
     }
 
-    public void setNotify(List<GoodsInfo> shopInfo) {
-        shopInfos.clear();
-        shopInfos.addAll(shopInfo);
+    public void setNotify(List<GoodsInfo> goodsInfo) {
+        this.goodsInfos.clear();
+        this.goodsInfos.addAll(goodsInfo);
         adapter.notifyDataSetChanged();
     }
 
