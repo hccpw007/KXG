@@ -19,6 +19,7 @@ public class MyWebView extends WebView {
 		progressbar.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 5, 0, 0));
 		addView(progressbar);
 		setWebChromeClient(new WebChromeClient());
+		setOverScrollMode(View.OVER_SCROLL_NEVER);
 	}
 
 	public MyWebView(Context context, AttributeSet attrs) {
@@ -27,6 +28,7 @@ public class MyWebView extends WebView {
 		progressbar.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 5, 0, 0));
 		addView(progressbar);
 		setWebChromeClient(new WebChromeClient());
+		setOverScrollMode(View.OVER_SCROLL_NEVER);
 	}
 
 	public class WebChromeClient extends android.webkit.WebChromeClient {

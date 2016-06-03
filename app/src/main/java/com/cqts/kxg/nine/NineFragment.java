@@ -16,9 +16,9 @@ import com.base.BaseValue;
 import com.base.refreshlayout.RefreshLayout;
 import com.base.views.MyGridDecoration;
 import com.cqts.kxg.R;
-import com.cqts.kxg.nine.adapter.NineAdapter;
-import com.cqts.kxg.nine.bean.NineInfo;
-import com.cqts.kxg.nine.bean.NineInfo.NineListInfo;
+import com.cqts.kxg.bean.NineInfo;
+import com.cqts.kxg.bean.GoodsInfo;
+import com.cqts.kxg.adapter.GoodsAdapter;
 import com.cqts.kxg.utils.MyHttp;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -28,8 +28,8 @@ import java.util.List;
 public class NineFragment extends BaseFragment {
     private ImageView nine_img;
     private RecyclerView nine_rv;
-    List<NineListInfo> goods_list = new ArrayList<NineListInfo>();
-    private NineAdapter adapter;
+    List<GoodsInfo> goods_list = new ArrayList<GoodsInfo>();
+    private GoodsAdapter adapter;
     private LinearLayout.LayoutParams params;
     private int width;
     private int headHeight;
@@ -37,7 +37,7 @@ public class NineFragment extends BaseFragment {
     private GridLayoutManager manager;
     private RefreshLayout nine_refresh;
     int pageNum = 1;
-    int pageSize = 25;
+    int pageSize = 50;
     boolean isCanLoadMore = true; //是否可以加载更多
 
     @Override
@@ -46,7 +46,7 @@ public class NineFragment extends BaseFragment {
         if (null == view) {
             view = inflater.inflate(R.layout.fragment_nine, null);
             InitView();
-//            getData();
+            getData();
         }
         return view;
     }
@@ -81,7 +81,7 @@ public class NineFragment extends BaseFragment {
                 .dp2px(8), getResources().getColor(R.color.mybg), false);
         myGridDecoration.setImageView(R.id.item_nine_img, 1);
         nine_rv.addItemDecoration(myGridDecoration);
-        adapter = new NineAdapter(getActivity(), goods_list);
+        adapter = new GoodsAdapter(getActivity(), goods_list);
         nine_rv.setAdapter(adapter);
         nine_refresh.setRC(nine_rv, new RefreshLayout.TopOrBottom() {
             @Override
@@ -137,7 +137,7 @@ public class NineFragment extends BaseFragment {
                     nine_refresh.setResultState(RefreshLayout.ResultState.success);
                 }
                 NineInfo nineInfo = (NineInfo) bean;
-                List<NineListInfo> ninelist = nineInfo.goods_list;
+                List<GoodsInfo> ninelist = nineInfo.goods_list;
                 goods_list.addAll(ninelist);
                 adapter.notifyDataSetChanged();
                 if (nineInfo.banner != null) {

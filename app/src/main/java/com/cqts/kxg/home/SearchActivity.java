@@ -30,15 +30,17 @@ public class SearchActivity extends MyActivity implements MyTagView.OnTagClickLi
     private TextView search_tv;
     private PopupWindow popupWindow;
     private int type = 1;
-    private int type_goods = 1;
-    private int type_article = 2;
-    private int type_shop = 3;
+    public static final int type_goods = 1;
+    public static final int type_article = 2;
+    public static final int type_shop = 3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         InitView();
     }
+
     private void InitView() {
         search_finish_iv = (ImageView) findViewById(R.id.search_finish_iv);
         search_tag = (MyTagView) findViewById(R.id.search_tag);
@@ -51,7 +53,7 @@ public class SearchActivity extends MyActivity implements MyTagView.OnTagClickLi
         search_tv.setOnClickListener(this);
 
         search_et.setOnEditorActionListener(this);
-        String[] texts = new String[]{"泥沙", "发发", "嘎度", "嘎帅", "点噶嗲噶", "235日3", "大傻瓜",
+        String[] texts = new String[]{"大衣", "牛仔裤", "风衣", "帽子", "点噶嗲噶", "235日3", "大傻瓜",
                 "嘎帅得过", "嘎的速度高达", "嘎帅得过", "点噶嗲噶", "泥沙的", "点发"};
         search_tag.setMyTag(texts);
         search_tag.setOnTagClickListener(this);
@@ -94,7 +96,6 @@ public class SearchActivity extends MyActivity implements MyTagView.OnTagClickLi
                 type = type_shop;
                 popupWindow.dismiss();
                 break;
-
             default:
                 break;
         }
@@ -127,12 +128,14 @@ public class SearchActivity extends MyActivity implements MyTagView.OnTagClickLi
         popupWindow.setOutsideTouchable(true);
     }
 
-    private void search(){
+    private void search() {
         String searchStr = search_et.getText().toString().trim();
-        if (searchStr.isEmpty()){
+        if (searchStr.isEmpty()) {
             return;
         }
-        Intent intent = new Intent(this,SearchResultActivity.class);
+        Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
+        intent.putExtra("keyword", searchStr);
+        intent.putExtra("type", type);
         startActivity(intent);
     }
 }

@@ -17,15 +17,16 @@
         android:src="@mipmap/home_rv"/>
 
     <TextView
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:lineSpacingExtra="10dp"
+        android:lineSpacingMultiplier="1.2"
         android:maxLines="2"
         android:minLines="2"
-        android:padding="10dp"
         android:text="g大豆收购大家好多发高发大豆收购"
         android:textColor="@color/myblack"
-        android:textSize="17sp"
+        android:textSize="16sp"
         android:id="@+id/item_info_tv"/>
 
     <LinearLayout

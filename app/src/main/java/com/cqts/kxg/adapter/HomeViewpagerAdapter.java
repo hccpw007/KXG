@@ -1,4 +1,4 @@
-package com.cqts.kxg.home.adapter;
+package com.cqts.kxg.adapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;

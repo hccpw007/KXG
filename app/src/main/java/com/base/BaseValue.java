@@ -2,6 +2,7 @@ package com.base;
 
 import android.app.Application;
 import android.content.Context;
+import android.graphics.Path;
 import android.util.DisplayMetrics;
 import android.view.inputmethod.InputMethodManager;
 
@@ -19,7 +20,7 @@ public class BaseValue {
 	public static Gson gson;
 	public static RequestQueue mQueue;
 	public static InputMethodManager imm; //输入法管理器
-	
+
 	public static void setInit(Application application) {
 		DisplayMetrics displayMetrics = new DisplayMetrics();
 		displayMetrics = application.getResources().getDisplayMetrics();

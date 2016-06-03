@@ -23,9 +23,9 @@ import com.base.views.MyViewPager;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.ArticleInfo;
 import com.cqts.kxg.bean.SceneInfo;
-import com.cqts.kxg.home.adapter.ArticleClassifyAdapter;
-import com.cqts.kxg.home.adapter.ArticleListAdapter;
-import com.cqts.kxg.home.adapter.HomeViewpagerAdapter;
+import com.cqts.kxg.adapter.ArticleClassifyAdapter;
+import com.cqts.kxg.adapter.ArticleListAdapter;
+import com.cqts.kxg.adapter.HomeViewpagerAdapter;
 import com.cqts.kxg.utils.MyHttp;
 
 import java.util.ArrayList;
@@ -35,6 +35,7 @@ import java.util.TimerTask;
 public class HomeFragment extends BaseFragment implements Callback, MyViewPager
         .OnMyPageChangeListener, View.OnClickListener {
     private static final int VIEWPAGER = -1;
+    private static final int urlNum = 2; //当前页面是刷新的url数量
     private Handler handler;
     private MyViewPager home_viewpager;
     private RefreshLayout home_refresh;
@@ -44,7 +45,6 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
     private RecyclerView home_rv;
     private RecyclerView home_rv2;
     private MyScrollView home_scroll;
-
     ArrayList<SceneInfo> sceneInfos = new ArrayList<>();
     ArrayList<ArticleInfo> articleInfos = new ArrayList<>();
     private ArticleClassifyAdapter articleClassifyAdapter;
@@ -86,38 +86,61 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.home_search_img:
-                startActivity(new Intent(getActivity(),SearchActivity.class));
+                startActivity(new Intent(getActivity(), SearchActivity.class));
                 break;
             default:
                 break;
         }
     }
+
     private void getData() {
         //文章分类
-       MyHttp.scene(http, 1, new MyHttp.MyHttpResult() {
+        MyHttp.scene(http, 1, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
+                home_refresh.setUrlNum();
+                if (code != 0) {
+                    showToast(msg);
+                    if (home_refresh.isRefreshing && home_refresh.getUrlNum() == urlNum)
+                        home_refresh.setResultState(RefreshLayout.ResultState.failed);
+                    return;
+                }
                 ArrayList<SceneInfo> sceneInfos1 = (ArrayList<SceneInfo>) bean;
                 sceneInfos.addAll(sceneInfos1);
                 articleClassifyAdapter.notifyDataSetChanged();
-                if (home_refresh.isRefreshing)
-                home_refresh.setResultState(RefreshLayout.ResultState.success);
+
+                if (home_refresh.isRefreshing && home_refresh.getUrlNum() == urlNum)
+                    home_refresh.setResultState(RefreshLayout.ResultState.success);
             }
         });
 
-       MyHttp.articleList(http, 2, 1, 5, 1, new MyHttp.MyHttpResult() {
+        MyHttp.articleList(http, 2, 1, 5, 1, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
+                home_refresh.setUrlNum();
+                if (code != 0) {
+                    showToast(msg);
+                    if (home_refresh.isRefreshing && home_refresh.getUrlNum() == urlNum)
+                        home_refresh.setResultState(RefreshLayout.ResultState.failed);
+                    return;
+                }
+                articleInfos.addAll((ArrayList<ArticleInfo>) bean);
+                articleListAdapter.notifyDataSetChanged();
+
+                if (home_refresh.isRefreshing && home_refresh.getUrlNum() == urlNum)
+                    home_refresh.setResultState(RefreshLayout.ResultState.success);
             }
         });
+
     }
 
     private void InitRefresh() {
-        home_refresh.setScrollView(home_scroll,null);
-
+        home_refresh.setScrollView(home_scroll, null);
         home_refresh.setOnRefreshListener(new RefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                sceneInfos.clear();
+                articleInfos.clear();
                 getData();
             }
         });

@@ -1,4 +1,4 @@
-package com.cqts.kxg.classify.adapter;
+package com.cqts.kxg.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cqts.kxg.R;
-import com.cqts.kxg.classify.bean.ClassifyListInfo;
+import com.cqts.kxg.bean.ClassifyListInfo;
 
 import java.util.ArrayList;
 

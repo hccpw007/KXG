@@ -12,10 +12,10 @@ import com.base.BaseFragment;
 import com.base.BaseValue;
 import com.base.views.MyGridDecoration;
 import com.cqts.kxg.R;
-import com.cqts.kxg.classify.adapter.ClassifyListAdapter;
-import com.cqts.kxg.classify.adapter.ClassifyRecyclerViewAdapter2;
-import com.cqts.kxg.classify.bean.ClassifyListInfo;
-import com.cqts.kxg.classify.bean.ClassifyListInfo.ClassifyChildInfo;
+import com.cqts.kxg.adapter.ClassifyListAdapter;
+import com.cqts.kxg.adapter.ClassifyRecyclerViewAdapter2;
+import com.cqts.kxg.bean.ClassifyListInfo;
+import com.cqts.kxg.bean.ClassifyListInfo.ClassifyChildInfo;
 import com.cqts.kxg.utils.MyHttp;
 import com.cqts.kxg.utils.SPutils;
 import com.google.gson.reflect.TypeToken;
@@ -36,7 +36,7 @@ public class ClassifyFragment extends BaseFragment {
         if (null == view) {
             view = inflater.inflate(R.layout.fragment_classify, null);
             InitView();
-//            getData();
+            getData();
         }
         return view;
     }

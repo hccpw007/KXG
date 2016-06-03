@@ -4,11 +4,13 @@ package com.cqts.kxg.utils;
 import com.android.volley.Request;
 import com.base.BaseValue;
 import com.base.http.HttpForVolley;
+import com.cqts.kxg.bean.ArticleInfo;
+import com.cqts.kxg.bean.GoodsInfo;
 import com.cqts.kxg.bean.SceneInfo;
 import com.cqts.kxg.bean.SigninInfo;
 import com.cqts.kxg.bean.UserInfo;
-import com.cqts.kxg.classify.bean.ClassifyListInfo;
-import com.cqts.kxg.nine.bean.NineInfo;
+import com.cqts.kxg.bean.ClassifyListInfo;
+import com.cqts.kxg.bean.NineInfo;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONObject;
@@ -207,11 +209,13 @@ public class MyHttp {
         String httpUrl = url + "article/listing";
         httpMap.clear();
         httpMap.put("article_type", article_type + "");
-        httpMap.put("PerPage", PerPage + "");
-        httpMap.put("Page", Page + "");
-        Type type = new TypeToken<List<SceneInfo>>() {
+        httpMap.put("share_sum","desc");
+        httpMap.put("add_time", "desc");
+        httpMap.put("perPage", PerPage + "");
+        httpMap.put("page", Page + "");
+        Type type = new TypeToken<List<ArticleInfo>>() {
         }.getType();
-        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, null);
+        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type);
     }
 
     /**
@@ -246,4 +250,30 @@ public class MyHttp {
         toBean(Request.Method.GET, http, which, null, httpUrl, myHttpResult, type);
     }
 
+    /**
+     * 搜索商品 <p>
+     */
+    public static void searchGoods(HttpForVolley http, Integer which,int PageSize,int PageNum,String keyword,String sort, String order,MyHttpResult myHttpResult) {
+        String httpUrl = url + "search/goods";
+        httpMap.clear();
+        httpMap.put("PageSize",PageSize+"");
+        httpMap.put("PageNum",PageNum+"");
+        httpMap.put("keyword",keyword);
+        httpMap.put("sort",sort);
+        httpMap.put("order",order);
+        Type type = new TypeToken<List<GoodsInfo>>() {}.getType();
+        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type);
+    }
+    /**
+     * 搜索文章 <p>
+     */
+    public static void searchArticle(HttpForVolley http, Integer which,int PageSize,int PageNum,String keyword,MyHttpResult myHttpResult) {
+        String httpUrl = url + "search/article";
+        httpMap.clear();
+        httpMap.put("PageSize",PageSize+"");
+        httpMap.put("PageNum",PageNum+"");
+        httpMap.put("keyword",keyword);
+        Type type = new TypeToken<List<ArticleInfo>>() {}.getType();
+        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type);
+    }
 }

@@ -27,6 +27,7 @@
         android:id="@+id/nine_img"/>
 
     <android.support.v7.widget.RecyclerView
+        android:paddingTop="8dp"
         android:paddingRight="8dp"
         android:paddingLeft="8dp"
         android:layout_width="match_parent"

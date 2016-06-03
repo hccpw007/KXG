@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.base.BaseValue;
 import com.cqts.kxg.R;
 
 /**
@@ -17,10 +18,9 @@ import com.cqts.kxg.R;
  * 所有view/布局-都可以用
  */
 public class RoundLayout extends LinearLayout {
-    private float roundLayoutRadius = 20f;
-    private Path roundPath;
-    private RectF rectF;
+    private float roundLayoutRadius = 0;
     private int bgColor;
+    private Path roundPath;
 
     public RoundLayout(Context context) {
         this(context, null);
@@ -30,40 +30,28 @@ public class RoundLayout extends LinearLayout {
     public RoundLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-        getAttrs(context, attrs);
-        init();
-    }
-
-    private void init() {
-        setWillNotDraw(false);//如果你继承的是ViewGroup,注意此行,否则draw方法是不会回调的;
-        roundPath = new Path();
-        rectF = new RectF();
-    }
-
-    private void setRoundPath() {
-        //添加一个圆角矩形到path中, 如果要实现任意形状的View, 只需要手动添加path就行
-        roundPath.addRoundRect(rectF, roundLayoutRadius, roundLayoutRadius, Path.Direction.CW);
-//        roundPath.addRoundRect(rectF,new float[]{0,0,0,0,20,20,20,20},Path.Direction.CW);
-    }
-
-
-    public void setRoundLayoutRadius(float roundLayoutRadius) {
-        this.roundLayoutRadius = roundLayoutRadius;
-        setRoundPath();
-        postInvalidate();
+        if (roundLayoutRadius == 0) {
+            getAttrs(context, attrs);
+        }
     }
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
-        rectF.set(0f, 0f, getMeasuredWidth(), getMeasuredHeight());
-        setRoundPath();
+        if (roundPath == null && roundLayoutRadius > 0) {
+            setWillNotDraw(false);//如果你继承的是ViewGroup,注意此行,否则draw方法是不会回调的;
+            roundPath = new Path();
+            RectF rectF = new RectF();
+            rectF.set(0f, 0f, getMeasuredWidth(), getMeasuredHeight());
+            //添加一个圆角矩形到path中, 如果要实现任意形状的View, 只需要手动添加path就行
+            roundPath.addRoundRect(rectF, roundLayoutRadius, roundLayoutRadius, Path.Direction.CW);
+        }
     }
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawColor(bgColor);
-        if (roundLayoutRadius > 0f) {
+        if (roundPath != null) {
+            canvas.drawColor(bgColor);
             canvas.clipPath(roundPath);
         }
         super.draw(canvas);

@@ -1,4 +1,4 @@
-package com.cqts.kxg.home.adapter;
+package com.cqts.kxg.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -46,7 +46,7 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
 
     @Override
     public int getItemCount() {
-        return 5;
+        return articleInfos.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
@@ -65,4 +65,6 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
             item_collect_tv = (TextView) itemView.findViewById(R.id.item_collect_tv);
         }
     }
+
+
 }

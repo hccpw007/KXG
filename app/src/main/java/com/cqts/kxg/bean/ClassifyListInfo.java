@@ -1,4 +1,4 @@
-package com.cqts.kxg.classify.bean;
+package com.cqts.kxg.bean;
 
 import java.util.ArrayList;
 

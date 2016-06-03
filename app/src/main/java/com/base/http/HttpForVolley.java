@@ -3,6 +3,8 @@ package com.base.http;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -39,7 +41,7 @@ public class HttpForVolley {
         if (null != request && url.equals(request.getUrl())) {
             request.cancel();
         }
-        toHttp(Method, which, httpMap, url,todo);
+        toHttp(Method, which, httpMap, url, todo);
     }
 
     /**
@@ -57,12 +59,12 @@ public class HttpForVolley {
             httpMap.put("avatar", encodeToString);
 //            httpMap.put("ext", "jpg");
             if (null == request) {
-                toHttp(Method, which, httpMap, url,todo);
+                toHttp(Method, which, httpMap, url, todo);
             } else {
                 if (url.equals(request.getUrl())) {
                     request.cancel();
                 }
-                toHttp(Method, which, httpMap, url,todo);
+                toHttp(Method, which, httpMap, url, todo);
             }
         } catch (Exception e) {
             JSONObject object = new JSONObject();
@@ -96,8 +98,18 @@ public class HttpForVolley {
                 if (Method == Request.Method.POST)
                     httpMethod = "POST";
                 Logger.json(new JSONObject(map).put("url", url).put("activity",
-                        activity.getClass().getName()).put("Method",httpMethod).toString());
+                        activity.getClass().getName()).put("Method", httpMethod).toString());
             } catch (JSONException e) {
+            }
+        }
+
+        //对所有参数进行URL编码,以防中文服务器无法解析
+        if (httpMap != null) {
+            for (String key : httpMap.keySet()) {
+                try {
+                    httpMap.put(key, URLEncoder.encode(httpMap.get(key), "utf-8"));
+                } catch (Exception e) {
+                }
             }
         }
 

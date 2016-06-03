@@ -1,4 +1,4 @@
-package com.cqts.kxg.classify.adapter;
+package com.cqts.kxg.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 
 import com.cqts.kxg.R;
-import com.cqts.kxg.classify.bean.ClassifyListInfo;
+import com.cqts.kxg.bean.ClassifyListInfo;
 
 import java.util.ArrayList;
 import java.util.List;

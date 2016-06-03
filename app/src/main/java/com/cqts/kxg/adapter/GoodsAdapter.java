@@ -1,4 +1,4 @@
-package com.cqts.kxg.nine.adapter;
+package com.cqts.kxg.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cqts.kxg.R;
+import com.cqts.kxg.bean.GoodsInfo;
 import com.cqts.kxg.main.WebActivity;
-import com.cqts.kxg.nine.bean.NineInfo.NineListInfo;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -20,12 +20,12 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/5/31.
  */
-public class NineAdapter extends RecyclerView.Adapter<NineAdapter.MyViewHolder> {
+public class GoodsAdapter extends RecyclerView.Adapter<GoodsAdapter.MyViewHolder> {
     Context context;
-    List<NineListInfo> goods_list;
+    List<GoodsInfo> goods_list;
     DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).showImageOnLoading(R.color.white)
             .build();
-    public NineAdapter(Context context, List<NineListInfo> goods_list) {
+    public GoodsAdapter(Context context, List<GoodsInfo> goods_list) {
         this.context = context;
         this.goods_list = goods_list;
     }
