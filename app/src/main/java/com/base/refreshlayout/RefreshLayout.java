@@ -40,8 +40,9 @@ public class RefreshLayout extends LinearLayout {
     private float y_Move;
     private int y_Up;
     private LayoutParams params;
-    public boolean isHorizontal = false; // 是否是横划
-    public boolean canRefresh; // 是否能够刷新
+    private boolean isHorizontal = false; // 是否是横划
+    private boolean refreshble = true; // 激活刷新组件
+    private boolean canRefresh; // 是否能够刷新
     public boolean isRefreshing; // 是否正在刷新
     private static int headHeight = 0; // head的高度
     private int viewHeight = 1000; //
@@ -53,8 +54,8 @@ public class RefreshLayout extends LinearLayout {
     private View refreshStateImageView;
     private TextView refreshStateTextView;
     private static boolean initRefresh = false;
-    public static boolean isCanRefresh = true;
-    public static boolean isCanRefreshForView = true;
+    private static boolean isCanRefresh = true;
+    private static boolean isCanRefreshForView = true;
     private OnRefreshListener onRefreshListener = null;
     private int y_Change;
     HashMap<String, Float> location = new HashMap<String, Float>();
@@ -85,6 +86,12 @@ public class RefreshLayout extends LinearLayout {
         }
     }
 
+    /**
+     设置能否下拉刷新
+     */
+    public void setRefreshble(boolean refreshble){
+        this.refreshble = refreshble;
+    }
     public int getUrlNum() {
         return urlNum;
     }
@@ -246,6 +253,10 @@ public class RefreshLayout extends LinearLayout {
         if (null == onRefreshListener) {
             return;
         }
+        if (!isRefreshing){
+            return;
+        }
+
         refreshingView.clearAnimation();
         refreshingView.setVisibility(View.GONE);
         switch (resultState) {
@@ -380,6 +391,9 @@ public class RefreshLayout extends LinearLayout {
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             location.put("y", ev.getY());
+        }
+        if (!refreshble){
+            return super.dispatchTouchEvent(ev);
         }
         if (!initRefresh) {
             return super.dispatchTouchEvent(ev);

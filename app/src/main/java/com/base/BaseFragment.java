@@ -11,14 +11,14 @@ import android.widget.Toast;
 
 public class BaseFragment extends Fragment {
     private Toast toast;
-    private boolean isStopHttp = false;
+    private boolean isStopHttp = true;
     public HttpForVolley http;
     public View view;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        http = new HttpForVolley(getActivity());
+        http = new HttpForVolley(this);
     }
 
     /**
@@ -47,7 +47,7 @@ public class BaseFragment extends Fragment {
     public void onStop() {
         super.onStop();
         if (isStopHttp) {
-            BaseValue.mQueue.cancelAll(getActivity());
+            BaseValue.mQueue.cancelAll(this);
         }
     }
 

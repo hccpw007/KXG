@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/mybg"
+              android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/myred">
+        <TextView
+            android:textSize="22sp"
+            android:gravity="center"
+            style="@style/text_14sp_white"
+            android:text="热门"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:paddingBottom="7dp"
+            android:paddingLeft="34dp"
+            android:paddingRight="16dp"
+            android:paddingTop="7dp"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/home_search"
+            android:id="@+id/search_img"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:paddingBottom="3dp"
+        android:paddingTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_16sp_black"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="今日最热"
+            android:id="@+id/hot_tv0"/>
+
+        <TextView
+            style="@style/text_16sp_black"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="昨日最热"
+            android:id="@+id/hot_tv1"/>
+
+        <TextView
+            style="@style/text_16sp_black"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="本周最热"
+            android:id="@+id/hot_tv2"/>
+
+        <TextView
+            style="@style/text_16sp_black"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="分享最热"
+            android:id="@+id/hot_tv3"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/hot_view"
+        android:layout_width="70dp"
+        android:layout_height="3dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:src="@color/myred"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/myline"/>
+
+    <com.base.views.MyViewPager
+        android:id="@+id/hot_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </com.base.views.MyViewPager>
+</LinearLayout>

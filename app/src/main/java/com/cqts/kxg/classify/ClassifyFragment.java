@@ -1,11 +1,13 @@
 package com.cqts.kxg.classify;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.base.BaseFragment;
@@ -16,13 +18,14 @@ import com.cqts.kxg.adapter.ClassifyListAdapter;
 import com.cqts.kxg.adapter.ClassifyRVAdapter;
 import com.cqts.kxg.bean.ClassifyListInfo;
 import com.cqts.kxg.bean.ClassifyListInfo.ClassifyChildInfo;
+import com.cqts.kxg.home.SearchActivity;
 import com.cqts.kxg.utils.MyHttp;
 import com.cqts.kxg.utils.SPutils;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
-public class ClassifyFragment extends BaseFragment {
+public class ClassifyFragment extends BaseFragment implements View.OnClickListener {
     private ArrayList<ClassifyListInfo> classifyListInfos = new ArrayList<ClassifyListInfo>();
     private ArrayList<ClassifyChildInfo> classifyChildInfos = new ArrayList<ClassifyChildInfo>();
     private RecyclerView classify_rv;
@@ -41,6 +44,18 @@ public class ClassifyFragment extends BaseFragment {
         return view;
     }
 
+    private void InitView() {
+        classify_rv = (RecyclerView) view.findViewById(R.id.classify_rv);
+        classify_list = (ListView) view.findViewById(R.id.classify_list);
+        ImageView search_img = (ImageView) view.findViewById(R.id.search_img);
+        search_img.setOnClickListener(this);
+        InitRecyclerView();
+        InitListView();
+    }
+
+    /**
+     * 在SP总获取分类的缓存数据(大于24小时则重新请求)
+     */
     private void getData() {
         long nowTime = System.currentTimeMillis();//获取系统当前时间
         Long classifyTime = SPutils.getClassifyTime();
@@ -52,6 +67,11 @@ public class ClassifyFragment extends BaseFragment {
         }else {
             toHttp();
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        startActivity(new Intent(getActivity(), SearchActivity.class));
     }
 
     private void toHttp() {
@@ -69,7 +89,6 @@ public class ClassifyFragment extends BaseFragment {
                     if (classifyListInfos.get(i).cat_id == -1) {
                         classifyListInfoHot = classifyListInfos.get(i);
                         classifyListInfoHot.ischecked = true;
-                        classifyListInfoHot.son.addAll(classifyListInfoHot.son);
                         classifyListInfos.remove(i);
                         classifyListInfos.add(0, classifyListInfoHot);
                         break;
@@ -93,13 +112,6 @@ public class ClassifyFragment extends BaseFragment {
         adapter2.notifyDataSetChanged();
     }
 
-
-    private void InitView() {
-        classify_rv = (RecyclerView) view.findViewById(R.id.classify_rv);
-        classify_list = (ListView) view.findViewById(R.id.classify_list);
-        InitRecyclerView();
-        InitListView();
-    }
 
     private void InitListView() {
         listAdapter = new ClassifyListAdapter(getActivity(), classifyListInfos);

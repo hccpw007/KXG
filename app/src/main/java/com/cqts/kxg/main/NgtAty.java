@@ -21,6 +21,7 @@ import com.cqts.kxg.R;
 import com.cqts.kxg.center.LoginedFragment;
 import com.cqts.kxg.classify.ClassifyFragment;
 import com.cqts.kxg.home.HomeFragment;
+import com.cqts.kxg.hot.HotFragment;
 import com.cqts.kxg.nine.NineFragment;
 
 /**
@@ -75,7 +76,7 @@ public class NgtAty extends FragmentActivity implements OnMyPageChangeListener, 
         list.add(new HomeFragment());
         list.add(new NineFragment());
         list.add(new ClassifyFragment());
-        list.add(new Fragment2());
+        list.add(new HotFragment());
         list.add(new LoginedFragment());
         ngt_pager.setFragemnt(getSupportFragmentManager(), list);
         ngt_pager.setOnMyPageChangeListener(this);
@@ -86,6 +87,14 @@ public class NgtAty extends FragmentActivity implements OnMyPageChangeListener, 
         ngt_rb[arg0].setChecked(true);
         list.get(arg0).onStart();
         list.get(arg0).onShow();
+    }
+
+    @Override
+    public void OnMyPonPageScrolled(int arg0, float arg1, int arg2) {
+    }
+
+    @Override
+    public void OnMyPageScrollStateChanged(int arg0) {
     }
 
     /**

@@ -3,9 +3,14 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
+    <com.base.refreshlayout.RefreshLayout
+        android:id="@+id/goods_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <include layout="@layout/include_httpresult"/>
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/fragment_rclv"
+        android:id="@+id/goods_rclv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/mybg"
@@ -13,4 +18,5 @@
         android:paddingRight="8dp"
         android:paddingTop="8dp">
     </android.support.v7.widget.RecyclerView>
+    </com.base.refreshlayout.RefreshLayout>
 </LinearLayout>

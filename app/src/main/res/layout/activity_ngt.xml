@@ -9,6 +9,7 @@
               android:orientation="vertical"
               tools:context=".main.NgtAty">
     <com.base.views.MyViewPager
+        android:background="@color/mybg"
         android:id="@+id/ngt_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

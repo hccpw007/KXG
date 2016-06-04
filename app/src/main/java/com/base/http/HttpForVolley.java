@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.support.v4.app.Fragment;
 import android.util.Base64;
 
 import com.android.volley.AuthFailureError;
@@ -28,9 +29,12 @@ import com.base.utils.Logger;
 public class HttpForVolley {
     private StringRequest request;
     Activity activity;
-
+    Fragment fragment;
     public HttpForVolley(Activity activity) {
         this.activity = activity;
+    }
+    public HttpForVolley(Fragment fragment) {
+        this.fragment = fragment;
     }
 
     /**
@@ -97,8 +101,13 @@ public class HttpForVolley {
                     httpMethod = "GET";
                 if (Method == Request.Method.POST)
                     httpMethod = "POST";
-                Logger.json(new JSONObject(map).put("url", url).put("activity",
-                        activity.getClass().getName()).put("Method", httpMethod).toString());
+                if (activity != null){
+                    Logger.json(new JSONObject(map).put("url", url).put("activity",
+                            activity.getClass().getName()).put("Method", httpMethod).toString());
+                }else {
+                    Logger.json(new JSONObject(map).put("url", url).put("activity",
+                            fragment.getActivity().getClass().getName()).put("Method", httpMethod).toString());
+                }
             } catch (JSONException e) {
             }
         }
@@ -168,7 +177,11 @@ public class HttpForVolley {
                 }
             }
         };
-        request.setTag(activity);
+        if (activity != null){
+            request.setTag(activity);
+        }else {
+            request.setTag(fragment);
+        }
         BaseValue.mQueue.add(request);
     }
 

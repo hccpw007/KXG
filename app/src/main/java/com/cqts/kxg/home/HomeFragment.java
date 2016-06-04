@@ -144,6 +144,9 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
                     return;
                 }
                 InitViewPage(bean);
+                if (home_refresh.isRefreshing && home_refresh.getUrlNum() == urlNum)
+                    home_refresh.setResultState(RefreshLayout.ResultState.success);
+
             }
         });
     }
@@ -227,6 +230,14 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
         } else {
             rdBtn[(arg0 - 1)].setChecked(true);
         }
+    }
+
+    @Override
+    public void OnMyPonPageScrolled(int arg0, float arg1, int arg2) {
+    }
+
+    @Override
+    public void OnMyPageScrollStateChanged(int arg0) {
     }
 
     @Override

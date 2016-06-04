@@ -148,7 +148,7 @@ public class MyHttp {
 
     /**
      * 快捷登陆<p>
-     * <p>
+     * <p/>
      * 接口和注册一样需要先获取图形验证码，然后获取短信验证码<p>
      * mobile_phone 手机号码<br>
      * captcha 短信验证码<br>
@@ -264,6 +264,13 @@ public class MyHttp {
         }.getType();
         toBean(Request.Method.GET, http, which, null, httpUrl, myHttpResult, type);
     }
+    /**
+     * 热门搜索关键字 <p>
+     */
+    public static void hotKeyword(HttpForVolley http, Integer which, HttpForVolley.HttpTodo httpTodo) {
+        String httpUrl = url + "search/hotKeyword";
+        http.goTo(Request.Method.GET,which,null,httpUrl,httpTodo);
+    }
 
     /**
      * 搜索商品 <p>
@@ -309,6 +316,21 @@ public class MyHttp {
         httpMap.put("PageNum", PageNum + "");
         httpMap.put("keyword", keyword);
         Type type = new TypeToken<List<ShopInfo>>() {
+        }.getType();
+        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type);
+    }
+
+    /**
+     * 热门文章 <p>
+     */
+    public static void articleHot(HttpForVolley http, Integer which, int perPage, int
+            page, int hot_type, MyHttpResult myHttpResult) {
+        String httpUrl = url + "article/hot";
+        httpMap.clear();
+        httpMap.put("perPage", perPage + "");
+        httpMap.put("page", page + "");
+        httpMap.put("hot_type", hot_type + "");
+        Type type = new TypeToken<List<ArticleInfo>>() {
         }.getType();
         toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type);
     }

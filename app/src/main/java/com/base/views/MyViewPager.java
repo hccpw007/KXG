@@ -65,17 +65,24 @@ public class MyViewPager extends ViewPager {
 
 			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
+				if (null != listener) {
+					listener.OnMyPonPageScrolled(arg0,arg1,arg2);
+				}
 			}
 
 			@Override
 			public void onPageScrollStateChanged(int arg0) {
-
+				if (null != listener) {
+					listener.OnMyPageScrollStateChanged(arg0);
+				}
 			}
 		});
 	}
 
 	public interface OnMyPageChangeListener {
 		public void OnMyPageSelected(int arg0);
+		public void OnMyPonPageScrolled(int arg0, float arg1, int arg2);
+		public void OnMyPageScrollStateChanged(int arg0);
 	}
 
 	@Override

@@ -13,16 +13,20 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.base.BaseValue;
+import com.base.http.HttpForVolley;
 import com.base.views.MyEditText;
 import com.base.views.MyTagView;
 import com.cqts.kxg.R;
 import com.cqts.kxg.main.MyActivity;
+import com.cqts.kxg.utils.MyHttp;
+
+import org.json.JSONObject;
 
 /**
  * 搜索页面
  */
 public class SearchActivity extends MyActivity implements MyTagView.OnTagClickListener, View
-        .OnClickListener, TextView.OnEditorActionListener {
+        .OnClickListener, TextView.OnEditorActionListener, HttpForVolley.HttpTodo {
     private MyTagView search_tag;
     private MyEditText search_et;
     private ImageView search_finish_iv;
@@ -39,6 +43,11 @@ public class SearchActivity extends MyActivity implements MyTagView.OnTagClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         InitView();
+        getHotKeyWord();
+    }
+
+    private void getHotKeyWord() {
+        MyHttp.hotKeyword(http,null,this);
     }
 
     private void InitView() {
@@ -53,7 +62,7 @@ public class SearchActivity extends MyActivity implements MyTagView.OnTagClickLi
         search_tv.setOnClickListener(this);
 
         search_et.setOnEditorActionListener(this);
-        String[] texts = new String[]{"大衣", "杨", "风衣", "帽子", "点噶嗲噶", "235日3", "大傻瓜",
+        String[] texts = new String[]{"大衣", "杨", "主席", "帽子", "点噶嗲噶", "235日3", "大傻瓜",
                 "嘎帅得过", "嘎的速度高达", "嘎帅得过", "点噶嗲噶", "泥沙的", "点发"};
         search_tag.setMyTag(texts);
         search_tag.setOnTagClickListener(this);
@@ -137,5 +146,19 @@ public class SearchActivity extends MyActivity implements MyTagView.OnTagClickLi
         intent.putExtra("keyword", searchStr);
         intent.putExtra("type", type);
         startActivity(intent);
+    }
+
+
+    @Override
+    public void httpTodo(Integer which, JSONObject response) {
+        int code = response.optInt("code", 1);
+        String msg = response.optString("msg", "发生错误");
+        String data = response.optString("data", "");
+        if (code!=0){
+            showToast(msg);
+            return;
+        }
+        String[] split = data.split(",");
+        search_tag.setMyTag(split);
     }
 }
