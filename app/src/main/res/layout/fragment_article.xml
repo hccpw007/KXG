@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
-    <include layout="@layout/include_httpresult"/>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/fragment_rclv"
-        android:paddingRight="8dp"
-        android:paddingLeft="8dp"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+    <com.base.refreshlayout.RefreshLayout
+        android:id="@+id/article_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include layout="@layout/include_httpresult"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/article_rclv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp">
+        </android.support.v7.widget.RecyclerView>
+    </com.base.refreshlayout.RefreshLayout>
 </LinearLayout>

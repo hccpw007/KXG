@@ -18,7 +18,7 @@ public class BaseFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        http = new HttpForVolley(getActivity());
+        http = new HttpForVolley(this);
     }
 
     /**
@@ -47,7 +47,7 @@ public class BaseFragment extends Fragment {
     public void onStop() {
         super.onStop();
         if (isStopHttp) {
-            BaseValue.mQueue.cancelAll(getActivity());
+            BaseValue.mQueue.cancelAll(this);
         }
     }
 

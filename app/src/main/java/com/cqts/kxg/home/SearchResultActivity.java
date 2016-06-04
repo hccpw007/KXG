@@ -10,16 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cqts.kxg.R;
-import com.cqts.kxg.bean.ArticleInfo;
-import com.cqts.kxg.bean.GoodsInfo;
-import com.cqts.kxg.bean.ShopInfo;
 import com.cqts.kxg.main.MyActivity;
-import com.cqts.kxg.main.MyFragment;
-import com.cqts.kxg.utils.MyHttp;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 public class SearchResultActivity extends MyActivity implements View.OnClickListener{
 
@@ -38,10 +29,6 @@ public class SearchResultActivity extends MyActivity implements View.OnClickList
     private LinearLayout money_layout;
     private TextView money_tv;
     private ImageView money_img;
-    private List<GoodsInfo> goodsInfos = new ArrayList<GoodsInfo>();
-    private List<ArticleInfo> articleInfos = new ArrayList<ArticleInfo>();
-    private List<ShopInfo> shopInfos = new ArrayList<>();
-
     private ArticleFragment articleFragment;
     private GoodsFragment goodsFragment;
     private ShopFragment shopFragment;
@@ -52,10 +39,8 @@ public class SearchResultActivity extends MyActivity implements View.OnClickList
         setContentView(R.layout.activity_search_result);
         type = getIntent().getIntExtra("type", 1);
         keyword = getIntent().getStringExtra("keyword");
-
         InitView();
         setFragment();
-        getData();
     }
 
     private void InitView() {
@@ -68,14 +53,15 @@ public class SearchResultActivity extends MyActivity implements View.OnClickList
         money_layout = (LinearLayout) findViewById(R.id.money_layout);
         money_tv = (TextView) findViewById(R.id.money_tv);
         money_img = (ImageView) findViewById(R.id.money_img);
-
         keywords_tv.setText(keyword);
-        search_finish_iv.setOnClickListener(this);
 
+        search_finish_iv.setOnClickListener(this);
         all_tv.setOnClickListener(this);
         sales_tv.setOnClickListener(this);
         money_layout.setOnClickListener(this);
     }
+
+
 
     @Override
     public void onClick(View v) {
@@ -87,19 +73,48 @@ public class SearchResultActivity extends MyActivity implements View.OnClickList
             case R.id.sales_tv: //销量
             case R.id.money_layout: //价格
                 setGoodsTab(v.getId());
+                goodsFragment.setSearchValue(sort,order);
                 break;
             default:
                 break;
         }
     }
 
+
+    private void setFragment() {
+        switch (type) {
+            case SearchActivity.type_goods:
+                type_tv.setText("商品");
+                goodsFragment = new GoodsFragment(keyword, sort, order);
+                showFragment(goodsFragment);
+                break;
+            case SearchActivity.type_article:
+                goods_layout.setVisibility(View.GONE);
+                type_tv.setText("文章");
+                articleFragment = new ArticleFragment(keyword);
+                showFragment(articleFragment);
+                break;
+            case SearchActivity.type_shop:
+                goods_layout.setVisibility(View.GONE);
+                type_tv.setText("店铺");
+                shopFragment = new ShopFragment(keyword);
+                showFragment(shopFragment);
+            default:
+                break;
+        }
+    }
+
+    private void showFragment(Fragment fragment) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction beginTransaction = fm.beginTransaction();
+        beginTransaction.add(R.id.framelayout, fragment);
+        beginTransaction.commit();
+    }
     /**
      * 设置tab栏状态的改变,请求数据
      */
     void setGoodsTab(int which) {
         //数据清空
-        goodsInfos.clear();
-        PageNum = 1;
         all_tv.setTextColor(getResources().getColor(R.color.black));
         sales_tv.setTextColor(getResources().getColor(R.color.black));
         money_tv.setTextColor(getResources().getColor(R.color.black));
@@ -129,178 +144,5 @@ public class SearchResultActivity extends MyActivity implements View.OnClickList
             default:
                 break;
         }
-        getGoodsData();
-    }
-
-
-    private void setFragment() {
-        switch (type) {
-            case SearchActivity.type_goods:
-                goodsFragment = new GoodsFragment();
-                showFragment(goodsFragment);
-                type_tv.setText("商品");
-                break;
-            case SearchActivity.type_article:
-                goods_layout.setVisibility(View.GONE);
-                articleFragment = new ArticleFragment();
-                showFragment(articleFragment);
-                type_tv.setText("文章");
-                break;
-            case SearchActivity.type_shop:
-                goods_layout.setVisibility(View.GONE);
-                shopFragment = new ShopFragment();
-                showFragment(shopFragment);
-                type_tv.setText("店铺");
-            default:
-                break;
-        }
-    }
-
-    private void getData() {
-        switch (type) {
-            case SearchActivity.type_goods:
-                goodsFragment.setGotoBottom(new GoodsFragment.GotoDottom() {
-                    @Override
-                    public void loadMore() {
-                        getGoodsData();
-                    }
-                });
-                getGoodsData();
-                break;
-            case SearchActivity.type_article:
-                articleFragment.setGotoBottom(new ArticleFragment.GotoDottom() {
-                    @Override
-                    public void loadMore() {
-                        getArticleData();
-                    }
-                });
-                getArticleData();
-                break;
-            case SearchActivity.type_shop:
-                shopFragment.setGotoBottom(new ShopFragment.GotoDottom() {
-                    @Override
-                    public void loadMore() {
-                        getShopData();
-                    }
-                });
-                getShopData();
-                break;
-            default:
-                break;
-        }
-    }
-
-    /**
-     * 获得店铺数据
-     */
-    private void getShopData() {
-        MyHttp.searchShop(http, type, PageSize, PageNum, keyword, new MyHttp.MyHttpResult() {
-            @Override
-            public void httpResult(Integer which, int code, String msg, Object bean) {
-                if (code == 404){
-                    shopFragment.setHttpFail(new MyFragment.HttpFail() {
-                        @Override
-                        public void toHttpAgain() {
-                            getShopData();
-                        }
-                    });
-                    return;
-                }
-                if (code != 0) {
-                    showToast(msg);
-                    return;
-                }
-                shopInfos.addAll((Collection<? extends ShopInfo>) bean);
-                if (shopInfos.size() == 0) {
-                    shopFragment.setHttpNotData(new MyFragment.HttpFail() {
-                        @Override
-                        public void toHttpAgain() {
-                            getShopData();
-                        }
-                    });
-                    return;
-                }
-                shopFragment.setHttpSuccess();
-                shopFragment.setNotify(shopInfos);
-                PageNum++;
-            }
-        });
-    }
-
-    private void getGoodsData() {
-        MyHttp.searchGoods(http, type, PageSize, PageNum, keyword, sort, order, new MyHttp
-                .MyHttpResult() {
-            @Override
-            public void httpResult(Integer which, int code, String msg, Object bean) {
-                if (code == 404){
-                    goodsFragment.setHttpFail(new MyFragment.HttpFail() {
-                        @Override
-                        public void toHttpAgain() {
-                            getGoodsData();
-                        }
-                    });
-                    return;
-                }
-                if (code != 0) {
-                    showToast(msg);
-                    return;
-                }
-                goodsInfos.addAll((ArrayList<GoodsInfo>) bean);
-                if (goodsInfos.size() == 0) {
-                    goodsFragment.setHttpNotData(new MyFragment.HttpFail() {
-                        @Override
-                        public void toHttpAgain() {
-                            getGoodsData();
-                        }
-                    });
-                    return;
-                }
-                goodsFragment.setHttpSuccess();
-                goodsFragment.setNotify(goodsInfos);
-                PageNum++;
-            }
-        });
-    }
-
-    private void getArticleData() {
-        MyHttp.searchArticle(http, type, PageSize, PageNum, keyword, new MyHttp
-                .MyHttpResult() {
-            @Override
-            public void httpResult(Integer which, int code, String msg, Object bean) {
-                if (code == 404){
-                    articleFragment.setHttpFail(new MyFragment.HttpFail() {
-                        @Override
-                        public void toHttpAgain() {
-                            getArticleData();
-                        }
-                    });
-                    return;
-                }
-                if (code != 0) {
-                    showToast(msg);
-                    return;
-                }
-                articleInfos.addAll((ArrayList<ArticleInfo>) bean);
-                if (articleInfos.size() == 0) {
-                    articleFragment.setHttpNotData(new MyFragment.HttpFail() {
-                        @Override
-                        public void toHttpAgain() {
-                            getArticleData();
-                        }
-                    });
-                    return;
-                }
-                articleFragment.setHttpSuccess();
-                articleFragment.setNotify(articleInfos);
-                PageNum++;
-            }
-        });
-    }
-
-    private void showFragment(Fragment fragment) {
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction beginTransaction = fm.beginTransaction();
-        beginTransaction.add(R.id.framelayout, fragment);
-        beginTransaction.commit();
     }
 }

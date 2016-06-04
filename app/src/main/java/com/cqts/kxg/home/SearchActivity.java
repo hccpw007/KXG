@@ -53,7 +53,7 @@ public class SearchActivity extends MyActivity implements MyTagView.OnTagClickLi
         search_tv.setOnClickListener(this);
 
         search_et.setOnEditorActionListener(this);
-        String[] texts = new String[]{"大衣", "杨", "风衣", "帽子", "点噶嗲噶", "235日3", "大傻瓜",
+        String[] texts = new String[]{"大衣", "杨", "主席", "帽子", "点噶嗲噶", "235日3", "大傻瓜",
                 "嘎帅得过", "嘎的速度高达", "嘎帅得过", "点噶嗲噶", "泥沙的", "点发"};
         search_tag.setMyTag(texts);
         search_tag.setOnTagClickListener(this);

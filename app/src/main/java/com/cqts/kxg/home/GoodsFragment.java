@@ -7,27 +7,56 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.base.BaseFragment;
 import com.base.BaseValue;
+import com.base.refreshlayout.RefreshLayout;
 import com.base.views.MyGridDecoration;
 import com.cqts.kxg.R;
-import com.cqts.kxg.bean.GoodsInfo;
 import com.cqts.kxg.adapter.GoodsAdapter;
+import com.cqts.kxg.bean.GoodsInfo;
 import com.cqts.kxg.main.MyFragment;
+import com.cqts.kxg.utils.MyHttp;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * Created by Administrator on 2016/6/1.
  */
-public class GoodsFragment extends MyFragment {
-    private RecyclerView fragment_rclv;
+public class GoodsFragment extends MyFragment implements RefreshLayout.OnRefreshListener,
+        MyHttp.MyHttpResult, MyFragment.HttpFail, RefreshLayout.TopOrBottom {
     private GoodsAdapter adapter;
-    private  List<GoodsInfo> goodsInfos = new ArrayList<GoodsInfo>();
+    private List<GoodsInfo> goodsInfos = new ArrayList<>();
     private GridLayoutManager manager;
-    private GotoDottom gotoDottom;
+    private RefreshLayout goods_refresh;
+    private RecyclerView goods_rclv;
+    Where where;
+    private int PageSize = 50;
+    private int PageNum = 1;
+    String keyword = ""; //搜索文章的关键字
+    String  sort = "";
+    String  order = "";
+    /**
+     * 搜索商品
+     */
+    public GoodsFragment(String keyword,String sort,String order) {
+        this.keyword = keyword;
+        this.sort = sort;
+        this.order = order;
+        this.where = Where.search;
+    }
+
     public GoodsFragment() {
+        this.where = Where.love;
+    }
+
+    //设置搜索的排序参数
+    public void setSearchValue(String sort,String order )  {
+        this.sort = sort;
+        this.order = order;
+        PageNum = 1;
+        goodsInfos.clear();
+        getData();
     }
 
     @Override
@@ -36,47 +65,126 @@ public class GoodsFragment extends MyFragment {
         if (null == view) {
             view = inflater.inflate(R.layout.fragment_goods, null);
             InitView();
+            getData();
         }
         return view;
     }
 
     private void InitView() {
-        fragment_rclv = (RecyclerView) view.findViewById(R.id.fragment_rclv);
-        fragment_rclv.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        setStopHttp(true); //stop的时候关闭数据
+        goods_refresh = (RefreshLayout) view.findViewById(R.id.goods_refresh);
+        goods_rclv = (RecyclerView) view.findViewById(R.id.goods_rclv);
+        goods_refresh.setOnRefreshListener(this);
+        InteRV();
+    }
+
+    /**
+     * 初始化文章列表
+     */
+    private void InteRV() {
+        goods_rclv.setOverScrollMode(View.OVER_SCROLL_NEVER);
         manager = new GridLayoutManager(getActivity(), 2);
-        fragment_rclv.setLayoutManager(manager);
+        goods_rclv.setLayoutManager(manager);
         MyGridDecoration myGridDecoration = new MyGridDecoration(BaseValue.dp2px(8), BaseValue
                 .dp2px(8), getResources().getColor(R.color.mybg), false);
         myGridDecoration.setImageView(R.id.item_nine_img, 1);
-        fragment_rclv.addItemDecoration(myGridDecoration);
+        goods_rclv.addItemDecoration(myGridDecoration);
         adapter = new GoodsAdapter(getActivity(), goodsInfos);
-        fragment_rclv.setAdapter(adapter);
-        fragment_rclv.setOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                if (manager.findLastCompletelyVisibleItemPosition() == manager.getItemCount() -
-                        1) {
-                    //底部
-                    if (gotoDottom!=null){
-                        gotoDottom.loadMore();
-                    }
-                }
-            }
-        });
+        goods_rclv.setAdapter(adapter);
+        goods_refresh.setRC(goods_rclv, this);
     }
 
-    public void setNotify(List<GoodsInfo> goodsInfo) {
-        this.goodsInfos.clear();
-        this.goodsInfos.addAll(goodsInfo);
+    /**
+     * 下拉刷新
+     */
+    @Override
+    public void onRefresh() {
+        PageNum = 1;
+        goodsInfos.clear();
+        getData();
+    }
+
+    private void getData() {
+        switch (where) {
+            case search: //来自搜索
+                goods_refresh.setRefreshble(false);
+                MyHttp.searchGoods(http,null,PageSize,PageNum,keyword,sort,order,this);
+                break;
+            case love: //来自喜欢
+                goods_refresh.setRefreshble(false);
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void toHttpAgain() {
+        getData();
+    }
+
+    /**
+     * 网络数据返回
+     */
+    @Override
+    public void httpResult(Integer which, int code, String msg, Object bean) {
+
+        if (code == 404) {
+            setHttpFail(this);
+            goods_refresh.setResultState(RefreshLayout.ResultState.failed);
+            return;
+        }
+        if (code != 0) {
+            showToast(msg);
+            goods_refresh.setResultState(RefreshLayout.ResultState.failed);
+            return;
+        }
+        goods_refresh.setResultState(RefreshLayout.ResultState.success);
+
+        goodsInfos.addAll((ArrayList<GoodsInfo>) bean);
+        if (goodsInfos.size() == 0) {
+            setHttpNotData(this);
+            return;
+        }
+        setHttpSuccess();
         adapter.notifyDataSetChanged();
+        PageNum++;
     }
 
-    public void setGotoBottom(GotoDottom gotoDottom) {
-            this.gotoDottom =gotoDottom;
+    //到达底部  加载更多
+    @Override
+    public void gotoBottom() {
+        if (goodsInfos.size() >= PageSize) {
+            getData();
+        }
     }
 
-    public interface GotoDottom {
-        void loadMore();
+    @Override
+    public void move() {
+    }
+
+    @Override
+    public void stop() {
+    }
+
+    @Override
+    public void gotoTop() {
+    }
+
+    /**
+     * 商品的ArticleFragment出现在什么地方<p>
+     * search ------- 搜索<br>
+     * love --------- 喜欢(收藏)<br>
+     */
+    public enum Where {
+        search, love
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (goods_refresh.isRefreshing) {
+            goods_refresh.setResultState(RefreshLayout.ResultState.close);
+        }
     }
 }
