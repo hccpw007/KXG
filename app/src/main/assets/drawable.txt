@@ -15,4 +15,4 @@
   bg_white_to_gray 无钝角 white-gray 的 selector
   wqrtqwtqwt
   bg_shape_red_to_gray 有钝角 red-gray 的 selector
-  bg_shape_white_to_gray 有钝角 white-gray 的 selector
+  bg_shape_white_to_gray 有钝角 white-gray 的 electors
