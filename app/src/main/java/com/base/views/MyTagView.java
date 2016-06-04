@@ -1,10 +1,13 @@
 package com.base.views;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.text.Layout;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -43,19 +46,20 @@ public class MyTagView extends RelativeLayout implements View.OnClickListener {
     }
 
     @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        ViewGroup.LayoutParams layoutParams = getLayoutParams();
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
         int childCount = getChildCount();
-        int l = 0, t = 0, r = getPaddingLeft() - marginLeft, b = 0, h = 0;
-        int height =0;
+        int r = getPaddingLeft() - marginLeft;
+        int h = 0;
+        int height = 0;
         if (childCount != 0) {
             View childAt = getChildAt(0);
             height = childAt.getMeasuredHeight() + marginTop;
         }
 
         for (int i = 0; i < childCount; i++) {
-            View  childAt = getChildAt(i);
-            int   width = childAt.getMeasuredWidth();
+            View childAt = getChildAt(i);
+            int width = childAt.getMeasuredWidth();
             r = r + width + marginLeft;
             if (r > BaseValue.screenwidth - getPaddingLeft()) {
                 ++h;
@@ -64,10 +68,15 @@ public class MyTagView extends RelativeLayout implements View.OnClickListener {
             childAt.layout(r - width, h * height + marginTop, r, h * height + height);
         }
 
-        //自适应大小   注释取消
-        layoutParams.height = 4 * height + marginTop;
+        ViewGroup.LayoutParams layoutParams = getLayoutParams();
+        if (h < 3) {
+            layoutParams.height = (h+1)*height+ marginTop;
+        } else {
+            layoutParams.height = 4*height+ marginTop;
+        }
         setLayoutParams(layoutParams);
     }
+
 
     @Override
     public void onClick(View v) {

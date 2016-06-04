@@ -22,6 +22,10 @@ import com.cqts.kxg.utils.MyHttp;
 
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+
 /**
  * 搜索页面
  */
@@ -47,7 +51,7 @@ public class SearchActivity extends MyActivity implements MyTagView.OnTagClickLi
     }
 
     private void getHotKeyWord() {
-        MyHttp.hotKeyword(http,null,this);
+        MyHttp.hotKeyword(http, null, this);
     }
 
     private void InitView() {
@@ -62,9 +66,6 @@ public class SearchActivity extends MyActivity implements MyTagView.OnTagClickLi
         search_tv.setOnClickListener(this);
 
         search_et.setOnEditorActionListener(this);
-        String[] texts = new String[]{"大衣", "杨", "主席", "帽子", "点噶嗲噶", "235日3", "大傻瓜",
-                "嘎帅得过", "嘎的速度高达", "嘎帅得过", "点噶嗲噶", "泥沙的", "点发"};
-        search_tag.setMyTag(texts);
         search_tag.setOnTagClickListener(this);
         createPop();
     }
@@ -147,17 +148,19 @@ public class SearchActivity extends MyActivity implements MyTagView.OnTagClickLi
         intent.putExtra("type", type);
         startActivity(intent);
     }
-
-
     @Override
     public void httpTodo(Integer which, JSONObject response) {
         int code = response.optInt("code", 1);
         String msg = response.optString("msg", "发生错误");
         String data = response.optString("data", "");
-        if (code!=0){
+        if (code != 0) {
             showToast(msg);
             return;
         }
+
+        data = data.replace("[", "");
+        data = data.replace("]", "");
+        data = data.replace("\"", "");
         String[] split = data.split(",");
         search_tag.setMyTag(split);
     }
