@@ -264,6 +264,13 @@ public class MyHttp {
         }.getType();
         toBean(Request.Method.GET, http, which, null, httpUrl, myHttpResult, type);
     }
+    /**
+     * 热门搜索关键字 <p>
+     */
+    public static void hotKeyword(HttpForVolley http, Integer which, HttpForVolley.HttpTodo httpTodo) {
+        String httpUrl = url + "search/hotKeyword";
+        http.goTo(Request.Method.GET,which,null,httpUrl,httpTodo);
+    }
 
     /**
      * 搜索商品 <p>

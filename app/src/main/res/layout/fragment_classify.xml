@@ -30,7 +30,8 @@
             android:paddingRight="16dp"
             android:paddingTop="7dp"
             android:scaleType="fitCenter"
-            android:src="@mipmap/home_search"/>
+            android:src="@mipmap/home_search"
+            android:id="@+id/search_img"/>
     </RelativeLayout>
 
     <RelativeLayout

@@ -1,5 +1,6 @@
 package com.cqts.kxg.hot;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.base.BaseValue;
 import com.base.views.MyViewPager;
 import com.cqts.kxg.R;
 import com.cqts.kxg.home.ArticleFragment;
+import com.cqts.kxg.home.SearchActivity;
 
 import java.util.ArrayList;
 
@@ -36,11 +38,13 @@ public class HotFragment extends BaseFragment implements MyViewPager.OnMyPageCha
     }
 
     private void InitView() {
+        ImageView search_img = (ImageView) view.findViewById(R.id.search_img);
         hot_tv0 = (TextView)view. findViewById(R.id.hot_tv0);
         hot_tv1 = (TextView) view.findViewById(R.id.hot_tv1);
         hot_tv2 = (TextView) view.findViewById(R.id.hot_tv2);
         hot_tv3 = (TextView) view.findViewById(R.id.hot_tv3);
 
+        search_img.setOnClickListener(this);
         hot_tv0.setOnClickListener(this);
         hot_tv1.setOnClickListener(this);
         hot_tv2.setOnClickListener(this);
@@ -56,6 +60,9 @@ public class HotFragment extends BaseFragment implements MyViewPager.OnMyPageCha
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.search_img: //搜索按钮
+                startActivity(new Intent(getActivity(), SearchActivity.class));
+                break;
             case R.id.hot_tv0:
                 hot_viewpager.setCurrentItem(0,false);
                 break;
@@ -80,13 +87,15 @@ public class HotFragment extends BaseFragment implements MyViewPager.OnMyPageCha
         list.add(new ArticleFragment(4));
         hot_viewpager.setFragemnt(getActivity().getSupportFragmentManager(),list);
         hot_viewpager.setOnMyPageChangeListener(this);
-        hot_view.layout(50, BaseValue.dp2px(88),50+100,BaseValue.dp2px(93));
     }
 
     @Override
     public void OnMyPageSelected(int arg0) {
     }
 
+    /**
+     * 根据滑动改变红标的位置
+     */
     @Override
     public void OnMyPonPageScrolled(int arg0, float arg1, int arg2) {
         hot_view.setX(arg0*BaseValue.screenwidth/4+arg2/4);

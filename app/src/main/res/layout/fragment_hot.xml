@@ -4,18 +4,31 @@
               android:layout_height="match_parent"
               android:background="@color/mybg"
               android:orientation="vertical">
-
-    <TextView
-        style="@style/text_14sp_white"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="44dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:background="@color/myred"
-        android:gravity="center"
-        android:text="热门"
-        android:textSize="22sp"/>
-
+        android:background="@color/myred">
+        <TextView
+            android:textSize="22sp"
+            android:gravity="center"
+            style="@style/text_14sp_white"
+            android:text="热门"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:paddingBottom="7dp"
+            android:paddingLeft="34dp"
+            android:paddingRight="16dp"
+            android:paddingTop="7dp"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/home_search"
+            android:id="@+id/search_img"/>
+    </RelativeLayout>
     <LinearLayout
         android:paddingBottom="3dp"
         android:paddingTop="10dp"
