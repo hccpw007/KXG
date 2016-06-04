@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 public class BaseFragment extends Fragment {
     private Toast toast;
-    private boolean isStopHttp = false;
+    private boolean isStopHttp = true;
     public HttpForVolley http;
     public View view;
 

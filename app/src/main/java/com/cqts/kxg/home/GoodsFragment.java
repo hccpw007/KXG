@@ -71,7 +71,6 @@ public class GoodsFragment extends MyFragment implements RefreshLayout.OnRefresh
     }
 
     private void InitView() {
-        setStopHttp(true); //stop的时候关闭数据
         goods_refresh = (RefreshLayout) view.findViewById(R.id.goods_refresh);
         goods_rclv = (RecyclerView) view.findViewById(R.id.goods_rclv);
         goods_refresh.setOnRefreshListener(this);

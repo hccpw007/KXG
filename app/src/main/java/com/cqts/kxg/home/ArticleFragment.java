@@ -62,7 +62,6 @@ public class ArticleFragment extends MyFragment implements RefreshLayout.OnRefre
     }
 
     private void InitView() {
-        setStopHttp(true); //stop的时候关闭数据
         article_refresh = (RefreshLayout) view.findViewById(R.id.article_refresh);
         article_rclv = (RecyclerView) view.findViewById(R.id.article_rclv);
         article_refresh.setOnRefreshListener(this);
