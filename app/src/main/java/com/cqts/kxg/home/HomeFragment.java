@@ -22,12 +22,15 @@ import com.base.views.MyScrollView;
 import com.base.views.MyViewPager;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.ArticleInfo;
-import com.cqts.kxg.bean.BannerInfo;
-import com.cqts.kxg.bean.SceneInfo;
+import com.cqts.kxg.bean.HomeBannerInfo;
+import com.cqts.kxg.bean.HomeSceneInfo;
 import com.cqts.kxg.adapter.ArticleClassifyAdapter;
 import com.cqts.kxg.adapter.ArticleListAdapter;
 import com.cqts.kxg.adapter.BannerAdapter;
+import com.cqts.kxg.bean.HomeTableInfo;
+import com.cqts.kxg.main.NgtAty;
 import com.cqts.kxg.utils.MyHttp;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,22 +40,26 @@ import java.util.TimerTask;
 public class HomeFragment extends BaseFragment implements Callback, MyViewPager
         .OnMyPageChangeListener, View.OnClickListener {
     private static final int VIEWPAGER = -1;
-    private static final int urlNum = 3; //当前页面是刷新的url数量
+    private static final int urlNum = 4; //当前页面是刷新的url数量
     private Handler handler;
     private MyViewPager home_viewpager;
     private RefreshLayout home_refresh;
     private RadioButton[] rdBtn = new RadioButton[4];
     private Timer timer;
     private TimerTask timerTask;
+    private ImageView home_img1;
+    private ImageView home_img2;
+    private ImageView home_img3;
     private RecyclerView home_rv;
     private RecyclerView home_rv2;
     private MyScrollView home_scroll;
-    ArrayList<SceneInfo> sceneInfos = new ArrayList<>();
+    ArrayList<HomeSceneInfo> sceneInfos = new ArrayList<>();
     ArrayList<ArticleInfo> articleInfos = new ArrayList<>();
     private ArticleClassifyAdapter articleClassifyAdapter;
     private ArticleListAdapter articleListAdapter;
     private ImageView home_search_img;
-    List<BannerInfo> bannerInfos;
+    List<HomeBannerInfo> bannerInfos;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,6 +75,10 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
     }
 
     private void InitView() {
+        home_img1 = (ImageView) view.findViewById(R.id.home_img1);
+        home_img2 = (ImageView) view.findViewById(R.id.home_img2);
+        home_img3 = (ImageView) view.findViewById(R.id.home_img3);
+
         home_viewpager = ((MyViewPager) view.findViewById(R.id.home_viewpager));
         rdBtn[0] = ((RadioButton) view.findViewById(R.id.home_rdbtn1));
         rdBtn[1] = ((RadioButton) view.findViewById(R.id.home_rdbtn2));
@@ -80,6 +91,9 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
         home_search_img = (ImageView) view.findViewById(R.id.home_search_img);
         home_scroll.setOverScrollMode(View.OVER_SCROLL_NEVER); //去掉阴影
         home_search_img.setOnClickListener(this);
+        home_img1.setOnClickListener(this);
+        home_img2.setOnClickListener(this);
+        home_img3.setOnClickListener(this);
     }
 
     @Override
@@ -87,6 +101,15 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
         switch (v.getId()) {
             case R.id.home_search_img:
                 startActivity(new Intent(getActivity(), SearchActivity.class));
+                break;
+            case R.id.home_img1: //商品分类
+                ((NgtAty) getActivity()).ngt_pager.setCurrentItem(2, false);
+                break;
+            case R.id.home_img2:  //9.9包邮
+                ((NgtAty) getActivity()).ngt_pager.setCurrentItem(1, false);
+                break;
+            case R.id.home_img3: //店铺街
+                startActivity(new Intent(getActivity(), ShopStreetActivity.class));
                 break;
             default:
                 break;
@@ -105,7 +128,7 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
                         home_refresh.setResultState(RefreshLayout.ResultState.failed);
                     return;
                 }
-                ArrayList<SceneInfo> sceneInfos1 = (ArrayList<SceneInfo>) bean;
+                ArrayList<HomeSceneInfo> sceneInfos1 = (ArrayList<HomeSceneInfo>) bean;
                 sceneInfos.addAll(sceneInfos1);
                 articleClassifyAdapter.notifyDataSetChanged();
 
@@ -114,6 +137,7 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
             }
         });
 
+        //文章列表
         MyHttp.articleList(http, 2, 1, 5, 1, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
@@ -132,12 +156,12 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
             }
         });
 
-
+        //首页banner图
         MyHttp.homeBanner(http, null, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
                 home_refresh.setUrlNum();
-                if (code!=0){
+                if (code != 0) {
                     showToast(msg);
                     if (home_refresh.isRefreshing && home_refresh.getUrlNum() == urlNum)
                         home_refresh.setResultState(RefreshLayout.ResultState.failed);
@@ -149,7 +173,41 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
 
             }
         });
+
+        MyHttp.homemenu(http, null, new MyHttp.MyHttpResult() {
+            @Override
+            public void httpResult(Integer which, int code, String msg, Object bean) {
+                home_refresh.setUrlNum();
+                if (code != 0) {
+                    showToast(msg);
+                    if (home_refresh.isRefreshing && home_refresh.getUrlNum() == urlNum)
+                        home_refresh.setResultState(RefreshLayout.ResultState.failed);
+                    return;
+                }
+                if (home_refresh.isRefreshing && home_refresh.getUrlNum() == urlNum)
+                    home_refresh.setResultState(RefreshLayout.ResultState.success);
+                InitTable((ArrayList<HomeTableInfo>) bean);
+            }
+        });
     }
+
+    private void InitTable(ArrayList<HomeTableInfo> homeTableInfos) {
+        if (null==homeTableInfos){
+            return;
+        }
+        for (int i=0;i<homeTableInfos.size();i++){
+            if (homeTableInfos.get(i).ad_index == 1){
+                ImageLoader.getInstance().displayImage(homeTableInfos.get(i).ad_code,home_img1);
+            }
+            if (homeTableInfos.get(i).ad_index == 2){
+                ImageLoader.getInstance().displayImage(homeTableInfos.get(i).ad_code,home_img3);
+            }
+            if (homeTableInfos.get(i).ad_index == 3){
+                ImageLoader.getInstance().displayImage(homeTableInfos.get(i).ad_code,home_img2);
+            }
+        }
+    }
+
 
     private void InitRefresh() {
         home_refresh.setScrollView(home_scroll, null);
@@ -190,11 +248,11 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
     //广告Viewpager
     private void InitViewPage(Object bean) {
         home_viewpager.setOnMyPageChangeListener(this);
-        ArrayList<BannerInfo> bannerBeans = (ArrayList<BannerInfo>) bean;
+        ArrayList<HomeBannerInfo> bannerBeans = (ArrayList<HomeBannerInfo>) bean;
 
-        if (bannerBeans.size()>4){
-            bannerInfos = bannerBeans.subList(0,3);
-        }else {
+        if (bannerBeans.size() > 4) {
+            bannerInfos = bannerBeans.subList(0, 3);
+        } else {
             bannerInfos = bannerBeans;
         }
         home_viewpager.setAdapter(new BannerAdapter(getActivity(), rdBtn, bannerInfos));
@@ -225,7 +283,7 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
     public void OnMyPageSelected(int arg0) {
         if (arg0 == 0) {
             home_viewpager.setCurrentItem(bannerInfos.size(), false);
-        } else if (arg0 == bannerInfos.size()+1) {
+        } else if (arg0 == bannerInfos.size() + 1) {
             home_viewpager.setCurrentItem(1, false);
         } else {
             rdBtn[(arg0 - 1)].setChecked(true);
@@ -239,12 +297,6 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
     @Override
     public void OnMyPageScrollStateChanged(int arg0) {
     }
-
-    @Override
-    public void onShow() {
-        super.onShow();
-    }
-
     @Override
     public void onStop() {
         super.onStop();
@@ -254,7 +306,13 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onShow() {
+        super.onShow();
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 }

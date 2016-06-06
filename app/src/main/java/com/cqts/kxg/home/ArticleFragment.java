@@ -39,16 +39,15 @@ public class ArticleFragment extends MyFragment implements RefreshLayout.OnRefre
     /**
      * 热门的分类hotType
      */
-    public ArticleFragment(int hotType) {
+    public ArticleFragment(Where where,int hotType) {
         this.hotType = hotType;
-        this.where = hot;
+        this.where = where;
     }
 
-    public ArticleFragment(String keyword) {
-        this.where = search;
+    public ArticleFragment(Where where,String keyword) {
+        this.where = where;
         this.keyword = keyword;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle

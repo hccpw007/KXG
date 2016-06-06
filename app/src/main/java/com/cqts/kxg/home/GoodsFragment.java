@@ -34,24 +34,25 @@ public class GoodsFragment extends MyFragment implements RefreshLayout.OnRefresh
     private int PageSize = 50;
     private int PageNum = 1;
     String keyword = ""; //搜索文章的关键字
-    String  sort = "";
-    String  order = "";
+    String sort = "";
+    String order = "";
+
     /**
      * 搜索商品
      */
-    public GoodsFragment(String keyword,String sort,String order) {
+    public GoodsFragment(Where where, String keyword, String sort, String order) {
         this.keyword = keyword;
         this.sort = sort;
         this.order = order;
-        this.where = Where.search;
+        this.where = where;
     }
 
-    public GoodsFragment() {
-        this.where = Where.love;
+    public GoodsFragment(Where where) {
+        this.where = where;
     }
 
     //设置搜索的排序参数
-    public void setSearchValue(String sort,String order )  {
+    public void setSearchValue(String sort, String order) {
         this.sort = sort;
         this.order = order;
         PageNum = 1;
@@ -85,7 +86,7 @@ public class GoodsFragment extends MyFragment implements RefreshLayout.OnRefresh
         manager = new GridLayoutManager(getActivity(), 2);
         goods_rclv.setLayoutManager(manager);
         MyGridDecoration myGridDecoration = new MyGridDecoration(BaseValue.dp2px(8), BaseValue
-                .dp2px(8), getResources().getColor(R.color.mybg), false);
+                .dp2px(8), getResources().getColor(R.color.mybg), true);
         myGridDecoration.setImageView(R.id.item_nine_img, 1);
         goods_rclv.addItemDecoration(myGridDecoration);
         adapter = new GoodsAdapter(getActivity(), goodsInfos);
@@ -107,7 +108,7 @@ public class GoodsFragment extends MyFragment implements RefreshLayout.OnRefresh
         switch (where) {
             case search: //来自搜索
                 goods_refresh.setRefreshble(false);
-                MyHttp.searchGoods(http,null,PageSize,PageNum,keyword,sort,order,this);
+                MyHttp.searchGoods(http, null, PageSize, PageNum, keyword, sort, order, this);
                 break;
             case love: //来自喜欢
                 goods_refresh.setRefreshble(false);

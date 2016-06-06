@@ -55,11 +55,13 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        //登录
+        <activity android:name=".center.LoginActivity"
+                  android:theme="@style/AppBaseTheme">
+        </activity>
         <activity
             android:name="com.base.zxing.CaptureActivity"
             android:theme="@style/AppBaseTheme"/>
-        <activity android:name=".center.LoginActivity">
-        </activity>
         <activity
             android:name=".center.Register1Activity"
             android:theme="@style/SwipeBackTheme">
@@ -92,8 +94,13 @@
             android:name=".main.WebActivity"
             android:theme="@style/SwipeBackTheme">
         </activity>
-        <activity android:name=".home.SearchResultActivity"
-                  android:theme="@style/SwipeBackTheme" >
+        <activity
+            android:name=".home.SearchResultActivity"
+            android:theme="@style/SwipeBackTheme">
+        </activity>
+        <activity
+            android:name=".home.ShopStreetActivity"
+            android:theme="@style/SwipeBackTheme">
         </activity>
     </application>
 

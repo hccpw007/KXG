@@ -2,27 +2,17 @@ package com.cqts.kxg.center;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.base.http.HttpForVolley;
 import com.base.views.MyEditText;
 import com.cqts.kxg.R;
-import com.cqts.kxg.bean.SceneInfo;
 import com.cqts.kxg.bean.SigninInfo;
 import com.cqts.kxg.bean.UserInfo;
 import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.main.MyApplication;
 import com.cqts.kxg.utils.MyHttp;
-
-import org.json.JSONObject;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * 登录
@@ -107,7 +97,7 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
             public void httpResult(Integer which, int code, String msg, Object bean) {
                 SigninInfo signinInfo = (SigninInfo) bean;
                 MyApplication.token = signinInfo.getToken();
-                getUserInfo();
+                getUserInfoData();
             }
 
         });
@@ -116,8 +106,8 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
     /**
      * 获取用户信息
      */
-    private void getUserInfo() {
-       MyHttp.getUserInfo(http, null, MyApplication.token, new MyHttp.MyHttpResult() {
+    private void getUserInfoData() {
+       MyHttp.getUserInfo(http, null,new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
                 if (code!=0){
@@ -125,6 +115,7 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
                     return;
                 }
                 MyApplication.userInfo = (UserInfo) bean;
+                finish();
             }
         });
     }

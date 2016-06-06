@@ -17,12 +17,10 @@ public class MyApplication extends BaseApplication{
     public static CodeCountDownTimer downTimer;
     public static UserInfo userInfo; //用户信息
     public static String token = null;
-
     @Override
     public void onCreate() {
         super.onCreate();
         downTimer = new CodeCountDownTimer(10000,100);
-        userInfo = new UserInfo();
         userSp = getSharedPreferences("usersp", Context
                 .MODE_PRIVATE);
     }

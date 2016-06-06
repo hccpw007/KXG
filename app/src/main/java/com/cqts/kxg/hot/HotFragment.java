@@ -81,10 +81,10 @@ public class HotFragment extends BaseFragment implements MyViewPager.OnMyPageCha
     }
 
     private void InitViewPager() {
-        list.add(new ArticleFragment(1));
-        list.add(new ArticleFragment(2));
-        list.add(new ArticleFragment(3));
-        list.add(new ArticleFragment(4));
+        list.add(new ArticleFragment(ArticleFragment.Where.hot,1));
+        list.add(new ArticleFragment(ArticleFragment.Where.hot,2));
+        list.add(new ArticleFragment(ArticleFragment.Where.hot,3));
+        list.add(new ArticleFragment(ArticleFragment.Where.hot,4));
         hot_viewpager.setFragemnt(getActivity().getSupportFragmentManager(),list);
         hot_viewpager.setOnMyPageChangeListener(this);
     }

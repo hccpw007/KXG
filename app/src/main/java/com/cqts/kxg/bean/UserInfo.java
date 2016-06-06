@@ -4,58 +4,24 @@ package com.cqts.kxg.bean;
  * Created by Administrator on 2016/5/26.
  */
 public class UserInfo {
-    public String user_id; // 1003,
-    public String aite_id; //public String ",
-    public String email; //public String 4952933@qq.com",
-    public String user_name; //public String 方艳",
-    public String is_surplus_open; // 0,
-    public String surplus_password; //public String ",
-    public String question; //public String ",
-    public String answer; //public String ",
-    public String sex; // 0,
-    public String birthday; //public String 0000-00-00",
-    public String user_money; //public String 0.00",
-    public String frozen_money; //public String 0.00",
-    public String pay_points; // 5060,
-    public String rank_points; // 0,
-    public String address_id; // 0,
-    public String reg_time; // 0,
-    public String last_login; // 1464246177,
-    public String last_time; //public String 0000-00-00 00:00:00",
-    public String last_ip; //public String 222.182.125.211",
-    public String visit_count; // 0,
-    public String user_rank; // 0,
-    public String is_special; // 0,
-    public String ec_salt; // null,
-    public String salt; //public String 0",
-    public String parent_id; // 0,
-    public String flag; // 0,
-    public String alias; //public String ",
-    public String msn; //public String ",
-    public String qq; //public String ",
-    public String office_phone; //public String ",
-    public String home_phone; //public String ",
-    public String mobile_phone; //public String 18220541212",
-    public String is_validated; // 0,
-    public String validated; // 0,
-    public String credit_line; //public String 0.00",
-    public String passwd_question; // null,
-    public String passwd_answer; // null,
-    public String is_fenxiao; // 0,
-    public String real_name; //public String ",
-    public String card; //public String ",
-    public String face_card; //public String ",
-    public String back_card; //public String ",
-    public String country; // 0,
-    public String province; // 0,
-    public String city; // 0,
-    public String district; // 0,
-    public String address; //public String ",
-    public String status; // 0,
-    public String mediaUID; //public String ",
-    public String mediaID; // 0,
-    public String froms; //public String pc",
-    public String headimg; //public String ",
-    public String invite_code; //public String ",
-    public String invite; // 0
+    public String headimg;// "",
+    public String user_id;//会员资料自增id
+    public String email;//会员Email
+    public String user_name;//	用户名
+    public int sex;//性别 ; 0保密; 1男; 2女
+    public String birthday;//出生日期
+    public String user_money;//用户现有资金
+    public String frozen_money;//	用户冻结资金
+    public String pay_points;//	消费积分
+    public String rank_points;//	会员等级积分
+    public String reg_time;//	注册时间
+    public String last_login;//	最后一次登录时间
+    public String last_time;//	应该是最后一次修改信息时间，该表信息从其他表同步过来考虑
+    public String last_ip;//	最后一次登录IP
+    public String parent_id;//	推荐人会员id
+    public String alias;//昵称
+    public String mobile_phone;//移动电话
+    public String invite_code;//邀请码
+    public String app_money;//余额
+
 }

@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -17,7 +18,9 @@ import com.base.BaseFragment;
 import com.base.BaseValue;
 import com.base.views.MyViewPager;
 import com.base.views.MyViewPager.OnMyPageChangeListener;
+import com.base.zxing.FinishListener;
 import com.cqts.kxg.R;
+import com.cqts.kxg.center.CenterFragment;
 import com.cqts.kxg.center.LoginedFragment;
 import com.cqts.kxg.classify.ClassifyFragment;
 import com.cqts.kxg.home.HomeFragment;
@@ -27,14 +30,16 @@ import com.cqts.kxg.nine.NineFragment;
 /**
  * 主页 导航页
  */
-public class NgtAty extends FragmentActivity implements OnMyPageChangeListener, OnCheckedChangeListener {
+public class NgtAty extends FragmentActivity implements OnMyPageChangeListener,
+        OnCheckedChangeListener {
     private ArrayList<BaseFragment> list = new ArrayList<BaseFragment>();
-    private MyViewPager ngt_pager;
+    public MyViewPager ngt_pager;
     private RadioGroup ngt_rg;
     RadioButton[] ngt_rb = new RadioButton[5];
     int[] drawableId = new int[]{R.drawable.sl_ngt_rb1,
             R.drawable.sl_ngt_rb2, R.drawable.sl_ngt_rb3,
             R.drawable.sl_ngt_rb4, R.drawable.sl_ngt_rb5};
+    private BaseFragment checkedFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +59,19 @@ public class NgtAty extends FragmentActivity implements OnMyPageChangeListener, 
         InitNgt();
     }
 
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        list.get(0).onShow();
+//    }
+
+    /**
+     * 只有当前选中的fragment执行onshow
+     */
     @Override
-    protected void onStart() {
-        super.onStart();
-        list.get(0).onShow();
+    protected void onResume() {
+        super.onResume();
+        checkedFragment.onShow();
     }
 
     private void InitView() {
@@ -68,7 +82,7 @@ public class NgtAty extends FragmentActivity implements OnMyPageChangeListener, 
         ngt_rb[2] = (RadioButton) findViewById(R.id.ngt_rb3);
         ngt_rb[3] = (RadioButton) findViewById(R.id.ngt_rb4);
         ngt_rb[4] = (RadioButton) findViewById(R.id.ngt_rb5);
-        
+
         ngt_rg.setOnCheckedChangeListener(this);
     }
 
@@ -77,9 +91,10 @@ public class NgtAty extends FragmentActivity implements OnMyPageChangeListener, 
         list.add(new NineFragment());
         list.add(new ClassifyFragment());
         list.add(new HotFragment());
-        list.add(new LoginedFragment());
+        list.add(new CenterFragment());
         ngt_pager.setFragemnt(getSupportFragmentManager(), list);
         ngt_pager.setOnMyPageChangeListener(this);
+        checkedFragment = list.get(0);
     }
 
     @Override
@@ -113,9 +128,19 @@ public class NgtAty extends FragmentActivity implements OnMyPageChangeListener, 
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         for (int i = 0; i < 5; i++) {
             if (checkedId == ngt_rb[i].getId()) {
+                checkedFragment = list.get(i); //选中状态的fragment
                 ngt_pager.setCurrentItem(i, false);
                 break;
             }
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode ==KeyEvent.KEYCODE_BACK){
+            System.exit(0);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

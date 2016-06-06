@@ -1,5 +1,6 @@
 package com.cqts.kxg.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,6 +9,8 @@ import android.widget.RelativeLayout;
 
 import com.base.BaseFragment;
 import com.cqts.kxg.R;
+import com.cqts.kxg.bean.UserInfo;
+import com.cqts.kxg.center.LoginActivity;
 
 /**
  * Created by Administrator on 2016/6/3.
@@ -68,5 +71,26 @@ public class MyFragment extends BaseFragment {
 
     public interface HttpFail {
         void toHttpAgain();
+    }
+
+
+    //是否已经登录
+    public boolean isLogined() {
+        if (MyApplication.userInfo == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //需要登录,未登录这跳转登录页面
+    public void needLogin() {
+        if (!isLogined()) {
+            startActivity(new Intent(getActivity(), LoginActivity.class));
+        }
+    }
+
+    public UserInfo getUserInfo(){
+        return MyApplication.userInfo;
     }
 }

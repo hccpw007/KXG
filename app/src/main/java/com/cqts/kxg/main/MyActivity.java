@@ -1,11 +1,14 @@
 package com.cqts.kxg.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import com.base.BaseActivity;
 import com.cqts.kxg.R;
+import com.cqts.kxg.bean.UserInfo;
+import com.cqts.kxg.center.LoginActivity;
 
 /**
  * Created by Administrator on 2016/5/3.
@@ -35,7 +38,7 @@ public class MyActivity extends BaseActivity {
         });
     }
 
-    public void setMyTitle(String title,int titleColor) {
+    public void setMyTitle(String title, int titleColor) {
         View title_left_img = findViewById(R.id.title_left_img);
         TextView title_middle_text = (TextView) findViewById(R.id.title_middle_text);
 
@@ -52,5 +55,23 @@ public class MyActivity extends BaseActivity {
         });
     }
 
+    //是否已经登录
+    public boolean isLogined() {
+        if (MyApplication.userInfo == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
+    //需要登录,未登录这跳转登录页面
+    public void needLogin() {
+        if (!isLogined()) {
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+    }
+
+    public UserInfo getUserInfo(){
+        return MyApplication.userInfo;
+    }
 }

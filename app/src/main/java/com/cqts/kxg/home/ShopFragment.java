@@ -33,14 +33,16 @@ public class ShopFragment extends MyFragment implements RefreshLayout.OnRefreshL
     Where where;
     private int PageSize = 20;
     private int PageNum = 1;
-    String keyword = ""; //搜索文章的关键字
+    String str = ""; //搜索或者店铺街传的参数
 
     /**
-     * 来自搜索
+     * 来自搜索或者热门店铺 <p>
+     * 搜索的时候 传的参数是keyword<br>
+     * 店铺街传的参数就是排序 sort<br>
      */
-    public ShopFragment(String keyword) {
-        this.where = Where.search;
-        this.keyword = keyword;
+    public ShopFragment(Where where, String str) {
+        this.where = where;
+        this.str = str;
     }
 
     public ShopFragment() {
@@ -50,7 +52,7 @@ public class ShopFragment extends MyFragment implements RefreshLayout.OnRefreshL
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
         if (null == view) {
-            view = inflater.inflate(R.layout.fragment_shop,null);
+            view = inflater.inflate(R.layout.fragment_shop, null);
             InitView();
             getData();
         }
@@ -94,10 +96,14 @@ public class ShopFragment extends MyFragment implements RefreshLayout.OnRefreshL
         switch (where) {
             case search: //来自搜索
                 shop_refresh.setRefreshble(false);
-                MyHttp.searchShop(http,1,PageSize,PageNum,keyword,this);
+                MyHttp.searchShop(http, 1, PageSize, PageNum, str, "", this);
                 break;
             case love: //来自喜欢
                 shop_refresh.setRefreshble(false);
+                break;
+            case street: //来自店铺街
+                shop_refresh.setRefreshble(false);
+                MyHttp.searchShop(http, 3, PageSize, PageNum, "", str, this);
                 break;
             default:
                 break;
@@ -160,9 +166,10 @@ public class ShopFragment extends MyFragment implements RefreshLayout.OnRefreshL
      * 店铺的ArticleFragment出现在什么地方<p>
      * search ------- 搜索<br>
      * love --------- 喜欢(收藏)<br>
+     * street ------- 店铺街
      */
     public enum Where {
-        search, love
+        search, love, street
     }
 
     @Override

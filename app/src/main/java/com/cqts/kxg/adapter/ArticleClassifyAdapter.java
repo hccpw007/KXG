@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.base.BaseValue;
 import com.cqts.kxg.R;
-import com.cqts.kxg.bean.SceneInfo;
+import com.cqts.kxg.bean.HomeSceneInfo;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
@@ -21,9 +21,9 @@ import java.util.List;
 public class ArticleClassifyAdapter extends RecyclerView.Adapter<ArticleClassifyAdapter
         .MyViewHolder> {
     Context context;
-    List<SceneInfo> sceneInfos;
+    List<HomeSceneInfo> sceneInfos;
 
-    public ArticleClassifyAdapter(Context context, List<SceneInfo> sceneInfos) {
+    public ArticleClassifyAdapter(Context context, List<HomeSceneInfo> sceneInfos) {
         this.context = context;
         this.sceneInfos = sceneInfos;
     }

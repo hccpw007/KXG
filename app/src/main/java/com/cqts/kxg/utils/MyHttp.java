@@ -5,14 +5,17 @@ import com.android.volley.Request;
 import com.base.BaseValue;
 import com.base.http.HttpForVolley;
 import com.cqts.kxg.bean.ArticleInfo;
-import com.cqts.kxg.bean.BannerInfo;
+import com.cqts.kxg.bean.EarnInfo;
+import com.cqts.kxg.bean.HomeBannerInfo;
 import com.cqts.kxg.bean.GoodsInfo;
-import com.cqts.kxg.bean.SceneInfo;
+import com.cqts.kxg.bean.HomeSceneInfo;
+import com.cqts.kxg.bean.HomeTableInfo;
 import com.cqts.kxg.bean.ShopInfo;
 import com.cqts.kxg.bean.SigninInfo;
 import com.cqts.kxg.bean.UserInfo;
 import com.cqts.kxg.bean.ClassifyListInfo;
 import com.cqts.kxg.bean.NineInfo;
+import com.cqts.kxg.main.MyApplication;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONObject;
@@ -27,7 +30,7 @@ import java.util.List;
  */
 public class MyHttp {
     private static HashMap<String, String> httpMap = new HashMap<>();
-    private static String url = "http://api.kxg99.com/";
+    private static String url = "https://api.kxg99.com/";
 
     private MyHttp() {
     }
@@ -83,21 +86,51 @@ public class MyHttp {
     public static void scene(HttpForVolley http, Integer which,
                              MyHttpResult myHttpResult) {
         String httpUrl = url + "home/scene";
-        Type type = new TypeToken<List<SceneInfo>>() {
+        Type type = new TypeToken<List<HomeSceneInfo>>() {
         }.getType();
         toBean(Request.Method.GET, http, which, null, httpUrl, myHttpResult, type);
     }
 
     /**
      * 首页banner图 <p>
-     * 加载首页场景分类目前只有十个场景分类菜单<br>
      */
     public static void homeBanner(HttpForVolley http, Integer which,
                                   MyHttpResult myHttpResult) {
         String httpUrl = url + "home/banner";
-        Type type = new TypeToken<List<BannerInfo>>() {
+        Type type = new TypeToken<List<HomeBannerInfo>>() {
         }.getType();
         toBean(Request.Method.GET, http, which, null, httpUrl, myHttpResult, type);
+    }
+
+    /**
+     * 首页活动按钮(分类,店铺街,9.9) <p>
+     * 加载首页场景分类目前只有十个场景分类菜单<br>
+     */
+    public static void homemenu(HttpForVolley http, Integer which,
+                                MyHttpResult myHttpResult) {
+        String httpUrl = url + "home/menu";
+        Type type = new TypeToken<List<HomeTableInfo>>() {
+        }.getType();
+        toBean(Request.Method.GET, http, which, null, httpUrl, myHttpResult, type);
+    }
+
+
+    /**
+     * 查询首页推荐文章 <p>
+     */
+    public static void articleList(HttpForVolley http, Integer which, int article_type, int
+            PerPage, int Page,
+                                   MyHttpResult myHttpResult) {
+        String httpUrl = url + "article/listing";
+        httpMap.clear();
+        httpMap.put("article_type", article_type + "");
+        httpMap.put("share_sum", "desc");
+        httpMap.put("add_time", "desc");
+        httpMap.put("perPage", PerPage + "");
+        httpMap.put("page", Page + "");
+        Type type = new TypeToken<List<ArticleInfo>>() {
+        }.getType();
+        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type);
     }
 
     /**
@@ -192,10 +225,10 @@ public class MyHttp {
      * 获取用户个人资料<br>
      * 接口用于登陆后获取用户信息， 默认读取缓存中的用户信息（缓存时间5五分钟）<p>
      */
-    public static void getUserInfo(HttpForVolley http, Integer which, String token,
+    public static void getUserInfo(HttpForVolley http, Integer which,
                                    final MyHttpResult myHttpResult) {
         httpMap.clear();
-        httpMap.put("token", token);
+        httpMap.put("token", MyApplication.token);
         String httpUrl = url + "user/profile";
         toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, UserInfo.class);
     }
@@ -211,25 +244,6 @@ public class MyHttp {
         httpMap.put("token", token);
         String httpUrl = url + "user/refresh";
         toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, SigninInfo.class);
-    }
-
-
-    /**
-     * 查询首页推荐文章 <p>
-     */
-    public static void articleList(HttpForVolley http, Integer which, int article_type, int
-            PerPage, int Page,
-                                   MyHttpResult myHttpResult) {
-        String httpUrl = url + "article/listing";
-        httpMap.clear();
-        httpMap.put("article_type", article_type + "");
-        httpMap.put("share_sum", "desc");
-        httpMap.put("add_time", "desc");
-        httpMap.put("perPage", PerPage + "");
-        httpMap.put("page", Page + "");
-        Type type = new TypeToken<List<ArticleInfo>>() {
-        }.getType();
-        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type);
     }
 
     /**
@@ -264,12 +278,14 @@ public class MyHttp {
         }.getType();
         toBean(Request.Method.GET, http, which, null, httpUrl, myHttpResult, type);
     }
+
     /**
      * 热门搜索关键字 <p>
      */
-    public static void hotKeyword(HttpForVolley http, Integer which, HttpForVolley.HttpTodo httpTodo) {
+    public static void hotKeyword(HttpForVolley http, Integer which, HttpForVolley.HttpTodo
+            httpTodo) {
         String httpUrl = url + "search/hotKeyword";
-        http.goTo(Request.Method.GET,which,null,httpUrl,httpTodo);
+        http.goTo(Request.Method.GET, which, null, httpUrl, httpTodo);
     }
 
     /**
@@ -309,12 +325,13 @@ public class MyHttp {
      * 搜索店铺 <p>
      */
     public static void searchShop(HttpForVolley http, Integer which, int PageSize, int PageNum,
-                                  String keyword, MyHttpResult myHttpResult) {
+                                  String keyword, String sort, MyHttpResult myHttpResult) {
         String httpUrl = url + "search/shops";
         httpMap.clear();
         httpMap.put("PageSize", PageSize + "");
         httpMap.put("PageNum", PageNum + "");
         httpMap.put("keyword", keyword);
+        httpMap.put("sort", sort);
         Type type = new TypeToken<List<ShopInfo>>() {
         }.getType();
         toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type);
@@ -333,5 +350,29 @@ public class MyHttp {
         Type type = new TypeToken<List<ArticleInfo>>() {
         }.getType();
         toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type);
+    }
+
+
+    /**
+     * 获取个人中心收益<br>
+     * 接口用于登陆后获取用户信息， 默认读取缓存中的用户信息（缓存时间5五分钟）<p>
+     */
+    public static void userEarning(HttpForVolley http, Integer which,
+                                   final MyHttpResult myHttpResult) {
+        String httpUrl = url + "user/earning";
+        httpMap.clear();
+        httpMap.put("token", MyApplication.token);
+        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, EarnInfo.class);
+    }
+
+    /**
+     * 获取个人中心热门商品 <p>
+     */
+    public static void goodsRecommend(HttpForVolley http, Integer which, MyHttpResult
+            myHttpResult) {
+        String httpUrl = url + "goods/recommend";
+        Type type = new TypeToken<List<GoodsInfo>>() {
+        }.getType();
+        toBean(Request.Method.GET, http, which, null, httpUrl, myHttpResult, type);
     }
 }

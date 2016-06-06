@@ -123,11 +123,12 @@
                     android:orientation="horizontal">
 
                     <ImageView
+                        android:scaleType="fitXY"
                         android:id="@+id/home_img1"
                         android:layout_width="0px"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@color/myblue"/>
+                        android:background="@color/white"/>
 
                     <View
                         android:layout_width="1px"
@@ -140,10 +141,11 @@
                         android:orientation="vertical">
 
                         <ImageView
+                            android:scaleType="fitXY"
                             android:id="@+id/home_img2"
                             android:layout_width="160dp"
                             android:layout_height="60dp"
-                            android:background="@color/myblue"/>
+                            android:background="@color/white"/>
 
                         <View
                             android:layout_width="match_parent"
@@ -151,10 +153,11 @@
                             android:background="@color/myline"/>
 
                         <ImageView
+                            android:scaleType="fitXY"
                             android:id="@+id/home_img3"
                             android:layout_width="160dp"
                             android:layout_height="60dp"
-                            android:background="@color/myblue"/>
+                            android:background="@color/white"/>
                     </LinearLayout>
                 </LinearLayout>
 

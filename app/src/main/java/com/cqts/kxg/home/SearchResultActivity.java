@@ -12,10 +12,8 @@ import android.widget.TextView;
 import com.cqts.kxg.R;
 import com.cqts.kxg.main.MyActivity;
 
-public class SearchResultActivity extends MyActivity implements View.OnClickListener{
+public class SearchResultActivity extends MyActivity implements View.OnClickListener {
 
-    private int PageSize = 50;
-    private int PageNum = 1;
     private int type;
     private String keyword = "";
     private String sort = "add_time";
@@ -62,7 +60,6 @@ public class SearchResultActivity extends MyActivity implements View.OnClickList
     }
 
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -73,7 +70,7 @@ public class SearchResultActivity extends MyActivity implements View.OnClickList
             case R.id.sales_tv: //销量
             case R.id.money_layout: //价格
                 setGoodsTab(v.getId());
-                goodsFragment.setSearchValue(sort,order);
+                goodsFragment.setSearchValue(sort, order);
                 break;
             default:
                 break;
@@ -85,19 +82,19 @@ public class SearchResultActivity extends MyActivity implements View.OnClickList
         switch (type) {
             case SearchActivity.type_goods:
                 type_tv.setText("商品");
-                goodsFragment = new GoodsFragment(keyword, sort, order);
+                goodsFragment = new GoodsFragment(GoodsFragment.Where.search,keyword, sort, order);
                 showFragment(goodsFragment);
                 break;
             case SearchActivity.type_article:
                 goods_layout.setVisibility(View.GONE);
                 type_tv.setText("文章");
-                articleFragment = new ArticleFragment(keyword);
+                articleFragment = new ArticleFragment(ArticleFragment.Where.search,keyword);
                 showFragment(articleFragment);
                 break;
             case SearchActivity.type_shop:
                 goods_layout.setVisibility(View.GONE);
                 type_tv.setText("店铺");
-                shopFragment = new ShopFragment(keyword);
+                shopFragment = new ShopFragment(ShopFragment.Where.search, keyword);
                 showFragment(shopFragment);
             default:
                 break;
@@ -110,6 +107,7 @@ public class SearchResultActivity extends MyActivity implements View.OnClickList
         beginTransaction.add(R.id.framelayout, fragment);
         beginTransaction.commit();
     }
+
     /**
      * 设置tab栏状态的改变,请求数据
      */

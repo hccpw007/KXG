@@ -28,13 +28,13 @@ public class LoginedFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_logined, null);
-        InitView(view);
+        view = inflater.inflate(R.layout.fragment_center, null);
+//        InitView(view);
         return view;
     }
 
     private void InitView(View view) {
-        center_img = (ImageView) view.findViewById(R.id.center_img);
+//        center_img = (ImageView) view.findViewById(R.id.center_img);
 
         center_img.setOnClickListener(new View.OnClickListener() {
             @Override

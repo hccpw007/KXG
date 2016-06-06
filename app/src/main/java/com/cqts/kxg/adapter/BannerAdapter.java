@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 
 import com.cqts.kxg.R;
-import com.cqts.kxg.bean.BannerInfo;
+import com.cqts.kxg.bean.HomeBannerInfo;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -23,11 +23,11 @@ public class BannerAdapter extends PagerAdapter {
     private ImageView[] imageViews;
     Context context;
     RadioButton[] rdBtn;
-    private List<BannerInfo> imgUrls  = new ArrayList<>();
+    private List<HomeBannerInfo> imgUrls  = new ArrayList<>();
     DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).showImageOnLoading(R.mipmap.solid_banner)
             .showImageOnFail(R.mipmap.solid_banner).build();
 
-    public BannerAdapter(Context context, RadioButton[] rdBtn, List<BannerInfo> imgUrl) {
+    public BannerAdapter(Context context, RadioButton[] rdBtn, List<HomeBannerInfo> imgUrl) {
         this.context = context;
         this.rdBtn = rdBtn;
         this.imgUrls .addAll(imgUrl);
