@@ -86,7 +86,7 @@ public class GoodsFragment extends MyFragment implements RefreshLayout.OnRefresh
         manager = new GridLayoutManager(getActivity(), 2);
         goods_rclv.setLayoutManager(manager);
         MyGridDecoration myGridDecoration = new MyGridDecoration(BaseValue.dp2px(8), BaseValue
-                .dp2px(8), getResources().getColor(R.color.mybg), true);
+                .dp2px(8), getResources().getColor(R.color.mybg), false);
         myGridDecoration.setImageView(R.id.item_nine_img, 1);
         goods_rclv.addItemDecoration(myGridDecoration);
         adapter = new GoodsAdapter(getActivity(), goodsInfos);

@@ -233,13 +233,13 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
                 sceneInfos);
         home_rv.setAdapter(articleClassifyAdapter);
     }
-
     //文章列表
     private void InitArticleList() {
         FullyGridLayoutManager manager1 = new FullyGridLayoutManager(getActivity(), 1);
         MyGridDecoration myGridDecoration = new MyGridDecoration(BaseValue.dp2px(6), BaseValue
                 .dp2px(0), getResources().getColor(R.color.mybg), true);
         home_rv2.setLayoutManager(manager1);
+        myGridDecoration.setFrame(true);
         home_rv2.addItemDecoration(myGridDecoration);
         articleListAdapter = new ArticleListAdapter(getActivity(), articleInfos);
         home_rv2.setAdapter(articleListAdapter);

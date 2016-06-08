@@ -172,7 +172,6 @@ public class MyGridDecoration extends RecyclerView.ItemDecoration {
                 }
                 parent.setLayoutParams(layoutParams);
             } catch (Exception e) {
-
             }
         }
     }

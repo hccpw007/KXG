@@ -84,10 +84,12 @@ public class MyFragment extends BaseFragment {
     }
 
     //需要登录,未登录这跳转登录页面
-    public void needLogin() {
+    public boolean needLogin() {
         if (!isLogined()) {
             startActivity(new Intent(getActivity(), LoginActivity.class));
+            return false;
         }
+        return true;
     }
 
     public UserInfo getUserInfo(){

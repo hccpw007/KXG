@@ -11,7 +11,7 @@
 
     <!-- 字体 -->
     <style name="text_main">
-        <item name="android:singleLine">true</item>
+        <item name="android:maxLines">1</item>
         <item name="android:gravity">center_vertical</item>
     </style>
 

@@ -1,5 +1,6 @@
 package com.cqts.kxg.center;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,7 +23,6 @@ import com.cqts.kxg.main.MyFragment;
 import com.cqts.kxg.utils.MyHttp;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * Created by Administrator on 2016/6/6.
@@ -103,9 +103,12 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 needLogin();
                 break;
             case R.id.setting_img://设置
-
+                if (needLogin()){
+                    startActivity(new Intent(getActivity(),SettingActivity.class));
+                }
                 break;
             case R.id.lookall_tv://查看全部收益
+                InitRC();
                 break;
             case R.id.head_img://头像
                 break;
@@ -149,6 +152,10 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
             MyHttp.userEarning(http, null, new MyHttp.MyHttpResult() {
                 @Override
                 public void httpResult(Integer which, int code, String msg, Object bean) {
+                    if (code!=0){
+                        showToast(msg);
+                        return;
+                    }
                     EarnInfo earnInfo = (EarnInfo) bean;
                     money_tv.setText(earnInfo.history);
                     today_tv.setText(earnInfo.today);
@@ -180,14 +187,14 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
         name_tv.setText(getUserInfo().user_name);
     }
 
-
     private void InitRC() {
         goods_rclv.setOverScrollMode(View.OVER_SCROLL_NEVER);
         GridLayoutManager   manager = new GridLayoutManager(getActivity(), 2);
         goods_rclv.setLayoutManager(manager);
         MyGridDecoration myGridDecoration = new MyGridDecoration(BaseValue.dp2px(8), BaseValue
-                .dp2px(8), getResources().getColor(R.color.mybg), false);
+                .dp2px(8), getResources().getColor(R.color.mybg), true);
         myGridDecoration.setImageView(R.id.item_nine_img, 1);
+        myGridDecoration.setFrame(true);
         goods_rclv.addItemDecoration(myGridDecoration);
         adapter = new GoodsAdapter(getActivity(), goodsInfos);
         goods_rclv.setAdapter(adapter);
@@ -198,7 +205,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                     showToast(msg);
                     return;
                 }
-                goodsInfos .addAll((Collection<? extends GoodsInfo>) bean);
+                goodsInfos .addAll((ArrayList<GoodsInfo>) bean);
                 adapter.notifyDataSetChanged();
             }
         });
