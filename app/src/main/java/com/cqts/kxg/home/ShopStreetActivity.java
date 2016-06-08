@@ -22,7 +22,7 @@ public class ShopStreetActivity extends MyActivity implements RadioGroup.OnCheck
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shop_street);
+        setContentView(R.layout.activity_shopstreet);
         InitView();
         InitFragment();
         showFragment(shopFragment1);

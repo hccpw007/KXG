@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:layout_height="match_parent"
+    android:background="@color/myred"
+    android:orientation="vertical"
+    tools:context=".center.SetAliasActivity">
+
+    <include layout="@layout/include_red_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mybg"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/nickname_et_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.base.views.MyEditText
+                style="@style/text_16sp_black"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_weight="1"
+                android:background="@color/transparency"
+                android:hint="请输入昵称（4-20个字符）"
+                android:maxLength="20"
+                android:textColorHint="@color/myhint"
+                android:textSize="18sp"
+                android:id="@+id/nickname_et"/>
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:src="@mipmap/clean"
+                android:id="@+id/clean_img"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            style="@style/text_14sp_black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:text="1. 此昵称非登录会员名，仅在社区场景显示。 "
+            android:textSize="12sp"/>
+
+        <TextView
+            android:layout_marginTop="5dp"
+            style="@style/text_14sp_black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:text="2. 与开心购业务或卖家品牌有冲突的昵称，开心购有权收回。” "
+            android:textSize="12sp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/bg_shape_red_to_gray"
+            android:text="保存"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:id="@+id/set_btn"/>
+    </LinearLayout>
+</LinearLayout>

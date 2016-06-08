@@ -61,7 +61,6 @@ public class HttpForVolley {
             String encodeToString = Base64.encodeToString(buffer,
                     Base64.DEFAULT);
             httpMap.put("avatar", encodeToString);
-//            httpMap.put("ext", "jpg");
             if (null == request) {
                 toHttp(Method, which, httpMap, url, todo);
             } else {
@@ -116,7 +115,9 @@ public class HttpForVolley {
         if (httpMap != null) {
             for (String key : httpMap.keySet()) {
                 try {
-                    httpMap.put(key, URLEncoder.encode(httpMap.get(key), "utf-8"));
+                    if (!key.equals("token")){
+                        httpMap.put(key, URLEncoder.encode(httpMap.get(key), "utf-8"));
+                    }
                 } catch (Exception e) {
                 }
             }
@@ -158,7 +159,6 @@ public class HttpForVolley {
                     object.put("msg", "网络错误");
                     object.put("code", "404");
                     todo.httpTodo(which, object);
-
                     if (BaseValue.isDebug) {
                         Logger.json(object.toString());
                     }

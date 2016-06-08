@@ -78,6 +78,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
         table12 = (LinearLayout) view.findViewById(R.id.table12);
 
         login_tv.setOnClickListener(this);
+        name_tv.setOnClickListener(this);
         setting_img.setOnClickListener(this);
         lookall_tv.setOnClickListener(this);
         head_img.setOnClickListener(this);
@@ -111,6 +112,10 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 InitRC();
                 break;
             case R.id.head_img://头像
+            case R.id.name_tv://头像
+                if (needLogin()){
+                    startActivity(new Intent(getActivity(),InformationActivity.class));
+                }
                 break;
             case R.id.table1://收徒赚钱
                 break;

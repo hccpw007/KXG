@@ -355,7 +355,6 @@ public class MyHttp {
 
     /**
      * 获取个人中心收益<br>
-     * 接口用于登陆后获取用户信息， 默认读取缓存中的用户信息（缓存时间5五分钟）<p>
      */
     public static void userEarning(HttpForVolley http, Integer which,
                                    final MyHttpResult myHttpResult) {
@@ -374,5 +373,26 @@ public class MyHttp {
         Type type = new TypeToken<List<GoodsInfo>>() {
         }.getType();
         toBean(Request.Method.GET, http, which, null, httpUrl, myHttpResult, type);
+    }
+
+    /**
+     * 修改用户性别<br>
+     */
+    public static void userSex(HttpForVolley http, Integer which, int sex, final MyHttpResult myHttpResult) {
+        String httpUrl = url + "user/sex";
+        httpMap.clear();
+        httpMap.put("token", MyApplication.token);
+        httpMap.put("sex", sex + "");
+        toBean(Request.Method.POST, http, which, httpMap, httpUrl, myHttpResult, null);
+    }
+    /**
+     * 修改用户昵称<br>
+     */
+    public static void userAlias(HttpForVolley http, Integer which, String alias, final MyHttpResult myHttpResult) {
+        String httpUrl = url + "user/alias";
+        httpMap.clear();
+        httpMap.put("token", MyApplication.token);
+        httpMap.put("alias", alias);
+        toBean(Request.Method.POST, http, which, httpMap, httpUrl, myHttpResult, null);
     }
 }

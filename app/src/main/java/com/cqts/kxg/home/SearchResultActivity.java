@@ -34,7 +34,7 @@ public class SearchResultActivity extends MyActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_result);
+        setContentView(R.layout.activity_searchresult);
         type = getIntent().getIntExtra("type", 1);
         keyword = getIntent().getStringExtra("keyword");
         InitView();
