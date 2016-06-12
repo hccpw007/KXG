@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:background="@color/myred"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:layout_height="match_parent"
+    tools:context="com.cqts.kxg.center.EarningsActivity">
+    <include layout="@layout/include_red_title"/>
+    <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            style="@style/text_14sp_black"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_radiobutton"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:text="收入"
+            android:textSize="18sp"
+            android:id="@+id/rediobtn1"/>
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/myline"/>
+        <RadioButton
+            style="@style/text_14sp_black"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_radiobutton"
+            android:button="@null"
+            android:gravity="center"
+            android:text="提现"
+            android:textSize="21sp"
+            android:checked="false"
+            android:id="@+id/rediobtn2"/>
+    </RadioGroup>
+    <View
+        android:background="@color/mybg"
+        android:layout_width="match_parent"
+        android:layout_height="12dp"/>
+   <ListView
+       android:divider="@color/myhint"
+       android:dividerHeight="2px"
+       android:scrollbars="none"
+       android:listSelector="@color/transparency"
+       android:cacheColorHint="@color/transparency"
+       android:background="@color/mybg"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:id="@+id/listview">
+   </ListView>
+</LinearLayout>

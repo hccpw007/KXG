@@ -186,7 +186,32 @@ public class RefreshLayout extends LinearLayout {
             }
         });
     }
+    public void setListView(ListView view, final TopOrBottom topOrBottom) {
+        this.listview = view;
+        view.setOnScrollListener(new OnScrollListener() {
 
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem,
+                                 int visibleItemCount, int totalItemCount) {
+                View firstView = view.getChildAt(firstVisibleItem);
+                if (firstVisibleItem == 0
+                        && (firstView == null || firstView.getTop() == 0)) {
+                    setTopOrBottom(topOrBottom, gotoTop);
+                    isCanRefreshForView = true;
+                } else {
+                    setTopOrBottom(topOrBottom, move);
+                    isCanRefresh = false;
+                    isCanRefreshForView = false;
+                }
+            }
+        });
+
+    }
     void setTopOrBottom(TopOrBottom topOrBottom,int state) {
         if (null == topOrBottom) {
             return;
@@ -215,32 +240,6 @@ public class RefreshLayout extends LinearLayout {
         void gotoBottom();
         void move();
         void stop();
-    }
-
-    public void setListView(ListView view, final TopOrBottom topOrBottom) {
-        this.listview = view;
-        view.setOnScrollListener(new OnScrollListener() {
-
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem,
-                                 int visibleItemCount, int totalItemCount) {
-                View firstView = view.getChildAt(firstVisibleItem);
-                if (firstVisibleItem == 0
-                        && (firstView == null || firstView.getTop() == 0)) {
-                    setTopOrBottom(topOrBottom, gotoTop);
-                    isCanRefreshForView = true;
-                } else {
-                    isCanRefresh = false;
-                    isCanRefreshForView = false;
-                }
-            }
-        });
-
     }
 
     /**

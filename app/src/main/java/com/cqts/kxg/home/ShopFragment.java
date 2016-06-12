@@ -1,5 +1,6 @@
 package com.cqts.kxg.home;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +24,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/6/1.
  */
+@SuppressLint("ValidFragment")
 public class ShopFragment extends MyFragment implements RefreshLayout.OnRefreshListener,
         MyHttp.MyHttpResult, MyFragment.HttpFail, RefreshLayout.TopOrBottom {
     private ShopAdapter adapter;

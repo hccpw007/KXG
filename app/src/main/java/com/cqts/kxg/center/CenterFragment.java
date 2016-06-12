@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.base.BaseValue;
+import com.base.http.HttpForVolley;
+import com.base.views.AutoTextView;
 import com.base.views.MyGridDecoration;
 import com.base.views.MyHeadImageView;
 import com.cqts.kxg.R;
@@ -21,6 +25,8 @@ import com.cqts.kxg.bean.EarnInfo;
 import com.cqts.kxg.bean.GoodsInfo;
 import com.cqts.kxg.main.MyFragment;
 import com.cqts.kxg.utils.MyHttp;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -32,8 +38,9 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
     ImageView setting_img;
     MyHeadImageView head_img;
     private RecyclerView goods_rclv;
+    AutoTextView message_tv;
     TextView login_tv, name_tv, money_tv, lookall_tv, today_tv, history_tv, prentice_tv,
-            prenticemoney_tv, message_tv;
+            prenticemoney_tv;
     LinearLayout table1, table2, table3, table4, table5, table6, table7, table8, table9, table10,
             table11, table12;
     private ArrayList<GoodsInfo> goodsInfos = new ArrayList<>();
@@ -49,8 +56,9 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
         }
         return view;
     }
+
     private void InitView() {
-        scrollview = (ScrollView)view.findViewById(R.id.scrollview);
+        scrollview = (ScrollView) view.findViewById(R.id.scrollview);
         setting_img = (ImageView) view.findViewById(R.id.setting_img);
         head_img = (MyHeadImageView) view.findViewById(R.id.head_img);
         login_tv = (TextView) view.findViewById(R.id.login_tv);
@@ -61,7 +69,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
         history_tv = (TextView) view.findViewById(R.id.history_tv);
         prentice_tv = (TextView) view.findViewById(R.id.prentice_tv);
         prenticemoney_tv = (TextView) view.findViewById(R.id.prenticemoney_tv);
-        message_tv = (TextView) view.findViewById(R.id.message_tv);
+        message_tv = (AutoTextView) view.findViewById(R.id.message_tv);
         goods_rclv = (RecyclerView) view.findViewById(R.id.goods_rclv);
 
         table1 = (LinearLayout) view.findViewById(R.id.table1);
@@ -104,17 +112,19 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 needLogin();
                 break;
             case R.id.setting_img://设置
-                if (needLogin()){
-                    startActivity(new Intent(getActivity(),SettingActivity.class));
+                if (needLogin()) {
+                    startActivity(new Intent(getActivity(), SettingActivity.class));
                 }
                 break;
             case R.id.lookall_tv://查看全部收益
-                InitRC();
+                if (needLogin()) {
+                    startActivity(new Intent(getActivity(), EarningsActivity.class));
+                }
                 break;
             case R.id.head_img://头像
-            case R.id.name_tv://头像
-                if (needLogin()){
-                    startActivity(new Intent(getActivity(),InformationActivity.class));
+            case R.id.name_tv://名字
+                if (needLogin()) {
+                    startActivity(new Intent(getActivity(), InformationActivity.class));
                 }
                 break;
             case R.id.table1://收徒赚钱
@@ -136,6 +146,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
             case R.id.table9://新手任务
                 break;
             case R.id.table10://牛人排行
+                startActivity(new Intent(getActivity(),RankingActivity.class));
                 break;
             case R.id.table11://话费充值
                 break;
@@ -149,26 +160,12 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
     @Override
     public void onShow() {
         super.onShow();
-            
+        setMessage();//刷新消息
         if (!isLogined()) {
             showUnLogined();
         } else {
             showLogined();
-            MyHttp.userEarning(http, null, new MyHttp.MyHttpResult() {
-                @Override
-                public void httpResult(Integer which, int code, String msg, Object bean) {
-                    if (code!=0){
-                        showToast(msg);
-                        return;
-                    }
-                    EarnInfo earnInfo = (EarnInfo) bean;
-                    money_tv.setText(earnInfo.history);
-                    today_tv.setText(earnInfo.today);
-                    history_tv.setText(earnInfo.history);
-                    prentice_tv.setText(earnInfo.receive);
-                    prenticemoney_tv.setText(earnInfo.kickback);
-                }
-            });
+
         }
     }
 
@@ -190,11 +187,30 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
         login_tv.setVisibility(View.GONE);
         money_tv.setText(getUserInfo().app_money);
         name_tv.setText(getUserInfo().user_name);
+
+        MyHttp.userEarning(http, null, new MyHttp.MyHttpResult() {
+            @Override
+            public void httpResult(Integer which, int code, String msg, Object bean) {
+                if (code != 0) {
+                    showToast(msg);
+                    return;
+                }
+                EarnInfo earnInfo = (EarnInfo) bean;
+                money_tv.setText(earnInfo.history);
+                today_tv.setText(earnInfo.today);
+                history_tv.setText(earnInfo.history);
+                prentice_tv.setText(earnInfo.receive);
+                prenticemoney_tv.setText(earnInfo.kickback);
+            }
+        });
     }
 
+    /**
+     * 设置热门推荐商品的列表
+     */
     private void InitRC() {
         goods_rclv.setOverScrollMode(View.OVER_SCROLL_NEVER);
-        GridLayoutManager   manager = new GridLayoutManager(getActivity(), 2);
+        GridLayoutManager manager = new GridLayoutManager(getActivity(), 2);
         goods_rclv.setLayoutManager(manager);
         MyGridDecoration myGridDecoration = new MyGridDecoration(BaseValue.dp2px(8), BaseValue
                 .dp2px(8), getResources().getColor(R.color.mybg), true);
@@ -206,12 +222,33 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
         MyHttp.goodsRecommend(http, null, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
-                if (code!=0){
+                if (code != 0) {
                     showToast(msg);
                     return;
                 }
-                goodsInfos .addAll((ArrayList<GoodsInfo>) bean);
+                goodsInfos.addAll((ArrayList<GoodsInfo>) bean);
                 adapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    /**
+     * 设置滚动消息的跑马灯
+     */
+    private void setMessage() {
+        MyHttp.withdraw(http, null, new HttpForVolley.HttpTodo() {
+            @Override
+            public void httpTodo(Integer which, JSONObject response) {
+                if (response.optInt("code") != 0) {
+                    showToast(response.optString("msg", "网络错误"));
+                    return;
+                }
+                String data = response.optString("data");
+                data = data.replace("[", "");
+                data = data.replace("]", "");
+                data = data.replace("\"", "");
+                String[] split = data.split(",");
+                message_tv.setText(split);
             }
         });
     }

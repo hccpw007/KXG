@@ -111,8 +111,17 @@
             android:name=".center.InformationActivity"
             android:theme="@style/SwipeBackTheme">
         </activity>
-        <activity android:name=".center.SetAliasActivity"
-                  android:theme="@style/SwipeBackTheme">
+        <activity
+            android:name=".center.SetAliasActivity"
+            android:theme="@style/SwipeBackTheme">
+        </activity>
+        <activity
+            android:name=".center.EarningsActivity"
+            android:theme="@style/SwipeBackTheme">
+        </activity>
+        <activity
+            android:name=".center.RankingActivity"
+            android:theme="@style/SwipeBackTheme">
         </activity>
     </application>
 

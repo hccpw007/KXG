@@ -268,15 +268,11 @@
                 android:layout_marginLeft="15dp"
                 android:src="@mipmap/center_message"/>
 
-            <TextView
-
+            <com.base.views.AutoTextView
                 android:id="@+id/message_tv"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:ellipsize="marquee"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:singleLine="true"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
         <View

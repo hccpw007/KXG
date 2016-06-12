@@ -18,6 +18,7 @@ public class BaseValue {
     public static int screenwidth;// 屏幕宽度
     public static int screenHeight;// 屏幕高度
     public static float density;// 屏幕密度
+    public static float scaledDensity;// 屏幕放大密度
     public static int densityDPI;// 屏幕密度
     public static Gson gson;
     public static RequestQueue mQueue;
@@ -33,6 +34,7 @@ public class BaseValue {
         screenHeight = displayMetrics.heightPixels;
         screenwidth = displayMetrics.widthPixels;
         density = displayMetrics.density;
+        scaledDensity = displayMetrics.scaledDensity;
         densityDPI = displayMetrics.densityDpi;
         gson = new Gson();
         mQueue = Volley.newRequestQueue(application);
@@ -46,6 +48,12 @@ public class BaseValue {
     public static int dp2px(float dipValue) {
         return (int) (dipValue * density + 0.5f);
     }
+    /**
+     * sp转px
+     */
+//    public static int sp2px(float dipValue) {
+//        return (int) (dipValue * scaledDensity + 0.5f);
+//    }
 
     public static DisplayImageOptions getOptions(int defaultimg){
         return new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).showImageOnLoading(defaultimg).showImageOnFail(defaultimg)

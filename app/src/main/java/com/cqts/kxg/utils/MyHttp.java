@@ -5,11 +5,13 @@ import com.android.volley.Request;
 import com.base.BaseValue;
 import com.base.http.HttpForVolley;
 import com.cqts.kxg.bean.ArticleInfo;
+import com.cqts.kxg.bean.EaringsInfo;
 import com.cqts.kxg.bean.EarnInfo;
 import com.cqts.kxg.bean.HomeBannerInfo;
 import com.cqts.kxg.bean.GoodsInfo;
 import com.cqts.kxg.bean.HomeSceneInfo;
 import com.cqts.kxg.bean.HomeTableInfo;
+import com.cqts.kxg.bean.RankingInfo;
 import com.cqts.kxg.bean.ShopInfo;
 import com.cqts.kxg.bean.SigninInfo;
 import com.cqts.kxg.bean.UserInfo;
@@ -378,7 +380,7 @@ public class MyHttp {
     /**
      * 修改用户性别<br>
      */
-    public static void userSex(HttpForVolley http, Integer which, int sex, final MyHttpResult myHttpResult) {
+    public static void userSex(HttpForVolley http, Integer which, int sex,  MyHttpResult myHttpResult) {
         String httpUrl = url + "user/sex";
         httpMap.clear();
         httpMap.put("token", MyApplication.token);
@@ -388,11 +390,46 @@ public class MyHttp {
     /**
      * 修改用户昵称<br>
      */
-    public static void userAlias(HttpForVolley http, Integer which, String alias, final MyHttpResult myHttpResult) {
+    public static void userAlias(HttpForVolley http, Integer which, String alias, MyHttpResult myHttpResult) {
         String httpUrl = url + "user/alias";
         httpMap.clear();
         httpMap.put("token", MyApplication.token);
         httpMap.put("alias", alias);
         toBean(Request.Method.POST, http, which, httpMap, httpUrl, myHttpResult, null);
+    }
+
+    /**
+     * 获取个人中心热门商品 <p>
+     */
+    public static void withdraw(HttpForVolley http, Integer which, HttpForVolley.HttpTodo httpTodo) {
+        String httpUrl = url + "user/withdraw/listing";
+        http.goTo(Request.Method.GET,which,null,httpUrl,httpTodo);
+    }
+
+    /**
+     * 收益 & 提现 <p>
+     *     type 1、提现 2、收益
+     */
+    public static void userDetails(HttpForVolley http, Integer which, int type,int pageNum ,int pageSize,MyHttpResult myHttpResult) {
+        String httpUrl = url + "user/details";
+        httpMap.clear();
+        httpMap.put("token", MyApplication.token);
+        httpMap.put("type", type+"");
+        httpMap.put("page", pageNum+"");
+        httpMap.put("perPage", pageSize+"");
+        Type type1 = new TypeToken<List<EaringsInfo>>() {
+        }.getType();
+        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type1);
+    }
+
+    /**
+     * 牛人排行 <p>
+     *     type 1、提现 2、收益
+     */
+    public static void userRanking(HttpForVolley http, Integer which, MyHttpResult myHttpResult) {
+        String httpUrl = url + "user/ranking";
+        Type type = new TypeToken<List<RankingInfo>>() {
+        }.getType();
+        toBean(Request.Method.GET, http, which, null, httpUrl, myHttpResult, type);
     }
 }

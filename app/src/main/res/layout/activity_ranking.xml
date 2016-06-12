@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="@color/myred"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="true"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.cqts.kxg.center.RankingActivity">
+    <include layout="@layout/include_red_title"/>
+    <ListView
+        android:divider="@color/myhint"
+        android:dividerHeight="2px"
+        android:scrollbars="none"
+        android:listSelector="@color/transparency"
+        android:cacheColorHint="@color/transparency"
+        android:background="@color/mybg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listview">
+    </ListView>
+</LinearLayout>
