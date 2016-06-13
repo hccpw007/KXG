@@ -134,12 +134,24 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
             case R.id.table3://我要提现
                 break;
             case R.id.table4://收益详情
+                if (needLogin()) {
+                    startActivity(new Intent(getActivity(), EarningsActivity.class));
+                }
                 break;
             case R.id.table5://喜欢文章
+                if (needLogin()) {
+                    startActivity(new Intent(getActivity(), MyloveActivity.class).putExtra("type",MyloveActivity.articleType));
+                }
                 break;
             case R.id.table6://喜欢宝贝
+                if (needLogin()) {
+                    startActivity(new Intent(getActivity(), MyloveActivity.class).putExtra("type",MyloveActivity.goodsType));
+                }
                 break;
             case R.id.table7://喜欢店铺
+                if (needLogin()) {
+                    startActivity(new Intent(getActivity(), MyloveActivity.class).putExtra("type",MyloveActivity.shopType));
+                }
                 break;
             case R.id.table8://常见问题
                 break;

@@ -49,6 +49,9 @@ public class GoodsFragment extends MyFragment implements RefreshLayout.OnRefresh
         this.where = where;
     }
 
+    /**
+     * 喜欢
+     */
     public GoodsFragment(Where where) {
         this.where = where;
     }
@@ -114,6 +117,7 @@ public class GoodsFragment extends MyFragment implements RefreshLayout.OnRefresh
                 break;
             case love: //来自喜欢
                 goods_refresh.setRefreshble(false);
+                MyHttp.loveGoods(http,null,PageNum,PageSize,this);
                 break;
             default:
                 break;
@@ -185,7 +189,7 @@ public class GoodsFragment extends MyFragment implements RefreshLayout.OnRefresh
     @Override
     public void onStop() {
         super.onStop();
-        if (goods_refresh.isRefreshing) {
+        if (goods_refresh!=null&&goods_refresh.isRefreshing) {
             goods_refresh.setResultState(RefreshLayout.ResultState.close);
         }
     }

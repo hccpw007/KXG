@@ -65,7 +65,7 @@ public class RankingAdapter extends BaseAdapter {
 
         ImageLoader.getInstance().displayImage(rankingInfos.get(position).headimg,holder.headImg,
                 BaseValue.getOptions(R.mipmap.center_head));
-
+        holder.rankingTv.setTextColor(context.getResources().getColor(R.color.mygray));
         holder.rankingTv.setText((position+1)+"");
         holder.moneyTv.setText("￥"+rankingInfos.get(position).app_money);
 

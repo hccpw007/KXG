@@ -14,12 +14,12 @@
         android:src="@mipmap/home_articleclassify"/>
 
     <TextView
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/item_classifyrv2_tv"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:gravity="center"
-        android:singleLine="true"
+        android:maxLines="1"
         android:text="牛逼的男装"
         android:textColor="@color/black"
         android:textSize="14sp"/>

@@ -52,8 +52,11 @@ public class HotFragment extends BaseFragment implements MyViewPager.OnMyPageCha
 
         hot_viewpager = (MyViewPager)view.findViewById(R.id.hot_viewpager);
         hot_view = (ImageView)view. findViewById(R.id.hot_view);
+
+
         ViewGroup.LayoutParams layoutParams = hot_view.getLayoutParams();
         layoutParams.width = BaseValue.screenwidth/4;
+
         InitViewPager();
     }
 

@@ -123,6 +123,14 @@
             android:name=".center.RankingActivity"
             android:theme="@style/SwipeBackTheme">
         </activity>
+        <activity
+            android:name=".center.MyloveActivity"
+            android:theme="@style/SwipeBackTheme">
+        </activity>
+        <activity
+            android:name=".home.ArticleActivity"
+            android:theme="@style/SwipeBackTheme">
+        </activity>
     </application>
 
 </manifest>

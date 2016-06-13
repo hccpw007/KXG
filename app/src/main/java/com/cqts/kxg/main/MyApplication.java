@@ -16,7 +16,7 @@ public class MyApplication extends BaseApplication{
     public static SharedPreferences userSp;//缓存文件
     public static CodeCountDownTimer downTimer;
     public static UserInfo userInfo; //用户信息
-    public static String token = null;
+    public static String token = "";
     @Override
     public void onCreate() {
         super.onCreate();

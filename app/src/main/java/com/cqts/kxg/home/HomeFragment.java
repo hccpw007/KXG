@@ -174,6 +174,7 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
             }
         });
 
+        //首页3个图标按钮
         MyHttp.homemenu(http, null, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
@@ -190,7 +191,7 @@ public class HomeFragment extends BaseFragment implements Callback, MyViewPager
             }
         });
     }
-
+    //首页3个图标按钮
     private void InitTable(ArrayList<HomeTableInfo> homeTableInfos) {
         if (null==homeTableInfos){
             return;

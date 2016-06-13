@@ -1,6 +1,7 @@
 package com.cqts.kxg.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.base.BaseValue;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.HomeSceneInfo;
+import com.cqts.kxg.home.ArticleActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
@@ -36,11 +38,21 @@ public class ArticleClassifyAdapter extends RecyclerView.Adapter<ArticleClassify
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder myViewHolder, int i) {
+    public void onBindViewHolder(MyViewHolder myViewHolder, final int i) {
         if (sceneInfos.size() == 0) return;
         myViewHolder.item_tv.setText(sceneInfos.get(i).cat_name);
         ImageLoader.getInstance().displayImage(sceneInfos.get(i).cover_img,myViewHolder.item_img,
                 BaseValue.getOptions(R.mipmap.home_articleclassify));
+
+        myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ArticleActivity.class);
+                intent.putExtra("title",sceneInfos.get(i).cat_name);
+                intent.putExtra("cat_id",sceneInfos.get(i).cat_id);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

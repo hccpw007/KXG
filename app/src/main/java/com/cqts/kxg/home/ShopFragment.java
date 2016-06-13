@@ -47,7 +47,11 @@ public class ShopFragment extends MyFragment implements RefreshLayout.OnRefreshL
         this.str = str;
     }
 
-    public ShopFragment() {
+    /**
+     * 来自我的喜欢
+     */
+    public ShopFragment(Where where) {
+        this.where = where;
     }
 
     @Override
@@ -102,6 +106,7 @@ public class ShopFragment extends MyFragment implements RefreshLayout.OnRefreshL
                 break;
             case love: //来自喜欢
                 shop_refresh.setRefreshble(false);
+                MyHttp.loveShop(http,2,PageNum,PageSize,this);
                 break;
             case street: //来自店铺街
                 shop_refresh.setRefreshble(false);
@@ -177,7 +182,7 @@ public class ShopFragment extends MyFragment implements RefreshLayout.OnRefreshL
     @Override
     public void onStop() {
         super.onStop();
-        if (shop_refresh.isRefreshing) {
+        if (shop_refresh!=null&&shop_refresh.isRefreshing) {
             shop_refresh.setResultState(RefreshLayout.ResultState.close);
         }
     }

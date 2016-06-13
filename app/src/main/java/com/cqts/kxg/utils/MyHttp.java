@@ -318,6 +318,9 @@ public class MyHttp {
         httpMap.put("PageSize", PageSize + "");
         httpMap.put("PageNum", PageNum + "");
         httpMap.put("keyword", keyword);
+        if (MyApplication.token!=null&&!MyApplication.token.isEmpty()){
+            httpMap.put("token", MyApplication.token);
+        }
         Type type = new TypeToken<List<ArticleInfo>>() {
         }.getType();
         toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type);
@@ -354,6 +357,20 @@ public class MyHttp {
         toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type);
     }
 
+    /**
+     * 首页文章分类查询列表 <p>
+     */
+    public static void articleListing(HttpForVolley http, Integer which, int PageSize, int
+            PageNum, String cat_id, MyHttpResult myHttpResult) {
+        String httpUrl = url + "article/listing";
+        httpMap.clear();
+        httpMap.put("cat_id", cat_id);
+        httpMap.put("perPage", PageSize + "");
+        httpMap.put("page", PageNum + "");
+        Type type = new TypeToken<List<ArticleInfo>>() {
+        }.getType();
+        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type);
+    }
 
     /**
      * 获取个人中心收益<br>
@@ -380,17 +397,20 @@ public class MyHttp {
     /**
      * 修改用户性别<br>
      */
-    public static void userSex(HttpForVolley http, Integer which, int sex,  MyHttpResult myHttpResult) {
+    public static void userSex(HttpForVolley http, Integer which, int sex, MyHttpResult
+            myHttpResult) {
         String httpUrl = url + "user/sex";
         httpMap.clear();
         httpMap.put("token", MyApplication.token);
         httpMap.put("sex", sex + "");
         toBean(Request.Method.POST, http, which, httpMap, httpUrl, myHttpResult, null);
     }
+
     /**
      * 修改用户昵称<br>
      */
-    public static void userAlias(HttpForVolley http, Integer which, String alias, MyHttpResult myHttpResult) {
+    public static void userAlias(HttpForVolley http, Integer which, String alias, MyHttpResult
+            myHttpResult) {
         String httpUrl = url + "user/alias";
         httpMap.clear();
         httpMap.put("token", MyApplication.token);
@@ -401,22 +421,24 @@ public class MyHttp {
     /**
      * 获取个人中心热门商品 <p>
      */
-    public static void withdraw(HttpForVolley http, Integer which, HttpForVolley.HttpTodo httpTodo) {
+    public static void withdraw(HttpForVolley http, Integer which, HttpForVolley.HttpTodo
+            httpTodo) {
         String httpUrl = url + "user/withdraw/listing";
-        http.goTo(Request.Method.GET,which,null,httpUrl,httpTodo);
+        http.goTo(Request.Method.GET, which, null, httpUrl, httpTodo);
     }
 
     /**
      * 收益 & 提现 <p>
-     *     type 1、提现 2、收益
+     * type 1、提现 2、收益
      */
-    public static void userDetails(HttpForVolley http, Integer which, int type,int pageNum ,int pageSize,MyHttpResult myHttpResult) {
+    public static void userDetails(HttpForVolley http, Integer which, int type, int pageNum, int
+            pageSize, MyHttpResult myHttpResult) {
         String httpUrl = url + "user/details";
         httpMap.clear();
         httpMap.put("token", MyApplication.token);
-        httpMap.put("type", type+"");
-        httpMap.put("page", pageNum+"");
-        httpMap.put("perPage", pageSize+"");
+        httpMap.put("type", type + "");
+        httpMap.put("page", pageNum + "");
+        httpMap.put("perPage", pageSize + "");
         Type type1 = new TypeToken<List<EaringsInfo>>() {
         }.getType();
         toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type1);
@@ -424,12 +446,63 @@ public class MyHttp {
 
     /**
      * 牛人排行 <p>
-     *     type 1、提现 2、收益
+     * type 1、提现 2、收益
      */
     public static void userRanking(HttpForVolley http, Integer which, MyHttpResult myHttpResult) {
         String httpUrl = url + "user/ranking";
         Type type = new TypeToken<List<RankingInfo>>() {
         }.getType();
         toBean(Request.Method.GET, http, which, null, httpUrl, myHttpResult, type);
+    }
+
+    /**
+     * 我的喜欢-商品 <p>
+     * article:文章,good商品,supplier:商品
+     */
+    public static void loveGoods(HttpForVolley http, Integer which, int pageNum, int pageSize,
+                                 MyHttpResult myHttpResult) {
+        String httpUrl = url + "user/collect";
+        httpMap.clear();
+        httpMap.put("token", MyApplication.token);
+        httpMap.put("type", "good");
+        httpMap.put("page", pageNum + "");
+        httpMap.put("perPage", pageSize + "");
+        Type type = new TypeToken<List<GoodsInfo>>() {
+        }.getType();
+        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type);
+    }
+
+    /**
+     * 我的喜欢-文章 <p>
+     * article:文章,good商品,supplier:商品
+     */
+    public static void loveArticle(HttpForVolley http, Integer which, int pageNum, int pageSize,
+                                   MyHttpResult myHttpResult) {
+        String httpUrl = url + "user/collect";
+        httpMap.clear();
+        httpMap.put("token", MyApplication.token);
+        httpMap.put("type", "article");
+        httpMap.put("page", pageNum + "");
+        httpMap.put("perPage", pageSize + "");
+        Type type = new TypeToken<List<ArticleInfo>>() {
+        }.getType();
+        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type);
+    }
+
+    /**
+     * 我的喜欢-文章 <p>
+     * article:文章,good商品,supplier:商品
+     */
+    public static void loveShop(HttpForVolley http, Integer which, int pageNum, int pageSize,
+                                   MyHttpResult myHttpResult) {
+        String httpUrl = url + "user/collect";
+        httpMap.clear();
+        httpMap.put("token", MyApplication.token);
+        httpMap.put("type", "supplier");
+        httpMap.put("page", pageNum + "");
+        httpMap.put("perPage", pageSize + "");
+        Type type = new TypeToken<List<ShopInfo>>() {
+        }.getType();
+        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type);
     }
 }

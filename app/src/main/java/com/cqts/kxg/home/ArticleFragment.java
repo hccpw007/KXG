@@ -38,17 +38,38 @@ public class ArticleFragment extends MyFragment implements RefreshLayout.OnRefre
     private int PageNum = 1;
     int hotType = 1; //热门模块的分类
     String keyword = ""; //搜索文章的关键字
+    String cat_id; //来自首页分类文章查询
+
     /**
-     * 热门的分类hotType
+     * 热门的分类hotType <p>
      */
-    public ArticleFragment(Where where,int hotType) {
-        this.hotType = hotType;
+    public ArticleFragment(Where where, int hotType) {
         this.where = where;
+        //来自热门
+        this.hotType = hotType;
     }
 
-    public ArticleFragment(Where where,String keyword) {
+    /**
+     * 来自搜索<p>
+     * 来自首页的分类文章查询传 cat_id
+     */
+    public ArticleFragment(Where where, String str) {
         this.where = where;
-        this.keyword = keyword;
+
+        //来自首页分类查询
+        if (where == home) {
+            this.cat_id = str;
+        }
+        if (where == search){
+            this.keyword = str;
+        }
+    }
+
+    /**
+     * 来自我的喜欢
+     */
+    public ArticleFragment(Where where) {
+        this.where = where;
     }
 
     @Override
@@ -97,7 +118,7 @@ public class ArticleFragment extends MyFragment implements RefreshLayout.OnRefre
     private void getData() {
         switch (where) {
             case hot: //来自热门
-                MyHttp.articleHot(http,1,PageSize,PageNum,hotType,this);
+                MyHttp.articleHot(http, 1, PageSize, PageNum, hotType, this);
                 break;
             case search: //来自搜索
                 article_refresh.setRefreshble(false);
@@ -105,6 +126,11 @@ public class ArticleFragment extends MyFragment implements RefreshLayout.OnRefre
                 break;
             case love: //来自喜欢
                 article_refresh.setRefreshble(false);
+                MyHttp.loveArticle(http, 3, PageNum, PageSize, this);
+                break;
+            case home:
+                article_refresh.setRefreshble(false);
+                MyHttp.articleListing(http, 4, PageSize, PageNum, cat_id, this);
                 break;
             default:
                 break;
@@ -170,13 +196,13 @@ public class ArticleFragment extends MyFragment implements RefreshLayout.OnRefre
      * love --------- 喜欢(收藏)<br>
      */
     public enum Where {
-        hot, search, love
+        hot, search, love, home
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (article_refresh.isRefreshing) {
+        if (article_refresh != null && article_refresh.isRefreshing) {
             article_refresh.setResultState(RefreshLayout.ResultState.close);
         }
     }
