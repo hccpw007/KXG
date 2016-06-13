@@ -53,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:text="注册/登录"
-                    android:textSize="20sp"/>
+                    android:textSize="18sp"/>
 
                 <TextView
                     android:id="@+id/name_tv"
@@ -93,7 +93,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="-2dp"
                     android:text="账户余额(元)"
-                    android:textSize="20sp"/>
+                    android:textSize="18sp"/>
             </LinearLayout>
         </RelativeLayout>
 
@@ -117,7 +117,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="我的收益"
-                android:textSize="20sp"/>
+                android:textSize="17sp"/>
 
             <TextView
                 android:id="@+id/lookall_tv"
@@ -155,7 +155,7 @@
                     android:text="0.00"/>
 
                 <TextView
-                    style="@style/text_16sp_black"
+                    style="@style/text_15sp_black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="今日收益"/>
@@ -184,7 +184,7 @@
                     android:text="0.00"/>
 
                 <TextView
-                    style="@style/text_16sp_black"
+                    style="@style/text_15sp_black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="历史收入"
@@ -214,7 +214,7 @@
                     android:text="0.00"/>
 
                 <TextView
-                    style="@style/text_16sp_black"
+                    style="@style/text_15sp_black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="今日收徒"/>
@@ -243,7 +243,7 @@
                     android:text="0.00"/>
 
                 <TextView
-                    style="@style/text_16sp_black"
+                    style="@style/text_15sp_black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="徒弟帮赚"/>
@@ -294,16 +294,16 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@mipmap/center_table1"/>
 
                 <TextView
-                    style="@style/text_16sp_black"
+                    style="@style/text_14sp_black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="收徒赚钱"
-                    android:textSize="16sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
 
             <View
@@ -320,16 +320,16 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@mipmap/center_table2"/>
 
                 <TextView
-                    style="@style/text_16sp_black"
+                    style="@style/text_14sp_black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="文章赚钱"
-                    android:textSize="16sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
 
             <View
@@ -346,16 +346,16 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@mipmap/center_table3"/>
 
                 <TextView
-                    style="@style/text_16sp_black"
+                    style="@style/text_14sp_black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="我要提现"
-                    android:textSize="16sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
 
             <View
@@ -372,8 +372,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@mipmap/center_table4"/>
 
                 <TextView
@@ -381,7 +381,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="收益详情"
-                    android:textSize="16sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -404,8 +404,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@mipmap/center_table5"/>
 
                 <TextView
@@ -413,7 +413,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="喜欢文章"
-                    android:textSize="16sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
 
             <View
@@ -430,8 +430,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@mipmap/center_table6"/>
 
                 <TextView
@@ -439,7 +439,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="喜欢宝贝"
-                    android:textSize="16sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
 
             <View
@@ -456,8 +456,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@mipmap/center_table7"/>
 
                 <TextView
@@ -465,7 +465,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="喜欢店铺"
-                    android:textSize="16sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
 
             <View
@@ -482,8 +482,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@mipmap/center_table8"/>
 
                 <TextView
@@ -491,7 +491,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="常见问题"
-                    android:textSize="16sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -514,8 +514,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@mipmap/center_table9"/>
 
                 <TextView
@@ -523,7 +523,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="新手任务"
-                    android:textSize="16sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
 
             <View
@@ -540,8 +540,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@mipmap/center_table10"/>
 
                 <TextView
@@ -549,7 +549,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="牛人排行"
-                    android:textSize="16sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
 
             <View
@@ -566,8 +566,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@mipmap/center_table11"/>
 
                 <TextView
@@ -575,7 +575,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="话费充值"
-                    android:textSize="16sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
 
             <View
@@ -592,8 +592,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@mipmap/center_table12"/>
 
                 <TextView
@@ -601,7 +601,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="我的店铺"
-                    android:textSize="16sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -630,7 +630,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="热门推荐"
-                android:textSize="18sp"/>
+                android:textSize="17sp"/>
 
             <View
                 android:layout_width="0px"

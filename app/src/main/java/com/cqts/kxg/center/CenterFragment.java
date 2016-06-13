@@ -25,6 +25,7 @@ import com.cqts.kxg.bean.EarnInfo;
 import com.cqts.kxg.bean.GoodsInfo;
 import com.cqts.kxg.main.MyFragment;
 import com.cqts.kxg.utils.MyHttp;
+import com.cqts.kxg.views.SharePop;
 
 import org.json.JSONObject;
 
