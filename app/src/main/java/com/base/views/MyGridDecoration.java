@@ -5,12 +5,8 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-
-import com.base.BaseValue;
 
 /**
  * RecyclerView的分割线
@@ -24,6 +20,7 @@ public class MyGridDecoration extends RecyclerView.ItemDecoration {
     private boolean isFrame = false;
     int viewId = 0;
     float scale = 1.0f;
+    int itemSize;
 
     public MyGridDecoration(int hSize, int vSize, int color, boolean isInScroll) {
         this.isInScroll = isInScroll;
@@ -35,6 +32,7 @@ public class MyGridDecoration extends RecyclerView.ItemDecoration {
 
     /**
      * 是否需要边框 然后在recyclerview中设置pading就行了
+     *
      * @param isFrame
      */
     public void setFrame(boolean isFrame) {
@@ -98,7 +96,8 @@ public class MyGridDecoration extends RecyclerView.ItemDecoration {
 
 
     @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State
+            state) {
         super.getItemOffsets(outRect, view, parent, state);
         RecyclerView.Adapter adapter = parent.getAdapter(); //获得RecyclerView的Adapter
         int itemSize = adapter.getItemCount(); //总共有多少个item
@@ -148,12 +147,10 @@ public class MyGridDecoration extends RecyclerView.ItemDecoration {
     @Override
     public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
         super.onDrawOver(c, parent, state);
-
-
-        if (isInScroll) {
+        RecyclerView.Adapter adapter = parent.getAdapter(); //获得RecyclerView的Adapter
+        int itemSize = adapter.getItemCount(); //总共有多少个item
+        if (isInScroll && this.itemSize != itemSize) {
             try {
-                RecyclerView.Adapter adapter = parent.getAdapter(); //获得RecyclerView的Adapter
-                int itemSize = adapter.getItemCount(); //总共有多少个item
                 GridLayoutManager layoutManager = (GridLayoutManager) parent.getLayoutManager();
                 int spanCount = layoutManager.getSpanCount();
                 int itemNum;
@@ -166,11 +163,14 @@ public class MyGridDecoration extends RecyclerView.ItemDecoration {
                 View childAt = parent.getChildAt(0);
                 ViewGroup.LayoutParams layoutParams = parent.getLayoutParams();
                 if (!isFrame) {
-                    layoutParams.height = childAt.getMeasuredHeight() * itemNum + hSize * (itemNum - 1) ;
+                    layoutParams.height = childAt.getMeasuredHeight() * itemNum + hSize *
+                            (itemNum - 1);
                 } else {
-                    layoutParams.height = childAt.getMeasuredHeight() * itemNum + hSize * (itemNum - 1) + hSize * 2;
+                    layoutParams.height = childAt.getMeasuredHeight() * itemNum + hSize *
+                            (itemNum - 1) + hSize * 2;
                 }
                 parent.setLayoutParams(layoutParams);
+                this.itemSize = itemSize;
             } catch (Exception e) {
             }
         }
