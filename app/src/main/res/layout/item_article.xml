@@ -1,48 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<com.base.views.RoundLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="160dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/mybg">
-    <com.base.views.MyOvalImageView
-        app:myradius="4dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    app:mylayoutbg="@color/mybg"
+    app:mylayoutradius="4dp">
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:src="@mipmap/solid_article"
-        android:id="@+id/item_img"/>
-    <TextView
-        android:id="@+id/item_tv"
-        style="@style/text_14sp_white"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_alignParentBottom="true"
-        android:background="@mipmap/articlelist_tvbg"
-        android:gravity="center"
-        />
-    <LinearLayout
-        android:id="@+id/item_collect_layout"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
-        android:background="@mipmap/collect_bg"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <ImageView
+            app:myScale="1"
+            android:id="@+id/item_img"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
             android:scaleType="fitXY"
-            android:id="@+id/item_collect_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/home_taoxin"/>
+            android:src="@mipmap/solid_article"/>
 
         <TextView
-            android:id="@+id/item_collect_tv"
+            android:id="@+id/item_tv"
             style="@style/text_14sp_white"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:background="@mipmap/articlelist_tvbg"
+            android:gravity="center"/>
+
+        <LinearLayout
+            android:id="@+id/item_collect_layout"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="11sp"/>
-    </LinearLayout>
-</RelativeLayout>
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:background="@mipmap/collect_bg"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/item_collect_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@mipmap/home_taoxin"/>
+
+            <TextView
+                android:id="@+id/item_collect_tv"
+                style="@style/text_14sp_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="11sp"/>
+        </LinearLayout>
+    </RelativeLayout>
+</com.base.views.RoundLayout>

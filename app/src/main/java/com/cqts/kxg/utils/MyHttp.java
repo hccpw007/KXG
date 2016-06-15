@@ -106,7 +106,6 @@ public class MyHttp {
 
     /**
      * 首页活动按钮(分类,店铺街,9.9) <p>
-     * 加载首页场景分类目前只有十个场景分类菜单<br>
      */
     public static void homemenu(HttpForVolley http, Integer which,
                                 MyHttpResult myHttpResult) {

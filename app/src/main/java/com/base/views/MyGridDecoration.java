@@ -42,13 +42,11 @@ public class MyGridDecoration extends RecyclerView.ItemDecoration {
     /**
      * 图片的id和比例 float 大于1表示高>宽  小于1反之
      *
-     * @param viewId
-     * @param scale
      */
-    public void setImageView(int viewId, float scale) {
-        this.viewId = viewId;
-        this.scale = scale;
-    }
+//    public void setImageView(int viewId, float scale) {
+//        this.viewId = viewId;
+//        this.scale = scale;
+//    }
 
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {

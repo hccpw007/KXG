@@ -9,7 +9,8 @@
     app:mylayoutbg="@color/mybg"
     app:mylayoutradius="4dp">
 
-    <ImageView
+    <com.base.views.ScaleImageView
+        app:myScale="1"
         android:id="@+id/item_nine_img"
         android:layout_width="match_parent"
         android:layout_height="170dp"

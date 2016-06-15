@@ -25,6 +25,7 @@ import com.cqts.kxg.center.LoginedFragment;
 import com.cqts.kxg.classify.ClassifyFragment;
 import com.cqts.kxg.home.HomeFragment;
 import com.cqts.kxg.hot.HotFragment;
+import com.cqts.kxg.nine.NewHomeFragment;
 import com.cqts.kxg.nine.NineFragment;
 
 /**
@@ -59,12 +60,6 @@ public class NgtAty extends FragmentActivity implements OnMyPageChangeListener,
         InitNgt();
     }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        list.get(0).onShow();
-//    }
-
     /**
      * 只有当前选中的fragment执行onshow
      */
@@ -87,7 +82,8 @@ public class NgtAty extends FragmentActivity implements OnMyPageChangeListener,
     }
 
     private void InitFragment() {
-        list.add(new HomeFragment());
+//        list.add(new HomeFragment());
+        list.add(new NewHomeFragment());
         list.add(new NineFragment());
         list.add(new ClassifyFragment());
         list.add(new HotFragment());

@@ -4,9 +4,14 @@
     <declare-styleable name="MyOvalImageView">
         <attr name="myradius" format="dimension"/>
     </declare-styleable>
-
+    <!--圆角矩形的参数-->
     <declare-styleable name="RoundLayout">
         <attr name="mylayoutbg" format="color"/>
         <attr name="mylayoutradius" format="dimension"/>
+    </declare-styleable>
+
+    <!--ImageView 按比例显示-->
+    <declare-styleable name="ScaleImageView" >
+        <attr name="myScale" format="float"/>
     </declare-styleable>
 </resources>

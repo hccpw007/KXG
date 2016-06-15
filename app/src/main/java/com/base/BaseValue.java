@@ -23,11 +23,6 @@ public class BaseValue {
     public static Gson gson;
     public static RequestQueue mQueue;
     public static InputMethodManager imm; //输入法管理器
-    public static float roundLayoutRadius = 0f;
-    public static int bgColor;
-    public static Path roundPath;
-
-
     public static void setInit(Application application) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         displayMetrics = application.getResources().getDisplayMetrics();

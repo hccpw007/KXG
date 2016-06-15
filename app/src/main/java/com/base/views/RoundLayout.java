@@ -22,6 +22,8 @@ public class RoundLayout extends LinearLayout {
     private int bgColor;
     Context context;
     AttributeSet attrs;
+    public  Path roundPath;
+    private int measuredHeight;
 
     public RoundLayout(Context context) {
         this(context, null);
@@ -33,34 +35,40 @@ public class RoundLayout extends LinearLayout {
         this.context = context;
         this.attrs = attrs;
         this.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-        if (BaseValue.roundLayoutRadius == 0) {
+        if (roundLayoutRadius == 0) {
             getAttrs(context, attrs);
-            if (roundLayoutRadius > 0) {
-                BaseValue.roundLayoutRadius = roundLayoutRadius;
-                BaseValue.bgColor = bgColor;
-            }
         }
     }
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
-        if (BaseValue.roundPath == null && BaseValue.roundLayoutRadius > 0) {
+        if (roundPath == null && roundLayoutRadius > 0 ) {
             setWillNotDraw(false);//如果你继承的是ViewGroup,注意此行,否则draw方法是不会回调的;
-            Path roundPath = new Path();
+            roundPath = new Path();
             RectF rectF = new RectF();
+            measuredHeight = getMeasuredHeight();
             rectF.set(0f, 0f, getMeasuredWidth(), getMeasuredHeight());
             //添加一个圆角矩形到path中, 如果要实现任意形状的View, 只需要手动添加path就行
             roundPath.addRoundRect(rectF, roundLayoutRadius, roundLayoutRadius, Path.Direction.CW);
-            BaseValue.roundPath = roundPath;
+        }
+
+        if (roundPath != null&& measuredHeight!= getMeasuredHeight()){
+            setWillNotDraw(false);//如果你继承的是ViewGroup,注意此行,否则draw方法是不会回调的;
+            roundPath = new Path();
+            RectF rectF = new RectF();
+            measuredHeight = getMeasuredHeight();
+            rectF.set(0f, 0f, getMeasuredWidth(), getMeasuredHeight());
+            //添加一个圆角矩形到path中, 如果要实现任意形状的View, 只需要手动添加path就行
+            roundPath.addRoundRect(rectF, roundLayoutRadius, roundLayoutRadius, Path.Direction.CW);
         }
     }
 
     @Override
     public void draw(Canvas canvas) {
-        if (BaseValue.roundPath != null) {
-            canvas.drawColor(BaseValue.bgColor);
-            canvas.clipPath(BaseValue.roundPath);
+        if (roundPath != null) {
+            canvas.drawColor(bgColor);
+            canvas.clipPath(roundPath);
         }
         super.draw(canvas);
     }

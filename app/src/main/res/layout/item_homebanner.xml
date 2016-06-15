@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+
+        <com.base.views.MyViewPager
+            android:id="@+id/home_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@mipmap/solid_banner">
+        </com.base.views.MyViewPager>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/home_rdbtn1"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_margin="3dp"
+                android:background="@drawable/sl_viewpager_dot"
+                android:button="@null"
+                android:checked="false"
+                android:visibility="gone"/>
+
+            <RadioButton
+                android:id="@+id/home_rdbtn2"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_margin="3dp"
+                android:background="@drawable/sl_viewpager_dot"
+                android:button="@null"
+                android:checked="false"
+                android:visibility="gone"/>
+
+            <RadioButton
+                android:id="@+id/home_rdbtn3"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_margin="3dp"
+                android:background="@drawable/sl_viewpager_dot"
+                android:button="@null"
+                android:checked="false"
+                android:visibility="gone"/>
+
+            <RadioButton
+                android:id="@+id/home_rdbtn4"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_margin="3dp"
+                android:background="@drawable/sl_viewpager_dot"
+                android:button="@null"
+                android:checked="false"
+                android:visibility="gone"/>
+        </RadioGroup>
+    </FrameLayout>
+</LinearLayout>

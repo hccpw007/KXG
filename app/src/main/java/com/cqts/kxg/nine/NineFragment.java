@@ -79,7 +79,7 @@ public class NineFragment extends BaseFragment {
         nine_rv.setLayoutManager(manager);
         MyGridDecoration myGridDecoration = new MyGridDecoration(BaseValue.dp2px(8), BaseValue
                 .dp2px(8), getResources().getColor(R.color.mybg), false);
-        myGridDecoration.setImageView(R.id.item_nine_img, 1);
+//        myGridDecoration.setImageView(R.id.item_nine_img, 1);
         nine_rv.addItemDecoration(myGridDecoration);
         adapter = new GoodsAdapter(getActivity(), goods_list);
         nine_rv.setAdapter(adapter);
