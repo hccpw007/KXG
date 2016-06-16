@@ -105,6 +105,7 @@ public class InformationActivity extends MyActivity implements View.OnClickListe
                     showToast(msg);
                     return;
                 }
+                showToast("修改性别成功!");
                 MyApplication.userInfo.sex = sex;
                 setSex();
             }
