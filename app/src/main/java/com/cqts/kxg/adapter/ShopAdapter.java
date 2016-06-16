@@ -18,6 +18,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.List;
 
 /**
+ * 店铺
  * Created by Administrator on 2016/6/3.
  */
 public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.MyviewHolder>{

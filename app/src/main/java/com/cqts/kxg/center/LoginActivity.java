@@ -13,6 +13,7 @@ import com.cqts.kxg.bean.UserInfo;
 import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.main.MyApplication;
 import com.cqts.kxg.utils.MyHttp;
+import com.cqts.kxg.utils.SPutils;
 
 /**
  * 登录
@@ -97,6 +98,7 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
             public void httpResult(Integer which, int code, String msg, Object bean) {
                 SigninInfo signinInfo = (SigninInfo) bean;
                 MyApplication.token = signinInfo.getToken();
+                SPutils.setToken(MyApplication.token);
                 getUserInfoData();
             }
 

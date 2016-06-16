@@ -224,7 +224,6 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
         goods_rclv.setLayoutManager(manager);
         MyGridDecoration myGridDecoration = new MyGridDecoration(BaseValue.dp2px(8), BaseValue
                 .dp2px(8), getResources().getColor(R.color.mybg), true);
-//        myGridDecoration.setImageView(R.id.item_nine_img, 1);
         myGridDecoration.setFrame(true);
         goods_rclv.addItemDecoration(myGridDecoration);
         adapter = new GoodsAdapter(getActivity(), goodsInfos);

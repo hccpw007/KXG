@@ -1,6 +1,8 @@
 package com.cqts.kxg.utils;
 
 
+import android.text.TextUtils;
+
 import com.android.volley.Request;
 import com.base.BaseValue;
 import com.base.http.HttpForVolley;
@@ -129,6 +131,7 @@ public class MyHttp {
         httpMap.put("add_time", "desc");
         httpMap.put("perPage", PerPage + "");
         httpMap.put("page", Page + "");
+        httpMap.put("token", MyApplication.token);
         Type type = new TypeToken<List<ArticleInfo>>() {
         }.getType();
         toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type);
@@ -317,9 +320,7 @@ public class MyHttp {
         httpMap.put("PageSize", PageSize + "");
         httpMap.put("PageNum", PageNum + "");
         httpMap.put("keyword", keyword);
-        if (MyApplication.token!=null&&!MyApplication.token.isEmpty()){
             httpMap.put("token", MyApplication.token);
-        }
         Type type = new TypeToken<List<ArticleInfo>>() {
         }.getType();
         toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type);
@@ -348,6 +349,7 @@ public class MyHttp {
             page, int hot_type, MyHttpResult myHttpResult) {
         String httpUrl = url + "article/hot";
         httpMap.clear();
+        httpMap.put("token", MyApplication.token);
         httpMap.put("perPage", perPage + "");
         httpMap.put("page", page + "");
         httpMap.put("hot_type", hot_type + "");
@@ -363,6 +365,7 @@ public class MyHttp {
             PageNum, String cat_id, MyHttpResult myHttpResult) {
         String httpUrl = url + "article/listing";
         httpMap.clear();
+        httpMap.put("token", MyApplication.token);
         httpMap.put("cat_id", cat_id);
         httpMap.put("perPage", PageSize + "");
         httpMap.put("page", PageNum + "");
@@ -503,5 +506,31 @@ public class MyHttp {
         Type type = new TypeToken<List<ShopInfo>>() {
         }.getType();
         toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type);
+    }
+
+    /**
+     * 查询文章是否喜欢<p>
+     */
+    public static void articleCollect(HttpForVolley http, Integer which, String article_id,
+                                      HttpForVolley.HttpTodo httpTodo) {
+        String httpUrl = url + "article/collect";
+        httpMap.clear();
+        httpMap.put("token", MyApplication.token);
+        httpMap.put("article_id", article_id);
+        http.goTo(Request.Method.GET,which,httpMap,httpUrl,httpTodo);
+    }
+
+    /**
+     * 收藏文章<p>
+     *     behavior 0 : 关注 1 : 取关
+     */
+    public static void articleLove(HttpForVolley http, Integer which, String article_id,int behavior,
+                                   MyHttpResult myHttpResult) {
+        String httpUrl = url + "article/love";
+        httpMap.clear();
+        httpMap.put("token", MyApplication.token);
+        httpMap.put("article_id", article_id);
+        httpMap.put("behavior", behavior+"");
+        toBean(Request.Method.POST, http, which, httpMap, httpUrl, myHttpResult, ArticleInfo.class);
     }
 }

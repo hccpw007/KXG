@@ -41,6 +41,7 @@ public class ArticleClassifyAdapter extends RecyclerView.Adapter<ArticleClassify
 
     @Override
     public void onBindViewHolder(classifyViewHolder classifyViewHolder, final int i) {
+        if (sceneInfos.size() < i+1) return;
 
         classifyViewHolder.item_tv.setText(sceneInfos.get(i).cat_name);
         ImageLoader.getInstance().displayImage(sceneInfos.get(i).cover_img,
@@ -59,7 +60,7 @@ public class ArticleClassifyAdapter extends RecyclerView.Adapter<ArticleClassify
 
     @Override
     public int getItemCount() {
-        return 10;
+        return sceneInfos.size();
     }
 
     class classifyViewHolder extends RecyclerView.ViewHolder {

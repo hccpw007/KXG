@@ -12,7 +12,7 @@ import com.base.BaseValue;
 import com.base.views.RefreshLayout;
 import com.base.utils.MyGridDecoration;
 import com.cqts.kxg.R;
-import com.cqts.kxg.adapter.ArticleListAdapter;
+import com.cqts.kxg.adapter.ArticleAdapter;
 import com.cqts.kxg.bean.ArticleInfo;
 import com.cqts.kxg.main.MyFragment;
 import com.cqts.kxg.utils.MyHttp;
@@ -28,7 +28,7 @@ import static com.cqts.kxg.home.ArticleFragment.Where.*;
 @SuppressLint("ValidFragment")
 public class ArticleFragment extends MyFragment implements RefreshLayout.OnRefreshListener,
         MyHttp.MyHttpResult, MyFragment.HttpFail, RefreshLayout.TopOrBottom {
-    private ArticleListAdapter adapter;
+    private ArticleAdapter adapter;
     private List<ArticleInfo> articleInfos = new ArrayList<ArticleInfo>();
     private GridLayoutManager manager;
     private RefreshLayout article_refresh;
@@ -100,7 +100,7 @@ public class ArticleFragment extends MyFragment implements RefreshLayout.OnRefre
                 .dp2px(0), getResources().getColor(R.color.mybg), false);
         article_rclv.setLayoutManager(manager);
         article_rclv.addItemDecoration(myGridDecoration);
-        adapter = new ArticleListAdapter(getActivity(), articleInfos);
+        adapter = new ArticleAdapter(this, articleInfos);
         article_rclv.setAdapter(adapter);
         article_refresh.setRC(article_rclv, this);
     }

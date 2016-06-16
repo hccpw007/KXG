@@ -55,6 +55,7 @@ public class MyActivity extends BaseActivity {
         });
     }
 
+
     //是否已经登录
     public boolean isLogined() {
         if (MyApplication.userInfo == null) {
@@ -65,10 +66,12 @@ public class MyActivity extends BaseActivity {
     }
 
     //需要登录,未登录这跳转登录页面
-    public void needLogin() {
+    public boolean needLogin() {
         if (!isLogined()) {
             startActivity(new Intent(this, LoginActivity.class));
+            return false;
         }
+        return true;
     }
 
     public UserInfo getUserInfo(){

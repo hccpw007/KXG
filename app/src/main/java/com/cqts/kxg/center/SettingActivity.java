@@ -59,7 +59,7 @@ public class SettingActivity extends MyActivity implements View.OnClickListener 
                 break;
             case R.id.exit_btn: //退出当前账户
                 MyApplication.userInfo = null;
-                MyApplication.token = null;
+                MyApplication.token = "";
                 SPutils.setToken("");
                 finish();
                 break;

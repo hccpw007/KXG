@@ -1,4 +1,4 @@
-package com.cqts.kxg.home;
+package com.cqts.kxg.adapter;
 
 import android.content.Context;
 import android.os.Handler;
@@ -11,7 +11,6 @@ import android.widget.RadioButton;
 
 import com.base.views.MyViewPager;
 import com.cqts.kxg.R;
-import com.cqts.kxg.adapter.BannerAdapter;
 import com.cqts.kxg.bean.HomeBannerInfo;
 
 import java.util.ArrayList;
@@ -22,22 +21,33 @@ import java.util.TimerTask;
 /**
  * Created by Administrator on 2016/6/16.
  */
-public class HomeBannerAdapter extends RecyclerView.Adapter<HomeBannerAdapter.Viewholder>{
+public class HomeBannerAdapter extends RecyclerView.Adapter<HomeBannerAdapter.Viewholder> {
 
     private Context context;
     List<HomeBannerInfo> bannerInfos;
+    private Timer timer;
+    private TimerTask timerTask;
+    private Handler handler;
+
+    public HomeBannerAdapter(List<HomeBannerInfo> bannerInfos) {
+        this.bannerInfos = bannerInfos;
+    }
+
     @Override
     public HomeBannerAdapter.Viewholder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        if (context == null){
+        if (context == null) {
             context = viewGroup.getContext();
         }
-        return new Viewholder(LayoutInflater.from(context).inflate(R.layout.item_homebanner,null));
+        return new Viewholder(LayoutInflater.from(context).inflate(R.layout.item_homebanner, null));
     }
 
     @Override
     public void onBindViewHolder(final Viewholder viewholder, int i) {
 
-        viewholder.home_viewpager.setOnMyPageChangeListener(new MyViewPager.OnMyPageChangeListener() {
+        if (bannerInfos.size() == 0) return;
+
+        viewholder.home_viewpager.setOnMyPageChangeListener(new MyViewPager
+                .OnMyPageChangeListener() {
             //广告Viewpager保证可以循环滑动
             @Override
             public void OnMyPageSelected(int arg0) {
@@ -66,40 +76,47 @@ public class HomeBannerAdapter extends RecyclerView.Adapter<HomeBannerAdapter.Vi
         } else {
             bannerInfos = bannerBeans;
         }
-        viewholder.home_viewpager.setAdapter(new BannerAdapter(context, viewholder.rdBtn, bannerInfos));
-        viewholder. home_viewpager.setOffscreenPageLimit(3);
+
+        viewholder.home_viewpager.setAdapter(new HomeViewPagerAdapter(context, viewholder.rdBtn,
+                bannerInfos));
+        viewholder.home_viewpager.setOffscreenPageLimit(3);
         viewholder.home_viewpager.setCurrentItem(1, false);
 
+
+        if (handler != null) {
+            return;
+        }
+
         //设置循环播放
-        final Handler handler = new Handler() {
+        handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                viewholder.home_viewpager.setCurrentItem(1 + viewholder.home_viewpager.getCurrentItem(), true);
+                viewholder.home_viewpager.setCurrentItem(1 + viewholder.home_viewpager
+                        .getCurrentItem(), true);
             }
         };
-        Timer timer = new Timer();
-        TimerTask timerTask = new TimerTask() {
+        timer = new Timer();
+        timerTask = new TimerTask() {
             @Override
             public void run() {
                 handler.sendEmptyMessage(0);
             }
         };
         timer.schedule(timerTask, 0, 4000);
-
-
     }
+
     @Override
     public int getItemCount() {
+
         return 1;
     }
 
-    class Viewholder extends RecyclerView.ViewHolder {
-         MyViewPager home_viewpager;
-         RadioButton[] rdBtn = new RadioButton[4];
+    public class Viewholder extends RecyclerView.ViewHolder {
+        MyViewPager home_viewpager;
+        RadioButton[] rdBtn = new RadioButton[4];
 
         public Viewholder(View itemView) {
-
             super(itemView);
             home_viewpager = ((MyViewPager) itemView.findViewById(R.id.home_viewpager));
             rdBtn[0] = ((RadioButton) itemView.findViewById(R.id.home_rdbtn1));

@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/4/18.
  */
-public class BannerAdapter extends PagerAdapter {
+public class HomeViewPagerAdapter extends PagerAdapter {
     private ImageView[] imageViews;
     Context context;
     RadioButton[] rdBtn;
@@ -27,7 +27,7 @@ public class BannerAdapter extends PagerAdapter {
     DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).showImageOnLoading(R.mipmap.solid_banner)
             .showImageOnFail(R.mipmap.solid_banner).build();
 
-    public BannerAdapter(Context context, RadioButton[] rdBtn, List<HomeBannerInfo> imgUrl) {
+    public HomeViewPagerAdapter(Context context, RadioButton[] rdBtn, List<HomeBannerInfo> imgUrl) {
         this.context = context;
         this.rdBtn = rdBtn;
         this.imgUrls .addAll(imgUrl);

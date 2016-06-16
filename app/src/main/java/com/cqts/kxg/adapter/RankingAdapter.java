@@ -20,6 +20,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.ArrayList;
 
 /**
+ * 牛人排行
  * Created by Administrator on 2016/6/12.
  */
 public class RankingAdapter extends BaseAdapter {

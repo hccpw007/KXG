@@ -1,44 +1,36 @@
 package com.cqts.kxg.adapter;
 
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * Created by Administrator on 2016/6/15.
- */
 public class HomeAdapter extends RecyclerView.Adapter {
     public static final int bannerType = 1;
     public static final int classifyType = 2;
     public static final int tableType = 3;
     public static final int listType = 4;
 
-    View item_homebanner;
-    View item_hometable;
-    ArticleListAdapter articleListAdapter;
+    ArticleAdapter articleListAdapter;
     ArticleClassifyAdapter homeArticleClassifyAdapter;
+    HomeBannerAdapter homeBannerAdapter;
+    HomeTableAdapter homeTableAdapter;
 
-
-    public HomeAdapter(View item_homebanner, View item_hometable, ArticleListAdapter
-            articleListAdapter, ArticleClassifyAdapter homeArticleClassifyAdapter) {
-        this.articleListAdapter = articleListAdapter;
+    public HomeAdapter(HomeBannerAdapter homeBannerAdapter, HomeTableAdapter homeTableAdapter,
+                       ArticleClassifyAdapter homeArticleClassifyAdapter, ArticleAdapter
+                               articleListAdapter) {
+        this.homeBannerAdapter = homeBannerAdapter;
+        this.homeTableAdapter = homeTableAdapter;
         this.homeArticleClassifyAdapter = homeArticleClassifyAdapter;
-        this.item_homebanner = item_homebanner;
-        this.item_hometable = item_hometable;
-    }
-
-    class Viewholder extends RecyclerView.ViewHolder {
-        public Viewholder(View itemView) {
-            super(itemView);
-        }
+        this.articleListAdapter = articleListAdapter;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        if (viewType == bannerType) return new Viewholder(item_homebanner);
+        if (viewType == bannerType)
+            return homeBannerAdapter.onCreateViewHolder(viewGroup, viewType);
         if (viewType == classifyType)
             return homeArticleClassifyAdapter.onCreateViewHolder(viewGroup, viewType);
-        if (viewType == tableType) return new Viewholder(item_hometable);
+        if (viewType == tableType)
+            return homeTableAdapter.onCreateViewHolder(viewGroup, viewType);
         if (viewType == listType)
             return articleListAdapter.onCreateViewHolder(viewGroup, viewType);
         return null;
@@ -46,10 +38,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        articleListAdapter.notifyDataSetChanged();
-        homeArticleClassifyAdapter.notifyDataSetChanged();
-
-        return  articleListAdapter.getItemCount() + 12;
+        return articleListAdapter.getItemCount() + 12;
     }
 
     @Override
@@ -63,16 +52,20 @@ public class HomeAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         switch (getItemViewType(position)) {
-
+            case tableType:
+                homeTableAdapter.onBindViewHolder((HomeTableAdapter.ViewHolder) viewHolder,
+                        position);
+                break;
+            case bannerType:
+                homeBannerAdapter.onBindViewHolder((HomeBannerAdapter.Viewholder) viewHolder,
+                        position);
+                break;
             case classifyType:
-                if (homeArticleClassifyAdapter.getItemCount() == 0) return;
                 homeArticleClassifyAdapter.onBindViewHolder((ArticleClassifyAdapter
                         .classifyViewHolder) viewHolder, position - 1);
                 break;
-
             case listType:
-                if (articleListAdapter.getItemCount() == 0)return;
-                articleListAdapter.onBindViewHolder((ArticleListAdapter.MyViewHolder) viewHolder,
+                articleListAdapter.onBindViewHolder((ArticleAdapter.MyViewHolder) viewHolder,
                         position - 12);
                 break;
         }
