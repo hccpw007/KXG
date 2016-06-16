@@ -41,12 +41,10 @@ public class AutoTextView extends TextSwitcher implements
 
     public AutoTextView(Context context) {
         this(context, null);
-        // TODO Auto-generated constructor stub
     }
 
     public AutoTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        // TODO Auto-generated constructor stub
 //        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.auto3d);
         //mHeight = a.getDimension(R.styleable.auto3d_textSize, 36);
         mHeight = 20;
@@ -56,7 +54,6 @@ public class AutoTextView extends TextSwitcher implements
     }
 
     private void init() {
-        // TODO Auto-generated method stub
         setFactory(this);
         mInUp = createAnim(-90, 0, true, true);
         mOutUp = createAnim(0, 90, false, true);
@@ -82,7 +79,6 @@ public class AutoTextView extends TextSwitcher implements
     //这里返回的TextView，就是我们看到的View
     @Override
     public View makeView() {
-        // TODO Auto-generated method stub
         TextView t = new TextView(mContext);
         t.setGravity(Gravity.CENTER_VERTICAL);
         t.setTextSize(15);

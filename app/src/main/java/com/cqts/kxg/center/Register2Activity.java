@@ -79,7 +79,7 @@ public class Register2Activity extends MyActivity implements View.OnClickListene
         }
 
         if (inviteCodeStr.length()>0&&inviteCodeStr.length()<7){
-            // TODO: 2016/5/26
+            // // TODO: 2016/6/16 邀请码到底是几位
             showToast("请输入完整的邀请码");
             return;
         }

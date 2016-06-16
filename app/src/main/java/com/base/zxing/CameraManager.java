@@ -146,7 +146,6 @@ public final class CameraManager {
 			}
 			configManager.setDesiredCameraParameters(camera);
 
-			// FIXME
 			// SharedPreferences prefs =
 			// PreferenceManager.getDefaultSharedPreferences(context);
 			// �Ƿ�ʹ��ǰ��
