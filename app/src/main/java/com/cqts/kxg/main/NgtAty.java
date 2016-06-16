@@ -2,7 +2,6 @@ package com.cqts.kxg.main;
 
 import java.util.ArrayList;
 
-import android.content.ContentResolver;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -18,14 +17,11 @@ import com.base.BaseFragment;
 import com.base.BaseValue;
 import com.base.views.MyViewPager;
 import com.base.views.MyViewPager.OnMyPageChangeListener;
-import com.base.zxing.FinishListener;
 import com.cqts.kxg.R;
 import com.cqts.kxg.center.CenterFragment;
-import com.cqts.kxg.center.LoginedFragment;
 import com.cqts.kxg.classify.ClassifyFragment;
-import com.cqts.kxg.home.HomeFragment;
 import com.cqts.kxg.hot.HotFragment;
-import com.cqts.kxg.nine.NewHomeFragment;
+import com.cqts.kxg.home.HomeFragment;
 import com.cqts.kxg.nine.NineFragment;
 
 /**
@@ -82,8 +78,7 @@ public class NgtAty extends FragmentActivity implements OnMyPageChangeListener,
     }
 
     private void InitFragment() {
-//        list.add(new HomeFragment());
-        list.add(new NewHomeFragment());
+        list.add(new HomeFragment());
         list.add(new NineFragment());
         list.add(new ClassifyFragment());
         list.add(new HotFragment());

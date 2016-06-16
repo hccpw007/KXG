@@ -4,7 +4,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <com.base.refreshlayout.RefreshLayout
+    <com.base.views.RefreshLayout
         android:id="@+id/shop_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,5 +18,5 @@
             android:layout_height="match_parent"
             android:background="@color/mybg">
         </android.support.v7.widget.RecyclerView>
-    </com.base.refreshlayout.RefreshLayout>
+    </com.base.views.RefreshLayout>
 </LinearLayout>

@@ -12,7 +12,7 @@ import android.widget.ListView;
 
 import com.base.BaseFragment;
 import com.base.BaseValue;
-import com.base.views.MyGridDecoration;
+import com.base.utils.MyGridDecoration;
 import com.cqts.kxg.R;
 import com.cqts.kxg.adapter.ClassifyListAdapter;
 import com.cqts.kxg.adapter.ClassifyRVAdapter;

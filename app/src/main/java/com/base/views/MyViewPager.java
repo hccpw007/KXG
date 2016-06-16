@@ -11,6 +11,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.base.BaseFragment;
+import com.base.utils.MyFragmentPagerAdapter;
 
 public class MyViewPager extends ViewPager {
 	private boolean isCanScroll = true;

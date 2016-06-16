@@ -1,4 +1,4 @@
-package com.base.views;
+package com.base.utils;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -18,8 +18,6 @@ public class MyGridDecoration extends RecyclerView.ItemDecoration {
     private int hSize;
     private boolean isInScroll = false;
     private boolean isFrame = false;
-    int viewId = 0;
-    float scale = 1.0f;
     int itemSize;
 
     public MyGridDecoration(int hSize, int vSize, int color, boolean isInScroll) {
@@ -38,15 +36,6 @@ public class MyGridDecoration extends RecyclerView.ItemDecoration {
     public void setFrame(boolean isFrame) {
         this.isFrame = isFrame;
     }
-
-    /**
-     * 图片的id和比例 float 大于1表示高>宽  小于1反之
-     *
-     */
-//    public void setImageView(int viewId, float scale) {
-//        this.viewId = viewId;
-//        this.scale = scale;
-//    }
 
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
@@ -99,25 +88,6 @@ public class MyGridDecoration extends RecyclerView.ItemDecoration {
         super.getItemOffsets(outRect, view, parent, state);
         RecyclerView.Adapter adapter = parent.getAdapter(); //获得RecyclerView的Adapter
         int itemSize = adapter.getItemCount(); //总共有多少个item
-
-
-        if (viewId != 0) {
-            View viewById = view.findViewById(viewId);
-            ViewGroup.LayoutParams layoutParams = viewById.getLayoutParams();
-            layoutParams.height = (int) (parent.getChildAt(0).getMeasuredWidth() * scale);
-            viewById.setLayoutParams(layoutParams);
-
-            if (itemSize == 1) {
-                layoutParams.width = 155;
-                layoutParams.height = 155;
-                viewById.setLayoutParams(layoutParams);
-            }
-            if (parent.getChildPosition(view) == 1) {
-                View viewById1 = parent.getChildAt(0).findViewById(viewId);
-                viewById1.setLayoutParams(layoutParams);
-            }
-        }
-
         int childPosition = parent.getChildPosition(view); //当前View的Position
         GridLayoutManager layoutManager = (GridLayoutManager) parent.getLayoutManager();
         int spanCount = layoutManager.getSpanCount();

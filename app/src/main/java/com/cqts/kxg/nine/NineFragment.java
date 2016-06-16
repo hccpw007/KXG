@@ -13,8 +13,9 @@ import android.widget.LinearLayout;
 
 import com.base.BaseFragment;
 import com.base.BaseValue;
-import com.base.refreshlayout.RefreshLayout;
-import com.base.views.MyGridDecoration;
+import com.base.views.RefreshLayout;
+import com.base.utils.MyGridDecoration;
+import com.base.utils.GridDecoration;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.NineInfo;
 import com.cqts.kxg.bean.GoodsInfo;
@@ -77,10 +78,9 @@ public class NineFragment extends BaseFragment {
         nine_rv.setOverScrollMode(View.OVER_SCROLL_NEVER);
         manager = new GridLayoutManager(getActivity(), 2);
         nine_rv.setLayoutManager(manager);
-        MyGridDecoration myGridDecoration = new MyGridDecoration(BaseValue.dp2px(8), BaseValue
-                .dp2px(8), getResources().getColor(R.color.mybg), false);
-//        myGridDecoration.setImageView(R.id.item_nine_img, 1);
-        nine_rv.addItemDecoration(myGridDecoration);
+        GridDecoration newGridDecoration = new GridDecoration(0, BaseValue.dp2px(8),
+                getResources().getColor(R.color.mybg),false);
+        nine_rv.addItemDecoration(newGridDecoration);
         adapter = new GoodsAdapter(getActivity(), goods_list);
         nine_rv.setAdapter(adapter);
         nine_refresh.setRC(nine_rv, new RefreshLayout.TopOrBottom() {

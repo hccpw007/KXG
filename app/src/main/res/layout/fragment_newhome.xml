@@ -32,7 +32,7 @@
             android:src="@mipmap/home_search"/>
     </RelativeLayout>
 
-    <com.base.refreshlayout.RefreshLayout
+    <com.base.views.RefreshLayout
         android:id="@+id/refreshing"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -42,5 +42,5 @@
             android:layout_height="match_parent"
             android:background="@color/white"
             android:scrollbars="none"/>
-    </com.base.refreshlayout.RefreshLayout>
+    </com.base.views.RefreshLayout>
 </LinearLayout>

@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +15,7 @@ import android.widget.TextView;
 import com.base.BaseValue;
 import com.base.http.HttpForVolley;
 import com.base.views.AutoTextView;
-import com.base.views.MyGridDecoration;
+import com.base.utils.MyGridDecoration;
 import com.base.views.MyHeadImageView;
 import com.cqts.kxg.R;
 import com.cqts.kxg.adapter.GoodsAdapter;
@@ -25,7 +23,6 @@ import com.cqts.kxg.bean.EarnInfo;
 import com.cqts.kxg.bean.GoodsInfo;
 import com.cqts.kxg.main.MyFragment;
 import com.cqts.kxg.utils.MyHttp;
-import com.cqts.kxg.views.SharePop;
 
 import org.json.JSONObject;
 

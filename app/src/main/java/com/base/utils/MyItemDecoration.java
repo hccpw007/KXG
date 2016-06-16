@@ -1,4 +1,4 @@
-package com.base.views;
+package com.base.utils;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;

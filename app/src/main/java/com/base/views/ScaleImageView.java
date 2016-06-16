@@ -44,10 +44,6 @@ public class ScaleImageView extends ImageView {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-//        if (getMeasuredHeight()!= getMeasuredWidth()*myScale){
-//            ViewGroup.LayoutParams layoutParams = getLayoutParams();
-//            layoutParams.height = (int) (getMeasuredWidth()*myScale);
-//        }
     }
 
     //获得参数

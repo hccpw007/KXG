@@ -1,4 +1,4 @@
-package com.cqts.kxg.nine;
+package com.cqts.kxg.adapter;
 
 import android.content.Context;
 import android.content.Intent;

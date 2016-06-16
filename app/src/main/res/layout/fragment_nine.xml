@@ -15,7 +15,7 @@
         android:gravity="center"
         android:text="9.9元包邮"
         android:textSize="22sp"/>
-<com.base.refreshlayout.RefreshLayout
+<com.base.views.RefreshLayout
     android:id="@+id/nine_refresh"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -34,5 +34,5 @@
         android:layout_height="match_parent"
         android:id="@+id/nine_rv">
     </android.support.v7.widget.RecyclerView>
-</com.base.refreshlayout.RefreshLayout>
+</com.base.views.RefreshLayout>
 </LinearLayout>

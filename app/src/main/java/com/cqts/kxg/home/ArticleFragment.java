@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.base.BaseValue;
-import com.base.refreshlayout.RefreshLayout;
-import com.base.views.MyGridDecoration;
+import com.base.views.RefreshLayout;
+import com.base.utils.MyGridDecoration;
 import com.cqts.kxg.R;
 import com.cqts.kxg.adapter.ArticleListAdapter;
 import com.cqts.kxg.bean.ArticleInfo;
