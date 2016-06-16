@@ -16,6 +16,7 @@ import com.cqts.kxg.bean.ArticleInfo;
 import com.cqts.kxg.main.WebActivity;
 import com.cqts.kxg.views.FavoriteAnimation;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageSize;
 
 import java.util.List;
 

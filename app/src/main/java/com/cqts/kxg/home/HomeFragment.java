@@ -17,8 +17,10 @@ import com.base.views.RefreshLayout;
 import com.base.views.MyViewPager;
 import com.base.utils.GridDecoration;
 import com.cqts.kxg.R;
+import com.cqts.kxg.adapter.ArticleListAdapter;
 import com.cqts.kxg.adapter.BannerAdapter;
 import com.cqts.kxg.adapter.HomeAdapter;
+import com.cqts.kxg.adapter.ArticleClassifyAdapter;
 import com.cqts.kxg.bean.ArticleInfo;
 import com.cqts.kxg.bean.HomeBannerInfo;
 import com.cqts.kxg.bean.HomeSceneInfo;
@@ -40,7 +42,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     private RadioButton[] rdBtn = new RadioButton[4];
     private RefreshLayout home_refresh;
 
-    List<HomeBannerInfo> bannerInfos;
+    List<HomeBannerInfo> bannerInfos = new ArrayList<>();
     ArrayList<HomeSceneInfo> sceneInfos = new ArrayList<>();
     ArrayList<ArticleInfo> articleInfos = new ArrayList<>();
 
@@ -104,7 +106,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         });
         GridDecoration newGridDecoration = new GridDecoration(12, BaseValue.dp2px(6),
                 getResources().getColor(R.color.mybg),true);
-        adapter = new HomeAdapter(item_homebanner, item_hometable, sceneInfos, articleInfos);
+        ArticleListAdapter articleListAdapter = new ArticleListAdapter(getActivity(),articleInfos);
+        ArticleClassifyAdapter homeArticleClassifyAdapter = new ArticleClassifyAdapter(sceneInfos);
+        adapter = new HomeAdapter(item_homebanner, item_hometable,articleListAdapter,homeArticleClassifyAdapter);
         recyclerview.addItemDecoration(newGridDecoration);
         recyclerview.setLayoutManager(manager);
         recyclerview.setAdapter(adapter);
@@ -161,7 +165,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
         switch (which) {
             case HomeAdapter.bannerType:
-                InitViewPage(bean);
+                bannerInfos.addAll((List<HomeBannerInfo>) bean);
+//                InitViewPage(bean);
                 break;
             case HomeAdapter.tableType:
                 InitTable((ArrayList<HomeTableInfo>) bean);
@@ -172,6 +177,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                 break;
             case HomeAdapter.listType:
                 articleInfos.addAll((ArrayList<ArticleInfo>) bean);
+                adapter.notifyDataSetChanged();
                 break;
             default:
                 break;
@@ -263,9 +269,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
     @Override
     public void onRefresh() {
-//        pageNum = 1;
-//        sceneInfos.clear();
-//        articleInfos.clear();
+        pageNum = 1;
+        sceneInfos.clear();
+        articleInfos.clear();
         getData();
     }
 }

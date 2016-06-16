@@ -50,7 +50,7 @@ public class ArticleFragment extends MyFragment implements RefreshLayout.OnRefre
     }
 
     /**
-     * 来自搜索<p>
+     * 来自搜索传keyword<p>
      * 来自首页的分类文章查询传 cat_id
      */
     public ArticleFragment(Where where, String str) {
