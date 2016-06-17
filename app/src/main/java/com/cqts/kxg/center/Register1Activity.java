@@ -69,6 +69,7 @@ public class Register1Activity extends MyActivity implements View.OnClickListene
                 next();
                 break;
             case R.id.register1_login_tv: //已有帐号登录
+                finish();
                 break;
             default:
                 break;
@@ -106,6 +107,7 @@ public class Register1Activity extends MyActivity implements View.OnClickListene
                 intent.putExtra("pswdStr", pswdStr);
                 intent.putExtra("codeStr", codeStr);
                 startActivity(intent);
+                finish();
             }
         });
     }

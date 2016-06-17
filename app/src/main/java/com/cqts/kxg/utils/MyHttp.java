@@ -1,6 +1,10 @@
 package com.cqts.kxg.utils;
 
 
+import android.content.Context;
+import android.content.Intent;
+import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.base.BaseValue;
 import com.base.http.HttpForVolley;
@@ -18,6 +22,7 @@ import com.cqts.kxg.bean.SigninInfo;
 import com.cqts.kxg.bean.UserInfo;
 import com.cqts.kxg.bean.ClassifyListInfo;
 import com.cqts.kxg.bean.NineInfo;
+import com.cqts.kxg.center.LoginActivity;
 import com.cqts.kxg.main.MyApplication;
 import com.google.gson.reflect.TypeToken;
 
@@ -48,18 +53,27 @@ public class MyHttp {
     /**
      * 请求网络,并把结果返回成相应的bean
      */
-    private static void toBean(int method, HttpForVolley http, Integer which, HashMap<String,
+    private static void toBean(int method, final HttpForVolley http, Integer which, HashMap<String,
             String> httpMap
             , String url, final MyHttpResult myHttpResult, final Type bean) {
         http.goTo(method, which, httpMap, url, new HttpForVolley.HttpTodo() {
             @Override
             public void httpTodo(Integer which, JSONObject response) {
+                int code = response.optInt("code", 1);
+
+                //登录失效
+                if (code == 2){
+                    Context context = http.getContext();
+                    Toast.makeText(context,"登录失效,请重新登录!",Toast.LENGTH_SHORT).show();
+                    context.startActivity(new Intent(context, LoginActivity.class));
+                    return;
+                }
+
                 Object data = null;
                 if (null != bean) {
                     data = BaseValue.gson.fromJson(response.optString("data"), bean);
                 }
-                myHttpResult.httpResult(which, response.optInt("code", 1), response.optString
-                        ("msg", "发生错误"), data);
+                myHttpResult.httpResult(which, code,response.optString("msg", "发生错误"), data);
             }
         });
     }
@@ -215,7 +229,7 @@ public class MyHttp {
     public static void password(HttpForVolley http, Integer which, String captcha, String
             imgcaptcha, String mobile_phone, String password,
                                 final MyHttpResult myHttpResult) {
-        String httpUrl = url + "user/password";
+        String httpUrl = url + "user/forgot";
         httpMap.clear();
         httpMap.put("captcha", captcha);
         httpMap.put("imgcaptcha", imgcaptcha);
@@ -256,6 +270,8 @@ public class MyHttp {
                                    final HttpForVolley.HttpTodo httpTodo) {
         httpMap.clear();
         String httpUrl = url + "user/upload_avatar";
+//        String httpUrl ="http://caiji.kxg99.com/test.php";
+        httpMap.put("token",MyApplication.token);
         http.postBase64(Request.Method.POST, null, httpMap, path, httpUrl, httpTodo);
     }
 

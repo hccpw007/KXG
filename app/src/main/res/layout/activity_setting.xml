@@ -114,9 +114,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:text="清楚缓存"
+                android:text="清除缓存"
                 android:textSize="17sp"/>
-
+            <TextView
+                android:id="@+id/cache_tv"
+                android:textColor="@color/mygray"
+                style="@style/text_16sp_black"
+                android:text="0 M"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -1,5 +1,6 @@
 package com.cqts.kxg.center;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -8,9 +9,13 @@ import android.widget.TextView;
 
 import com.base.views.MyEditText;
 import com.cqts.kxg.R;
+import com.cqts.kxg.bean.SigninInfo;
+import com.cqts.kxg.bean.UserInfo;
 import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.main.MyApplication;
+import com.cqts.kxg.main.NgtAty;
 import com.cqts.kxg.utils.MyHttp;
+import com.cqts.kxg.utils.SPutils;
 
 public class Pswd2Activity extends MyActivity implements View.OnClickListener {
     private TextView pswd2_phone_tv;
@@ -91,7 +96,19 @@ public class Pswd2Activity extends MyActivity implements View.OnClickListener {
                     showToast(msg);
                     return;
                 }
-
+                if (which == Pswd1Activity.QIUCKLOGIN){
+                    SigninInfo signinInfo = (SigninInfo) bean;
+                    MyApplication.token = signinInfo.getToken();
+                    SPutils.setToken(MyApplication.token);
+                    getUserInfoData();
+                }else {
+                    showToast("修改密码成功,请登录");
+                    MyApplication.userInfo = null;
+                    MyApplication.token = "";
+                    Intent intent = new Intent(Pswd2Activity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         };
 
@@ -99,12 +116,12 @@ public class Pswd2Activity extends MyActivity implements View.OnClickListener {
         if (act == Pswd1Activity.QIUCKLOGIN) {
            MyHttp.quickSignin(http,act,smsCodeStr,imgcaptcha,phoneStr,pswdStr,myHttpResult);
         }
-        if (act == Pswd1Activity.FINDPSWD) {
+        if (act == Pswd1Activity.FINDPSWD||act == Pswd1Activity.CHANGEPSWD) {
             if (pswdStr.length()<6){
                 showToast("请输入至少6位登录密码");
                 return;
             }
-           MyHttp.password(http,act,smsCodeStr,imgcaptcha,phoneStr,pswdStr,myHttpResult);
+           MyHttp.password(http,3,smsCodeStr,imgcaptcha,phoneStr,pswdStr,myHttpResult);
         }
     }
 
@@ -113,7 +130,7 @@ public class Pswd2Activity extends MyActivity implements View.OnClickListener {
      */
     private void sendAgain() {
         MyApplication.downTimer.going();
-       MyHttp.sms(http, null, phoneStr, imgcaptcha, act, null, new MyHttp.MyHttpResult() {
+       MyHttp.sms(http, null, phoneStr, imgcaptcha, act==Pswd1Activity.CHANGEPSWD?Pswd1Activity.FINDPSWD:act, null, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
                 if (code != 0) {
@@ -138,5 +155,29 @@ public class Pswd2Activity extends MyActivity implements View.OnClickListener {
             setMyTitle("重置登录密码");
             pswd2_login_btn.setText("找回密码并登录");
         }
+
+        if (act == Pswd1Activity.CHANGEPSWD){
+            setMyTitle("重置登录密码");
+            pswd2_login_btn.setText("修改密码并登录");
+        }
     }
+
+    /**
+     * 获取用户信息
+     */
+    private void getUserInfoData() {
+        MyHttp.getUserInfo(http, null,new MyHttp.MyHttpResult() {
+            @Override
+            public void httpResult(Integer which, int code, String msg, Object bean) {
+                if (code!=0){
+                    showToast(msg);
+                    return;
+                }
+                MyApplication.userInfo = (UserInfo) bean;
+                Intent intent = new Intent(Pswd2Activity.this, NgtAty.class);
+                startActivity(intent);
+            }
+        });
+    }
+
 }

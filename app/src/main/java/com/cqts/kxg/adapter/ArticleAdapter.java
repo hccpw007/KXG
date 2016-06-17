@@ -119,6 +119,12 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
                         int is_love = response.optJSONObject("data").optInt("is_love");
                         myViewHolder.itemView.setTag(is_love);
 
+                        if (is_love == 0){ //未收藏
+                            myViewHolder.item_collect_img.setImageResource(R.mipmap.home_taoxin);
+                        }else {//已收藏
+                            myViewHolder.item_collect_img.setImageResource(R.mipmap.home_taoxin_hover);
+                        }
+
                         MyHttp.articleLove(http, 2, articleInfos.get(i).article_id, is_love,
                                 myHttpResult);
                     }

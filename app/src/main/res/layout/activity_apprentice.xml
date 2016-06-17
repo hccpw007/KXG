@@ -250,7 +250,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="最新未完成新手任务的徒弟"
+                android:text="最新完成新手任务的徒弟"
                 android:textSize="17sp"/>
         </LinearLayout>
 

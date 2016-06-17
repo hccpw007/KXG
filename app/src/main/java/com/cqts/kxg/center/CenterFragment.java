@@ -23,6 +23,7 @@ import com.cqts.kxg.bean.EarnInfo;
 import com.cqts.kxg.bean.GoodsInfo;
 import com.cqts.kxg.main.MyFragment;
 import com.cqts.kxg.utils.MyHttp;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json.JSONObject;
 
@@ -100,6 +101,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
         table10.setOnClickListener(this);
         table11.setOnClickListener(this);
         table12.setOnClickListener(this);
+
         scrollview.setOverScrollMode(View.OVER_SCROLL_NEVER);
     }
 
@@ -193,6 +195,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
         history_tv.setText("0.00");
         prentice_tv.setText("0.00");
         prenticemoney_tv.setText("0.00");
+        head_img.setImageResource(R.mipmap.center_head);
     }
 
     private void showLogined() {
@@ -200,7 +203,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
         login_tv.setVisibility(View.GONE);
         money_tv.setText(getUserInfo().app_money);
         name_tv.setText(getUserInfo().user_name);
-
+        ImageLoader.getInstance().displayImage(getUserInfo().headimg,head_img,BaseValue.getOptions(R.mipmap.center_head));
         MyHttp.userEarning(http, null, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {

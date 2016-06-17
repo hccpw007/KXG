@@ -18,9 +18,11 @@ import com.cqts.kxg.utils.MyHttp;
  * 2、登陆验证码
  * 3、找回密码验证码
  */
-public class Pswd1Activity extends MyActivity implements View.OnClickListener, MyEditText.TextChanged {
+public class Pswd1Activity extends MyActivity implements View.OnClickListener, MyEditText
+        .TextChanged {
     public static int QIUCKLOGIN = 2;
     public static int FINDPSWD = 3;
+    public static int CHANGEPSWD = 1;
     private int act;
 
     private MyEditText pswd1_phone_et;
@@ -39,11 +41,6 @@ public class Pswd1Activity extends MyActivity implements View.OnClickListener, M
     }
 
     private void InitView() {
-        if (act == QIUCKLOGIN)
-            setMyTitle("手机号快捷登录");
-        if (act == FINDPSWD)
-            setMyTitle("找回密码");
-
         pswd1_phone_et = (MyEditText) findViewById(R.id.pswd1_phone_et);
         pswd1_code_et = (MyEditText) findViewById(R.id.pswd1_code_et);
         pswd1_code_img = (ImageView) findViewById(R.id.pswd1_code_img);
@@ -53,6 +50,20 @@ public class Pswd1Activity extends MyActivity implements View.OnClickListener, M
         pswd1_phone_et.addMyTextChangedListener(this);
         pswd1_change_tv.setOnClickListener(this);
         pswd1_next_btn.setOnClickListener(this);
+
+
+        if (act == QIUCKLOGIN)
+            setMyTitle("手机号快捷登录");
+        if (act == FINDPSWD)
+            setMyTitle("找回密码");
+
+        if (act == CHANGEPSWD) {
+            setMyTitle("修改登录密码");
+            pswd1_phone_et.setText(getUserInfo().mobile_phone);
+            pswd1_phone_et.setEnabled(false);
+        }
+
+
     }
 
     @Override
@@ -85,18 +96,20 @@ public class Pswd1Activity extends MyActivity implements View.OnClickListener, M
             showToast("请输入4位验证码");
             return;
         }
-       MyHttp.sms(http, null, phoneStr, codeStr, act ,null,new MyHttp.MyHttpResult() {
+        MyHttp.sms(http, null, phoneStr, codeStr, act == CHANGEPSWD ? FINDPSWD : act, null, new
+                MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
                 if (code != 0) {
                     showToast(msg);
                     return;
                 }
-                Intent intent = new Intent(Pswd1Activity.this,Pswd2Activity.class);
-                intent.putExtra("act",act);
-                intent.putExtra("imgcaptcha",codeStr);
-                intent.putExtra("phoneStr",phoneStr);
+                Intent intent = new Intent(Pswd1Activity.this, Pswd2Activity.class);
+                intent.putExtra("act", act);
+                intent.putExtra("imgcaptcha", codeStr);
+                intent.putExtra("phoneStr", phoneStr);
                 startActivity(intent);
+                finish();
             }
         });
     }

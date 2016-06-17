@@ -73,21 +73,26 @@ public class Register2Activity extends MyActivity implements View.OnClickListene
         String smsCodeStr = register2_code_et.getText().toString().trim();
         String inviteCodeStr = register2_invite_et.getText().toString().trim();
 
-        if (smsCodeStr.length()<6){
+        if (smsCodeStr.length() < 6) {
             showToast("请输入6位短信验证码");
             return;
         }
 
-        if (inviteCodeStr.length()>0&&inviteCodeStr.length()<7){
+        if (inviteCodeStr.length() > 0 && inviteCodeStr.length() < 6) {
             // // TODO: 2016/6/16 邀请码到底是几位
             showToast("请输入完整的邀请码");
             return;
         }
 
-       MyHttp.signup(http, null, smsCodeStr, codeStr, phoneStr, pswdStr, inviteCodeStr, new MyHttp.MyHttpResult() {
+        MyHttp.signup(http, null, smsCodeStr, codeStr, phoneStr, pswdStr, inviteCodeStr, new
+                MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
                 showToast(msg);
+                if (code != 0) {
+                    return;
+                }
+                finish();
             }
         });
     }
@@ -97,7 +102,7 @@ public class Register2Activity extends MyActivity implements View.OnClickListene
      */
     private void sendAgain() {
         MyApplication.downTimer.going();
-       MyHttp.sms(http, null, phoneStr, codeStr, 1,null, new MyHttp.MyHttpResult() {
+        MyHttp.sms(http, null, phoneStr, codeStr, 1, null, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
                 if (code != 0) {

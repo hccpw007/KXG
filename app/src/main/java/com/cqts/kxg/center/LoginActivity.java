@@ -12,6 +12,7 @@ import com.cqts.kxg.bean.SigninInfo;
 import com.cqts.kxg.bean.UserInfo;
 import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.main.MyApplication;
+import com.cqts.kxg.main.NgtAty;
 import com.cqts.kxg.utils.MyHttp;
 import com.cqts.kxg.utils.SPutils;
 
@@ -117,9 +118,9 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
                     return;
                 }
                 MyApplication.userInfo = (UserInfo) bean;
+                startActivity(new Intent(LoginActivity.this,NgtAty.class));
                 finish();
             }
         });
     }
-
 }

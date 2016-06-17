@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.base.BaseFragment;
 import com.base.BaseValue;
 import com.base.views.RefreshLayout;
 import com.base.utils.GridDecoration;
@@ -49,7 +48,7 @@ public class HomeFragment extends MyFragment implements View.OnClickListener, Re
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (null == view) {
-            view = inflater.inflate(R.layout.fragment_newhome, null);
+            view = inflater.inflate(R.layout.fragment_home, null);
             initView();
             initRecyclerView();
             getData();

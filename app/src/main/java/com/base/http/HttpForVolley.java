@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
 
@@ -30,11 +31,20 @@ public class HttpForVolley {
     private StringRequest request;
     Activity activity;
     Fragment fragment;
+    Context context;
+
     public HttpForVolley(Activity activity) {
         this.activity = activity;
+        context = activity;
     }
+
     public HttpForVolley(Fragment fragment) {
         this.fragment = fragment;
+        context = fragment.getActivity();
+    }
+
+    public Context getContext() {
+        return context;
     }
 
     /**
@@ -100,12 +110,13 @@ public class HttpForVolley {
                     httpMethod = "GET";
                 if (Method == Request.Method.POST)
                     httpMethod = "POST";
-                if (activity != null){
+                if (activity != null) {
                     Logger.json(new JSONObject(map).put("url", url).put("activity",
                             activity.getClass().getName()).put("Method", httpMethod).toString());
-                }else {
+                } else {
                     Logger.json(new JSONObject(map).put("url", url).put("activity",
-                            fragment.getActivity().getClass().getName()).put("Method", httpMethod).toString());
+                            fragment.getActivity().getClass().getName()).put("Method",
+                            httpMethod).toString());
                 }
             } catch (JSONException e) {
             }
@@ -115,7 +126,7 @@ public class HttpForVolley {
         if (httpMap != null) {
             for (String key : httpMap.keySet()) {
                 try {
-                    if (!key.equals("token")){
+                    if (!key.equals("token")) {
                         httpMap.put(key, URLEncoder.encode(httpMap.get(key), "utf-8"));
                     }
                 } catch (Exception e) {
@@ -177,9 +188,9 @@ public class HttpForVolley {
                 }
             }
         };
-        if (activity != null){
+        if (activity != null) {
             request.setTag(activity);
-        }else {
+        } else {
             request.setTag(fragment);
         }
         BaseValue.mQueue.add(request);

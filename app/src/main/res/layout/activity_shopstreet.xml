@@ -1,54 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
-    android:background="@color/myred"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:clipToPadding="true"
-    android:fitsSystemWindows="true"
-    android:layout_height="match_parent"
-    tools:context="com.cqts.kxg.home.ShopStreetActivity">
-    <include layout="@layout/include_red_title"/>
-    <RadioGroup
-        android:id="@+id/radiogroup"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:orientation="horizontal">
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <RadioButton
-            style="@style/text_14sp_black"
-            android:layout_width="0px"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/bg_radiobutton"
-            android:button="@null"
-            android:checked="true"
-            android:gravity="center"
-            android:text="综合"
-            android:textSize="21sp"
-            android:id="@+id/rediobtn1"/>
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="@color/myline"/>
-        <RadioButton
-            style="@style/text_14sp_black"
-            android:layout_width="0px"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/bg_radiobutton"
-            android:button="@null"
-            android:gravity="center"
-            android:text="热度"
-            android:textSize="21sp"
-            android:checked="false"
-            android:id="@+id/rediobtn2"/>
-    </RadioGroup>
-    <FrameLayout
-        android:background="@color/white"
-        android:id="@+id/framelayout"
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </FrameLayout>
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:background="@color/myred"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        tools:context="com.cqts.kxg.home.ShopStreetActivity">
+
+        <include layout="@layout/include_red_title"/>
+
+        <RadioGroup
+            android:id="@+id/radiogroup"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rediobtn1"
+                style="@style/text_14sp_black"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_radiobutton"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:text="综合"
+                android:textSize="21sp"/>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/myline"/>
+
+            <RadioButton
+                android:id="@+id/rediobtn2"
+                style="@style/text_14sp_black"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_radiobutton"
+                android:button="@null"
+                android:checked="false"
+                android:gravity="center"
+                android:text="热度"
+                android:textSize="21sp"/>
+        </RadioGroup>
+
+        <FrameLayout
+            android:id="@+id/framelayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+        </FrameLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/openshop_img"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="10dp"
+        android:src="@mipmap/openshop"/>
+</merge>

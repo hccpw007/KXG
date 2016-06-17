@@ -5,14 +5,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.base.BaseValue;
+import com.base.http.HttpForVolley;
+import com.base.utils.PhotoPopupWindow;
+import com.base.utils.PhotoUtil;
 import com.base.views.MyHeadImageView;
 import com.cqts.kxg.R;
 import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.main.MyApplication;
 import com.cqts.kxg.utils.MyHttp;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
+import org.json.JSONObject;
 
 public class InformationActivity extends MyActivity implements View.OnClickListener {
     private LinearLayout head_layout;
@@ -25,6 +33,8 @@ public class InformationActivity extends MyActivity implements View.OnClickListe
     private TextView sex_tv;
     private AlertDialog dialog;
 
+    private PhotoUtil photoUtil;
+    private PhotoPopupWindow mPhotoPopupWindow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +59,7 @@ public class InformationActivity extends MyActivity implements View.OnClickListe
         sex_layout.setOnClickListener(this);
 
         name_tv.setText(getUserInfo().user_name);
+        ImageLoader.getInstance().displayImage(getUserInfo().headimg,head_img, BaseValue.getOptions(R.mipmap.center_head));
         setSex();
     }
 
@@ -56,6 +67,9 @@ public class InformationActivity extends MyActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.head_layout://修改头像
+                photoUtil = new PhotoUtil(this, 3, 3);
+                mPhotoPopupWindow = new PhotoPopupWindow(this, photoUtil);
+                mPhotoPopupWindow.showpop(v);
                 break;
             case R.id.name_layout: //用户名
                 showToast("开心购会员名作为登录名不可以修改~");
@@ -141,5 +155,38 @@ public class InformationActivity extends MyActivity implements View.OnClickListe
     protected void onResume() {
         super.onResume();
         setNickName();
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case PhotoUtil.FromWhere.camera:
+            case PhotoUtil.FromWhere.photo:
+                photoUtil.onActivityResult(requestCode, resultCode, data);
+                break;
+            case PhotoUtil.FromWhere.forfex:
+                if (resultCode == RESULT_OK) {
+                    MyHttp.uploadImage(http, null, photoUtil.getForfexPath(), new HttpForVolley
+                            .HttpTodo() {
+                        @Override
+                        public void httpTodo(Integer which, JSONObject response) {
+                            if (response.optInt("code",1)!=0){
+                                showToast("上传图片发生错误!");
+                                return;
+                            }
+                            showToast("修改头像成功!");
+                            String filename = response.optJSONObject("data").optString("filename");
+                            System.out.println(filename+"==");
+                            ImageLoader.getInstance().displayImage(filename, head_img);
+                            getUserInfo().headimg = filename;
+                        }
+                    });
+                }
+                break;
+            default:
+                break;
+        }
     }
 }

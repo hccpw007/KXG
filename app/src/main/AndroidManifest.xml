@@ -45,14 +45,14 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppBaseTheme">
+
         <!-- 微信分享回调 -->
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <activity
             android:name=".main.NgtAty"
             android:label="@string/app_name"
@@ -66,7 +66,8 @@
         </activity>
         <activity
             android:name=".center.LoginActivity"
-            android:theme="@style/AppBaseTheme">
+            android:launchMode="singleTask"
+            android:theme="@style/SwipeBackTheme">
         </activity>
         <activity
             android:name="com.base.zxing.CaptureActivity"
@@ -139,8 +140,13 @@
             android:name=".home.ArticleActivity"
             android:theme="@style/SwipeBackTheme">
         </activity>
-        <activity android:name=".center.ApprenticeActivity"
-                  android:theme="@style/SwipeBackTheme">
+        <activity
+            android:name=".center.ApprenticeActivity"
+            android:theme="@style/SwipeBackTheme">
+        </activity>
+        <activity
+            android:name=".center.SafeActivity"
+            android:theme="@style/SwipeBackTheme">
         </activity>
     </application>
 

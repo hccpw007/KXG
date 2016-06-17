@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.base.utils.DataCleanManager;
 import com.cqts.kxg.R;
 import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.main.MyApplication;
@@ -18,6 +20,7 @@ public class SettingActivity extends MyActivity implements View.OnClickListener 
     private LinearLayout layout4;
     private LinearLayout layout5;
     private Button exit_btn;
+    private TextView cacheTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,7 @@ public class SettingActivity extends MyActivity implements View.OnClickListener 
         layout4 = (LinearLayout) findViewById(R.id.layout4);
         layout5 = (LinearLayout) findViewById(R.id.layout5);
         exit_btn = (Button) findViewById(R.id.exit_btn);
+        cacheTv = (TextView) findViewById(R.id.cache_tv);
 
         layout1.setOnClickListener(this);
         layout2.setOnClickListener(this);
@@ -41,6 +45,13 @@ public class SettingActivity extends MyActivity implements View.OnClickListener 
         layout4.setOnClickListener(this);
         layout5.setOnClickListener(this);
         exit_btn.setOnClickListener(this);
+
+
+        try {
+            cacheTv.setText(DataCleanManager.getTotalCacheSize(this));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -50,8 +61,16 @@ public class SettingActivity extends MyActivity implements View.OnClickListener 
                 startActivity(new Intent(this,InformationActivity.class));
                 break;
             case R.id.layout2: //账户与安全
+                startActivity(new Intent(this,SafeActivity.class));
+                finish();
                 break;
-            case R.id.layout3: //清楚缓存
+            case R.id.layout3: //清除缓存
+                try {
+                    DataCleanManager.clearAllCache(this);
+                    cacheTv.setText(DataCleanManager.getTotalCacheSize(this));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
             case R.id.layout4: //邀请好友使用开心购
                 break;

@@ -48,7 +48,6 @@ public class GridDecoration extends RecyclerView.ItemDecoration {
                 .getSpanSize(position);
         int i = (childPosition) % spanCount;
         float s = spanCount;
-
         float left = 0;
         float right = 0;
         float top = lineSize / 2;

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import android.widget.RadioGroup;
 
+import com.base.utils.ViewMove;
 import com.cqts.kxg.R;
 import com.cqts.kxg.main.MyActivity;
 
@@ -19,6 +20,7 @@ public class ShopStreetActivity extends MyActivity implements RadioGroup.OnCheck
     private RadioGroup radiogroup;
     private ShopFragment shopFragment1;
     private ShopFragment shopFragment2;
+    ImageView openshopImg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,9 +35,13 @@ public class ShopStreetActivity extends MyActivity implements RadioGroup.OnCheck
         search_img = (ImageView) findViewById(R.id.search_img);
         radiogroup = (RadioGroup) findViewById(R.id.radiogroup);
         search_img.setVisibility(View.VISIBLE);
+        openshopImg = (ImageView) findViewById(R.id.openshop_img);
 
         radiogroup.setOnCheckedChangeListener(this);
         search_img.setOnClickListener(this);
+        openshopImg.setOnClickListener(this);
+
+        new ViewMove(openshopImg, 60, 60, this, this);
     }
 
     @Override
@@ -76,6 +82,13 @@ public class ShopStreetActivity extends MyActivity implements RadioGroup.OnCheck
 
     @Override
     public void onClick(View v) {
-        startActivity(new Intent(this,SearchActivity.class));
+        switch (v.getId()) {
+            case R.id.search_img:
+                startActivity(new Intent(this,SearchActivity.class));
+                break;
+            case R.id.openshop_img:
+                // TODO: 2016/6/17  我要开店
+                break;
+        }
     }
 }
