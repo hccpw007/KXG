@@ -126,6 +126,9 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 }
                 break;
             case R.id.table1://收徒赚钱
+                if (needLogin()) {
+                    startActivity(new Intent(getActivity(), ApprenticeActivity.class));
+                }
                 break;
             case R.id.table2://文章赚钱
                 break;

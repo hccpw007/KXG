@@ -1,8 +1,6 @@
 package com.cqts.kxg.utils;
 
 
-import android.text.TextUtils;
-
 import com.android.volley.Request;
 import com.base.BaseValue;
 import com.base.http.HttpForVolley;
@@ -13,6 +11,7 @@ import com.cqts.kxg.bean.HomeBannerInfo;
 import com.cqts.kxg.bean.GoodsInfo;
 import com.cqts.kxg.bean.HomeSceneInfo;
 import com.cqts.kxg.bean.HomeTableInfo;
+import com.cqts.kxg.bean.MyApprenticeInfo;
 import com.cqts.kxg.bean.RankingInfo;
 import com.cqts.kxg.bean.ShopInfo;
 import com.cqts.kxg.bean.SigninInfo;
@@ -320,7 +319,7 @@ public class MyHttp {
         httpMap.put("PageSize", PageSize + "");
         httpMap.put("PageNum", PageNum + "");
         httpMap.put("keyword", keyword);
-            httpMap.put("token", MyApplication.token);
+        httpMap.put("token", MyApplication.token);
         Type type = new TypeToken<List<ArticleInfo>>() {
         }.getType();
         toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type);
@@ -492,11 +491,11 @@ public class MyHttp {
     }
 
     /**
-     * 我的喜欢-文章 <p>
+     * 我的喜欢-店铺 <p>
      * article:文章,good商品,supplier:商品
      */
     public static void loveShop(HttpForVolley http, Integer which, int pageNum, int pageSize,
-                                   MyHttpResult myHttpResult) {
+                                MyHttpResult myHttpResult) {
         String httpUrl = url + "user/collect";
         httpMap.clear();
         httpMap.put("token", MyApplication.token);
@@ -517,20 +516,45 @@ public class MyHttp {
         httpMap.clear();
         httpMap.put("token", MyApplication.token);
         httpMap.put("article_id", article_id);
-        http.goTo(Request.Method.GET,which,httpMap,httpUrl,httpTodo);
+        http.goTo(Request.Method.GET, which, httpMap, httpUrl, httpTodo);
     }
 
     /**
      * 收藏文章<p>
-     *     behavior 0 : 关注 1 : 取关
+     * behavior 0 : 关注 1 : 取关
      */
-    public static void articleLove(HttpForVolley http, Integer which, String article_id,int behavior,
+    public static void articleLove(HttpForVolley http, Integer which, String article_id, int
+            behavior,
                                    MyHttpResult myHttpResult) {
         String httpUrl = url + "article/love";
         httpMap.clear();
         httpMap.put("token", MyApplication.token);
         httpMap.put("article_id", article_id);
-        httpMap.put("behavior", behavior+"");
+        httpMap.put("behavior", behavior + "");
         toBean(Request.Method.POST, http, which, httpMap, httpUrl, myHttpResult, ArticleInfo.class);
+    }
+
+    /**
+     * 最近完成新手任务的徒弟
+     * 这里接口返回一个多层级的 JSON 其中 task 代表最近完成新手任务的徒弟， signup 是最新注册的徒弟。<p>
+     */
+    public static void apprenticeListing(HttpForVolley http, Integer which,
+                                         MyHttpResult myHttpResult) {
+        String httpUrl = url + "user/apprentice/listing";
+        httpMap.clear();
+        httpMap.put("token", MyApplication.token);
+        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, MyApprenticeInfo.class);
+    }
+
+    /**
+     * 修改邀请码<p>
+     */
+    public static void userInvitecode(HttpForVolley http, Integer which, String invite_code,
+                                      MyHttpResult myHttpResult) {
+        String httpUrl = url + "user/invitecode";
+        httpMap.clear();
+        httpMap.put("token", MyApplication.token);
+        httpMap.put("invite_code", invite_code);
+        toBean(Request.Method.POST, http, which, httpMap, httpUrl, myHttpResult, null);
     }
 }
