@@ -1,4 +1,4 @@
-package com.cqts.kxg.main;
+package com.cqts.kxg.home;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +9,9 @@ import android.webkit.WebViewClient;
 import com.base.views.MyWebView;
 import com.cqts.kxg.R;
 import com.cqts.kxg.center.LoginActivity;
+import com.cqts.kxg.main.MyActivity;
 
-public class WebActivity extends MyActivity {
+public class WebGoodsActivity extends MyActivity {
     private String title = "";
     private String url = "";
     private MyWebView webview;
@@ -18,7 +19,7 @@ public class WebActivity extends MyActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_web);
+        setContentView(R.layout.activity_webgoods);
         getData();
         InitView();
     }
@@ -41,7 +42,7 @@ public class WebActivity extends MyActivity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 if (url.contains("$$login")){ //需要登录
-                    startActivity(new Intent(WebActivity.this, LoginActivity.class));
+                    startActivity(new Intent(WebGoodsActivity.this, LoginActivity.class));
                     finish();
                     return true;
                 }
@@ -53,6 +54,4 @@ public class WebActivity extends MyActivity {
         });
         webview.loadUrl(url);
     }
-
-
 }

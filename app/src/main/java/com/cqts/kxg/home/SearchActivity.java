@@ -162,6 +162,7 @@ public class SearchActivity extends MyActivity implements MyTagView.OnTagClickLi
         data = data.replace("]", "");
         data = data.replace("\"", "");
         String[] split = data.split(",");
+        split[0] = "数码";
         search_tag.setMyTag(split);
     }
 }

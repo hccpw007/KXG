@@ -38,8 +38,9 @@ public class ApprenticeActivity extends MyActivity implements View.OnClickListen
     MyApprenticeInfo myApprenticeInfo;
     ArrayList<MyApprenticeInfo.Apprentice> signup = new ArrayList<>();
     ArrayList<MyApprenticeInfo.Apprentice> task = new ArrayList<>();
-    private ApprenticeAdapter adapter1,adapter2;
-    private RecyclerView recyclerview1,recyclerview2;
+    private ApprenticeAdapter adapter1, adapter2;
+    private RecyclerView recyclerview1, recyclerview2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +52,8 @@ public class ApprenticeActivity extends MyActivity implements View.OnClickListen
     }
 
     private void InitRC1() {
-        GridLayoutManager manager = new GridLayoutManager(this,6);
-        MyGridDecoration gridDecoration = new MyGridDecoration(0,0, Color.WHITE,true);
+        GridLayoutManager manager = new GridLayoutManager(this, 6);
+        MyGridDecoration gridDecoration = new MyGridDecoration(0, 0, Color.WHITE, true);
         adapter1 = new ApprenticeAdapter(signup);
         recyclerview1.setLayoutManager(manager);
         recyclerview1.addItemDecoration(gridDecoration);
@@ -60,8 +61,8 @@ public class ApprenticeActivity extends MyActivity implements View.OnClickListen
     }
 
     private void InitRC2() {
-        GridLayoutManager manager = new GridLayoutManager(this,6);
-        MyGridDecoration gridDecoration = new MyGridDecoration(0,0, Color.WHITE,true);
+        GridLayoutManager manager = new GridLayoutManager(this, 6);
+        MyGridDecoration gridDecoration = new MyGridDecoration(0, 0, Color.WHITE, true);
         adapter2 = new ApprenticeAdapter(task);
         recyclerview2.setLayoutManager(manager);
         recyclerview2.addItemDecoration(gridDecoration);
@@ -82,33 +83,35 @@ public class ApprenticeActivity extends MyActivity implements View.OnClickListen
         recyclerview2 = (RecyclerView) findViewById(R.id.recyclerview2);
         empty2Img = (ImageView) findViewById(R.id.empty2_img);
         change_tv.setOnClickListener(this);
-        invitationEt.setText(getUserInfo().invite_code +"");
+        invitationEt.setText(getUserInfo().invite_code + "");
     }
 
     private void getData() {
         MyHttp.apprenticeListing(http, null, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
-                if (code != 0){
+                if (code != 0) {
                     showToast(msg);
                     empty1Img.setVisibility(View.VISIBLE);
                     empty2Img.setVisibility(View.VISIBLE);
                     return;
                 }
                 myApprenticeInfo = (MyApprenticeInfo) bean;
-                if (myApprenticeInfo!=null && myApprenticeInfo.signup!=null&&myApprenticeInfo.signup.size()!=0){
+                if (myApprenticeInfo != null && myApprenticeInfo.signup != null &&
+                        myApprenticeInfo.signup.size() != 0) {
                     signup.addAll(myApprenticeInfo.signup);
                     adapter1.notifyDataSetChanged();
 
-                }else {
+                } else {
                     empty1Img.setVisibility(View.VISIBLE);
                 }
 
-                if (myApprenticeInfo!=null && myApprenticeInfo.task!=null&&myApprenticeInfo.task.size()!=0){
+                if (myApprenticeInfo != null && myApprenticeInfo.task != null && myApprenticeInfo
+                        .task.size() != 0) {
                     task.addAll(myApprenticeInfo.task);
                     adapter2.notifyDataSetChanged();
 
-                }else {
+                } else {
                     empty2Img.setVisibility(View.VISIBLE);
                 }
             }
@@ -134,13 +137,13 @@ public class ApprenticeActivity extends MyActivity implements View.OnClickListen
         if (!enabled) {
             change_tv.setText("确认");
             invitationEt.setEnabled(true);
-            if (!TextUtils.isEmpty(text)){
+            if (!TextUtils.isEmpty(text)) {
                 invitationEt.setSelection(text.length());
             }
         }
 
         if (enabled) {
-            if (text.isEmpty()) {
+            if (text.isEmpty() || text.length() < 6) {
                 showToast("请输入1~6位邀请码");
                 return;
             }

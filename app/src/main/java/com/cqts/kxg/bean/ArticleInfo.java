@@ -1,9 +1,11 @@
 package com.cqts.kxg.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2016/5/28.
  */
-public class ArticleInfo {
+public class ArticleInfo implements Serializable{
     public String love;//  0,
     public String cat_id;//  22,
     public String author;// public String ",

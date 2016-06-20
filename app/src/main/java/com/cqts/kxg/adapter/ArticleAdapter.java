@@ -15,6 +15,7 @@ import com.base.BaseValue;
 import com.base.http.HttpForVolley;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.ArticleInfo;
+import com.cqts.kxg.home.WebArticleActivity;
 import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.main.MyFragment;
 import com.cqts.kxg.main.WebActivity;
@@ -24,6 +25,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -138,14 +140,16 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, WebActivity.class);
+                Intent intent = new Intent(context, WebArticleActivity.class);
                 intent.putExtra("title", articleInfos.get(i).title);
                 intent.putExtra("url", articleInfos.get(i).article_url);
+                intent.putExtra("articleInfo", articleInfos.get(i));
                 context.startActivity(intent);
             }
         });
 
         int is_love = articleInfos.get(i).is_love;
+
         if (is_love == 0){ //未收藏
             myViewHolder.item_collect_img.setImageResource(R.mipmap.home_taoxin);
         }else {//已收藏

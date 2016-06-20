@@ -159,7 +159,21 @@
             android:name=".center.SafeActivity"
             android:theme="@style/SwipeBackTheme">
         </activity>
-        <activity android:name=".main.IndexActivity">
+        <activity
+            android:name=".main.IndexActivity"
+            android:theme="@style/SwipeBackTheme">
+        </activity>
+        <activity
+            android:name=".home.WebArticleActivity"
+            android:theme="@style/SwipeBackTheme">
+        </activity>
+        <activity
+            android:name=".home.WebGoodsActivity"
+            android:theme="@style/SwipeBackTheme">
+        </activity>
+        <activity
+            android:name=".home.WebShopActivity"
+            android:theme="@style/SwipeBackTheme">
         </activity>
     </application>
 
