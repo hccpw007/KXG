@@ -533,6 +533,17 @@ public class MyHttp {
         httpMap.put("article_id", article_id);
         http.goTo(Request.Method.GET, which, httpMap, httpUrl, httpTodo);
     }
+    /**
+     * 查询商品是否喜欢<p>
+     */
+    public static void goodsCollect(HttpForVolley http, Integer which, String goods_id ,
+                                      HttpForVolley.HttpTodo httpTodo) {
+        String httpUrl = url + "goods/collect";
+        httpMap.clear();
+        httpMap.put("token", MyApplication.token);
+        httpMap.put("goods_id", goods_id);
+        http.goTo(Request.Method.GET, which, httpMap, httpUrl, httpTodo);
+    }
 
     /**
      * 收藏文章<p>

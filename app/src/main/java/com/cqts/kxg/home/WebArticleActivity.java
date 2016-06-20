@@ -84,10 +84,10 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
                         Intent intent = new Intent(WebArticleActivity.this, WebGoodsActivity.class);
                         int start = url.indexOf("goods_name=");
                         int end = url.indexOf("$$push_goods");
-
                         String goods_name = url.substring(start + 11, end);
                         intent.putExtra("url", url);
                         intent.putExtra("title",URLDecoder.decode(goods_name, "utf-8"));
+                        intent.putExtra("id",url.substring(url.indexOf("id=")+3,url.indexOf("&goods_name=")));
                         startActivity(intent);
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();

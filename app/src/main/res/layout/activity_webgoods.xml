@@ -24,35 +24,36 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/white"
+        android:background="#FEF5F8"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/collect_layout"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/bg_goodsdetails_love"
             android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:id="@+id/collect_layout">
+            android:orientation="horizontal">
 
             <ImageView
-                android:scaleType="fitCenter"
+                android:id="@+id/collect_img"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="20dp"
-                android:src="@mipmap/home_taoxin"
-                android:id="@+id/collect_img"/>
+                android:scaleType="fitCenter"
+                android:src="@mipmap/home_taoxin"/>
 
             <TextView
+                android:id="@+id/collect_tv"
                 style="@style/text_16sp_black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="20dp"
-                android:text="0"
-                android:textColor="@color/mygray"
-                android:id="@+id/collect_tv"/>
+                android:text="喜欢"
+                android:textColor="@color/mygray"/>
         </LinearLayout>
 
         <View
@@ -60,30 +61,18 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
 
-        <LinearLayout
+
+        <TextView
+            style="@style/text_16sp_black"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="10dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:id="@+id/share_layout">
-
-            <ImageView
-                android:scaleType="fitCenter"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="20dp"
-                android:src="@mipmap/article_share"/>
-
-            <TextView
-                style="@style/text_16sp_black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="20dp"
-                android:text="0"
-                android:textColor="@color/mygray"
-                android:id="@+id/share_tv"/>
-        </LinearLayout>
+            android:layout_height="30dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/bg_goodsdetails_tobuy"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:text="去淘宝购买"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:id="@+id/tobuy_tv"/>
     </LinearLayout>
 </LinearLayout>

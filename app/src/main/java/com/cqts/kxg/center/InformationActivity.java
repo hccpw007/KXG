@@ -178,7 +178,6 @@ public class InformationActivity extends MyActivity implements View.OnClickListe
                             }
                             showToast("修改头像成功!");
                             String filename = response.optJSONObject("data").optString("filename");
-                            System.out.println(filename+"==");
                             ImageLoader.getInstance().displayImage(filename, head_img);
                             getUserInfo().headimg = filename;
                         }
