@@ -49,7 +49,7 @@ public class ApprenticeAdapter extends RecyclerView.Adapter<ApprenticeAdapter
         classifyViewHolder.item_tv.setText(s);
         ImageLoader.getInstance().displayImage(apprentices.get(i).headimg,
                 classifyViewHolder.item_img,
-                BaseValue.getOptions(R.mipmap.home_articleclassify));
+                BaseValue.getOptions(R.mipmap.center_head));
     }
 
     @Override

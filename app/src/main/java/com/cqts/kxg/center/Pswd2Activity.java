@@ -98,6 +98,7 @@ public class Pswd2Activity extends MyActivity implements View.OnClickListener {
                 }
                 if (which == Pswd1Activity.QIUCKLOGIN){
                     SigninInfo signinInfo = (SigninInfo) bean;
+                    MyApplication.signinInfo = signinInfo;
                     MyApplication.token = signinInfo.getToken();
                     SPutils.setToken(MyApplication.token);
                     getUserInfoData();

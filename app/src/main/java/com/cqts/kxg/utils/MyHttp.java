@@ -251,8 +251,7 @@ public class MyHttp {
     }
 
     /**
-     * 获取用户个人资料<br>
-     * 接口用于登陆后获取用户信息， 默认读取缓存中的用户信息（缓存时间5五分钟）<p>
+     * 刷新token <br>
      * token 登陆的时候获取到的 Token
      */
     public static void refreshToken(HttpForVolley http, Integer which, String token,

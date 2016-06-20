@@ -37,7 +37,6 @@
             android:text="帐号"/>
 
         <com.base.views.MyEditText
-            android:text="15215029766"
             android:id="@+id/login_user_et"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

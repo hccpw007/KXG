@@ -27,6 +27,7 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
     private TextView login_regist_tv;
     private TextView lgoin_forget_tv;
     private TextView login_quick_tv;
+    private String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,8 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
         login_regist_tv.setOnClickListener(this);
         lgoin_forget_tv.setOnClickListener(this);
         login_quick_tv.setOnClickListener(this);
+
+        login_user_et.setText(SPutils.getUserName());
     }
 
     @Override
@@ -82,7 +85,7 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
      * 登录
      */
     private void login() {
-        String userName = login_user_et.getText().toString().trim();
+        userName = login_user_et.getText().toString().trim();
         String pswd = login_pswd_et.getText().toString().trim();
 
         if (userName.isEmpty()){
@@ -98,8 +101,10 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
                 SigninInfo signinInfo = (SigninInfo) bean;
+                MyApplication.signinInfo = signinInfo;
                 MyApplication.token = signinInfo.getToken();
                 SPutils.setToken(MyApplication.token);
+                login_user_et.setEnabled(false);
                 getUserInfoData();
             }
 
@@ -113,11 +118,13 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
        MyHttp.getUserInfo(http, null,new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
+                login_user_et.setEnabled(true);
                 if (code!=0){
                     showToast(msg);
                     return;
                 }
                 MyApplication.userInfo = (UserInfo) bean;
+                SPutils.setUserName(userName);
                 startActivity(new Intent(LoginActivity.this,NgtAty.class));
                 finish();
             }
