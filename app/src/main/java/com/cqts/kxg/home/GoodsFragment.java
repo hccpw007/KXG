@@ -38,7 +38,7 @@ public class GoodsFragment extends MyFragment implements RefreshLayout.OnRefresh
     String keyword = ""; //搜索文章的关键字
     String sort = "";
     String order = "";
-
+    String cat_id = "0";
     /**
      * 搜索商品
      */
@@ -54,6 +54,17 @@ public class GoodsFragment extends MyFragment implements RefreshLayout.OnRefresh
      */
     public GoodsFragment(Where where) {
         this.where = where;
+    }
+
+    /**
+     * 分类查询商品
+     */
+    public GoodsFragment(Where where, String keyword, String sort, String order,String cat_id) {
+        this.keyword = keyword;
+        this.sort = sort;
+        this.order = order;
+        this.where = where;
+        this.cat_id = cat_id;
     }
 
     //设置搜索的排序参数
@@ -113,12 +124,15 @@ public class GoodsFragment extends MyFragment implements RefreshLayout.OnRefresh
         switch (where) {
             case search: //来自搜索
                 goods_refresh.setRefreshble(false);
-                MyHttp.searchGoods(http, null, PageSize, PageNum, keyword, sort, order, this);
+                MyHttp.searchGoods(http, null, PageSize, PageNum, keyword, sort, order,cat_id ,this);
                 break;
             case love: //来自喜欢
                 goods_refresh.setRefreshble(false);
-                MyHttp.loveGoods(http,null,PageNum,PageSize,this);
+                MyHttp.loveGoods(http, null, PageNum, PageSize, this);
                 break;
+            case classify://来自分类
+                goods_refresh.setRefreshble(false);
+                MyHttp.searchGoods(http, null, PageSize, PageNum, keyword, sort, order,cat_id ,this);
             default:
                 break;
         }
@@ -183,13 +197,13 @@ public class GoodsFragment extends MyFragment implements RefreshLayout.OnRefresh
      * love --------- 喜欢(收藏)<br>
      */
     public enum Where {
-        search, love
+        search, love, classify
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (goods_refresh!=null&&goods_refresh.isRefreshing) {
+        if (goods_refresh != null && goods_refresh.isRefreshing) {
             goods_refresh.setResultState(RefreshLayout.ResultState.close);
         }
     }

@@ -21,8 +21,11 @@ import com.cqts.kxg.R;
 import com.cqts.kxg.adapter.GoodsAdapter;
 import com.cqts.kxg.bean.EarnInfo;
 import com.cqts.kxg.bean.GoodsInfo;
+import com.cqts.kxg.main.MyApplication;
 import com.cqts.kxg.main.MyFragment;
+import com.cqts.kxg.main.WebActivity;
 import com.cqts.kxg.utils.MyHttp;
+import com.cqts.kxg.utils.MyURL;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json.JSONObject;
@@ -135,6 +138,12 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
             case R.id.table2://文章赚钱
                 break;
             case R.id.table3://我要提现
+                if (needLogin()) {
+                    Intent intent = new Intent(getActivity(), WebActivity.class);
+                    intent.putExtra("title", "提现");
+                    intent.putExtra("url", MyURL.WITHDRAW+"?token="+ MyApplication.token);
+                    startActivity(intent);
+                }
                 break;
             case R.id.table4://收益详情
                 if (needLogin()) {
@@ -143,27 +152,40 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 break;
             case R.id.table5://喜欢文章
                 if (needLogin()) {
-                    startActivity(new Intent(getActivity(), MyloveActivity.class).putExtra("type",MyloveActivity.articleType));
+                    startActivity(new Intent(getActivity(), MyloveActivity.class).putExtra
+                            ("type", MyloveActivity.articleType));
                 }
                 break;
             case R.id.table6://喜欢宝贝
                 if (needLogin()) {
-                    startActivity(new Intent(getActivity(), MyloveActivity.class).putExtra("type",MyloveActivity.goodsType));
+                    startActivity(new Intent(getActivity(), MyloveActivity.class).putExtra
+                            ("type", MyloveActivity.goodsType));
                 }
                 break;
             case R.id.table7://喜欢店铺
                 if (needLogin()) {
-                    startActivity(new Intent(getActivity(), MyloveActivity.class).putExtra("type",MyloveActivity.shopType));
+                    startActivity(new Intent(getActivity(), MyloveActivity.class).putExtra
+                            ("type", MyloveActivity.shopType));
                 }
                 break;
             case R.id.table8://常见问题
                 break;
             case R.id.table9://新手任务
+                if (needLogin()) {
+                    Intent intent = new Intent(getActivity(), WebActivity.class);
+                    intent.putExtra("title", "新手任务");
+                    intent.putExtra("url", MyURL.NOVICETASK+"?token="+ MyApplication.token);
+                    startActivity(intent);
+                }
                 break;
             case R.id.table10://牛人排行
-                startActivity(new Intent(getActivity(),RankingActivity.class));
+                startActivity(new Intent(getActivity(), RankingActivity.class));
                 break;
             case R.id.table11://话费充值
+                Intent intent = new Intent(getActivity(), WebActivity.class);
+                intent.putExtra("title", "话费充值");
+                intent.putExtra("url", MyURL.RECHARGE);
+                startActivity(intent);
                 break;
             case R.id.table12://我的店铺
                 break;
@@ -203,7 +225,8 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
         login_tv.setVisibility(View.GONE);
         money_tv.setText(getUserInfo().app_money);
         name_tv.setText(getUserInfo().user_name);
-        ImageLoader.getInstance().displayImage(getUserInfo().headimg,head_img,BaseValue.getOptions(R.mipmap.center_head));
+        ImageLoader.getInstance().displayImage(getUserInfo().headimg, head_img, BaseValue
+                .getOptions(R.mipmap.center_head));
         MyHttp.userEarning(http, null, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {

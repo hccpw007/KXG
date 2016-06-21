@@ -11,7 +11,10 @@ import com.base.utils.DataCleanManager;
 import com.cqts.kxg.R;
 import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.main.MyApplication;
+import com.cqts.kxg.main.WebActivity;
+import com.cqts.kxg.utils.MyURL;
 import com.cqts.kxg.utils.SPutils;
+import com.cqts.kxg.views.SharePop;
 
 public class SettingActivity extends MyActivity implements View.OnClickListener {
     private LinearLayout layout1;
@@ -58,10 +61,10 @@ public class SettingActivity extends MyActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.layout1: //个人资料
-                startActivity(new Intent(this,InformationActivity.class));
+                startActivity(new Intent(this, InformationActivity.class));
                 break;
             case R.id.layout2: //账户与安全
-                startActivity(new Intent(this,SafeActivity.class));
+                startActivity(new Intent(this, SafeActivity.class));
                 finish();
                 break;
             case R.id.layout3: //清除缓存
@@ -73,8 +76,13 @@ public class SettingActivity extends MyActivity implements View.OnClickListener 
                 }
                 break;
             case R.id.layout4: //邀请好友使用开心购
+                new SharePop(this, layout4, "www.baidu.com", "分享测试");
                 break;
             case R.id.layout5: //关于开心购
+                Intent intent = new Intent(this, WebActivity.class);
+                intent.putExtra("title", "关于开心购");
+                intent.putExtra("url", MyURL.ABOUT);
+                startActivity(intent);
                 break;
             case R.id.exit_btn: //退出当前账户
                 MyApplication.userInfo = null;

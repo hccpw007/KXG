@@ -70,6 +70,7 @@ public class ApprenticeActivity extends MyActivity implements View.OnClickListen
     }
 
     private void InitView() {
+        setMyTitle("收徒");
         change_tv = (TextView) findViewById(R.id.change_tv);
         table1Tv = (TextView) findViewById(R.id.table1_tv);
         table2Tv = (TextView) findViewById(R.id.table2_tv);
@@ -94,6 +95,8 @@ public class ApprenticeActivity extends MyActivity implements View.OnClickListen
                     showToast(msg);
                     empty1Img.setVisibility(View.VISIBLE);
                     empty2Img.setVisibility(View.VISIBLE);
+                    recyclerview2.setVisibility(View.GONE);
+                    recyclerview1.setVisibility(View.GONE);
                     return;
                 }
                 myApprenticeInfo = (MyApprenticeInfo) bean;
@@ -101,18 +104,22 @@ public class ApprenticeActivity extends MyActivity implements View.OnClickListen
                         myApprenticeInfo.signup.size() != 0) {
                     signup.addAll(myApprenticeInfo.signup);
                     adapter1.notifyDataSetChanged();
-
+                    recyclerview1.setVisibility(View.VISIBLE);
+                    empty1Img.setVisibility(View.GONE);
                 } else {
                     empty1Img.setVisibility(View.VISIBLE);
+                    recyclerview1.setVisibility(View.GONE);
                 }
 
                 if (myApprenticeInfo != null && myApprenticeInfo.task != null && myApprenticeInfo
                         .task.size() != 0) {
                     task.addAll(myApprenticeInfo.task);
                     adapter2.notifyDataSetChanged();
-
+                    recyclerview2.setVisibility(View.VISIBLE);
+                    empty2Img.setVisibility(View.GONE);
                 } else {
                     empty2Img.setVisibility(View.VISIBLE);
+                    recyclerview2.setVisibility(View.GONE);
                 }
             }
         });

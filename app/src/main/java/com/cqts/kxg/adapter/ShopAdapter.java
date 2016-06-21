@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.base.views.MyOvalImageView;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.ShopInfo;
+import com.cqts.kxg.home.WebShopActivity;
 import com.cqts.kxg.main.WebActivity;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -43,7 +44,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.MyviewHolder>{
         myviewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, WebActivity.class);
+                Intent intent = new Intent(context, WebShopActivity.class);
                 intent.putExtra("title", shopInfos.get(i).supplier_name);
                 intent.putExtra("url", shopInfos.get(i).url);
                 context.startActivity(intent);

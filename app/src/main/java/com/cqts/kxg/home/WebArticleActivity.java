@@ -79,22 +79,23 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
         webview.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                if (url.contains("$$push_goods")) {//跳转到商品
-                    try {
+                try {
+                    url = URLDecoder.decode(url, "utf-8");
+                    if (url.contains("$$push_goods")) {//跳转到商品
                         Intent intent = new Intent(WebArticleActivity.this, WebGoodsActivity.class);
                         int start = url.indexOf("goods_name=");
                         int end = url.indexOf("$$push_goods");
                         String goods_name = url.substring(start + 11, end);
                         intent.putExtra("url", url);
-                        intent.putExtra("title",URLDecoder.decode(goods_name, "utf-8"));
-                        intent.putExtra("id",url.substring(url.indexOf("id=")+3,url.indexOf("&goods_name=")));
+                        intent.putExtra("title", URLDecoder.decode(goods_name, "utf-8"));
+                        intent.putExtra("id", url.substring(url.indexOf("id=") + 3, url.indexOf
+                                ("&goods_name=")));
                         startActivity(intent);
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
+                        return true;
                     }
-                    return true;
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
                 }
-
                 // 返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
                 view.loadUrl(url);
                 return true;

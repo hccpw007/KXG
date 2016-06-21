@@ -108,7 +108,7 @@
             android:theme="@style/SwipeBackTheme">
         </activity>
         <activity
-            android:name=".TestImgActivity"
+            android:name=".TestActivity"
             android:theme="@style/SwipeBackTheme">
         </activity>
         <activity
@@ -173,6 +173,14 @@
         </activity>
         <activity
             android:name=".home.WebShopActivity"
+            android:theme="@style/SwipeBackTheme">
+        </activity>
+        <activity
+            android:name=".home.WebBuyActivity"
+            android:theme="@style/SwipeBackTheme">
+        </activity>
+        <activity
+            android:name=".classify.ClassifyGoodsActivity"
             android:theme="@style/SwipeBackTheme">
         </activity>
     </application>

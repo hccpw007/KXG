@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.GoodsInfo;
+import com.cqts.kxg.home.WebGoodsActivity;
 import com.cqts.kxg.main.WebActivity;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -46,9 +47,10 @@ public class GoodsAdapter extends RecyclerView.Adapter<GoodsAdapter.MyViewHolder
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, WebActivity.class);
+                Intent intent = new Intent(context, WebGoodsActivity.class);
                 intent.putExtra("title", goods_list.get(i).goods_name);
                 intent.putExtra("url", goods_list.get(i).url);
+                intent.putExtra("id", goods_list.get(i).goods_id);
                 context.startActivity(intent);
             }
         });

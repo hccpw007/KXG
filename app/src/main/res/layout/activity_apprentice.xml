@@ -186,6 +186,8 @@
                     android:text="邀请码:"/>
 
                 <com.base.views.MyEditText
+                    android:focusableInTouchMode="false"
+                    android:focusable="false"
                     style="@style/text_16sp_red"
                     android:layout_width="0px"
                     android:layout_height="wrap_content"

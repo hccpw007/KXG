@@ -5,7 +5,7 @@ package com.cqts.kxg.bean;
  * Created by Administrator on 2016/6/2.
  */
 public class GoodsInfo {
-    public long goods_id;//  648,
+    public String goods_id;//  648,
     public long cat_id;//  34,
     public String goods_name;//  "禧诺纯棉毛巾字母印花三层纱布儿童毛巾全棉面巾柔软童巾",
     public String goods_sn;//  "43964182031",

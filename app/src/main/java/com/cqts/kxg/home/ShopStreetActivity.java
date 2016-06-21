@@ -13,6 +13,8 @@ import android.widget.RadioGroup;
 import com.base.utils.ViewMove;
 import com.cqts.kxg.R;
 import com.cqts.kxg.main.MyActivity;
+import com.cqts.kxg.main.WebActivity;
+import com.cqts.kxg.utils.MyURL;
 
 public class ShopStreetActivity extends MyActivity implements RadioGroup.OnCheckedChangeListener,
         View.OnClickListener {
@@ -87,7 +89,10 @@ public class ShopStreetActivity extends MyActivity implements RadioGroup.OnCheck
                 startActivity(new Intent(this,SearchActivity.class));
                 break;
             case R.id.openshop_img:
-                // TODO: 2016/6/17  我要开店
+                Intent intent =new Intent(this, WebActivity.class);
+                intent.putExtra("title","我要开店");
+                intent.putExtra("url", MyURL.OPENSHOP);
+                startActivity(intent);
                 break;
         }
     }

@@ -1,6 +1,7 @@
 package com.cqts.kxg.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,8 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.base.BaseValue;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.ClassifyListInfo;
+import com.cqts.kxg.classify.ClassifyGoodsActivity;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 
@@ -34,7 +38,17 @@ public class ClassifyRVAdapter extends RecyclerView.Adapter<ClassifyRVAdapter.My
 
     @Override
     public void onBindViewHolder(final MyViewHolder myViewHolder, final int p) {
+        myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ClassifyGoodsActivity.class);
+                intent.putExtra("title",list.get(p).cat_name);
+                intent.putExtra("cat_id",list.get(p).cat_id);
+                context.startActivity(intent);
+            }
+        });
         myViewHolder.textView.setText(list.get(p).cat_name);
+        ImageLoader.getInstance().displayImage(list.get(p).cover_img,myViewHolder.imageView, BaseValue.getOptions(R.mipmap.home_articleclassify));
     }
 
     @Override

@@ -60,20 +60,20 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
         Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.login_regist_tv: //注册
-                intent.setClass(this,Register1Activity.class);
+                intent.setClass(this, Register1Activity.class);
                 startActivity(intent);
                 break;
             case R.id.lgoin_forget_tv: //忘记密码
-                intent.setClass(this,Pswd1Activity.class);
-                intent.putExtra("act",Pswd1Activity.FINDPSWD);
+                intent.setClass(this, Pswd1Activity.class);
+                intent.putExtra("act", Pswd1Activity.FINDPSWD);
                 startActivity(intent);
                 break;
             case R.id.login_login_btn: //登录
                 login();
                 break;
             case R.id.login_quick_tv: //快捷登录
-                intent.setClass(this,Pswd1Activity.class);
-                intent.putExtra("act",Pswd1Activity.QIUCKLOGIN);
+                intent.setClass(this, Pswd1Activity.class);
+                intent.putExtra("act", Pswd1Activity.QIUCKLOGIN);
                 startActivity(intent);
                 break;
             default:
@@ -88,18 +88,23 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
         userName = login_user_et.getText().toString().trim();
         String pswd = login_pswd_et.getText().toString().trim();
 
-        if (userName.isEmpty()){
+        if (userName.isEmpty()) {
             showToast("请输入手机号或用户名");
             return;
         }
-        if (pswd.isEmpty()||pswd.length()<6){
+        if (pswd.isEmpty() || pswd.length() < 6) {
             showToast("请输入登录密码");
             return;
         }
 
-        MyHttp .signin(http, null, userName, pswd, new MyHttp.MyHttpResult() {
+        MyHttp.signin(http, null, userName, pswd, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
+                if (code != 0) {
+                    SPutils.setToken("");
+                    showToast(msg);
+                    return;
+                }
                 SigninInfo signinInfo = (SigninInfo) bean;
                 MyApplication.signinInfo = signinInfo;
                 MyApplication.token = signinInfo.getToken();
@@ -115,17 +120,17 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
      * 获取用户信息
      */
     private void getUserInfoData() {
-       MyHttp.getUserInfo(http, null,new MyHttp.MyHttpResult() {
+        MyHttp.getUserInfo(http, null, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
                 login_user_et.setEnabled(true);
-                if (code!=0){
+                if (code != 0) {
                     showToast(msg);
                     return;
                 }
                 MyApplication.userInfo = (UserInfo) bean;
                 SPutils.setUserName(userName);
-                startActivity(new Intent(LoginActivity.this,NgtAty.class));
+//                startActivity(new Intent(LoginActivity.this,NgtAty.class));
                 finish();
             }
         });
