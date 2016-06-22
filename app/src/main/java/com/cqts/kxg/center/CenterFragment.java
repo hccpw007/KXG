@@ -31,6 +31,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -229,7 +230,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
     private void showLogined() {
         name_tv.setVisibility(View.VISIBLE);
         login_tv.setVisibility(View.GONE);
-        money_tv.setText(getUserInfo().app_money);
+        money_tv.setText(new DecimalFormat("#.00").format(getUserInfo().app_money));
         name_tv.setText(getUserInfo().user_name);
         ImageLoader.getInstance().displayImage(getUserInfo().headimg, head_img, BaseValue
                 .getOptions(R.mipmap.center_head));

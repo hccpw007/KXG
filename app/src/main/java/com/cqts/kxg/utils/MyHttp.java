@@ -62,7 +62,6 @@ public class MyHttp {
         http.goTo(method, which, httpMap, url, new HttpForVolley.HttpTodo() {
             @Override
             public void httpTodo(Integer which, JSONObject response) {
-                System.out.println("httpTodo");
                 int code = response.optInt("code", 1);
                 //登录失效
                 if (code == 2 && (http.getContext().getClass() != MainActivity.class)) {
