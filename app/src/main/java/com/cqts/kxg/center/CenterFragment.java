@@ -1,5 +1,6 @@
 package com.cqts.kxg.center;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -47,7 +48,8 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
             table11, table12;
     private ArrayList<GoodsInfo> goodsInfos = new ArrayList<>();
     private GoodsAdapter adapter;
-
+    private LinearLayout money_layout;
+    private AlertDialog dialog;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,6 +75,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
         prenticemoney_tv = (TextView) view.findViewById(R.id.prenticemoney_tv);
         message_tv = (AutoTextView) view.findViewById(R.id.message_tv);
         goods_rclv = (RecyclerView) view.findViewById(R.id.goods_rclv);
+        money_layout = (LinearLayout) view.findViewById(R.id.money_layout);
 
         table1 = (LinearLayout) view.findViewById(R.id.table1);
         table2 = (LinearLayout) view.findViewById(R.id.table2);
@@ -88,6 +91,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
         table12 = (LinearLayout) view.findViewById(R.id.table12);
 
         login_tv.setOnClickListener(this);
+        money_layout.setOnClickListener(this);
         name_tv.setOnClickListener(this);
         setting_img.setOnClickListener(this);
         lookall_tv.setOnClickListener(this);
@@ -136,16 +140,18 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 }
                 break;
             case R.id.table2://文章赚钱
+                table2Dialog();
                 break;
             case R.id.table3://我要提现
                 if (needLogin()) {
                     Intent intent = new Intent(getActivity(), WebActivity.class);
                     intent.putExtra("title", "提现");
-                    intent.putExtra("url", MyURL.WITHDRAW+"?token="+ MyApplication.token);
+                    intent.putExtra("url", MyURL.WITHDRAW + "?token=" + MyApplication.token);
                     startActivity(intent);
                 }
                 break;
             case R.id.table4://收益详情
+            case R.id.money_layout://账户余额
                 if (needLogin()) {
                     startActivity(new Intent(getActivity(), EarningsActivity.class));
                 }
@@ -174,7 +180,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 if (needLogin()) {
                     Intent intent = new Intent(getActivity(), WebActivity.class);
                     intent.putExtra("title", "新手任务");
-                    intent.putExtra("url", MyURL.NOVICETASK+"?token="+ MyApplication.token);
+                    intent.putExtra("url", MyURL.NOVICETASK + "?token=" + MyApplication.token);
                     startActivity(intent);
                 }
                 break;
@@ -289,5 +295,22 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 message_tv.setText(split);
             }
         });
+    }
+
+    /**
+     * 文章赚钱的dialog
+     */
+    void table2Dialog() {
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_centertable2, null);
+        View dismiss = view.findViewById(R.id.dismiss);
+        dismiss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog = new AlertDialog.Builder(getActivity()).create();
+        dialog.show();
+        dialog.setContentView(view);
     }
 }
