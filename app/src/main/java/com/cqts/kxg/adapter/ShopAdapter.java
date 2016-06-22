@@ -25,7 +25,7 @@ import java.util.List;
 public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.MyviewHolder>{
     Context context;
     List<ShopInfo> shopInfos;
-    DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).showImageOnLoading(R.mipmap.home_articleclassify)
+    DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).showImageOnLoading(R.mipmap.center_head)
             .build();
 
     public ShopAdapter(Context context, List<ShopInfo> shopInfos) {

@@ -18,6 +18,7 @@ import com.base.utils.MyGridDecoration;
 import com.base.views.MyEditText;
 import com.cqts.kxg.R;
 import com.cqts.kxg.adapter.ApprenticeAdapter;
+import com.cqts.kxg.bean.EaringApprenticeInfo;
 import com.cqts.kxg.bean.MyApprenticeInfo;
 import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.main.MyApplication;
@@ -76,6 +77,7 @@ public class ApprenticeActivity extends MyActivity implements View.OnClickListen
         table2Tv = (TextView) findViewById(R.id.table2_tv);
         table3Tv = (TextView) findViewById(R.id.table3_tv);
         table4Tv = (TextView) findViewById(R.id.table4_tv);
+
         qrImg = (ImageView) findViewById(R.id.qr_img);
         invitationEt = (MyEditText) findViewById(R.id.invitation_et);
         shareBtn = (Button) findViewById(R.id.share_btn);
@@ -88,6 +90,23 @@ public class ApprenticeActivity extends MyActivity implements View.OnClickListen
     }
 
     private void getData() {
+        //查询徒弟收益信息
+        MyHttp.userApprentice(http, null, new MyHttp.MyHttpResult() {
+            @Override
+            public void httpResult(Integer which, int code, String msg, Object bean) {
+                if (code!=0){
+                    showToast(msg);
+                    return;
+                }
+                EaringApprenticeInfo apprenticeInfo = (EaringApprenticeInfo) bean;
+                table1Tv.setText(TextUtils.isEmpty(apprenticeInfo.total)?"0":apprenticeInfo.total+"人");
+                table2Tv.setText(TextUtils.isEmpty(apprenticeInfo.today)?"0":apprenticeInfo.today+"人");
+                table3Tv.setText(TextUtils.isEmpty(apprenticeInfo.apprentice)?"0.00":apprenticeInfo.apprentice+"元");
+                table4Tv.setText(TextUtils.isEmpty(apprenticeInfo.shared)?"0":apprenticeInfo.shared+"次");
+            }
+        });
+
+        //查询答题和为答题的徒弟
         MyHttp.apprenticeListing(http, null, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {

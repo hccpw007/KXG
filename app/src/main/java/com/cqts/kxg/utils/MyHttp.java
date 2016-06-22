@@ -10,6 +10,7 @@ import com.android.volley.Request;
 import com.base.BaseValue;
 import com.base.http.HttpForVolley;
 import com.cqts.kxg.bean.ArticleInfo;
+import com.cqts.kxg.bean.EaringApprenticeInfo;
 import com.cqts.kxg.bean.EaringsInfo;
 import com.cqts.kxg.bean.EarnInfo;
 import com.cqts.kxg.bean.HomeBannerInfo;
@@ -590,6 +591,17 @@ public class MyHttp {
         httpMap.clear();
         httpMap.put("token", MyApplication.token);
         toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, MyApprenticeInfo
+                .class);
+    }
+    /**
+     * 收徒信息
+     */
+    public static void userApprentice(HttpForVolley http, Integer which,
+                                         MyHttpResult myHttpResult) {
+        String httpUrl = url + "user/apprentice";
+        httpMap.clear();
+        httpMap.put("token", MyApplication.token);
+        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, EaringApprenticeInfo
                 .class);
     }
 

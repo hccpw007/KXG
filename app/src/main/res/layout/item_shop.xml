@@ -14,7 +14,7 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:scaleType="center"
-        android:src="@mipmap/home_articleclassify"
+        android:src="@mipmap/center_head"
         android:id="@+id/item_img"/>
 
     <LinearLayout
