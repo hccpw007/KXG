@@ -150,7 +150,7 @@ public class HttpForVolley {
         }
 
 
-        request = new StringRequest(Method, url, new Listener<String>() {
+        request = new StringRequest(Method,  url, new Listener<String>() {
 
             @Override
             public void onResponse(String response) {

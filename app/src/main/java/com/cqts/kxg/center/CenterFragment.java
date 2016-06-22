@@ -230,7 +230,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
     private void showLogined() {
         name_tv.setVisibility(View.VISIBLE);
         login_tv.setVisibility(View.GONE);
-        money_tv.setText(new DecimalFormat("#.00").format(getUserInfo().app_money));
+        money_tv.setText(String.format("%.2f",getUserInfo().app_money));
         name_tv.setText(getUserInfo().user_name);
         ImageLoader.getInstance().displayImage(getUserInfo().headimg, head_img, BaseValue
                 .getOptions(R.mipmap.center_head));
@@ -242,9 +242,9 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                     return;
                 }
                 EarnInfo earnInfo = (EarnInfo) bean;
-                money_tv.setText(earnInfo.history);
+                money_tv.setText(String.format("%.2f",earnInfo.history));
+                history_tv.setText(String.format("%.2f",earnInfo.history));
                 today_tv.setText(earnInfo.today);
-                history_tv.setText(earnInfo.history);
                 prentice_tv.setText(earnInfo.receive);
                 prenticemoney_tv.setText(earnInfo.kickback);
             }
