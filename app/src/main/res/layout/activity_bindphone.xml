@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mybg"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".center.Register1Activity">
+
+    <include
+        layout="@layout/include_title"/>
+
+    <TextView
+        style="@style/text_15sp_black"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingLeft="12dp"
+        android:text="我们将发送验证码到你的手机"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_15sp_black"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:text="用户名"/>
+
+        <TextView
+            android:id="@+id/username_tv"
+            android:enabled="false"
+            style="@style/text_15sp_black"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparency"
+            android:maxLength="11"
+            android:textColor="@color/black"
+            android:textColorHint="@color/myhint"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/white"
+        android:paddingLeft="12dp"
+        android:src="@color/myline"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_15sp_black"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:text="手机号"/>
+
+        <com.base.views.MyEditText
+            android:id="@+id/phone_et"
+            style="@style/text_15sp_black"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparency"
+            android:hint="请输入你的手机号"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:textColor="@color/black"
+            android:textColorHint="@color/myhint"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/white"
+        android:paddingLeft="12dp"
+        android:src="@color/myline"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/white"
+        android:paddingLeft="12dp"
+        android:src="@color/myline"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:id="@+id/smscode_layout">
+
+        <TextView
+            style="@style/text_15sp_black"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:text="验证码"/>
+
+        <com.base.views.MyEditText
+            style="@style/text_15sp_black"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:inputType="number"
+            android:background="@color/transparency"
+            android:hint="短信验证码"
+            android:maxLength="6"
+            android:paddingLeft="5dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/myhint"
+            android:id="@+id/smscode_et"/>
+        <View
+            android:layout_marginLeft="12dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="3dp"
+            android:background="@color/myline"
+            android:layout_width="1px"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:gravity="center_vertical|right"
+            android:layout_marginRight="12dp"
+            android:textColor="@drawable/sl_count_text"
+            style="@style/text_15sp_black"
+            android:text="获取手机验证码"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:id="@+id/smscount_tv"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/myline"/>
+
+    <TextView
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="10dp"
+        style="@style/text_14sp_black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="为了您的账户安全请绑定手机号。"/>
+
+    <Button
+        android:id="@+id/bind_btn"
+        style="@style/text_16sp_white"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_shape_red_to_gray"
+        android:gravity="center"
+        android:text="绑  定"
+        android:textSize="18sp"/>
+
+</LinearLayout>

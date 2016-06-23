@@ -2,6 +2,7 @@ package com.cqts.kxg.center;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -28,7 +29,6 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
     private TextView lgoin_forget_tv;
     private TextView login_quick_tv;
     private String userName;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,6 +98,7 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
         }
 
         MyHttp.signin(http, null, userName, pswd, new MyHttp.MyHttpResult() {
+
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
                 if (code != 0) {
@@ -105,10 +106,12 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
                     showToast(msg);
                     return;
                 }
+                SPutils.setUserName(userName);
+
                 SigninInfo signinInfo = (SigninInfo) bean;
                 MyApplication.signinInfo = signinInfo;
+
                 MyApplication.token = signinInfo.getToken();
-                SPutils.setToken(MyApplication.token);
                 login_user_et.setEnabled(false);
                 getUserInfoData();
             }
@@ -121,6 +124,7 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
      */
     private void getUserInfoData() {
         MyHttp.getUserInfo(http, null, new MyHttp.MyHttpResult() {
+
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
                 login_user_et.setEnabled(true);
@@ -129,10 +133,28 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
                     return;
                 }
                 MyApplication.userInfo = (UserInfo) bean;
-                SPutils.setUserName(userName);
-//                startActivity(new Intent(LoginActivity.this,NgtAty.class));
-                finish();
+                if (TextUtils.isEmpty(MyApplication.userInfo.mobile_phone)){
+                    startActivityForResult(new Intent(LoginActivity.this,BindPhoneActivity.class).putExtra("userName",userName),1);
+                }else {
+                    SPutils.setToken(MyApplication.token);
+                    finish();
+                }
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1){
+            if (resultCode == RESULT_OK){ //绑定手机成功
+                SPutils.setToken(MyApplication.token);
+                finish();
+            }else {
+                MyApplication.userInfo = null;
+                MyApplication.token = "";
+                SPutils.setToken("");
+            }
+        }
     }
 }

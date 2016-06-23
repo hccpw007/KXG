@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import com.cqts.kxg.R;
 import com.cqts.kxg.adapter.GoodsAdapter;
 import com.cqts.kxg.bean.EarnInfo;
 import com.cqts.kxg.bean.GoodsInfo;
+import com.cqts.kxg.home.WebShopActivity;
 import com.cqts.kxg.main.MyApplication;
 import com.cqts.kxg.main.MyFragment;
 import com.cqts.kxg.main.WebActivity;
@@ -195,6 +197,11 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.table12://我的店铺
+                if (!TextUtils.isEmpty(getUserInfo().store)) {
+                    startActivity(new Intent(getActivity(), WebShopActivity.class).putExtra("title","我的店铺").putExtra("url",getUserInfo().store));
+                }else {
+                    showToast("您还没有店铺!");
+                }
                 break;
             default:
                 break;

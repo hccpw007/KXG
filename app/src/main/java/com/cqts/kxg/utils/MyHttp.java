@@ -184,6 +184,7 @@ public class MyHttp {
      * 2、登陆验证码<br>
      * 3、找回密码验证码<br>
      * 4、重置密码验证码<br>
+     * 5、绑定手机号<br>
      */
     public static void sms(HttpForVolley http, Integer which, String phone, String captcha, int
             act, String token,
@@ -197,6 +198,19 @@ public class MyHttp {
         toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, null);
     }
 
+    /**
+     * 此接口用于找回密码和绑定手机号的短信验证码发送
+     * 必须发送token 不需要图片验证码
+     */
+    public static void sms2(HttpForVolley http, Integer which, String phone, int
+            act, MyHttpResult myHttpResult) {
+        httpMap.clear();
+        httpMap.put("phone", phone);
+        httpMap.put("act", act + "");
+        httpMap.put("token",MyApplication. token);
+        String httpUrl = url + "user/appsms";
+        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, null);
+    }
 
     /**
      * 快捷登陆<p>
@@ -247,7 +261,7 @@ public class MyHttp {
     public static void getUserInfo(HttpForVolley http, Integer which,
                                    final MyHttpResult myHttpResult) {
         httpMap.clear();
-        httpMap.put("token", MyApplication.token);
+        httpMap.put("token",MyApplication. token);
         String httpUrl = url + "user/profile";
         toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, UserInfo.class);
     }
@@ -592,11 +606,12 @@ public class MyHttp {
         toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, MyApprenticeInfo
                 .class);
     }
+
     /**
      * 收徒信息
      */
     public static void userApprentice(HttpForVolley http, Integer which,
-                                         MyHttpResult myHttpResult) {
+                                      MyHttpResult myHttpResult) {
         String httpUrl = url + "user/apprentice";
         httpMap.clear();
         httpMap.put("token", MyApplication.token);
@@ -613,6 +628,19 @@ public class MyHttp {
         httpMap.clear();
         httpMap.put("token", MyApplication.token);
         httpMap.put("invite_code", invite_code);
+        toBean(Request.Method.POST, http, which, httpMap, httpUrl, myHttpResult, null);
+    }
+
+    /**
+     * 绑定手机号<p>
+     */
+    public static void bindPhone(HttpForVolley http, Integer which, String mobile_phone, String
+            captcha,  MyHttpResult myHttpResult) {
+        String httpUrl = url + "user/bind";
+        httpMap.clear();
+        httpMap.put("token",MyApplication. token);
+        httpMap.put("mobile_phone", mobile_phone);
+        httpMap.put("captcha", captcha);
         toBean(Request.Method.POST, http, which, httpMap, httpUrl, myHttpResult, null);
     }
 }

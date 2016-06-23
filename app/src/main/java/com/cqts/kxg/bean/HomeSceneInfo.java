@@ -1,5 +1,6 @@
 package com.cqts.kxg.bean;
 
+
 /**
  * 场景菜单查询 <p>
  * <p/>
@@ -7,7 +8,8 @@ package com.cqts.kxg.bean;
  * Created by Administrator on 2016/5/25.
  */
 public class HomeSceneInfo {
-         public String  cat_id; // 20,
-         public String  cat_name; //public String  首页测试分类1",
-         public String  cover_img; //public String  首页测试分类1",
+    public String cat_id; // 20,
+    public String cat_name; //public String  首页测试分类1",
+    public String cover_img; //public String  首页测试分类1",
+    public String url;
 }

@@ -19,6 +19,7 @@ import com.cqts.kxg.center.LoginActivity;
 import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.utils.MyHttp;
 import com.cqts.kxg.views.FavoriteAnimation;
+import com.cqts.kxg.views.SharePop;
 
 import org.json.JSONObject;
 
@@ -48,6 +49,7 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
         articleInfo = (ArticleInfo) getIntent().getSerializableExtra("articleInfo");
         InitView();
         InitWebView();
+
     }
 
     private void InitView() {
@@ -111,7 +113,14 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
                 setLove();
                 break;
             case R.id.share_layout: //分享
-                // TODO: 2016/6/20 分享
+                SharePop.getInstance().showPop(this, shareLayout, "我是一个大逗逼!", "www.baidu.com",
+                        "分享测试", new SharePop.ShareResult() {
+                            @Override
+                            public void shareResult(int result) {
+                                if (result == SharePop.ShareResult.SUCCESS){ //分享成功
+                                }
+                            }
+                        });
                 break;
         }
     }

@@ -183,6 +183,10 @@
             android:name=".classify.ClassifyGoodsActivity"
             android:theme="@style/SwipeBackTheme">
         </activity>
+        <activity
+            android:name=".center.BindPhoneActivity"
+            android:theme="@style/SwipeBackTheme">
+        </activity>
     </application>
 
 </manifest>

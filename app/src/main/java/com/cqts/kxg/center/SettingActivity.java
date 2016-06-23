@@ -76,7 +76,8 @@ public class SettingActivity extends MyActivity implements View.OnClickListener 
                 }
                 break;
             case R.id.layout4: //邀请好友使用开心购
-                new SharePop(this, layout4, "www.baidu.com", "分享测试");
+                SharePop.getInstance().showPop(this, layout4, "我是一个大逗逼!", "www.baidu.com",
+                        "分享测试", null);
                 break;
             case R.id.layout5: //关于开心购
                 Intent intent = new Intent(this, WebActivity.class);

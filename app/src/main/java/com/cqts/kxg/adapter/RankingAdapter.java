@@ -71,7 +71,7 @@ public class RankingAdapter extends BaseAdapter {
         holder.moneyTv.setText("￥"+rankingInfos.get(position).app_money);
 
         if (rankingInfos.get(position).alias.isEmpty()){
-            holder.nameTv.setText(rankingInfos.get(position).user_name);
+            holder.nameTv.setText(rankingInfos.get(position).user_name.substring(0,1)+"**");
         }else {
             holder.nameTv.setText(rankingInfos.get(position).alias);
         }

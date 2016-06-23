@@ -23,5 +23,6 @@ public class UserInfo {
     public String mobile_phone;//移动电话
     public String invite_code;//邀请码
     public double app_money;//余额
+    public String store;//余额
 
 }

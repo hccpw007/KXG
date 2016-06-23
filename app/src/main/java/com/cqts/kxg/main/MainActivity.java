@@ -56,7 +56,7 @@ public class MainActivity extends MyActivity implements MyHttp.MyHttpResult, Han
                 MyApplication.signinInfo = signinInfo;
                 MyApplication.token = signinInfo.getToken();
                 SPutils.setToken(signinInfo.getToken());
-                MyHttp.getUserInfo(http, GETUSERINFO, this);
+                MyHttp.getUserInfo(http, GETUSERINFO,this);
                 break;
             case GETUSERINFO: //获得userinfo
                 MyApplication.userInfo = (UserInfo) bean;

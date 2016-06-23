@@ -7,8 +7,6 @@ import android.widget.TextView;
 
 /**
  * 发送验证码倒计时
- *
- * @author Administrator
  */
 public class CodeCountDownTimer extends CountDownTimer {
     TextView text;

@@ -9,6 +9,7 @@ import android.view.inputmethod.InputMethodManager;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.cqts.kxg.R;
+import com.cqts.kxg.views.SharePop;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
@@ -23,7 +24,21 @@ public class BaseValue {
     public static Gson gson;
     public static RequestQueue mQueue;
     public static InputMethodManager imm; //输入法管理器
+    public static SharePop sharePop; //分享
+
     public static void setInit(Application application) {
+        getDisplayValue(application);
+        gson = new Gson();
+        mQueue = Volley.newRequestQueue(application);
+        imm = (InputMethodManager) application.getBaseContext()
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        sharePop = new SharePop();
+    }
+
+    /**
+     * 获取屏幕参数
+     */
+    private static void getDisplayValue(Application application) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         displayMetrics = application.getResources().getDisplayMetrics();
         screenHeight = displayMetrics.heightPixels;
@@ -31,10 +46,6 @@ public class BaseValue {
         density = displayMetrics.density;
         scaledDensity = displayMetrics.scaledDensity;
         densityDPI = displayMetrics.densityDpi;
-        gson = new Gson();
-        mQueue = Volley.newRequestQueue(application);
-        imm = (InputMethodManager) application.getBaseContext()
-                .getSystemService(Context.INPUT_METHOD_SERVICE);
     }
 
     /**

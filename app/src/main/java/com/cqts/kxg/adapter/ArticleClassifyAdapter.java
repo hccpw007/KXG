@@ -13,12 +13,13 @@ import com.base.BaseValue;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.HomeSceneInfo;
 import com.cqts.kxg.home.ArticleActivity;
+import com.cqts.kxg.main.WebActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 
 /**
- * Created by Administrator on 2016/6/16.
+ * 首页文章分类
  */
 public class ArticleClassifyAdapter extends RecyclerView.Adapter<ArticleClassifyAdapter
         .classifyViewHolder> {
@@ -50,6 +51,10 @@ public class ArticleClassifyAdapter extends RecyclerView.Adapter<ArticleClassify
         classifyViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (sceneInfos.get(i).cat_id.equals("301")||sceneInfos.get(i).cat_id.equals("311")){ //充话费和携程旅游
+                    context.startActivity(new Intent(context, WebActivity.class).putExtra("title",sceneInfos.get(i).cat_name).putExtra("url",sceneInfos.get(i).url));
+                    return;
+                }
                 Intent intent = new Intent(context, ArticleActivity.class);
                 intent.putExtra("title", sceneInfos.get(i).cat_name);
                 intent.putExtra("cat_id", sceneInfos.get(i).cat_id);
