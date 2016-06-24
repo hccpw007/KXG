@@ -23,6 +23,7 @@ import com.cqts.kxg.bean.MyApprenticeInfo;
 import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.main.MyApplication;
 import com.cqts.kxg.utils.MyHttp;
+import com.cqts.kxg.views.SharePop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +87,7 @@ public class ApprenticeActivity extends MyActivity implements View.OnClickListen
         recyclerview2 = (RecyclerView) findViewById(R.id.recyclerview2);
         empty2Img = (ImageView) findViewById(R.id.empty2_img);
         change_tv.setOnClickListener(this);
+        shareBtn.setOnClickListener(this);
         invitationEt.setText(getUserInfo().invite_code + "");
     }
 
@@ -147,8 +149,14 @@ public class ApprenticeActivity extends MyActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.change_tv:
+            case R.id.change_tv: //改变邀请码
                 changeCode();
+                break;
+            case R.id.share_btn: //分享给徒弟
+                String title = (TextUtils.isEmpty(getUserInfo().alias) ? "" :( "\"" + getUserInfo().alias + "\""))+"推荐给你“开心购久久app”，注册后有红包哦！";
+                String url =  getUserInfo().invite_link + getUserInfo().invite_code;
+                String text = "您可以在这里浏览购买数百万商品，更有9.9包邮等特价专区！";
+                SharePop.getInstance().showPop(this, shareBtn, title, url,text, null, null);
                 break;
             default:
                 break;

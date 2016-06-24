@@ -2,6 +2,7 @@ package com.cqts.kxg.center;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -76,8 +77,10 @@ public class SettingActivity extends MyActivity implements View.OnClickListener 
                 }
                 break;
             case R.id.layout4: //邀请好友使用开心购
-                SharePop.getInstance().showPop(this, layout4, "我是一个大逗逼!", "www.baidu.com",
-                        "分享测试", null);
+                String title = (TextUtils.isEmpty(getUserInfo().alias) ? "" :( "\"" + getUserInfo().alias + "\""))+"推荐给你“开心购久久app”，注册后有红包哦！";
+                String url =  getUserInfo().invite_link + getUserInfo().invite_code;
+                String text = "您可以在这里浏览购买数百万商品，更有9.9包邮等特价专区！";
+                SharePop.getInstance().showPop(this, layout4, title, url,text, null, null);
                 break;
             case R.id.layout5: //关于开心购
                 Intent intent = new Intent(this, WebActivity.class);

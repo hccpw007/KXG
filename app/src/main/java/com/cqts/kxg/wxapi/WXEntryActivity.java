@@ -48,19 +48,19 @@ public class WXEntryActivity extends BaseActivity implements IWXAPIEventHandler 
 		String result;
 		switch (resp.errCode) {
 		case BaseResp.ErrCode.ERR_OK:
-			SharePop.getInstance().payResult.shareResult(SharePop.ShareResult.SUCCESS);
+			SharePop.getInstance().setResult(SharePop.ShareResult.SUCCESS);
 			result = "分享成功";
 			break;
 		case BaseResp.ErrCode.ERR_USER_CANCEL:
-			SharePop.getInstance().payResult.shareResult(SharePop.ShareResult.CANCEL);
+			SharePop.getInstance().setResult(SharePop.ShareResult.CANCEL);
 			result = "取消分享";
 			break;
 		case BaseResp.ErrCode.ERR_AUTH_DENIED:
-			SharePop.getInstance().payResult.shareResult(SharePop.ShareResult.FAILED);
+			SharePop.getInstance().setResult(SharePop.ShareResult.FAILED);
 			result = "分享失败";
 			break;
 		default:
-			SharePop.getInstance().payResult.shareResult(SharePop.ShareResult.FAILED);
+			SharePop.getInstance().setResult(SharePop.ShareResult.FAILED);
 			result = "分享错误";
 			break;
 		}

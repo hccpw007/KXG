@@ -4,6 +4,7 @@ package com.cqts.kxg.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -75,7 +76,9 @@ public class MyHttp {
                 if (null != bean && code == 0) {
                     data = BaseValue.gson.fromJson(response.optString("data"), bean);
                 }
-                myHttpResult.httpResult(which, code, response.optString("msg", "发生错误"), data);
+                if (null!=myHttpResult){
+                    myHttpResult.httpResult(which, code, response.optString("msg", "发生错误"), data);
+                }
             }
         });
     }
@@ -207,14 +210,14 @@ public class MyHttp {
         httpMap.clear();
         httpMap.put("phone", phone);
         httpMap.put("act", act + "");
-        httpMap.put("token",MyApplication. token);
+        httpMap.put("token", MyApplication.token);
         String httpUrl = url + "user/appsms";
         toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, null);
     }
 
     /**
      * 快捷登陆<p>
-     * <p/>
+     * <p>
      * 接口和注册一样需要先获取图形验证码，然后获取短信验证码<p>
      * mobile_phone 手机号码<br>
      * captcha 短信验证码<br>
@@ -261,7 +264,7 @@ public class MyHttp {
     public static void getUserInfo(HttpForVolley http, Integer which,
                                    final MyHttpResult myHttpResult) {
         httpMap.clear();
-        httpMap.put("token",MyApplication. token);
+        httpMap.put("token", MyApplication.token);
         String httpUrl = url + "user/profile";
         toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, UserInfo.class);
     }
@@ -635,12 +638,40 @@ public class MyHttp {
      * 绑定手机号<p>
      */
     public static void bindPhone(HttpForVolley http, Integer which, String mobile_phone, String
-            captcha,  MyHttpResult myHttpResult) {
+            captcha, MyHttpResult myHttpResult) {
         String httpUrl = url + "user/bind";
         httpMap.clear();
-        httpMap.put("token",MyApplication. token);
+        httpMap.put("token", MyApplication.token);
         httpMap.put("mobile_phone", mobile_phone);
         httpMap.put("captcha", captcha);
+        toBean(Request.Method.POST, http, which, httpMap, httpUrl, myHttpResult, null);
+    }
+
+    /**
+     * 分享添加收益回调的接口<p>
+     * 分享文章或者商品
+     */
+    public static void articleShare(HttpForVolley http, Integer which, String article_id, String
+            goods_id, MyHttpResult myHttpResult) {
+        String httpUrl = url + "user/articleShare";
+        httpMap.clear();
+        httpMap.put("token", MyApplication.token);
+        httpMap.put("article_id", article_id);
+        httpMap.put("goods_id", goods_id);
+        toBean(Request.Method.POST, http, which, httpMap, httpUrl, myHttpResult, null);
+    }
+
+    /**
+     * 阅读添加收益<p>
+     */
+    public static void userRead(HttpForVolley http, Integer which, String article_id,MyHttpResult myHttpResult) {
+        String httpUrl = url + "user/read";
+        httpMap.clear();
+        httpMap.put("token", MyApplication.token);
+        httpMap.put("article_id", article_id);
+        if (TextUtils.isEmpty(MyApplication.token)){
+            return;
+        }
         toBean(Request.Method.POST, http, which, httpMap, httpUrl, myHttpResult, null);
     }
 }

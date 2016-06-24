@@ -22,6 +22,7 @@ public class UserInfo {
     public String alias;//昵称
     public String mobile_phone;//移动电话
     public String invite_code;//邀请码
+    public String invite_link;//分享链接
     public double app_money;//余额
     public String store;//余额
 

@@ -1,6 +1,8 @@
 package com.cqts.kxg.home;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -20,6 +22,7 @@ import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.utils.MyHttp;
 import com.cqts.kxg.views.FavoriteAnimation;
 import com.cqts.kxg.views.SharePop;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json.JSONObject;
 
@@ -29,7 +32,7 @@ import java.net.URLDecoder;
 public class WebArticleActivity extends MyActivity implements View.OnClickListener {
     private String title = "";
     private String url = "";
-    ArticleInfo articleInfo;
+    private ArticleInfo articleInfo;
     private MyWebView webview;
     private LinearLayout collectLayout;
     private ImageView collectImg;
@@ -39,6 +42,7 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
     boolean canClick = true;
     private int is_love;
     private FavoriteAnimation animation;
+    private Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +53,8 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
         articleInfo = (ArticleInfo) getIntent().getSerializableExtra("articleInfo");
         InitView();
         InitWebView();
-
+        MyHttp.userRead(http,null,articleInfo.article_id,null); //阅读回调
+        bitmap = ImageLoader.getInstance().loadImageSync(articleInfo.cover_img);
     }
 
     private void InitView() {
@@ -113,16 +118,28 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
                 setLove();
                 break;
             case R.id.share_layout: //分享
-                SharePop.getInstance().showPop(this, shareLayout, "我是一个大逗逼!", "www.baidu.com",
-                        "分享测试", new SharePop.ShareResult() {
-                            @Override
-                            public void shareResult(int result) {
-                                if (result == SharePop.ShareResult.SUCCESS){ //分享成功
-                                }
-                            }
-                        });
+                setShare();
                 break;
         }
+    }
+
+
+    /**
+     * 分享文章并请求接口调用收益
+     */
+    private void setShare() {
+        SharePop.getInstance().showPop(this, shareLayout, articleInfo.title,articleInfo.article_url,
+                "分享测试",bitmap,new SharePop.ShareResult() {
+                    @Override
+                    public void shareResult(int result) {
+                        if (result == SharePop.ShareResult.SUCCESS) { //分享成功
+                            if (getUserInfo() != null) {
+                                MyHttp.articleShare(http, null, articleInfo.article_id,
+                                        "", null);
+                            }
+                        }
+                    }
+                });
     }
 
     private void setLove() {

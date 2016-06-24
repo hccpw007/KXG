@@ -22,7 +22,7 @@ public class WXShareUtils {
      * 微信分享<p>
      * type:分享类型, 1 = 微信分享  2 = 朋友圈分享 3 = 微信收藏
      */
-    public static void wxShare(Context context, int type, String title, String url, String text) {
+    public static void wxShare(Context context, int type, String title, String url, String text,Bitmap thumb) {
         //注册微信
         String APP_ID = "wx68d4f6f1109e4f94";
         IWXAPI api = WXAPIFactory.createWXAPI(context, APP_ID, true);
@@ -36,9 +36,12 @@ public class WXShareUtils {
         WXWebpageObject webpage = new WXWebpageObject();
         webpage.webpageUrl = url;
         WXMediaMessage msg = new WXMediaMessage(webpage);
+        if (null!= thumb){ //如果有图片,这添加图片
 //        Bitmap thumb = BitmapFactory.decodeResource(context.getResources(), R.mipmap
 //        .center_table9);
-//        msg.thumbData = bmpToByteArray(thumb, true);
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(thumb,100, 100, true);
+            msg.thumbData = bmpToByteArray(scaledBitmap,true);
+        }
         msg.title = title;
         msg.description = text;
         SendMessageToWX.Req req = new SendMessageToWX.Req();

@@ -2,6 +2,7 @@ package com.cqts.kxg.views;
 
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,27 +15,20 @@ import android.widget.Toast;
 
 import com.cqts.kxg.R;
 import com.cqts.kxg.utils.WXShareUtils;
-import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
-import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
-import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
-import com.tencent.mm.sdk.openapi.IWXAPI;
-import com.tencent.mm.sdk.openapi.WXAPIFactory;
-
-import org.w3c.dom.Text;
 
 /**
  * 分享POP
  */
 public class SharePop implements View.OnClickListener {
     public final static int TAG_SETTING = 1, TAG_APPRENTICE = 2, TAG_ARTICLE = 3;
-    Context context;
-    String url;
-    String title = "";
-    String text;
-    public ShareResult payResult;
-    int tag;
+    private Context context;
+    private String url;
+    private String title = "";
+    private String text;
+    private ShareResult shareResult;
     private PopupWindow window;
     private static SharePop instance;
+    private Bitmap image;
 
     public static SharePop getInstance() {
         if (instance == null) {
@@ -47,9 +41,11 @@ public class SharePop implements View.OnClickListener {
         return instance;
     }
 
-    public SharePop showPop(Context context, View view,String  title,String url, String text,ShareResult payResult) {
-        setTag(0);
-        this.payResult = payResult;
+    public SharePop showPop(Context context, View view, String title, String url, String text,
+                            Bitmap image,
+                            ShareResult payResult) {
+        this.image = image;
+        this.shareResult = payResult;
         this.title = title;
         this.context = context;
         this.url = url;
@@ -79,10 +75,10 @@ public class SharePop implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.wx_img: //微信分享
-                WXShareUtils.wxShare(context,1,title,url,text);
+                WXShareUtils.wxShare(context, 1, title, url, text, image);
                 break;
             case R.id.friend_img: //朋友圈分享
-                WXShareUtils.wxShare(context,2,title,url,text);
+                WXShareUtils.wxShare(context, 2, title, url, text, image);
                 break;
             case R.id.copy_img: //复制到剪切板
                 ClipboardManager cmb = (ClipboardManager) context
@@ -96,12 +92,11 @@ public class SharePop implements View.OnClickListener {
         window.dismiss();
     }
 
-    public int getTag() {
-        return tag;
-    }
 
-    public void setTag(int tag) {
-        this.tag = tag;
+    public void setResult(int result) {
+        if (shareResult != null) {
+            shareResult.shareResult(result);
+        }
     }
 
     /**
@@ -112,6 +107,7 @@ public class SharePop implements View.OnClickListener {
         public static int DOING = -2;
         public static int CANCEL = -3;
         public static int FAILED = -4;
+
         /**
          * @param result (int) <br>
          *               SUCCESS -1 支付成功<br>
