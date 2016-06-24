@@ -44,6 +44,11 @@ public class WebActivity extends MyActivity {
                     startActivity(new Intent(WebActivity.this, LoginActivity.class));
                     return true;
                 }
+                if(url.contains("$$close")){
+                    finish();
+                    return true;
+                }
+
                 // 返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
                 view.loadUrl(url);
                 return true;

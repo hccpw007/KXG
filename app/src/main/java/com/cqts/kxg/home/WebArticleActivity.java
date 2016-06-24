@@ -161,7 +161,6 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
                     return;
                 }
 
-
                 if (is_love == 0) { //喜欢成功
                     animation = new FavoriteAnimation(collectImg, true);
 

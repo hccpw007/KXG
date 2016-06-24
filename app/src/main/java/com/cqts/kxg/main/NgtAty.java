@@ -23,6 +23,7 @@ import com.cqts.kxg.classify.ClassifyFragment;
 import com.cqts.kxg.hot.HotFragment;
 import com.cqts.kxg.home.HomeFragment;
 import com.cqts.kxg.nine.NineFragment;
+import com.cqts.kxg.utils.UpdateUtils;
 
 /**
  * 主页 导航页
@@ -54,6 +55,7 @@ public class NgtAty extends FragmentActivity implements OnMyPageChangeListener,
         InitView();
         InitFragment();
         InitNgt();
+        new UpdateUtils(this);
     }
 
     /**

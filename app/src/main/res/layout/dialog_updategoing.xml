@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/bg_dialog"
+              android:orientation="vertical">
+
+    <TextView
+        style="@style/text_16sp_red"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="正在更新,请稍后···"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/myline"/>
+
+    <ProgressBar
+        android:layout_margin="15dp"
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:indeterminate="false"
+        android:progress="20"
+        android:progressDrawable="@drawable/update_progress"/>
+
+    <LinearLayout
+        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:textColor="@color/mygray"
+            style="@style/text_14sp_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="总共1.38M"/>
+
+        <TextView
+            android:textColor="@color/mygray"
+            style="@style/text_14sp_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20"/>
+        <TextView
+            android:layout_marginRight="20dp"
+            android:textColor="@color/mygray"
+            style="@style/text_14sp_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/100"/>
+
+    </LinearLayout>
+</LinearLayout>

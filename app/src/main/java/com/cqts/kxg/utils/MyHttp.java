@@ -22,6 +22,7 @@ import com.cqts.kxg.bean.MyApprenticeInfo;
 import com.cqts.kxg.bean.RankingInfo;
 import com.cqts.kxg.bean.ShopInfo;
 import com.cqts.kxg.bean.SigninInfo;
+import com.cqts.kxg.bean.UpdateInfo;
 import com.cqts.kxg.bean.UserInfo;
 import com.cqts.kxg.bean.ClassifyListInfo;
 import com.cqts.kxg.bean.NineInfo;
@@ -673,5 +674,13 @@ public class MyHttp {
             return;
         }
         toBean(Request.Method.POST, http, which, httpMap, httpUrl, myHttpResult, null);
+    }
+
+    /**
+     * 阅读添加收益<p>
+     */
+    public static void update(HttpForVolley http, Integer which,MyHttpResult myHttpResult) {
+        String httpUrl = url + "system/android";
+        toBean(Request.Method.GET, http, which, null, httpUrl, myHttpResult, UpdateInfo.class);
     }
 }
