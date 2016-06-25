@@ -18,8 +18,7 @@ public class MyGridDecoration extends RecyclerView.ItemDecoration {
     private int hSize;
     private boolean isInScroll = false;
     private boolean isFrame = false;
-    int itemSize;
-
+    int RCheight = 0;
     public MyGridDecoration(int hSize, int vSize, int color, boolean isInScroll) {
         this.isInScroll = isInScroll;
         this.hSize = hSize;
@@ -117,7 +116,9 @@ public class MyGridDecoration extends RecyclerView.ItemDecoration {
         super.onDrawOver(c, parent, state);
         RecyclerView.Adapter adapter = parent.getAdapter(); //获得RecyclerView的Adapter
         int itemSize = adapter.getItemCount(); //总共有多少个item
-        if (isInScroll && this.itemSize != itemSize) {
+        ViewGroup.LayoutParams layoutParams = parent.getLayoutParams();
+
+        if (isInScroll) {
             try {
                 GridLayoutManager layoutManager = (GridLayoutManager) parent.getLayoutManager();
                 int spanCount = layoutManager.getSpanCount();
@@ -129,7 +130,6 @@ public class MyGridDecoration extends RecyclerView.ItemDecoration {
                 }
 
                 View childAt = parent.getChildAt(0);
-                ViewGroup.LayoutParams layoutParams = parent.getLayoutParams();
                 if (!isFrame) {
                     layoutParams.height = childAt.getMeasuredHeight() * itemNum + hSize *
                             (itemNum - 1);
@@ -137,8 +137,11 @@ public class MyGridDecoration extends RecyclerView.ItemDecoration {
                     layoutParams.height = childAt.getMeasuredHeight() * itemNum + hSize *
                             (itemNum - 1) + hSize * 2;
                 }
-                parent.setLayoutParams(layoutParams);
-                this.itemSize = itemSize;
+
+                if ( this.RCheight != layoutParams.height){
+                    parent.setLayoutParams(layoutParams);
+                    this.RCheight = layoutParams.height;
+                }
             } catch (Exception e) {
             }
         }
