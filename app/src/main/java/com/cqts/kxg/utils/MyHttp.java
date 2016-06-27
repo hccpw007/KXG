@@ -430,9 +430,11 @@ public class MyHttp {
     public static void goodsRecommend(HttpForVolley http, Integer which, MyHttpResult
             myHttpResult) {
         String httpUrl = url + "goods/recommend";
+        httpMap.clear();
+        httpMap.put("PageSize",30+"");
         Type type = new TypeToken<List<GoodsInfo>>() {
         }.getType();
-        toBean(Request.Method.GET, http, which, null, httpUrl, myHttpResult, type);
+        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type);
     }
 
     /**

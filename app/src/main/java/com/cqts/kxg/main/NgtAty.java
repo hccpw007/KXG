@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.Toast;
 
 import com.base.BaseFragment;
 import com.base.BaseValue;
@@ -38,6 +39,10 @@ public class NgtAty extends FragmentActivity implements OnMyPageChangeListener,
             R.drawable.sl_ngt_rb2, R.drawable.sl_ngt_rb3,
             R.drawable.sl_ngt_rb4, R.drawable.sl_ngt_rb5};
     private BaseFragment checkedFragment;
+    private UpdateUtils updateUtils;
+    protected int clickCount;
+    protected long clickFirstTime;
+    protected long clickSecondTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +60,7 @@ public class NgtAty extends FragmentActivity implements OnMyPageChangeListener,
         InitView();
         InitFragment();
         InitNgt();
-        new UpdateUtils(this);
+        updateUtils = new UpdateUtils(this);
     }
 
     /**
@@ -129,9 +134,41 @@ public class NgtAty extends FragmentActivity implements OnMyPageChangeListener,
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        updateUtils.setClose();//关闭自动更新
+    }
+
+    /**
+     * 两秒内双击退出
+     */
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode ==KeyEvent.KEYCODE_BACK){
-            System.exit(0);
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (updateUtils.alertDialog.isShowing()) {
+                return true;
+            }
+        }
+
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            clickCount++;
+            if (clickCount == 1) {
+                clickFirstTime = System.currentTimeMillis();
+                Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
+            } else if (clickCount == 2) {
+                clickSecondTime = System.currentTimeMillis();
+                if (clickSecondTime - clickFirstTime <= 2000) {
+                    System.exit(0);
+                } else {
+                    clickCount = 1;
+                    clickFirstTime = System.currentTimeMillis();
+                    Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                clickCount = 1;
+                clickFirstTime = System.currentTimeMillis();
+                Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
+            }
             return true;
         }
         return super.onKeyDown(keyCode, event);

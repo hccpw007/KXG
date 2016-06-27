@@ -3,6 +3,7 @@ package com.cqts.kxg.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +52,7 @@ public class ArticleClassifyAdapter extends RecyclerView.Adapter<ArticleClassify
         classifyViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (sceneInfos.get(i).cat_id.equals("301")||sceneInfos.get(i).cat_id.equals("311")){ //充话费和携程旅游
+                if (!TextUtils.isEmpty(sceneInfos.get(i).url)){ //充话费和携程旅游
                     context.startActivity(new Intent(context, WebActivity.class).putExtra("title",sceneInfos.get(i).cat_name).putExtra("url",sceneInfos.get(i).url));
                     return;
                 }

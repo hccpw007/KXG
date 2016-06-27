@@ -19,7 +19,7 @@
 
     <ProgressBar
         android:layout_margin="15dp"
-        android:id="@+id/progressBar"
+        android:id="@+id/progress"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="10dp"
@@ -28,7 +28,7 @@
         android:progressDrawable="@drawable/update_progress"/>
 
     <LinearLayout
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -39,14 +39,16 @@
             style="@style/text_14sp_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="总共1.38M"/>
+            android:text="总共:1.38M"
+            android:id="@+id/size_tv"/>
 
         <TextView
             android:textColor="@color/mygray"
             style="@style/text_14sp_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="20"/>
+            android:text="0"
+            android:id="@+id/plan_tv"/>
         <TextView
             android:layout_marginRight="20dp"
             android:textColor="@color/mygray"
@@ -54,6 +56,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="/100"/>
-
     </LinearLayout>
+    <View
+        android:background="@color/myline"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <TextView
+        android:id="@+id/cancel"
+        style="@style/text_16sp_black"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="取\t\t消"/>
+    <View
+        android:background="@color/myline"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
 </LinearLayout>
