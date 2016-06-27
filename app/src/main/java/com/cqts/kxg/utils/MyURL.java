@@ -1,21 +1,45 @@
 package com.cqts.kxg.utils;
 
+import android.app.Activity;
+import android.widget.Toast;
+
+import com.base.http.HttpForVolley;
+import com.cqts.kxg.bean.MyUrlInfo;
+import com.cqts.kxg.views.SharePop;
+
 /**
- * Created by Administrator on 2016/6/21.
+ * Created by Administrator on 2016/6/27.
  */
-public class MyURL {
-    //关于
-    public static String ABOUT = "https://h5.kxg99.com/about/index";
-    //跳转淘宝链接
-    public static String JUMP = "http://www.kxg99.com/jump.php";
-    //提现
-    public static String WITHDRAW = "http://h5.kxg99.com/user/withdraw";
-    //新手任务
-    public static String NOVICETASK = "http://h5.kxg99.com/noviceTask/index";
-    //我要开店
-    public static String OPENSHOP = "http://h5.kxg99.com/openShop/index";
-    //我要充值
-    public static String RECHARGE = "http://www.kxg99.com/recharge/?method=3";
-    //我的店铺
-    public static String MYSHOP = "";
+public class MyUrl {
+    static MyUrl instance;
+    MyUrlInfo urlInfo;
+
+    public static MyUrl getInstance() {
+        if (instance == null) {
+            synchronized (SharePop.class) {
+                if (instance == null) {
+                    instance = new MyUrl();
+                }
+            }
+        }
+        return instance;
+    }
+
+    public MyUrlInfo getMyUrl(final Activity context) {
+        if (null != urlInfo) {
+            return urlInfo;
+        }
+        HttpForVolley httpForVolley = new HttpForVolley(context);
+        MyHttp.getLinkIndex(httpForVolley, null, new MyHttp.MyHttpResult() {
+            @Override
+            public void httpResult(Integer which, int code, String msg, Object bean) {
+                if (code != 0) {
+                    Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                urlInfo = (MyUrlInfo) bean;
+            }
+        });
+        return urlInfo;
+    }
 }
