@@ -125,7 +125,7 @@ public class HttpForVolley {
         }
 
         //对所有参数进行URL编码,以防中文服务器无法解析
-        if (httpMap != null) {
+        if (httpMap != null && Method == Request.Method.GET) {
             for (String key : httpMap.keySet()) {
                 try {
                     if (!key.equals("token")) {
@@ -150,7 +150,7 @@ public class HttpForVolley {
         }
 
 
-        request = new StringRequest(Method,  url, new Listener<String>() {
+        request = new StringRequest(Method, url, new Listener<String>() {
 
             @Override
             public void onResponse(String response) {
