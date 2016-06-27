@@ -69,6 +69,9 @@ public class MyHttp {
                 if (code == 2 && (http.getContext().getClass() != MainActivity.class)) {
                     Context context = http.getContext();
                     Toast.makeText(context, "登录失效,请重新登录!", Toast.LENGTH_SHORT).show();
+                    MyApplication.userInfo = null;
+                    MyApplication.token = "";
+                    SPutils.setToken("");
                     context.startActivity(new Intent(context, LoginActivity.class));
                     return;
                 }
