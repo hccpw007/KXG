@@ -183,6 +183,10 @@
             android:name=".center.BindPhoneActivity"
             android:theme="@style/SwipeBackTheme">
         </activity>
+        <activity
+            android:name=".center.WebActivityActivity"
+            android:theme="@style/SwipeBackTheme">
+        </activity>
     </application>
 
 </manifest>

@@ -19,6 +19,7 @@ import com.cqts.kxg.bean.GoodsInfo;
 import com.cqts.kxg.bean.HomeSceneInfo;
 import com.cqts.kxg.bean.HomeTableInfo;
 import com.cqts.kxg.bean.MyApprenticeInfo;
+import com.cqts.kxg.bean.MyUrlInfo;
 import com.cqts.kxg.bean.RankingInfo;
 import com.cqts.kxg.bean.ShopInfo;
 import com.cqts.kxg.bean.SigninInfo;
@@ -462,7 +463,7 @@ public class MyHttp {
     }
 
     /**
-     * 获取个人中心热门商品 <p>
+     * 获取个人中心滚动消息 <p>
      */
     public static void withdraw(HttpForVolley http, Integer which, HttpForVolley.HttpTodo
             httpTodo) {
@@ -687,5 +688,13 @@ public class MyHttp {
     public static void update(HttpForVolley http, Integer which,MyHttpResult myHttpResult) {
         String httpUrl = url + "system/android";
         toBean(Request.Method.GET, http, which, null, httpUrl, myHttpResult, UpdateInfo.class);
+    }
+
+    /**
+     * 获取URL<p>
+     */
+    public static void getLinkIndex(HttpForVolley http, Integer which,MyHttpResult myHttpResult) {
+        String httpUrl = url + "getLink/index";
+        toBean(Request.Method.GET, http, which, null, httpUrl, myHttpResult, MyUrlInfo.class);
     }
 }

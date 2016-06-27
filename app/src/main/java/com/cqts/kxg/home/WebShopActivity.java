@@ -28,6 +28,7 @@ public class WebShopActivity extends MyActivity {
         title = getIntent().getStringExtra("title");
         url = getIntent().getStringExtra("url");
         InitView();
+        setSwipeBackEnable(false);
     }
 
     @Override

@@ -13,7 +13,7 @@ import com.cqts.kxg.R;
 import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.main.MyApplication;
 import com.cqts.kxg.main.WebActivity;
-import com.cqts.kxg.utils.MyURL;
+import com.cqts.kxg.utils.MyUrls;
 import com.cqts.kxg.utils.SPutils;
 import com.cqts.kxg.views.SharePop;
 
@@ -85,7 +85,7 @@ public class SettingActivity extends MyActivity implements View.OnClickListener 
             case R.id.layout5: //关于开心购
                 Intent intent = new Intent(this, WebActivity.class);
                 intent.putExtra("title", "关于开心购");
-                intent.putExtra("url", MyURL.ABOUT);
+                intent.putExtra("url", MyUrls.getInstance().getMyUrl(this).about);
                 startActivity(intent);
                 break;
             case R.id.exit_btn: //退出当前账户

@@ -13,6 +13,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
+import com.base.BaseValue;
 import com.base.http.HttpForVolley;
 import com.base.views.MyWebView;
 import com.cqts.kxg.R;
@@ -53,8 +57,8 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
         articleInfo = (ArticleInfo) getIntent().getSerializableExtra("articleInfo");
         InitView();
         InitWebView();
-        MyHttp.userRead(http,null,articleInfo.article_id,null); //阅读回调
-        bitmap = ImageLoader.getInstance().loadImageSync(articleInfo.cover_img);
+        MyHttp.userRead(http, null, articleInfo.article_id, null); //阅读回调
+        getBitmap();
     }
 
     private void InitView() {
@@ -117,19 +121,20 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
             case R.id.collect_layout://收藏  取消收藏
                 setLove();
                 break;
+
             case R.id.share_layout: //分享
                 setShare();
                 break;
         }
     }
 
-
     /**
      * 分享文章并请求接口调用收益
      */
     private void setShare() {
-        SharePop.getInstance().showPop(this, shareLayout, articleInfo.title,articleInfo.article_url,
-                "分享测试",bitmap,new SharePop.ShareResult() {
+        SharePop.getInstance().showPop(this, shareLayout, articleInfo.title, articleInfo
+                .article_url,
+                articleInfo.share_content, bitmap, new SharePop.ShareResult() {
                     @Override
                     public void shareResult(int result) {
                         if (result == SharePop.ShareResult.SUCCESS) { //分享成功
@@ -198,6 +203,21 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
 
         MyHttp.articleCollect(http, 1, articleInfo.article_id, httpTodo);
         canClick = false;
+    }
+
+    void getBitmap(){
+        ImageRequest imageRequest = new ImageRequest(articleInfo.share_img,
+                new Response.Listener<Bitmap>() {
+                    @Override
+                    public void onResponse(Bitmap response) {
+                        bitmap = response;
+                    }
+                }, 0, 0, Bitmap.Config.RGB_565, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        BaseValue.mQueue.add(imageRequest);
     }
 }
 

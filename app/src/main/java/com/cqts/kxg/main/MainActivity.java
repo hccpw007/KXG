@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.KeyEvent;
 
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.SigninInfo;
@@ -24,7 +25,6 @@ public class MainActivity extends MyActivity implements MyHttp.MyHttpResult, Han
         InitView();
         AutoLogin();
     }
-
 
     /**
      * 自动登录
@@ -66,13 +66,20 @@ public class MainActivity extends MyActivity implements MyHttp.MyHttpResult, Han
 
     @Override
     public boolean handleMessage(Message msg) {
-//        if (SPutils.getFirst()){
-//            // TODO: 2016/6/20 引导页
-//        }else {
-//            startActivity(new Intent(this,NgtAty.class));
-//        }
-        startActivity(new Intent(this, NgtAty.class));
+        if (SPutils.getFirst()){
+            startActivity(new Intent(this,IndexActivity.class));
+        }else {
+            startActivity(new Intent(this,NgtAty.class));
+        }
         finish();
         return false;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

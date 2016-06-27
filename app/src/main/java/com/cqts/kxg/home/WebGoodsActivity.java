@@ -8,19 +8,15 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.base.http.HttpForVolley;
 import com.base.views.MyWebView;
 import com.cqts.kxg.R;
-import com.cqts.kxg.bean.ArticleInfo;
-import com.cqts.kxg.center.LoginActivity;
 import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.main.MyApplication;
-import com.cqts.kxg.main.WebActivity;
 import com.cqts.kxg.utils.MyHttp;
-import com.cqts.kxg.utils.MyURL;
+import com.cqts.kxg.utils.MyUrls;
 import com.cqts.kxg.views.FavoriteAnimation;
 
 import org.json.JSONObject;
@@ -120,7 +116,7 @@ public class WebGoodsActivity extends MyActivity implements View.OnClickListener
                 setLove();
                 break;
             case R.id.tobuy_tv://去淘宝购买
-                String urlStr = MyURL.JUMP+"?id="+id+"&token="+MyApplication.token;
+                String urlStr = MyUrls.getInstance().getMyUrl(this)+"?id="+id+"&token="+MyApplication.token;
                 Intent intent =new Intent(this, WebBuyActivity.class);
                 intent.putExtra("title",title);
                 intent.putExtra("url",urlStr);

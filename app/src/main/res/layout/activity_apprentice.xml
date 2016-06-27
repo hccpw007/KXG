@@ -3,12 +3,14 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scrollbars="none"
             android:background="@color/myred"
             android:clipToPadding="true"
             android:fitsSystemWindows="true"
             tools:context="com.cqts.kxg.center.ApprenticeActivity">
-
     <LinearLayout
+        android:focusableInTouchMode="true"
+        android:focusable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -149,11 +151,11 @@
             android:background="@color/white">
 
             <ImageView
+                android:scaleType="fitXY"
                 android:id="@+id/qr_img"
-                android:layout_width="110dp"
+                android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="10dp"
                 android:src="@mipmap/ic_launcher"/>
 
             <TextView
@@ -161,7 +163,7 @@
                 style="@style/text_14sp_black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@id/qr_img"
@@ -172,8 +174,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/qr_img"
-                android:layout_marginLeft="25dp"
+                android:layout_alignBottom="@id/qr_img"
+                android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_toRightOf="@id/qr_img"
                 android:orientation="horizontal">
@@ -186,8 +188,6 @@
                     android:text="邀请码:"/>
 
                 <com.base.views.MyEditText
-                    android:focusableInTouchMode="false"
-                    android:focusable="false"
                     style="@style/text_16sp_red"
                     android:layout_width="0px"
                     android:layout_height="wrap_content"

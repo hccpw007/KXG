@@ -23,7 +23,7 @@ public class MyApplication extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        downTimer = new CodeCountDownTimer(10000, 100);
+        downTimer = new CodeCountDownTimer(60000, 100);
         userSp = getSharedPreferences("usersp", Context
                 .MODE_PRIVATE);
     }

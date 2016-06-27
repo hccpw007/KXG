@@ -14,7 +14,7 @@ import com.base.utils.ViewMove;
 import com.cqts.kxg.R;
 import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.main.WebActivity;
-import com.cqts.kxg.utils.MyURL;
+import com.cqts.kxg.utils.MyUrls;
 
 public class ShopStreetActivity extends MyActivity implements RadioGroup.OnCheckedChangeListener,
         View.OnClickListener {
@@ -91,7 +91,7 @@ public class ShopStreetActivity extends MyActivity implements RadioGroup.OnCheck
             case R.id.openshop_img:
                 Intent intent =new Intent(this, WebActivity.class);
                 intent.putExtra("title","我要开店");
-                intent.putExtra("url", MyURL.OPENSHOP);
+                intent.putExtra("url", MyUrls.getInstance().getMyUrl(this).openShop);
                 startActivity(intent);
                 break;
         }

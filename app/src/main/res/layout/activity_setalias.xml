@@ -37,6 +37,8 @@
                 android:background="@color/transparency"
                 android:hint="请输入昵称（4-20个字符）"
                 android:maxLength="20"
+                android:maxLines="1"
+                android:singleLine="true"
                 android:textColorHint="@color/myhint"
                 android:textSize="18sp"
                 android:id="@+id/nickname_et"/>

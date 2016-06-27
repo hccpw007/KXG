@@ -24,6 +24,7 @@ import com.cqts.kxg.classify.ClassifyFragment;
 import com.cqts.kxg.hot.HotFragment;
 import com.cqts.kxg.home.HomeFragment;
 import com.cqts.kxg.nine.NineFragment;
+import com.cqts.kxg.utils.MyUrls;
 import com.cqts.kxg.utils.UpdateUtils;
 
 /**
@@ -61,6 +62,7 @@ public class NgtAty extends FragmentActivity implements OnMyPageChangeListener,
         InitFragment();
         InitNgt();
         updateUtils = new UpdateUtils(this);
+        MyUrls.getInstance().getMyUrl(this);
     }
 
     /**
@@ -145,7 +147,7 @@ public class NgtAty extends FragmentActivity implements OnMyPageChangeListener,
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (updateUtils.alertDialog.isShowing()) {
+            if (updateUtils.alertDialog != null && updateUtils.alertDialog.isShowing()) {
                 return true;
             }
         }

@@ -1,32 +1,29 @@
 package com.cqts.kxg.center;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.base.utils.MyGridDecoration;
 import com.base.views.MyEditText;
+import com.base.zxing.EncodingHandler;
 import com.cqts.kxg.R;
 import com.cqts.kxg.adapter.ApprenticeAdapter;
 import com.cqts.kxg.bean.EaringApprenticeInfo;
 import com.cqts.kxg.bean.MyApprenticeInfo;
 import com.cqts.kxg.main.MyActivity;
-import com.cqts.kxg.main.MyApplication;
 import com.cqts.kxg.utils.MyHttp;
 import com.cqts.kxg.views.SharePop;
+import com.google.zxing.WriterException;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 收徒弟页面
@@ -89,6 +86,15 @@ public class ApprenticeActivity extends MyActivity implements View.OnClickListen
         change_tv.setOnClickListener(this);
         shareBtn.setOnClickListener(this);
         invitationEt.setText(getUserInfo().invite_code + "");
+
+        try {
+            //生成二维码
+            Bitmap qrcodeBitmap = EncodingHandler.createQRCode(getUserInfo().invite_link + getUserInfo().invite_code, 800);
+            qrImg.setImageBitmap(qrcodeBitmap);
+            qrImg.setScaleType(ImageView.ScaleType.FIT_XY);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
     }
 
     private void getData() {
@@ -169,8 +175,10 @@ public class ApprenticeActivity extends MyActivity implements View.OnClickListen
         boolean enabled = invitationEt.isEnabled();
 
         if (!enabled) {
+            System.out.println("1");
             change_tv.setText("确认");
             invitationEt.setEnabled(true);
+            System.out.println(invitationEt.isEnabled());
             if (!TextUtils.isEmpty(text)) {
                 invitationEt.setSelection(text.length());
             }
@@ -178,7 +186,7 @@ public class ApprenticeActivity extends MyActivity implements View.OnClickListen
 
         if (enabled) {
             if (text.isEmpty() || text.length() < 6) {
-                showToast("请输入1~6位邀请码");
+                showToast("请输入6位邀请码");
                 return;
             }
             MyHttp.userInvitecode(http, null, text, new MyHttp.MyHttpResult() {

@@ -1,6 +1,5 @@
-package com.cqts.kxg.main;
+package com.cqts.kxg.center;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -8,9 +7,11 @@ import android.webkit.WebViewClient;
 
 import com.base.views.MyWebView;
 import com.cqts.kxg.R;
-import com.cqts.kxg.center.LoginActivity;
+import com.cqts.kxg.main.MyActivity;
 
-public class WebActivity extends MyActivity {
+public class WebActivityActivity extends MyActivity {
+    public final static int REQUESTCODE = 8;
+    public final static int RESULTCODE = 9;
     private String title = "";
     private String url = "";
     private MyWebView webview;
@@ -40,11 +41,8 @@ public class WebActivity extends MyActivity {
         webview.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                if (url.contains("$$login")){ //需要登录
-                    startActivity(new Intent(WebActivity.this, LoginActivity.class));
-                    return true;
-                }
-                if(url.contains("$$close")){
+                if (url.contains("$$push_hot")) { //跳转到热门文章
+                    setResult(RESULTCODE);
                     finish();
                     return true;
                 }

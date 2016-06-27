@@ -26,14 +26,14 @@ import com.cqts.kxg.bean.GoodsInfo;
 import com.cqts.kxg.home.WebShopActivity;
 import com.cqts.kxg.main.MyApplication;
 import com.cqts.kxg.main.MyFragment;
+import com.cqts.kxg.main.NgtAty;
 import com.cqts.kxg.main.WebActivity;
 import com.cqts.kxg.utils.MyHttp;
-import com.cqts.kxg.utils.MyURL;
+import com.cqts.kxg.utils.MyUrls;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json.JSONObject;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -53,6 +53,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
     private GoodsAdapter adapter;
     private LinearLayout money_layout;
     private AlertDialog dialog;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -143,13 +144,19 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 }
                 break;
             case R.id.table2://文章赚钱
-                table2Dialog();
+                if (needLogin()) {
+                    Intent intent = new Intent(getActivity(), WebActivityActivity.class);
+                    intent.putExtra("title", "文章赚钱");
+                    intent.putExtra("url", MyUrls.getInstance().getMyUrl(getActivity()).activity);
+                    startActivityForResult(intent, WebActivityActivity.REQUESTCODE);
+                }
                 break;
             case R.id.table3://我要提现
                 if (needLogin()) {
                     Intent intent = new Intent(getActivity(), WebActivity.class);
                     intent.putExtra("title", "提现");
-                    intent.putExtra("url", MyURL.WITHDRAW + "?token=" + MyApplication.token);
+                    intent.putExtra("url", MyUrls.getInstance().getMyUrl(getActivity()).withdraw +
+                            "?token=" + MyApplication.token);
                     startActivity(intent);
                 }
                 break;
@@ -178,12 +185,17 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 }
                 break;
             case R.id.table8://常见问题
+                Intent intent1 = new Intent(getActivity(), WebActivity.class);
+                intent1.putExtra("title", "常见问题");
+                intent1.putExtra("url", MyUrls.getInstance().getMyUrl(getActivity()).problem);
+                startActivity(intent1);
                 break;
             case R.id.table9://新手任务
                 if (needLogin()) {
                     Intent intent = new Intent(getActivity(), WebActivity.class);
                     intent.putExtra("title", "新手任务");
-                    intent.putExtra("url", MyURL.NOVICETASK + "?token=" + MyApplication.token);
+                    intent.putExtra("url", MyUrls.getInstance().getMyUrl(getActivity()).noviceTask
+                            + "?token=" + MyApplication.token);
                     startActivity(intent);
                 }
                 break;
@@ -193,13 +205,14 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
             case R.id.table11://话费充值
                 Intent intent = new Intent(getActivity(), WebActivity.class);
                 intent.putExtra("title", "话费充值");
-                intent.putExtra("url", MyURL.RECHARGE);
+                intent.putExtra("url", MyUrls.getInstance().getMyUrl(getActivity()).recharge);
                 startActivity(intent);
                 break;
             case R.id.table12://我的店铺
                 if (!TextUtils.isEmpty(getUserInfo().store)) {
-                    startActivity(new Intent(getActivity(), WebShopActivity.class).putExtra("title","我的店铺").putExtra("url",getUserInfo().store));
-                }else {
+                    startActivity(new Intent(getActivity(), WebShopActivity.class).putExtra
+                            ("title", "我的店铺").putExtra("url", getUserInfo().store));
+                } else {
                     showToast("您还没有店铺!");
                 }
                 break;
@@ -237,7 +250,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
     private void showLogined() {
         name_tv.setVisibility(View.VISIBLE);
         login_tv.setVisibility(View.GONE);
-        money_tv.setText(String.format("%.2f",getUserInfo().app_money));
+        money_tv.setText(String.format("%.2f", getUserInfo().app_money));
         name_tv.setText(getUserInfo().user_name);
         ImageLoader.getInstance().displayImage(getUserInfo().headimg, head_img, BaseValue
                 .getOptions(R.mipmap.center_head));
@@ -249,8 +262,8 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                     return;
                 }
                 EarnInfo earnInfo = (EarnInfo) bean;
-                money_tv.setText(String.format("%.2f",earnInfo.history));
-                history_tv.setText(String.format("%.2f",earnInfo.history));
+                money_tv.setText(String.format("%.2f", earnInfo.history));
+                history_tv.setText(String.format("%.2f", earnInfo.history));
                 today_tv.setText(earnInfo.today);
                 prentice_tv.setText(earnInfo.receive);
                 prenticemoney_tv.setText(earnInfo.kickback);
@@ -305,20 +318,14 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
         });
     }
 
-    /**
-     * 文章赚钱的dialog
-     */
-    void table2Dialog() {
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_centertable2, null);
-        View dismiss = view.findViewById(R.id.dismiss);
-        dismiss.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog = new AlertDialog.Builder(getActivity()).create();
-        dialog.show();
-        dialog.setContentView(view);
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //文章赚钱的返回,跳转到热门文章
+        if (requestCode == WebActivityActivity.REQUESTCODE && resultCode == WebActivityActivity
+                .RESULTCODE) {
+            ((NgtAty) getActivity()).ngt_pager.setCurrentItem(3, false);
+        }
     }
 }

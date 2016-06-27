@@ -1,13 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
     tools:context="com.cqts.kxg.main.IndexActivity">
 
-</RelativeLayout>
+    <com.base.views.MyViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </com.base.views.MyViewPager>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rdbtn1"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/sl_viewpager_dot"
+            android:button="@null"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/rdbtn2"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/sl_viewpager_dot"
+            android:button="@null"
+            android:checked="false"/>
+
+        <RadioButton
+            android:id="@+id/rdbtn3"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/sl_viewpager_dot"
+            android:button="@null"
+            android:checked="false"/>
+    </RadioGroup>
+<Button
+    android:background="@color/transparency"
+    android:padding="10dp"
+    android:visibility="gone"
+    android:id="@+id/into_btn"
+    android:layout_marginBottom="50dp"
+    android:layout_gravity="center_horizontal|bottom"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"/>
+
+</FrameLayout>

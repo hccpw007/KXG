@@ -8,8 +8,10 @@
     </item>
     <item android:state_checked="false" >
         <shape android:shape="rectangle" >
-            <solid android:color="@color/mygray"/>
+            <solid android:color="@color/white"/>
             <corners android:radius="100dp"/>
+            <stroke android:color="@color/myred"
+                    android:width="1px"/>
         </shape>
     </item>
 </selector>
