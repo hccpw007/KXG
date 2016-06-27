@@ -8,13 +8,13 @@
               android:orientation="horizontal">
 
     <com.base.views.MyOvalImageView
+        android:src="@mipmap/center_head"
         app:myradius="100dp"
         android:layout_marginRight="12dp"
         android:layout_marginLeft="12dp"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:scaleType="center"
-        android:src="@mipmap/center_head"
         android:id="@+id/item_img"/>
 
     <LinearLayout
@@ -28,7 +28,6 @@
             style="@style/text_14sp_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="我的是店铺"
             android:textSize="18sp"
             android:id="@+id/item_shopname_tv"/>
 
@@ -38,7 +37,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:text="我的是店铺"
             android:textColor="@color/mygray"
             android:id="@+id/item_name_tv"/>
 
@@ -59,7 +57,7 @@
                 style="@style/text_14sp_red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="123"
+                android:text="0"
                 android:id="@+id/item_views_tv"/>
             <TextView
                 style="@style/text_14sp_black"
@@ -72,7 +70,7 @@
                 style="@style/text_14sp_red"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:text="1232"
+                android:text="0"
                 android:id="@+id/item_num_tv"/>
             <TextView
                 android:layout_marginRight="10dp"

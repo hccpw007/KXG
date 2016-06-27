@@ -88,10 +88,6 @@
             android:theme="@style/SwipeBackTheme">
         </activity>
         <activity
-            android:name=".center.FavoriteActivity"
-            android:theme="@style/SwipeBackTheme">
-        </activity>
-        <activity
             android:name=".home.SearchActivity"
             android:theme="@style/SwipeBackTheme">
         </activity>

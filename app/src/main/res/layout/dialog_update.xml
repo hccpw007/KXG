@@ -28,7 +28,6 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingTop="10dp"
-        android:text="现在非活动时间，阅读文章、分享文章不享受、分享文章不享受、分享文章不享受平台补贴"
         android:textColor="@color/mygray"
         android:id="@+id/msg_tv"/>
 

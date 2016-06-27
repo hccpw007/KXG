@@ -25,7 +25,6 @@
         android:lineSpacingMultiplier="1.2"
         android:maxLines="2"
         android:minLines="2"
-        android:text="g大豆收购大家好多发高发大豆收购"
         android:textColor="@color/myblack"
         android:textSize="16sp"
         android:id="@+id/item_info_tv"/>
@@ -43,7 +42,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="dsga"
             android:textSize="17sp"
             android:id="@+id/item_money_tv"/>
 
@@ -58,7 +56,7 @@
             style="@style/text_14sp_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="12345"
+            android:text="0"
             android:textColor="@color/mygray"
             android:textSize="17sp"
             android:id="@+id/item_love_tv"/>

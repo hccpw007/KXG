@@ -10,8 +10,7 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_gravity="center_horizontal"
-        android:scaleType="fitXY"
-        android:src="@mipmap/home_articleclassify"/>
+        android:scaleType="fitXY"/>
 
     <TextView
         android:layout_marginTop="10dp"
@@ -20,7 +19,6 @@
         android:layout_height="30dp"
         android:gravity="center"
         android:maxLines="1"
-        android:text="牛逼的男装"
         android:textColor="@color/black"
         android:textSize="14sp"/>
 </LinearLayout>

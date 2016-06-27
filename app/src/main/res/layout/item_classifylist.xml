@@ -11,7 +11,6 @@
         android:textColor="@drawable/sl_ngt_text"
         style="@style/text_14sp_black"
         android:textSize="16sp"
-        android:text="热门分类"
         android:layout_width="match_parent"
         android:layout_height="48dp"/>
 
