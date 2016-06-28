@@ -14,8 +14,10 @@ import com.google.zxing.common.BitMatrix;
  *
  */
 public final class EncodingHandler {
+	//二维码颜色
+	private static final int RED = 0xffff0000;
 	private static final int BLACK = 0xff000000;
-	
+
 	public static Bitmap createQRCode(String str,int widthAndHeight) throws WriterException {
 		Hashtable<EncodeHintType, String> hints = new Hashtable<EncodeHintType, String>();  
         hints.put(EncodeHintType.CHARACTER_SET, "utf-8"); 
@@ -28,7 +30,7 @@ public final class EncodingHandler {
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				if (matrix.get(x, y)) {
-					pixels[y * width + x] = BLACK;
+					pixels[y * width + x] = RED; //更改颜色
 				}
 			}
 		}

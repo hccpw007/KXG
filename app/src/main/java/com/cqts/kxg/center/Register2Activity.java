@@ -1,17 +1,20 @@
 package com.cqts.kxg.center;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.base.views.MyEditText;
 import com.cqts.kxg.R;
+import com.cqts.kxg.bean.SigninInfo;
+import com.cqts.kxg.bean.UserInfo;
 import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.main.MyApplication;
 import com.cqts.kxg.utils.MyHttp;
+import com.cqts.kxg.utils.SPutils;
 
 public class Register2Activity extends MyActivity implements View.OnClickListener {
     private TextView register2_phone_tv;
@@ -91,7 +94,7 @@ public class Register2Activity extends MyActivity implements View.OnClickListene
                 if (code != 0) {
                     return;
                 }
-                finish();
+                login();
             }
         });
     }
@@ -108,6 +111,52 @@ public class Register2Activity extends MyActivity implements View.OnClickListene
                     showToast(msg);
                     MyApplication.downTimer.setInit();
                 }
+            }
+        });
+    }
+
+
+
+    /**
+     * 登录
+     */
+    private void login() {
+
+        MyHttp.signin(http, null, phoneStr, pswdStr, new MyHttp.MyHttpResult() {
+            @Override
+            public void httpResult(Integer which, int code, String msg, Object bean) {
+                if (code != 0) {
+                    SPutils.setToken("");
+                    showToast(msg);
+                    return;
+                }
+                SPutils.setUserName(phoneStr);
+                SigninInfo signinInfo = (SigninInfo) bean;
+                MyApplication.signinInfo = signinInfo;
+                MyApplication.token = signinInfo.getToken();
+                getUserInfoData();
+            }
+
+        });
+    }
+
+
+    /**
+     * 获取用户信息
+     */
+    private void getUserInfoData() {
+        MyHttp.getUserInfo(http, null, new MyHttp.MyHttpResult() {
+
+            @Override
+            public void httpResult(Integer which, int code, String msg, Object bean) {
+                if (code != 0) {
+                    showToast(msg);
+                    return;
+                }
+                MyApplication.userInfo = (UserInfo) bean;
+                SPutils.setToken(MyApplication.token);
+                LoginActivity.instance.finish();
+                finish();
             }
         });
     }

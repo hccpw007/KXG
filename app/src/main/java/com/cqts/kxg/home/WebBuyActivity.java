@@ -1,6 +1,5 @@
 package com.cqts.kxg.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.webkit.WebSettings;
@@ -9,10 +8,7 @@ import android.webkit.WebViewClient;
 
 import com.base.views.MyWebView;
 import com.cqts.kxg.R;
-import com.cqts.kxg.center.LoginActivity;
 import com.cqts.kxg.main.MyActivity;
-
-import java.util.ArrayList;
 
 public class WebBuyActivity extends MyActivity {
     private String title = "";
@@ -32,7 +28,6 @@ public class WebBuyActivity extends MyActivity {
             title = getIntent().getStringExtra("title");
             url = getIntent().getStringExtra("url");
         } catch (Exception e) {
-
         }
     }
 

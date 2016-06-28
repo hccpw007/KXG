@@ -10,7 +10,7 @@ import android.view.animation.TranslateAnimation;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 
-public class MyWebView extends WebView {
+public class MyWebView extends WebView implements View.OnLongClickListener {
 	private ProgressBar progressbar;
 
 	public MyWebView(Context context) {
@@ -20,6 +20,7 @@ public class MyWebView extends WebView {
 		addView(progressbar);
 		setWebChromeClient(new WebChromeClient());
 		setOverScrollMode(View.OVER_SCROLL_NEVER);
+		setOnLongClickListener(this);
 	}
 
 	public MyWebView(Context context, AttributeSet attrs) {
@@ -29,6 +30,13 @@ public class MyWebView extends WebView {
 		addView(progressbar);
 		setWebChromeClient(new WebChromeClient());
 		setOverScrollMode(View.OVER_SCROLL_NEVER);
+		setOnLongClickListener(this);
+	}
+
+	//屏蔽长按复制
+	@Override
+	public boolean onLongClick(View v) {
+		return true;
 	}
 
 	public class WebChromeClient extends android.webkit.WebChromeClient {
@@ -54,5 +62,4 @@ public class MyWebView extends WebView {
 		progressbar.setLayoutParams(lp);
 		super.onScrollChanged(l, t, oldl, oldt);
 	}
-
 }

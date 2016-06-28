@@ -43,6 +43,7 @@ public class WebShopActivity extends MyActivity {
         setMyTitle(title);
         webview = (MyWebView) findViewById(R.id.webview);
         WebSettings settings = webview.getSettings();
+        settings.setBlockNetworkImage(false);
         settings.setJavaScriptEnabled(true);
         webview.setWebViewClient(new WebViewClient() {
             @Override

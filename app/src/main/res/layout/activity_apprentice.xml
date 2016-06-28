@@ -167,8 +167,9 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@id/qr_img"
-                android:maxLines="4"
-                android:text="好友注册时输入您的邀请码，您即可得到￥1.00元现金奖励，且以后他赚的钱都会给你有分成收益哦！"
+                android:maxLines="5"
+                android:text="好友使用您的邀请码成功注册，您即得0.20元现金奖励，其完成新
+手任务后您再得0.20元现金奖励，且以后他赚的钱你都会有10%分成收益哦！"
                 android:textColor="@color/mygray"/>
 
             <LinearLayout
@@ -408,7 +409,7 @@
             android:layout_marginRight="15dp"
             android:lineSpacingMultiplier="1.2"
             android:maxLines="100"
-            android:text="3、收益满30元即可提现。"
+            android:text="3、收益满30元即可提现(5%手续费)。"
             android:textColor="@color/mygray"/>
     </LinearLayout>
 </ScrollView>

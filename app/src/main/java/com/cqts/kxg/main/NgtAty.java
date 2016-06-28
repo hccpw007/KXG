@@ -37,8 +37,8 @@ public class NgtAty extends FragmentActivity implements OnMyPageChangeListener,
     private RadioGroup ngt_rg;
     RadioButton[] ngt_rb = new RadioButton[5];
     int[] drawableId = new int[]{R.drawable.sl_ngt_rb1,
-            R.drawable.sl_ngt_rb2, R.drawable.sl_ngt_rb3,
-            R.drawable.sl_ngt_rb4, R.drawable.sl_ngt_rb5};
+            R.drawable.sl_ngt_rb2, R.drawable.sl_ngt_rb4,
+            R.drawable.sl_ngt_rb3, R.drawable.sl_ngt_rb5};
     private BaseFragment checkedFragment;
     private UpdateUtils updateUtils;
     protected int clickCount;
@@ -89,8 +89,8 @@ public class NgtAty extends FragmentActivity implements OnMyPageChangeListener,
     private void InitFragment() {
         list.add(new HomeFragment());
         list.add(new NineFragment());
-        list.add(new ClassifyFragment());
         list.add(new HotFragment());
+        list.add(new ClassifyFragment());
         list.add(new CenterFragment());
         ngt_pager.setFragemnt(getSupportFragmentManager(), list);
         ngt_pager.setOnMyPageChangeListener(this);

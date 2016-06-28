@@ -89,7 +89,7 @@ public class ApprenticeActivity extends MyActivity implements View.OnClickListen
 
         try {
             //生成二维码
-            Bitmap qrcodeBitmap = EncodingHandler.createQRCode(getUserInfo().invite_link + getUserInfo().invite_code, 800);
+            Bitmap qrcodeBitmap = EncodingHandler.createQRCode(getUserInfo().invite_link + getUserInfo().invite_code, 400);
             qrImg.setImageBitmap(qrcodeBitmap);
             qrImg.setScaleType(ImageView.ScaleType.FIT_XY);
         } catch (WriterException e) {

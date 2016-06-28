@@ -116,7 +116,7 @@ public class WebGoodsActivity extends MyActivity implements View.OnClickListener
                 setLove();
                 break;
             case R.id.tobuy_tv://去淘宝购买
-                String urlStr = MyUrls.getInstance().getMyUrl(this)+"?id="+id+"&token="+MyApplication.token;
+                String urlStr = MyUrls.getInstance().getMyUrl(this).jump+"?id="+id+"&token="+MyApplication.token;
                 Intent intent =new Intent(this, WebBuyActivity.class);
                 intent.putExtra("title",title);
                 intent.putExtra("url",urlStr);

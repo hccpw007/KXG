@@ -92,6 +92,51 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 try {
                     url = URLDecoder.decode(url, "utf-8");
+                    System.out.println(url);
+                    if (url.contains("$$push_article")) { //跳转到文章
+                        ArticleInfo articleInfo = new ArticleInfo();
+
+                        int start = url.indexOf("id=");
+                        int end = url.indexOf("&title");
+                        String id = url.substring(start + 3, end);
+                        articleInfo.article_id = id;
+
+                        start = url.indexOf("&title=");
+                        end = url.indexOf("&share_sum=");
+                        String title = url.substring(start + 7, end);
+                        articleInfo.title = title;
+
+                        start = url.indexOf("&share_sum=");
+                        end = url.indexOf("&love=");
+                        String share_sum = url.substring(start + 11, end);
+                        articleInfo.share_sum = share_sum;
+
+                        start = url.indexOf("&love=");
+                        end = url.indexOf("&share_content=");
+                        String love = url.substring(start + 6, end);
+                        articleInfo.love = love;
+
+                        start = url.indexOf("&share_content=");
+                        end = url.indexOf("&share_img=");
+                        String share_content = url.substring(start + 15, end);
+                        articleInfo.share_content = share_content;
+
+                        start = url.indexOf("&share_img=");
+                        end = url.indexOf("$$push_article");
+                        String share_img = url.substring(start + 11, end);
+                        articleInfo.share_img = share_img;
+                        articleInfo.is_love = 0;
+                        articleInfo.article_url = url;
+
+                        Intent intent = new Intent(WebArticleActivity.this,
+                                WebArticleActivity.class);
+                        intent.putExtra("title", articleInfo.title);
+                        intent.putExtra("url", url);
+                        intent.putExtra("articleInfo", articleInfo);
+                        startActivity(intent);
+                        return true;
+                    }
+
                     if (url.contains("$$push_goods")) {//跳转到商品
                         Intent intent = new Intent(WebArticleActivity.this, WebGoodsActivity.class);
                         int start = url.indexOf("goods_name=");
@@ -133,7 +178,7 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
      */
     private void setShare() {
         SharePop.getInstance().showPop(this, shareLayout, articleInfo.title, articleInfo
-                .article_url,
+                        .article_url,
                 articleInfo.share_content, bitmap, new SharePop.ShareResult() {
                     @Override
                     public void shareResult(int result) {
@@ -205,7 +250,7 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
         canClick = false;
     }
 
-    void getBitmap(){
+    void getBitmap() {
         ImageRequest imageRequest = new ImageRequest(articleInfo.share_img,
                 new Response.Listener<Bitmap>() {
                     @Override

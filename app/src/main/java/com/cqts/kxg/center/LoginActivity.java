@@ -29,11 +29,13 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
     private TextView lgoin_forget_tv;
     private TextView login_quick_tv;
     private String userName;
+    public static LoginActivity instance = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTransparencyBar(true);
         setContentView(R.layout.activity_login);
+        instance = this;
         setSwipeBackEnable(true);
         InitView();
 

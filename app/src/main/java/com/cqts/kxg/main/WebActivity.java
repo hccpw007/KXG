@@ -2,6 +2,7 @@ package com.cqts.kxg.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -10,7 +11,7 @@ import com.base.views.MyWebView;
 import com.cqts.kxg.R;
 import com.cqts.kxg.center.LoginActivity;
 
-public class WebActivity extends MyActivity {
+public class WebActivity extends MyActivity  {
     private String title = "";
     private String url = "";
     private MyWebView webview;

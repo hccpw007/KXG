@@ -68,7 +68,7 @@ public class HomeTableAdapter extends RecyclerView.Adapter<HomeTableAdapter.View
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.home_img1: //商品分类
-                ((NgtAty) context).ngt_pager.setCurrentItem(2, false);
+                ((NgtAty) context).ngt_pager.setCurrentItem(3, false);
                 break;
             case R.id.home_img2:  //9.9包邮
                 ((NgtAty) context).ngt_pager.setCurrentItem(1, false);

@@ -3,12 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent"
     android:clipToPadding="true"
     android:fitsSystemWindows="true"
     tools:context="com.cqts.kxg.main.IndexActivity">
 
     <com.base.views.MyViewPager
+        android:background="@color/white"
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

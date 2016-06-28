@@ -1,6 +1,5 @@
 package com.cqts.kxg.main;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -16,7 +15,7 @@ import com.cqts.kxg.utils.SPutils;
 /**
  * 引导页
  */
-public class IndexActivity extends Activity implements MyViewPager.OnMyPageChangeListener, View
+public class IndexActivity extends MyActivity implements MyViewPager.OnMyPageChangeListener, View
         .OnClickListener {
     private MyViewPager viewpager;
     private RadioButton[] rdbtns = new RadioButton[3];
@@ -26,6 +25,7 @@ public class IndexActivity extends Activity implements MyViewPager.OnMyPageChang
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
+        setSwipeBackEnable(false);
         InitView();
     }
 

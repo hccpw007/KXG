@@ -102,11 +102,8 @@ public class BindPhoneActivity extends MyActivity implements View.OnClickListene
                 if (code != 0) {
                     return;
                 }
-                System.out.println(code+"===code");
                 getUserInfo().mobile_phone = phoneNum;
-                System.out.println(code+"===code");
                 setResult(RESULT_OK);
-                System.out.println(code+"===code");
                 finish();
             }
         });

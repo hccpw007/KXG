@@ -45,7 +45,6 @@ public class MainActivity extends MyActivity implements MyHttp.MyHttpResult, Han
     @Override
     public void httpResult(Integer which, int code, String msg, Object bean) {
         if (code != 0) {
-            showToast(msg);
             SPutils.setToken("");
             return;
         }

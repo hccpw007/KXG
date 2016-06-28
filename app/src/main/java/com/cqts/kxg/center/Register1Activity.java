@@ -121,6 +121,9 @@ public class Register1Activity extends MyActivity implements View.OnClickListene
         if (s.length() == 11) {
             register1_change_tv.setEnabled(true);
             register1_code_et.setEnabled(true);
+            register1_change_tv.setText("换一张");
+            GetImageCode.getImageCode(register1_code_img, register1_phone_et.getText()
+                    .toString().trim());
         } else {
             register1_change_tv.setText("获取");
             register1_change_tv.setEnabled(false);

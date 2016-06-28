@@ -124,6 +124,9 @@ public class Pswd1Activity extends MyActivity implements View.OnClickListener, M
         if (s.length() == 11) {
             pswd1_change_tv.setEnabled(true);
             pswd1_code_et.setEnabled(true);
+            GetImageCode.getImageCode(pswd1_code_img, pswd1_phone_et.getText()
+                    .toString().trim());
+            pswd1_change_tv.setText("换一张");
         } else {
             pswd1_change_tv.setText("获取");
             pswd1_change_tv.setEnabled(false);

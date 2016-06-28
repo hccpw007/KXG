@@ -209,12 +209,15 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.table12://我的店铺
-                if (!TextUtils.isEmpty(getUserInfo().store)) {
-                    startActivity(new Intent(getActivity(), WebShopActivity.class).putExtra
-                            ("title", "我的店铺").putExtra("url", getUserInfo().store));
-                } else {
-                    showToast("您还没有店铺!");
+                if (needLogin()) {
+                    if (!TextUtils.isEmpty(getUserInfo().store)) {
+                        startActivity(new Intent(getActivity(), WebShopActivity.class).putExtra
+                                ("title", "我的店铺").putExtra("url", getUserInfo().store));
+                    } else {
+                        showToast("您还没有店铺!");
+                    }
                 }
+
                 break;
             default:
                 break;
@@ -325,7 +328,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
         //文章赚钱的返回,跳转到热门文章
         if (requestCode == WebActivityActivity.REQUESTCODE && resultCode == WebActivityActivity
                 .RESULTCODE) {
-            ((NgtAty) getActivity()).ngt_pager.setCurrentItem(3, false);
+            ((NgtAty) getActivity()).ngt_pager.setCurrentItem(2, false);
         }
     }
 }

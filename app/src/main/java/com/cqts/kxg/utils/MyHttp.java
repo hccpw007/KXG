@@ -697,4 +697,14 @@ public class MyHttp {
         String httpUrl = url + "getLink/index";
         toBean(Request.Method.GET, http, which, null, httpUrl, myHttpResult, MyUrlInfo.class);
     }
+
+    /**
+     * 获取文章详情<p>
+     */
+    public static void articleDetail(HttpForVolley http, Integer which,String article_id,MyHttpResult myHttpResult) {
+        String httpUrl = url + "article/detail";
+        httpMap.clear();
+        httpMap.put("article_id", article_id);
+        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, ArticleInfo.class);
+    }
 }
