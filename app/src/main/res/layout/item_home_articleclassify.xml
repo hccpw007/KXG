@@ -11,6 +11,8 @@
                 android:id="@+id/item_img"/>
 
             <TextView
+                android:layout_marginBottom="5dp"
+                android:textColor="#646464"
                 android:layout_marginTop="5dp"
                 android:maxLength="4"
                 style="@style/text_14sp_black"

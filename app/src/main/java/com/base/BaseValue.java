@@ -2,6 +2,7 @@ package com.base;
 
 import android.app.Application;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Path;
 import android.util.DisplayMetrics;
 import android.view.inputmethod.InputMethodManager;
@@ -62,7 +63,7 @@ public class BaseValue {
 //    }
 
     public static DisplayImageOptions getOptions(int defaultimg){
-        return new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).showImageOnFail(defaultimg)
+        return new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).showImageOnFail(defaultimg).showImageOnLoading(R.color.transparency)
                .showImageForEmptyUri(defaultimg).build();
     }
 }

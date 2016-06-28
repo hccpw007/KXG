@@ -22,7 +22,7 @@
 
         <TextView
             android:id="@+id/item_tv"
-            style="@style/text_14sp_white"
+            style="@style/text_15sp_white"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_alignParentBottom="true"
