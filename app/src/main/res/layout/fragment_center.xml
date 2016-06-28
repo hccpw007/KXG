@@ -82,7 +82,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:maxLength="7"
+                    android:maxLength="8"
                     android:text="0.00"
                     android:textColor="#f0b414"
                     android:textSize="25sp"/>
@@ -211,7 +211,7 @@
                     style="@style/text_16sp_black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxLength="7"
+                    android:maxLength="8"
                     android:text="0.00"/>
 
                 <TextView
@@ -240,7 +240,7 @@
                     style="@style/text_16sp_black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxLength="7"
+                    android:maxLength="8"
                     android:text="0.00"/>
 
                 <TextView
