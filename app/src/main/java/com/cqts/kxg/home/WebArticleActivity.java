@@ -178,7 +178,7 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
      */
     private void setShare() {
         SharePop.getInstance().showPop(this, shareLayout, articleInfo.title, articleInfo
-                        .article_url,
+                        .article_url+"&share=1",
                 articleInfo.share_content, bitmap, new SharePop.ShareResult() {
                     @Override
                     public void shareResult(int result) {

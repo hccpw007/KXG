@@ -409,7 +409,7 @@
             android:layout_marginRight="15dp"
             android:lineSpacingMultiplier="1.2"
             android:maxLines="100"
-            android:text="3、收益满30元即可提现(5%手续费)。"
+            android:text="3、收益满30元即可提现(手续费5%)。"
             android:textColor="@color/mygray"/>
     </LinearLayout>
 </ScrollView>

@@ -265,7 +265,8 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                     return;
                 }
                 EarnInfo earnInfo = (EarnInfo) bean;
-                money_tv.setText(String.format("%.2f", earnInfo.history));
+                getUserInfo().app_money = Double.valueOf(String.format("%.2f", earnInfo.balance));
+                money_tv.setText(String.format("%.2f", earnInfo.balance));
                 history_tv.setText(String.format("%.2f", earnInfo.history));
                 today_tv.setText(earnInfo.today);
                 prentice_tv.setText(earnInfo.receive);

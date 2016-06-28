@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:indeterminate="false"
-        android:progress="20"
+        android:progress="0"
         android:progressDrawable="@drawable/update_progress"/>
 
     <LinearLayout
@@ -39,7 +39,7 @@
             style="@style/text_14sp_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="总共:1.38M"
+            android:text="总共:0M"
             android:id="@+id/size_tv"/>
 
         <TextView

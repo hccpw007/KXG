@@ -11,11 +11,12 @@
         android:background="@color/myred">
 
         <ImageView
+            android:paddingTop="5dp"
+            android:paddingBottom="8dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:padding="5dp"
             android:scaleType="fitCenter"
             android:src="@mipmap/home_logo"/>
 

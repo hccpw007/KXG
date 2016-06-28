@@ -8,4 +8,5 @@ public class EarnInfo {
     public double history;//  "0.00",
     public String receive;//  0,
     public String kickback;//  0.7
+    public String balance;//  0.7
 }
