@@ -30,6 +30,7 @@ import com.cqts.kxg.main.NgtAty;
 import com.cqts.kxg.main.WebActivity;
 import com.cqts.kxg.utils.MyHttp;
 import com.cqts.kxg.utils.MyUrls;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json.JSONObject;
@@ -254,8 +255,11 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
         login_tv.setVisibility(View.GONE);
         money_tv.setText(String.format("%.2f", getUserInfo().app_money));
         name_tv.setText(TextUtils.isEmpty(getUserInfo().alias)?getUserInfo().user_name:getUserInfo().alias);
-        ImageLoader.getInstance().displayImage(getUserInfo().headimg, head_img, BaseValue
-                .getOptions(R.mipmap.center_head));
+
+        DisplayImageOptions build = new DisplayImageOptions.Builder().cacheInMemory(true)
+                .cacheOnDisk(true).showImageOnFail(R.mipmap.center_head)
+                .showImageForEmptyUri(R.mipmap.center_head).build();
+        ImageLoader.getInstance().displayImage(getUserInfo().headimg, head_img, build);
         MyHttp.userEarning(http, null, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
