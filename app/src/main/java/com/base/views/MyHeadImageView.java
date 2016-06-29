@@ -10,7 +10,10 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ImageView;
+
+import com.cqts.kxg.R;
 
 
 /**
@@ -40,7 +43,13 @@ public class MyHeadImageView extends ImageView {
     public Bitmap getImg() {
         //获得图片
         Drawable drawable = getDrawable();
-        Bitmap source = ((BitmapDrawable) drawable).getBitmap();
+        Bitmap source = null;
+        try {
+            source = ((BitmapDrawable) drawable).getBitmap();
+        } catch (Exception e) {
+            Drawable drawable1 = getResources().getDrawable(R.mipmap.transparency);
+            source = ((BitmapDrawable) drawable1).getBitmap();
+        }
 
         //获得图片的原始高度
         int width = source.getWidth();
