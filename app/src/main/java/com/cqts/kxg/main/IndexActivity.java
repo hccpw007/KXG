@@ -1,9 +1,13 @@
 package com.cqts.kxg.main;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RadioButton;
 
@@ -15,7 +19,7 @@ import com.cqts.kxg.utils.SPutils;
 /**
  * 引导页
  */
-public class IndexActivity extends MyActivity implements MyViewPager.OnMyPageChangeListener, View
+public class IndexActivity extends Activity implements MyViewPager.OnMyPageChangeListener, View
         .OnClickListener {
     private MyViewPager viewpager;
     private RadioButton[] rdbtns = new RadioButton[3];
@@ -24,8 +28,15 @@ public class IndexActivity extends MyActivity implements MyViewPager.OnMyPageCha
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        //通知栏和虚拟按键透明(xml需要设置属性)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //通知栏透明
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //虚拟按键透明
+            // getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
         setContentView(R.layout.activity_index);
-        setSwipeBackEnable(false);
         InitView();
     }
 

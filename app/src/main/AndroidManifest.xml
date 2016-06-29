@@ -157,7 +157,7 @@
         </activity>
         <activity
             android:name=".main.IndexActivity"
-            android:theme="@style/SwipeBackTheme">
+            android:theme="@style/AppBaseTheme">
         </activity>
         <activity
             android:name=".home.WebArticleActivity"

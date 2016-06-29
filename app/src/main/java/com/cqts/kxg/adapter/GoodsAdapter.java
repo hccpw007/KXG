@@ -43,7 +43,7 @@ public class GoodsAdapter extends RecyclerView.Adapter<GoodsAdapter.MyViewHolder
                 .item_nine_img,defaultOptions);
         myViewHolder.item_info_tv.setText(goods_list.get(i).goods_name);
         myViewHolder.item_money_tv.setText("¥" + goods_list.get(i).shop_price);
-        myViewHolder.item_love_tv.setText(goods_list.get(i).volume + "");
+        myViewHolder.item_love_tv.setText(goods_list.get(i).click_count + "");
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

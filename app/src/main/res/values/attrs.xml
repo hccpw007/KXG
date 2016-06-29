@@ -14,4 +14,8 @@
     <declare-styleable name="ScaleImageView" >
         <attr name="myScale" format="float"/>
     </declare-styleable>
+    <declare-styleable name="RoundImageView">
+        <attr name="mylayoutbg1" format="color"/>
+        <attr name="mylayoutradius1" format="dimension"/>
+    </declare-styleable>
 </resources>

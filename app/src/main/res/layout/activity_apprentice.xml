@@ -1,416 +1,427 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/myred"
-            android:clipToPadding="true"
-            android:fitsSystemWindows="true"
-            android:scrollbars="none"
-            tools:context="com.cqts.kxg.center.ApprenticeActivity">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/myred"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.cqts.kxg.center.ApprenticeActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:orientation="vertical">
+    <include layout="@layout/include_red_title"/>
 
-        <include layout="@layout/include_red_title"/>
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:scrollbars="none"
+                tools:context="com.cqts.kxg.center.ApprenticeActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:background="@color/white"
-            android:orientation="horizontal">
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="0px"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@color/white"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/table1_tv"
-                    style="@style/text_16sp_black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLength="7"
-                    android:text="0人"/>
+                <LinearLayout
+                    android:layout_width="0px"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                <TextView
-                    style="@style/text_15sp_black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="徒弟徒孙"/>
+                    <TextView
+                        android:id="@+id/table1_tv"
+                        style="@style/text_16sp_black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLength="7"
+                        android:text="0人"/>
+
+                    <TextView
+                        style="@style/text_15sp_black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="徒弟徒孙"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/myline"/>
+
+                <LinearLayout
+                    android:layout_width="0px"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/table2_tv"
+                        style="@style/text_16sp_black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLength="7"
+                        android:text="0人"/>
+
+                    <TextView
+                        style="@style/text_15sp_black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="今日收徒"
+                        />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/myline"/>
+
+                <LinearLayout
+                    android:layout_width="0px"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/table3_tv"
+                        style="@style/text_16sp_black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLength="7"
+                        android:text="0.00元                     "/>
+
+                    <TextView
+                        style="@style/text_15sp_black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="徒弟帮赚"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/myline"/>
+
+                <LinearLayout
+                    android:layout_width="0px"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/table4_tv"
+                        style="@style/text_16sp_black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLength="7"
+                        android:text="0次"/>
+
+                    <TextView
+                        style="@style/text_15sp_black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="徒弟分享"/>
+                </LinearLayout>
             </LinearLayout>
 
             <View
-                android:layout_width="1px"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="2px"
                 android:background="@color/myline"/>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/mybg"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@color/white">
+
+                <ImageView
+                    android:id="@+id/qr_img"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_launcher"/>
+
+                <TextView
+                    android:id="@+id/info_tv"
+                    style="@style/text_14sp_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/qr_img"
+                    android:maxLines="5"
+                    android:text="好友使用您的邀请码成功注册，您即得0.20元现金奖励，其完成新
+手任务后您再得0.20元现金奖励，且以后他赚的钱你都会有10%分成收益哦！"
+                    android:textColor="@color/mygray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/qr_img"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_toRightOf="@id/qr_img"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/text_16sp_black"
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="邀请码:"/>
+
+                    <com.base.views.MyEditText
+                        android:id="@+id/invitation_et"
+                        style="@style/text_16sp_red"
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="3"
+                        android:background="@drawable/sl_invitation_bg"
+                        android:enabled="false"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="6"
+                        android:padding="3dp"
+                        android:text="000000"/>
+
+                    <TextView
+                        android:id="@+id/change_tv"
+                        style="@style/text_16sp_red"
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:button="@null"
+                        android:gravity="right"
+                        android:text="修改"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/share_btn"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="13dp"
+                android:background="@drawable/bg_shape_red_to_gray"
+                android:text="分享邀请链接给徒弟"
+                android:textColor="@color/white"
+                android:textSize="18sp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/mybg"/>
+
             <LinearLayout
-                android:layout_width="0px"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="3dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/myred"/>
 
                 <TextView
-                    android:id="@+id/table2_tv"
-                    style="@style/text_16sp_black"
+                    style="@style/text_14sp_black"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLength="7"
-                    android:text="0人"/>
-
-                <TextView
-                    style="@style/text_15sp_black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="今日收徒"
-                    />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="最新完成新手任务的徒弟"
+                    android:textSize="17sp"/>
             </LinearLayout>
 
             <View
-                android:layout_width="1px"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
                 android:background="@color/myline"/>
-
-            <LinearLayout
-                android:layout_width="0px"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/table3_tv"
-                    style="@style/text_16sp_black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLength="7"
-                    android:text="0.00元                     "/>
-
-                <TextView
-                    style="@style/text_15sp_black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="徒弟帮赚"/>
-            </LinearLayout>
-
-            <View
-                android:layout_width="1px"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                android:background="@color/myline"/>
-
-            <LinearLayout
-                android:layout_width="0px"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/table4_tv"
-                    style="@style/text_16sp_black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLength="7"
-                    android:text="0次"/>
-
-                <TextView
-                    style="@style/text_15sp_black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="徒弟分享"/>
-            </LinearLayout>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2px"
-            android:background="@color/myline"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="@color/mybg"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:background="@color/white">
 
             <ImageView
-                android:id="@+id/qr_img"
-                android:layout_width="120dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="15dp"
-                android:scaleType="fitXY"
-                android:src="@mipmap/ic_launcher"/>
+                android:id="@+id/empty1_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/empty_1"
+                android:visibility="gone"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview1"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@color/white">
+            </android.support.v7.widget.RecyclerView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/mybg"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="3dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/myred"/>
+
+                <TextView
+                    style="@style/text_14sp_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="最新未完成新手任务的徒弟"
+                    android:textSize="17sp"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/myline"/>
+
+            <ImageView
+                android:id="@+id/empty2_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/empty_2"
+                android:visibility="gone"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview2"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@color/white"
+                >
+            </android.support.v7.widget.RecyclerView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/myline"/>
 
             <TextView
-                android:id="@+id/info_tv"
-                style="@style/text_14sp_black"
-                android:layout_width="wrap_content"
+                style="@style/text_15sp_black"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginRight="15dp"
+                android:gravity="center_vertical|right"
+                android:text="只显示最近的12个徒弟"
+                android:textColor="@color/mygray"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/myline"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/mybg"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="3dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/myred"/>
+
+                <TextView
+                    style="@style/text_14sp_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="收徒收益说明"
+                    android:textSize="17sp"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/myline"/>
+
+            <TextView
+                style="@style/text_15sp_black"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
-                android:layout_toRightOf="@id/qr_img"
-                android:maxLines="5"
-                android:text="好友使用您的邀请码成功注册，您即得0.20元现金奖励，其完成新
-手任务后您再得0.20元现金奖励，且以后他赚的钱你都会有10%分成收益哦！"
+                android:lineSpacingMultiplier="1.2"
+                android:maxLines="100"
+                android:text="1、邀请新用户注册（必须使用您的邀请码）您得0.20 元，其完成新手任务您再得0.20元。"
                 android:textColor="@color/mygray"/>
 
-            <LinearLayout
+            <TextView
+                style="@style/text_15sp_black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/qr_img"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_toRightOf="@id/qr_img"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/text_16sp_black"
-                    android:layout_width="0px"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="邀请码:"/>
-
-                <com.base.views.MyEditText
-                    android:id="@+id/invitation_et"
-                    style="@style/text_16sp_red"
-                    android:layout_width="0px"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="3"
-                    android:background="@drawable/sl_invitation_bg"
-                    android:enabled="false"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:maxLength="6"
-                    android:padding="3dp"
-                    android:text="000000"/>
-
-                <TextView
-                    android:id="@+id/change_tv"
-                    style="@style/text_16sp_red"
-                    android:layout_width="0px"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:button="@null"
-                    android:gravity="right"
-                    android:text="修改"/>
-            </LinearLayout>
-        </RelativeLayout>
-
-        <Button
-            android:id="@+id/share_btn"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="13dp"
-            android:background="@drawable/bg_shape_red_to_gray"
-            android:text="分享邀请链接给徒弟"
-            android:textColor="@color/white"
-            android:textSize="18sp"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/mybg"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:orientation="horizontal">
-
-            <View
-                android:layout_width="3dp"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
-                android:background="@color/myred"/>
-
-            <TextView
-                style="@style/text_14sp_black"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="最新完成新手任务的徒弟"
-                android:textSize="17sp"/>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/myline"/>
-
-        <ImageView
-            android:id="@+id/empty1_img"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/empty_1"
-            android:visibility="gone"/>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview1"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:background="@color/white">
-        </android.support.v7.widget.RecyclerView>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="@color/mybg"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:orientation="horizontal">
-
-            <View
-                android:layout_width="3dp"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
-                android:background="@color/myred"/>
-
-            <TextView
-                style="@style/text_14sp_black"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="最新未完成新手任务的徒弟"
-                android:textSize="17sp"/>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/myline"/>
-
-        <ImageView
-            android:id="@+id/empty2_img"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/empty_2"
-            android:visibility="gone"/>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview2"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:background="@color/white"
-            >
-        </android.support.v7.widget.RecyclerView>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/myline"/>
-
-        <TextView
-            style="@style/text_15sp_black"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginRight="15dp"
-            android:gravity="center_vertical|right"
-            android:text="只显示最近的12个徒弟"
-            android:textColor="@color/mygray"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/myline"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="@color/mybg"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:orientation="horizontal">
-
-            <View
-                android:layout_width="3dp"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
-                android:background="@color/myred"/>
-
-            <TextView
-                style="@style/text_14sp_black"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="收徒收益说明"
-                android:textSize="17sp"/>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/myline"/>
-
-        <TextView
-            style="@style/text_15sp_black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp"
-            android:lineSpacingMultiplier="1.2"
-            android:maxLines="100"
-            android:text="1、邀请新用户注册（必须使用您的邀请码）您得0.20 元，其完成新手任务您再得0.20元。"
-            android:textColor="@color/mygray"/>
-
-        <TextView
-            style="@style/text_15sp_black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:lineSpacingMultiplier="1.2"
-            android:maxLines="100"
-            android:text="2、您永久性获取徒弟的10%分红，您的徒弟再收徒弟，也会给您10%的永久分红，他也
+                android:lineSpacingMultiplier="1.2"
+                android:maxLines="100"
+                android:text="2、您永久性获取徒弟的10%分红，您的徒弟再收徒弟，也会给您10%的永久分红，他也
 会获得10%的永久分红。 "
-            android:textColor="@color/mygray"/>
+                android:textColor="@color/mygray"/>
 
-        <TextView
-            style="@style/text_15sp_black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:lineSpacingMultiplier="1.2"
-            android:maxLines="100"
-            android:text="3、收益满30元即可提现(手续费5%)。"
-            android:textColor="@color/mygray"/>
-    </LinearLayout>
-</ScrollView>
+            <TextView
+                style="@style/text_15sp_black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:lineSpacingMultiplier="1.2"
+                android:maxLines="100"
+                android:text="3、收益满30元即可提现(手续费5%)。"
+                android:textColor="@color/mygray"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

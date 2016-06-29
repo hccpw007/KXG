@@ -52,7 +52,6 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
     private ArrayList<GoodsInfo> goodsInfos = new ArrayList<>();
     private GoodsAdapter adapter;
     private LinearLayout money_layout;
-    private AlertDialog dialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -271,9 +271,9 @@
 
             <com.base.views.AutoTextView
                 android:id="@+id/message_tv"
-                android:layout_marginLeft="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"/>
         </LinearLayout>
 
         <View
@@ -286,6 +286,11 @@
             android:layout_height="90dp"
             android:orientation="horizontal">
 
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/myline"/>
+
             <LinearLayout
                 android:id="@+id/table1"
                 android:layout_width="0px"
@@ -295,8 +300,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@mipmap/center_table1"/>
 
                 <TextView
@@ -321,8 +326,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@mipmap/center_table2"/>
 
                 <TextView
@@ -347,8 +352,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@mipmap/center_table3"/>
 
                 <TextView
@@ -373,8 +378,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@mipmap/center_table4"/>
 
                 <TextView
@@ -384,6 +389,11 @@
                     android:text="收益详情"
                     android:textSize="14sp"/>
             </LinearLayout>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/myline"/>
         </LinearLayout>
 
         <View
@@ -396,6 +406,11 @@
             android:layout_height="90dp"
             android:orientation="horizontal">
 
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/myline"/>
+
             <LinearLayout
                 android:id="@+id/table5"
                 android:layout_width="0px"
@@ -405,8 +420,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@mipmap/center_table5"/>
 
                 <TextView
@@ -431,8 +446,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@mipmap/center_table6"/>
 
                 <TextView
@@ -457,8 +472,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@mipmap/center_table7"/>
 
                 <TextView
@@ -483,8 +498,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@mipmap/center_table8"/>
 
                 <TextView
@@ -494,6 +509,11 @@
                     android:text="常见问题"
                     android:textSize="14sp"/>
             </LinearLayout>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/myline"/>
         </LinearLayout>
 
         <View
@@ -506,6 +526,11 @@
             android:layout_height="90dp"
             android:orientation="horizontal">
 
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/myline"/>
+
             <LinearLayout
                 android:id="@+id/table9"
                 android:layout_width="0px"
@@ -515,8 +540,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@mipmap/center_table9"/>
 
                 <TextView
@@ -541,8 +566,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@mipmap/center_table10"/>
 
                 <TextView
@@ -567,8 +592,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@mipmap/center_table11"/>
 
                 <TextView
@@ -584,6 +609,7 @@
                 android:layout_height="match_parent"
                 android:background="@color/myline"/>
 
+
             <LinearLayout
                 android:id="@+id/table12"
                 android:layout_width="0px"
@@ -593,8 +619,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@mipmap/center_table12"/>
 
                 <TextView
@@ -604,6 +630,11 @@
                     android:text="我的店铺"
                     android:textSize="14sp"/>
             </LinearLayout>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/myline"/>
         </LinearLayout>
 
         <View
@@ -642,11 +673,11 @@
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
-            android:padding="8dp"
             android:id="@+id/goods_rclv"
             android:layout_width="match_parent"
             android:layout_height="9dp"
-            android:background="@color/mybg">
+            android:background="@color/mybg"
+            android:padding="8dp">
         </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>

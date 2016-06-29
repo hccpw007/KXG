@@ -42,6 +42,7 @@ public class WebGoodsActivity extends MyActivity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webgoods);
+        setSwipeBackEnable(false);
         title = getIntent().getStringExtra("title");
         url = getIntent().getStringExtra("url");
         id = getIntent().getStringExtra("id");
@@ -169,10 +170,10 @@ public class WebGoodsActivity extends MyActivity implements View.OnClickListener
 
         if (is_love == 0) { //喜欢成功
             animation = new FavoriteAnimation(collectImg, true);
-            collectTv.setText("已收藏");
+            collectTv.setText("已喜欢");
         } else { //取消收藏成功
             animation = new FavoriteAnimation(collectImg, false);
-            collectTv.setText("收藏");
+            collectTv.setText("喜欢");
         }
         collectImg.startAnimation(animation);
     }

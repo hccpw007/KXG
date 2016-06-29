@@ -10,6 +10,8 @@ import com.cqts.kxg.R;
 import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.utils.MyHttp;
 
+import java.io.UnsupportedEncodingException;
+
 public class SetAliasActivity extends MyActivity implements View.OnClickListener {
     private MyEditText nickname_et;
     private ImageView clean_img;
@@ -54,7 +56,17 @@ public class SetAliasActivity extends MyActivity implements View.OnClickListener
 
     private void setNickName() {
         final String nickname = nickname_et.getText().toString().trim();
-        if (nickname.isEmpty()||nickname.length()<4) {
+        byte[] bytes = new byte[0];
+        try {
+            bytes = nickname.getBytes("GBK");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i <bytes.length ; i++) {
+            System.out.println(bytes[i]);
+        }
+
+        if (nickname.isEmpty()||bytes.length<4) {
             showToast("请输入昵称（4-20个字符）");
             return;
         }

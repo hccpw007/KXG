@@ -15,12 +15,13 @@ import com.cqts.kxg.utils.SPutils;
 public class MainActivity extends MyActivity implements MyHttp.MyHttpResult, Handler.Callback {
     public static final int REFRESHTOKEN = 1;
     public static final int GETUSERINFO = 2;
+    public static MainActivity instance;
     Handler handler = new Handler(this);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        instance = this;
         setSwipeBackEnable(false);
         InitView();
         AutoLogin();

@@ -62,8 +62,6 @@ public class BaseActivity extends SwipeBackActivity {
         if (transparency) {
             //通知栏和虚拟按键透明(xml需要设置属性)
 
-            // android:clipToPadding="true"
-            // android:fitsSystemWindows="true"
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 //通知栏透明
                 getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);

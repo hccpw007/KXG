@@ -81,7 +81,11 @@ public class MyHttp {
                 if (null != bean && code == 0) {
                     data = BaseValue.gson.fromJson(response.optString("data"), bean);
                 }
-                if (null!=myHttpResult){
+
+                if (null != bean && code == 0 && data == null) {
+                    code = 1;
+                }
+                if (null != myHttpResult) {
                     myHttpResult.httpResult(which, code, response.optString("msg", "发生错误"), data);
                 }
             }
@@ -222,7 +226,7 @@ public class MyHttp {
 
     /**
      * 快捷登陆<p>
-     * <p>
+     * <p/>
      * 接口和注册一样需要先获取图形验证码，然后获取短信验证码<p>
      * mobile_phone 手机号码<br>
      * captcha 短信验证码<br>
@@ -402,7 +406,7 @@ public class MyHttp {
      * 首页文章分类查询列表 <p>
      */
     public static void articleListing(HttpForVolley http, Integer which, int PageSize, int
-            PageNum, String cat_id,String sort, MyHttpResult myHttpResult) {
+            PageNum, String cat_id, String sort, MyHttpResult myHttpResult) {
         String httpUrl = url + "article/listing";
         httpMap.clear();
         httpMap.put("token", MyApplication.token);
@@ -433,7 +437,7 @@ public class MyHttp {
             myHttpResult) {
         String httpUrl = url + "goods/recommend";
         httpMap.clear();
-        httpMap.put("PageSize",30+"");
+        httpMap.put("PageSize", 30 + "");
         Type type = new TypeToken<List<GoodsInfo>>() {
         }.getType();
         toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type);
@@ -672,12 +676,13 @@ public class MyHttp {
     /**
      * 阅读添加收益<p>
      */
-    public static void userRead(HttpForVolley http, Integer which, String article_id,MyHttpResult myHttpResult) {
+    public static void userRead(HttpForVolley http, Integer which, String article_id,
+                                MyHttpResult myHttpResult) {
         String httpUrl = url + "user/read";
         httpMap.clear();
         httpMap.put("token", MyApplication.token);
         httpMap.put("article_id", article_id);
-        if (TextUtils.isEmpty(MyApplication.token)){
+        if (TextUtils.isEmpty(MyApplication.token)) {
             return;
         }
         toBean(Request.Method.POST, http, which, httpMap, httpUrl, myHttpResult, null);
@@ -686,7 +691,7 @@ public class MyHttp {
     /**
      * 阅读添加收益<p>
      */
-    public static void update(HttpForVolley http, Integer which,MyHttpResult myHttpResult) {
+    public static void update(HttpForVolley http, Integer which, MyHttpResult myHttpResult) {
         String httpUrl = url + "system/android";
         toBean(Request.Method.GET, http, which, null, httpUrl, myHttpResult, UpdateInfo.class);
     }
@@ -694,7 +699,7 @@ public class MyHttp {
     /**
      * 获取URL<p>
      */
-    public static void getLinkIndex(HttpForVolley http, Integer which,MyHttpResult myHttpResult) {
+    public static void getLinkIndex(HttpForVolley http, Integer which, MyHttpResult myHttpResult) {
         String httpUrl = url + "getLink/index";
         toBean(Request.Method.GET, http, which, null, httpUrl, myHttpResult, MyUrlInfo.class);
     }
@@ -702,7 +707,8 @@ public class MyHttp {
     /**
      * 获取文章详情<p>
      */
-    public static void articleDetail(HttpForVolley http, Integer which,String article_id,MyHttpResult myHttpResult) {
+    public static void articleDetail(HttpForVolley http, Integer which, String article_id,
+                                     MyHttpResult myHttpResult) {
         String httpUrl = url + "article/detail";
         httpMap.clear();
         httpMap.put("article_id", article_id);
