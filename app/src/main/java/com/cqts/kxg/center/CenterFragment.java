@@ -245,7 +245,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
         money_tv.setText("0.00");
         today_tv.setText("0.00");
         history_tv.setText("0.00");
-        prentice_tv.setText("0.00");
+        prentice_tv.setText("0");
         prenticemoney_tv.setText("0.00");
         head_img.setImageResource(R.mipmap.center_head);
     }
@@ -269,7 +269,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 money_tv.setText(String.format("%.2f", earnInfo.balance));
                 history_tv.setText(String.format("%.2f", earnInfo.history));
                 today_tv.setText(String.format("%.2f", earnInfo.today));
-                prentice_tv.setText(String.format("%.2f", earnInfo.receive));
+                prentice_tv.setText(earnInfo.receive);
                 prenticemoney_tv.setText(String.format("%.2f", earnInfo.kickback));
             }
         });

@@ -89,7 +89,8 @@ public class ApprenticeActivity extends MyActivity implements View.OnClickListen
 
         try {
             //生成二维码
-            Bitmap qrcodeBitmap = EncodingHandler.createQRCode(getUserInfo().invite_link + getUserInfo().invite_code, 400);
+            Bitmap qrcodeBitmap = EncodingHandler.createQRCode(getUserInfo().invite_link +
+                    getUserInfo().invite_code, 400);
             qrImg.setImageBitmap(qrcodeBitmap);
             qrImg.setScaleType(ImageView.ScaleType.FIT_XY);
         } catch (WriterException e) {
@@ -102,15 +103,19 @@ public class ApprenticeActivity extends MyActivity implements View.OnClickListen
         MyHttp.userApprentice(http, null, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
-                if (code!=0){
+                if (code != 0) {
                     showToast(msg);
                     return;
                 }
+
                 EaringApprenticeInfo apprenticeInfo = (EaringApprenticeInfo) bean;
-                table1Tv.setText(TextUtils.isEmpty(apprenticeInfo.total)?"0":apprenticeInfo.total+"人");
-                table2Tv.setText(TextUtils.isEmpty(apprenticeInfo.today)?"0":apprenticeInfo.today+"人");
-                table3Tv.setText(TextUtils.isEmpty(apprenticeInfo.apprentice)?"0.00":apprenticeInfo.apprentice+"元");
-                table4Tv.setText(TextUtils.isEmpty(apprenticeInfo.shared)?"0":apprenticeInfo.shared+"次");
+                table1Tv.setText(TextUtils.isEmpty(apprenticeInfo.total) ? "0" : apprenticeInfo
+                        .total + "人");
+                table2Tv.setText(TextUtils.isEmpty(apprenticeInfo.today) ? "0" : apprenticeInfo
+                        .today + "人");
+                table3Tv.setText(String.format("%.2f", apprenticeInfo.apprentice) + "元");
+                table4Tv.setText(TextUtils.isEmpty(apprenticeInfo.shared) ? "0" : apprenticeInfo
+                        .shared + "次");
             }
         });
 
@@ -159,10 +164,11 @@ public class ApprenticeActivity extends MyActivity implements View.OnClickListen
                 changeCode();
                 break;
             case R.id.share_btn: //分享给徒弟
-                String title = (TextUtils.isEmpty(getUserInfo().alias) ? "" :( "\"" + getUserInfo().alias + "\""))+"推荐给你“开心购久久app”，注册后有红包哦！";
-                String url =  getUserInfo().invite_link + getUserInfo().invite_code;
+                String title = (TextUtils.isEmpty(getUserInfo().alias) ? "" : ("\"" + getUserInfo
+                        ().alias + "\"")) + "推荐给你“开心购久久app”，注册后有红包哦！";
+                String url = getUserInfo().invite_link + getUserInfo().invite_code;
                 String text = "您可以在这里浏览购买数百万商品，更有9.9包邮等特价专区！";
-                SharePop.getInstance().showPop(this, shareBtn, title, url,text, null, null);
+                SharePop.getInstance().showPop(this, shareBtn, title, url, text, null, null);
                 break;
             default:
                 break;

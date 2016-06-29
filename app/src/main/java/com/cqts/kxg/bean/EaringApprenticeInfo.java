@@ -6,6 +6,6 @@ package com.cqts.kxg.bean;
 public class EaringApprenticeInfo {
     public  String total; //徒弟总数
     public  String today; //今日收徒
-    public  String apprentice; //徒弟帮赚
+    public  double apprentice; //徒弟帮赚
     public  String shared; //分享次数
 }

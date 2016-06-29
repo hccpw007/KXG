@@ -44,7 +44,7 @@
                     style="@style/text_15sp_black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="徒弟总数"/>
+                    android:text="徒弟徒孙"/>
             </LinearLayout>
 
             <View
