@@ -254,7 +254,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
         name_tv.setVisibility(View.VISIBLE);
         login_tv.setVisibility(View.GONE);
         money_tv.setText(String.format("%.2f", getUserInfo().app_money));
-        name_tv.setText(getUserInfo().user_name);
+        name_tv.setText(TextUtils.isEmpty(getUserInfo().alias)?getUserInfo().user_name:getUserInfo().alias);
         ImageLoader.getInstance().displayImage(getUserInfo().headimg, head_img, BaseValue
                 .getOptions(R.mipmap.center_head));
         MyHttp.userEarning(http, null, new MyHttp.MyHttpResult() {
@@ -268,9 +268,9 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 getUserInfo().app_money = Double.valueOf(String.format("%.2f", earnInfo.balance));
                 money_tv.setText(String.format("%.2f", earnInfo.balance));
                 history_tv.setText(String.format("%.2f", earnInfo.history));
-                today_tv.setText(earnInfo.today);
-                prentice_tv.setText(earnInfo.receive);
-                prenticemoney_tv.setText(earnInfo.kickback);
+                today_tv.setText(String.format("%.2f", earnInfo.today));
+                prentice_tv.setText(String.format("%.2f", earnInfo.receive));
+                prenticemoney_tv.setText(String.format("%.2f", earnInfo.kickback));
             }
         });
     }

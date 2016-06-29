@@ -71,6 +71,12 @@ public class SearchResultActivity extends MyActivity implements View.OnClickList
             case R.id.money_layout: //价格
                 setGoodsTab(v.getId());
                 goodsFragment.setSearchValue(sort, order);
+                try {
+                    if (goodsFragment.goods_rclv.getChildCount()!=0){
+                        goodsFragment.goods_rclv.scrollToPosition(0);
+                    }
+                }catch (Exception e){
+                }
                 break;
             default:
                 break;

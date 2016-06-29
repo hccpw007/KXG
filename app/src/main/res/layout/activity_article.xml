@@ -11,7 +11,41 @@
     tools:context="com.cqts.kxg.home.ShopStreetActivity">
 
     <include layout="@layout/include_red_title"/>
+    <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
 
+        <RadioButton
+            style="@style/text_14sp_black"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_radiobutton"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:text="综合"
+            android:textSize="18sp"
+            android:id="@+id/rediobtn1"/>
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/myline"/>
+        <RadioButton
+            style="@style/text_14sp_black"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_radiobutton"
+            android:button="@null"
+            android:gravity="center"
+            android:text="热度"
+            android:textSize="21sp"
+            android:checked="false"
+            android:id="@+id/rediobtn2"/>
+    </RadioGroup>
     <FrameLayout
         android:id="@+id/framelayout"
         android:layout_width="match_parent"

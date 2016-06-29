@@ -31,7 +31,7 @@ public class GoodsFragment extends MyFragment implements RefreshLayout.OnRefresh
     private List<GoodsInfo> goodsInfos = new ArrayList<>();
     private GridLayoutManager manager;
     private RefreshLayout goods_refresh;
-    private RecyclerView goods_rclv;
+    public RecyclerView goods_rclv;
     Where where;
     private int PageSize = 50;
     private int PageNum = 1;

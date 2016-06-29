@@ -21,13 +21,15 @@
             android:src="@mipmap/solid_article"/>
 
         <TextView
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
             android:id="@+id/item_tv"
             style="@style/text_15sp_white"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_alignParentBottom="true"
             android:background="@mipmap/articlelist_tvbg"
-            android:gravity="center"/>
+            android:gravity="center_vertical"/>
 
         <LinearLayout
             android:id="@+id/item_collect_layout"

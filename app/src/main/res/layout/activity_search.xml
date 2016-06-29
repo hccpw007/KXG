@@ -57,7 +57,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:background="@color/transparency"
-                android:gravity="bottom|center_horizontal"
+                android:gravity="bottom"
                 android:hint="搜索商品、文章、店铺"
                 android:imeOptions="actionSearch"
                 android:maxLength="8"

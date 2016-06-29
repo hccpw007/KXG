@@ -3,17 +3,18 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="none"
             android:background="@color/myred"
             android:clipToPadding="true"
             android:fitsSystemWindows="true"
+            android:scrollbars="none"
             tools:context="com.cqts.kxg.center.ApprenticeActivity">
+
     <LinearLayout
-        android:focusableInTouchMode="true"
-        android:focusable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:orientation="vertical">
 
         <include layout="@layout/include_red_title"/>
@@ -151,11 +152,11 @@
             android:background="@color/white">
 
             <ImageView
-                android:scaleType="fitXY"
                 android:id="@+id/qr_img"
                 android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
+                android:scaleType="fitXY"
                 android:src="@mipmap/ic_launcher"/>
 
             <TextView
@@ -189,6 +190,7 @@
                     android:text="邀请码:"/>
 
                 <com.base.views.MyEditText
+                    android:id="@+id/invitation_et"
                     style="@style/text_16sp_red"
                     android:layout_width="0px"
                     android:layout_height="wrap_content"
@@ -200,18 +202,17 @@
                     android:inputType="number"
                     android:maxLength="6"
                     android:padding="3dp"
-                    android:text="000000"
-                    android:id="@+id/invitation_et"/>
+                    android:text="000000"/>
 
                 <TextView
-                    android:button="@null"
+                    android:id="@+id/change_tv"
                     style="@style/text_16sp_red"
                     android:layout_width="0px"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:button="@null"
                     android:gravity="right"
-                    android:text="修改"
-                    android:id="@+id/change_tv"/>
+                    android:text="修改"/>
             </LinearLayout>
         </RelativeLayout>
 
@@ -263,17 +264,17 @@
             android:background="@color/myline"/>
 
         <ImageView
-            android:visibility="gone"
+            android:id="@+id/empty1_img"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@mipmap/empty_1"
-            android:id="@+id/empty1_img"/>
+            android:visibility="gone"/>
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview1"
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:background="@color/white"
-            android:id="@+id/recyclerview1">
+            android:background="@color/white">
         </android.support.v7.widget.RecyclerView>
 
         <View
@@ -310,17 +311,17 @@
             android:background="@color/myline"/>
 
         <ImageView
-            android:visibility="gone"
+            android:id="@+id/empty2_img"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@mipmap/empty_2"
-            android:id="@+id/empty2_img"/>
+            android:visibility="gone"/>
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview2"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:background="@color/white"
-            android:id="@+id/recyclerview2"
             >
         </android.support.v7.widget.RecyclerView>
 
@@ -377,12 +378,12 @@
             android:background="@color/myline"/>
 
         <TextView
-            android:layout_marginTop="10dp"
             style="@style/text_15sp_black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp"
             android:lineSpacingMultiplier="1.2"
             android:maxLines="100"
             android:text="1、邀请新用户注册（必须使用您的邀请码）您得0.20 元，其完成新手任务您再得0.20元。"
@@ -401,10 +402,10 @@
             android:textColor="@color/mygray"/>
 
         <TextView
-            android:layout_marginBottom="20dp"
             style="@style/text_15sp_black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:lineSpacingMultiplier="1.2"

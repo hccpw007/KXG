@@ -148,10 +148,10 @@ public class WebGoodsActivity extends MyActivity implements View.OnClickListener
 
         if (is_love != 1) { //未收藏
             collectImg.setImageResource(R.mipmap.home_taoxin);
-            collectTv.setText("收藏");
+            collectTv.setText("喜欢");
         } else {//已收藏
             collectImg.setImageResource(R.mipmap.home_taoxin_hover);
-            collectTv.setText("已收藏");
+            collectTv.setText("已喜欢");
         }
 
         if (which == 2) { //收藏

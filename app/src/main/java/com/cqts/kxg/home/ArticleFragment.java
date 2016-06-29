@@ -39,6 +39,7 @@ public class ArticleFragment extends MyFragment implements RefreshLayout.OnRefre
     int hotType = 1; //热门模块的分类
     String keyword = ""; //搜索文章的关键字
     String cat_id; //来自首页分类文章查询
+    String sort; //首页文章分类排序
 
     /**
      * 热门的分类hotType <p>
@@ -51,18 +52,28 @@ public class ArticleFragment extends MyFragment implements RefreshLayout.OnRefre
 
     /**
      * 来自搜索传keyword<p>
+     */
+    public ArticleFragment(Where where, String keyword) {
+        this.where = where;
+        this.keyword = keyword;
+    }
+
+    /**
      * 来自首页的分类文章查询传 cat_id
      */
-    public ArticleFragment(Where where, String str) {
+    public ArticleFragment(Where where, String cat_id, String sort) {
         this.where = where;
 
         //来自首页分类查询
-        if (where == home) {
-            this.cat_id = str;
-        }
-        if (where == search){
-            this.keyword = str;
-        }
+        this.cat_id = cat_id;
+        this.sort = sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
+        PageNum = 1;
+        articleInfos.clear();
+        getData();
     }
 
     /**
@@ -128,9 +139,9 @@ public class ArticleFragment extends MyFragment implements RefreshLayout.OnRefre
                 article_refresh.setRefreshble(false);
                 MyHttp.loveArticle(http, 3, PageNum, PageSize, this);
                 break;
-            case home:
+            case home: //来住首页
                 article_refresh.setRefreshble(false);
-                MyHttp.articleListing(http, 4, PageSize, PageNum, cat_id, this);
+                MyHttp.articleListing(http, 4, PageSize, PageNum, cat_id, sort,this);
                 break;
             default:
                 break;

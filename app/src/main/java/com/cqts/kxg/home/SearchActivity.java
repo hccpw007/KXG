@@ -75,7 +75,8 @@ public class SearchActivity extends MyActivity implements MyTagView.OnTagClickLi
         String text = ((TextView) v).getText().toString().trim();
         search_et.setText(text);
         search_et.setSelection(text.length());
-        BaseValue.imm.showSoftInput(search_et, 0);//展开输入法
+        search();
+//        BaseValue.imm.showSoftInput(search_et, 0);//展开输入法
     }
 
     @Override

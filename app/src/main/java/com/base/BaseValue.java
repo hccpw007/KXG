@@ -63,7 +63,7 @@ public class BaseValue {
 //    }
 
     public static DisplayImageOptions getOptions(int defaultimg){
-        return new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).showImageOnFail(defaultimg).showImageOnLoading(R.color.transparency)
+        return new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).showImageOnFail(defaultimg).showImageOnLoading(R.mipmap.transparency)
                .showImageForEmptyUri(defaultimg).build();
     }
 }

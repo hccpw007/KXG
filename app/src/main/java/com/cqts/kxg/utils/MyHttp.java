@@ -402,13 +402,14 @@ public class MyHttp {
      * 首页文章分类查询列表 <p>
      */
     public static void articleListing(HttpForVolley http, Integer which, int PageSize, int
-            PageNum, String cat_id, MyHttpResult myHttpResult) {
+            PageNum, String cat_id,String sort, MyHttpResult myHttpResult) {
         String httpUrl = url + "article/listing";
         httpMap.clear();
         httpMap.put("token", MyApplication.token);
         httpMap.put("cat_id", cat_id);
         httpMap.put("perPage", PageSize + "");
         httpMap.put("page", PageNum + "");
+        httpMap.put("sort", sort);
         Type type = new TypeToken<List<ArticleInfo>>() {
         }.getType();
         toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, type);

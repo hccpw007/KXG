@@ -44,7 +44,7 @@ public class MyEditText extends EditText {
 
     @Override
     public void setText(CharSequence text, BufferType type) {
-        if (!text.toString().isEmpty()){
+        if (!text.toString().isEmpty()) {
             setSelection(0);
         }
         super.setText(text, type);
@@ -52,58 +52,58 @@ public class MyEditText extends EditText {
 
     // 初始化edittext 控件
     private void initEditText() {
-        addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int before, int count) {
-                if (!resetText) {
-                    cursorPos = getSelectionEnd();
-                    // 这里用s.toString()而不直接用s是因为如果用s，
-                    // 那么，inputAfterText和s在内存中指向的是同一个地址，s改变了，
-                    // inputAfterText也就改变了，那么表情过滤就失败了
-                    inputAfterText = s.toString();
+            addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int before, int count) {
+                    if (!resetText) {
+                        cursorPos = getSelectionEnd();
+                        // 这里用s.toString()而不直接用s是因为如果用s，
+                        // 那么，inputAfterText和s在内存中指向的是同一个地址，s改变了，
+                        // inputAfterText也就改变了，那么表情过滤就失败了
+                        inputAfterText = s.toString();
+                    }
                 }
-            }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!resetText) {
-                    if (count >= 2) {// 表情符号的字符长度最小为2
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if (!resetText) {
+                        if (count >= 2&&s.toString().length()>=cursorPos + count) {// 表情符号的字符长度最小为2&&兼容谷歌输入法
 //                        CharSequence input = s;
-                        CharSequence input = s.subSequence(cursorPos, cursorPos + count);
-                        if (containsEmoji(input.toString())) {
-                            resetText = true;
-                            // 是表情符号就将文本还原为输入表情符号之前的内容
-                            setText(inputAfterText);
-                            CharSequence text = getText();
-                            if (text instanceof Spannable) {
-                                Spannable spanText = (Spannable) text;
-                                Selection.setSelection(spanText, text.length());
+                            CharSequence input = s.subSequence(cursorPos, cursorPos + count);
+                            if (containsEmoji(input.toString())) {
+                                resetText = true;
+                                // 是表情符号就将文本还原为输入表情符号之前的内容
+                                setText(inputAfterText);
+                                CharSequence text = getText();
+                                if (text instanceof Spannable) {
+                                    Spannable spanText = (Spannable) text;
+                                    Selection.setSelection(spanText, text.length());
+                                }
                             }
                         }
+                    } else {
+                        resetText = false;
                     }
-                } else {
-                    resetText = false;
-                }
 
 
-                //电话号码  取消首个字母为0
-                if (getInputType() == InputType.TYPE_CLASS_PHONE) {
-                    if (!s.toString().equals("") && s.toString().equals("0")) {
-                        setText("");
+                    //电话号码  取消首个字母为0
+                    if (getInputType() == InputType.TYPE_CLASS_PHONE) {
+                        if (!s.toString().equals("") && s.toString().equals("0")) {
+                            setText("");
+                        }
+                    }
+
+                    if (null != textChanged) {
+                        textChanged.textChanged(MyEditText.this, s.toString().trim(), start, before,
+                                count);
                     }
                 }
 
-                if (null != textChanged) {
-                    textChanged.textChanged(MyEditText.this, s.toString().trim(), start, before,
-                            count);
+                @Override
+                public void afterTextChanged(Editable editable) {
+
                 }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
+            });
     }
 
     //简化TextChanged方法,只需要执行interface 的textChanged 方法即可
