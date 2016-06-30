@@ -24,8 +24,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
             android:orientation="vertical">
 
             <LinearLayout
@@ -199,6 +197,7 @@
                         android:text="邀请码:"/>
 
                     <com.base.views.MyEditText
+                        android:focusable="true"
                         android:id="@+id/invitation_et"
                         style="@style/text_16sp_red"
                         android:layout_width="0px"
@@ -208,10 +207,9 @@
                         android:background="@drawable/sl_invitation_bg"
                         android:enabled="false"
                         android:gravity="center"
-                        android:inputType="number"
+                        android:digits="0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
                         android:maxLength="6"
-                        android:padding="3dp"
-                        android:text="000000"/>
+                        android:padding="3dp"/>
 
                     <TextView
                         android:id="@+id/change_tv"

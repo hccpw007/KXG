@@ -5,6 +5,7 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+
             <com.base.views.MyOvalImageView
                 app:myradius="100dp"
                 android:layout_marginTop="5dp"

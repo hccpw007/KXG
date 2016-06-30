@@ -36,12 +36,14 @@ public class WXShareUtils {
         WXWebpageObject webpage = new WXWebpageObject();
         webpage.webpageUrl = url;
         WXMediaMessage msg = new WXMediaMessage(webpage);
+        Bitmap scaledBitmap;
         if (null!= thumb){ //如果有图片,这添加图片
-//        Bitmap thumb = BitmapFactory.decodeResource(context.getResources(), R.mipmap
-//        .center_table9);
-            Bitmap scaledBitmap = Bitmap.createScaledBitmap(thumb,100, 100, true);
-            msg.thumbData = bmpToByteArray(scaledBitmap,true);
+            scaledBitmap = Bitmap.createScaledBitmap(thumb,100, 100, true);
+        }else {
+            scaledBitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher);
+            scaledBitmap = Bitmap.createScaledBitmap(scaledBitmap,100, 100, true);
         }
+        msg.thumbData = bmpToByteArray(scaledBitmap,true);
         msg.title = title;
         msg.description = text;
         SendMessageToWX.Req req = new SendMessageToWX.Req();

@@ -40,6 +40,7 @@ public class ApprenticeAdapter extends RecyclerView.Adapter<ApprenticeAdapter
                 .layout.item_home_articleclassify, null));
     }
 
+
     @Override
     public void onBindViewHolder(classifyViewHolder classifyViewHolder, final int i) {
         if (apprentices.size() < i+1) return;

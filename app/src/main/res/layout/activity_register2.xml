@@ -84,13 +84,13 @@
             android:text="邀请码"/>
 
         <com.base.views.MyEditText
+            android:digits="0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
             style="@style/text_15sp_black"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="15dp"
             android:layout_weight="1"
             android:background="@color/transparency"
-            android:inputType="number"
             android:hint="如有注册邀请码请输入"
             android:maxLength="6"
             android:paddingLeft="5dp"

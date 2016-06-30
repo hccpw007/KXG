@@ -7,10 +7,12 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.base.BaseValue;
 import com.base.utils.MyGridDecoration;
 import com.base.views.MyEditText;
 import com.base.zxing.EncodingHandler;
@@ -181,10 +183,9 @@ public class ApprenticeActivity extends MyActivity implements View.OnClickListen
         boolean enabled = invitationEt.isEnabled();
 
         if (!enabled) {
-            System.out.println("1");
+            BaseValue.imm.showSoftInput(invitationEt, 0);//展开输入法
             change_tv.setText("确认");
             invitationEt.setEnabled(true);
-            System.out.println(invitationEt.isEnabled());
             if (!TextUtils.isEmpty(text)) {
                 invitationEt.setSelection(text.length());
             }
@@ -200,6 +201,7 @@ public class ApprenticeActivity extends MyActivity implements View.OnClickListen
                 public void httpResult(Integer which, int code, String msg, Object bean) {
                     showToast(msg);
                     if (code == 0) {
+                        BaseValue.imm.hideSoftInputFromWindow(invitationEt.getWindowToken(), 0); //关闭输入法
                         invitationEt.setText(text);
                         getUserInfo().invite_code = text;
                         change_tv.setText("修改");

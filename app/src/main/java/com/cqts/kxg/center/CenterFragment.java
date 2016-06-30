@@ -52,7 +52,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
             table11, table12;
     private ArrayList<GoodsInfo> goodsInfos = new ArrayList<>();
     private GoodsAdapter adapter;
-    private LinearLayout money_layout;
+    private LinearLayout money_layout,moneytable_layout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -80,6 +80,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
         message_tv = (AutoTextView) view.findViewById(R.id.message_tv);
         goods_rclv = (RecyclerView) view.findViewById(R.id.goods_rclv);
         money_layout = (LinearLayout) view.findViewById(R.id.money_layout);
+        moneytable_layout = (LinearLayout) view.findViewById(R.id.moneytable_layout);
 
         table1 = (LinearLayout) view.findViewById(R.id.table1);
         table2 = (LinearLayout) view.findViewById(R.id.table2);
@@ -94,6 +95,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
         table11 = (LinearLayout) view.findViewById(R.id.table11);
         table12 = (LinearLayout) view.findViewById(R.id.table12);
 
+        moneytable_layout.setOnClickListener(this);
         login_tv.setOnClickListener(this);
         money_layout.setOnClickListener(this);
         name_tv.setOnClickListener(this);
@@ -162,6 +164,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 break;
             case R.id.table4://收益详情
             case R.id.money_layout://账户余额
+            case R.id.moneytable_layout://收徒金额信息
                 if (needLogin()) {
                     startActivity(new Intent(getActivity(), EarningsActivity.class));
                 }
@@ -215,6 +218,10 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                                 ("title", "我的店铺").putExtra("url", getUserInfo().store));
                     } else {
                         showToast("您还没有店铺!");
+                        Intent intent2 =new Intent(getActivity(), WebActivity.class);
+                        intent2.putExtra("title","我要开店");
+                        intent2.putExtra("url", MyUrls.getInstance().getMyUrl(getActivity()).openShop);
+                        startActivity(intent2);
                     }
                 }
 

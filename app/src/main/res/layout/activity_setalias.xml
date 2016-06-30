@@ -44,9 +44,10 @@
                 android:id="@+id/nickname_et"/>
 
             <ImageView
+
+                android:paddingLeft="30dp"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
-                android:padding="10dp"
                 android:src="@mipmap/clean"
                 android:id="@+id/clean_img"/>
         </LinearLayout>
@@ -57,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
-            android:text="1. 此昵称非登录会员名，仅在社区场景显示。 "
+            android:text="1. 此昵称非登录会员名，仅在社区场景显示 。"
             android:textSize="12sp"/>
 
         <TextView
@@ -66,7 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
-            android:text="2. 与开心购业务或卖家品牌有冲突的昵称，开心购有权收回。” "
+            android:text="2. 与开心购业务或卖家品牌有冲突的昵称，开心购有权收回。"
             android:textSize="12sp"/>
 
         <Button
