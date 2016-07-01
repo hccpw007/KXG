@@ -1,6 +1,5 @@
 package com.cqts.kxg.home;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.base.BaseValue;
-import com.base.views.RefreshLayout;
 import com.base.utils.MyGridDecoration;
+import com.base.views.RefreshLayout;
 import com.cqts.kxg.R;
 import com.cqts.kxg.adapter.GoodsAdapter;
 import com.cqts.kxg.bean.GoodsInfo;
@@ -20,11 +19,6 @@ import com.cqts.kxg.utils.MyHttp;
 import java.util.ArrayList;
 import java.util.List;
 
-
-/**
- * Created by Administrator on 2016/6/1.
- */
-@SuppressLint("ValidFragment")
 public class GoodsFragment extends MyFragment implements RefreshLayout.OnRefreshListener,
         MyHttp.MyHttpResult, MyFragment.HttpFail, RefreshLayout.TopOrBottom {
     private GoodsAdapter adapter;
@@ -32,40 +26,44 @@ public class GoodsFragment extends MyFragment implements RefreshLayout.OnRefresh
     private GridLayoutManager manager;
     private RefreshLayout goods_refresh;
     public RecyclerView goods_rclv;
-    Where where;
+    int where;
     private int PageSize = 50;
     private int PageNum = 1;
     String keyword = ""; //搜索文章的关键字
     String sort = "";
     String order = "";
     String cat_id = "0";
-    /**
-     * 搜索商品
-     */
-    public GoodsFragment(Where where, String keyword, String sort, String order) {
-        this.keyword = keyword;
-        this.sort = sort;
-        this.order = order;
-        this.where = where;
+
+    public GoodsFragment() {
     }
 
     /**
      * 喜欢
      */
-    public GoodsFragment(Where where) {
-        this.where = where;
+    public static GoodsFragment getInstanceForLove() {
+        GoodsFragment fragment = new GoodsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("where", WhereS.love);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     /**
-     * 分类查询商品
+     * 搜索和分类商品
      */
-    public GoodsFragment(Where where, String keyword, String sort, String order,String cat_id) {
-        this.keyword = keyword;
-        this.sort = sort;
-        this.order = order;
-        this.where = where;
-        this.cat_id = cat_id;
+    public static GoodsFragment getInstanceForSearch(String keyword, String sort, String order,
+                                                       String cat_id) {
+        GoodsFragment fragment = new GoodsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("where", WhereS.search);
+        bundle.putString("keyword", keyword);
+        bundle.putString("sort", sort);
+        bundle.putString("order", order);
+        bundle.putString("cat_id", cat_id);
+        fragment.setArguments(bundle);
+        return fragment;
     }
+
 
     //设置搜索的排序参数
     public void setSearchValue(String sort, String order) {
@@ -76,10 +74,23 @@ public class GoodsFragment extends MyFragment implements RefreshLayout.OnRefresh
         getData();
     }
 
+    void getBundleData(Bundle bundle) {
+        this.where = bundle.getInt("where");
+        switch (this.where) {
+            case WhereS.search:
+                this.keyword = bundle.getString("keyword");
+                this.sort = bundle.getString("sort");
+                this.order = bundle.getString("order");
+                this.cat_id = bundle.getString("cat_id");
+                break;
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
         if (null == view) {
+            getBundleData(getArguments());
             view = inflater.inflate(R.layout.fragment_goods, null);
             InitView();
             getData();
@@ -122,17 +133,15 @@ public class GoodsFragment extends MyFragment implements RefreshLayout.OnRefresh
 
     private void getData() {
         switch (where) {
-            case search: //来自搜索
+            case WhereS.search: //来自搜索
                 goods_refresh.setRefreshble(false);
-                MyHttp.searchGoods(http, null, PageSize, PageNum, keyword, sort, order,cat_id ,this);
+                MyHttp.searchGoods(http, null, PageSize, PageNum, keyword, sort, order, cat_id,
+                        this);
                 break;
-            case love: //来自喜欢
+            case WhereS.love: //来自喜欢
                 goods_refresh.setRefreshble(false);
                 MyHttp.loveGoods(http, null, PageNum, PageSize, this);
                 break;
-            case classify://来自分类
-                goods_refresh.setRefreshble(false);
-                MyHttp.searchGoods(http, null, PageSize, PageNum, keyword, sort, order,cat_id ,this);
             default:
                 break;
         }
@@ -189,15 +198,6 @@ public class GoodsFragment extends MyFragment implements RefreshLayout.OnRefresh
 
     @Override
     public void gotoTop() {
-    }
-
-    /**
-     * 商品的ArticleFragment出现在什么地方<p>
-     * search ------- 搜索<br>
-     * love --------- 喜欢(收藏)<br>
-     */
-    public enum Where {
-        search, love, classify
     }
 
     @Override

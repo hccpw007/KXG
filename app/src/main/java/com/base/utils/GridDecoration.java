@@ -75,7 +75,6 @@ public class GridDecoration extends RecyclerView.ItemDecoration {
                 bottom = 0;
             }
         }
-
         outRect.set((int) left, (int) top, (int) right, (int) bottom);
     }
 

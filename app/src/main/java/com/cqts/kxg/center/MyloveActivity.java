@@ -58,9 +58,9 @@ public class MyloveActivity extends MyActivity implements View.OnClickListener, 
     }
 
     private void InitViewPager() {
-        list.add(new GoodsFragment(GoodsFragment.Where.love));
-        list.add(new ArticleFragment(ArticleFragment.Where.love));
-        list.add(new ShopFragment(ShopFragment.Where.love));
+        list.add(GoodsFragment.getInstanceForLove());
+        list.add(ArticleFragment.getInstanceForLove());
+        list.add(ShopFragment.getInstanceForLove());
         viewpager.setFragemnt(getSupportFragmentManager(),list);
         viewpager.setOnMyPageChangeListener(this);
     }

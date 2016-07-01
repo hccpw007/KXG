@@ -1,6 +1,5 @@
 package com.cqts.kxg.home;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.base.BaseValue;
+import com.base.utils.GridDecoration;
 import com.base.views.RefreshLayout;
-import com.base.utils.MyGridDecoration;
 import com.cqts.kxg.R;
 import com.cqts.kxg.adapter.ArticleAdapter;
 import com.cqts.kxg.bean.ArticleInfo;
@@ -20,12 +19,9 @@ import com.cqts.kxg.utils.MyHttp;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.cqts.kxg.home.ArticleFragment.Where.*;
-
 /**
  * Created by Administrator on 2016/6/1.
  */
-@SuppressLint("ValidFragment")
 public class ArticleFragment extends MyFragment implements RefreshLayout.OnRefreshListener,
         MyHttp.MyHttpResult, MyFragment.HttpFail, RefreshLayout.TopOrBottom {
     private ArticleAdapter adapter;
@@ -33,7 +29,7 @@ public class ArticleFragment extends MyFragment implements RefreshLayout.OnRefre
     private GridLayoutManager manager;
     private RefreshLayout article_refresh;
     private RecyclerView article_rclv;
-    Where where;
+    int where;
     private int PageSize = 20;
     private int PageNum = 1;
     int hotType = 1; //热门模块的分类
@@ -44,29 +40,38 @@ public class ArticleFragment extends MyFragment implements RefreshLayout.OnRefre
     /**
      * 热门的分类hotType <p>
      */
-    public ArticleFragment(Where where, int hotType) {
-        this.where = where;
-        //来自热门
-        this.hotType = hotType;
+    public static ArticleFragment getInstanceForHOt(int hotType) {
+        ArticleFragment fragment = new ArticleFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("where", WhereS.hot);
+        bundle.putInt("hotType", hotType);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     /**
-     * 来自搜索传keyword<p>
+     * 来自搜索
      */
-    public ArticleFragment(Where where, String keyword) {
-        this.where = where;
-        this.keyword = keyword;
+    public static ArticleFragment getInstanceForSearch(String keyword) {
+        ArticleFragment fragment = new ArticleFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("where", WhereS.search);
+        bundle.putString("keyword", keyword);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     /**
      * 来自首页的分类文章查询传 cat_id
      */
-    public ArticleFragment(Where where, String cat_id, String sort) {
-        this.where = where;
-
-        //来自首页分类查询
-        this.cat_id = cat_id;
-        this.sort = sort;
+    public static ArticleFragment getInstanceForHome(String cat_id, String sort) {
+        ArticleFragment fragment = new ArticleFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("where", WhereS.home);
+        bundle.putString("cat_id", cat_id);
+        bundle.putString("sort", sort);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     public void setSort(String sort) {
@@ -79,14 +84,35 @@ public class ArticleFragment extends MyFragment implements RefreshLayout.OnRefre
     /**
      * 来自我的喜欢
      */
-    public ArticleFragment(Where where) {
-        this.where = where;
+    public static ArticleFragment getInstanceForLove() {
+        ArticleFragment fragment = new ArticleFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("where", WhereS.love);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    void getBundleData(Bundle bundle) {
+        this.where = bundle.getInt("where");
+        switch (this.where) {
+            case WhereS.hot:
+                this.hotType = bundle.getInt("hotType");
+                break;
+            case WhereS.home:
+                this.cat_id = bundle.getString("cat_id");
+                this.sort = bundle.getString("sort");
+                break;
+            case WhereS.search:
+                this.keyword = bundle.getString("keyword");
+                break;
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
         if (null == view) {
+            getBundleData(getArguments());
             view = inflater.inflate(R.layout.fragment_article, null);
             InitView();
             getData();
@@ -107,10 +133,10 @@ public class ArticleFragment extends MyFragment implements RefreshLayout.OnRefre
     private void InteRV() {
         article_rclv.setOverScrollMode(View.OVER_SCROLL_NEVER);
         manager = new GridLayoutManager(getActivity(), 1);
-        MyGridDecoration myGridDecoration = new MyGridDecoration(BaseValue.dp2px(6), BaseValue
-                .dp2px(0), getResources().getColor(R.color.mybg), false);
+        GridDecoration newGridDecoration = new GridDecoration(0, BaseValue.dp2px(6),
+                getResources().getColor(R.color.mybg), true);
         article_rclv.setLayoutManager(manager);
-        article_rclv.addItemDecoration(myGridDecoration);
+        article_rclv.addItemDecoration(newGridDecoration);
         adapter = new ArticleAdapter(this, articleInfos);
         article_rclv.setAdapter(adapter);
         article_refresh.setRC(article_rclv, this);
@@ -128,20 +154,20 @@ public class ArticleFragment extends MyFragment implements RefreshLayout.OnRefre
 
     private void getData() {
         switch (where) {
-            case hot: //来自热门
+            case WhereS.hot: //来自热门
                 MyHttp.articleHot(http, 1, PageSize, PageNum, hotType, this);
                 break;
-            case search: //来自搜索
+            case WhereS.search: //来自搜索
                 article_refresh.setRefreshble(false);
                 MyHttp.searchArticle(http, 2, PageSize, PageNum, keyword, this);
                 break;
-            case love: //来自喜欢
+            case WhereS.love: //来自喜欢
                 article_refresh.setRefreshble(false);
                 MyHttp.loveArticle(http, 3, PageNum, PageSize, this);
                 break;
-            case home: //来住首页
+            case WhereS.home: //来住首页
                 article_refresh.setRefreshble(false);
-                MyHttp.articleListing(http, 4, PageSize, PageNum, cat_id, sort,this);
+                MyHttp.articleListing(http, 4, PageSize, PageNum, cat_id, sort, this);
                 break;
             default:
                 break;
@@ -199,17 +225,6 @@ public class ArticleFragment extends MyFragment implements RefreshLayout.OnRefre
     @Override
     public void gotoTop() {
     }
-
-    /**
-     * 文章的ArticleFragment出现在什么地方<p>
-     * hot ---------- 热门<br>
-     * search ------- 搜索<br>
-     * love --------- 喜欢(收藏)<br>
-     */
-    public enum Where {
-        hot, search, love, home
-    }
-
     @Override
     public void onStop() {
         super.onStop();

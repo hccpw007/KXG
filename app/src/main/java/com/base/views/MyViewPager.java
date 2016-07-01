@@ -45,7 +45,7 @@ public class MyViewPager extends ViewPager {
 		isHaveFragment = true;
 		MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(
 				fragmentManager, list);
-		setOffscreenPageLimit(5);
+		setOffscreenPageLimit(0);
 		stopMap.put("Fragment", list.get(0));
 		setAdapter(adapter);
 		setOnMyPageChangeListener(null);

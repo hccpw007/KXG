@@ -63,8 +63,9 @@ public class ShopStreetActivity extends MyActivity implements RadioGroup.OnCheck
     private void InitFragment() {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction beginTransaction = fm.beginTransaction();
-        shopFragment1 = new ShopFragment(ShopFragment.Where.street, "");
-        shopFragment2 = new ShopFragment(ShopFragment.Where.street, "views");
+
+        shopFragment1 =  ShopFragment.getInstanceForStreet("");
+        shopFragment2 =  ShopFragment.getInstanceForStreet("views");
         beginTransaction.add(R.id.framelayout, shopFragment1);
         beginTransaction.add(R.id.framelayout, shopFragment2);
         beginTransaction.commit();

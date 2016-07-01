@@ -46,7 +46,7 @@ public class ClassifyGoodsActivity extends MyActivity implements View.OnClickLis
         sales_tv.setOnClickListener(this);
         money_layout.setOnClickListener(this);
 
-        goodsFragment = new GoodsFragment(GoodsFragment.Where.search,keyword, sort, order,cat_id);
+        goodsFragment = GoodsFragment.getInstanceForSearch(keyword, sort, order,cat_id);
         showFragment(goodsFragment);
     }
 

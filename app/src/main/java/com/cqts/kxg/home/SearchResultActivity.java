@@ -72,10 +72,10 @@ public class SearchResultActivity extends MyActivity implements View.OnClickList
                 setGoodsTab(v.getId());
                 goodsFragment.setSearchValue(sort, order);
                 try {
-                    if (goodsFragment.goods_rclv.getChildCount()!=0){
+                    if (goodsFragment.goods_rclv.getChildCount() != 0) {
                         goodsFragment.goods_rclv.scrollToPosition(0);
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                 }
                 break;
             default:
@@ -88,19 +88,20 @@ public class SearchResultActivity extends MyActivity implements View.OnClickList
         switch (type) {
             case SearchActivity.type_goods:
                 type_tv.setText("商品");
-                goodsFragment = new GoodsFragment(GoodsFragment.Where.search,keyword, sort, order);
+                goodsFragment = GoodsFragment.getInstanceForSearch(keyword, sort, order, "0");
                 showFragment(goodsFragment);
                 break;
             case SearchActivity.type_article:
                 goods_layout.setVisibility(View.GONE);
                 type_tv.setText("文章");
-                articleFragment = new ArticleFragment(ArticleFragment.Where.search,keyword);
+                articleFragment = ArticleFragment.getInstanceForSearch(keyword);
                 showFragment(articleFragment);
                 break;
             case SearchActivity.type_shop:
                 goods_layout.setVisibility(View.GONE);
                 type_tv.setText("店铺");
-                shopFragment = new ShopFragment(ShopFragment.Where.search, keyword);
+
+                shopFragment = ShopFragment.getInstanceForSeach(keyword);
                 showFragment(shopFragment);
             default:
                 break;

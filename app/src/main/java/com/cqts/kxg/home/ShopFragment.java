@@ -24,7 +24,6 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/6/1.
  */
-@SuppressLint("ValidFragment")
 public class ShopFragment extends MyFragment implements RefreshLayout.OnRefreshListener,
         MyHttp.MyHttpResult, MyFragment.HttpFail, RefreshLayout.TopOrBottom {
     private ShopAdapter adapter;
@@ -32,7 +31,7 @@ public class ShopFragment extends MyFragment implements RefreshLayout.OnRefreshL
     private GridLayoutManager manager;
     private RefreshLayout shop_refresh;
     private RecyclerView shop_rclv;
-    Where where;
+    int where;
     private int PageSize = 20;
     private int PageNum = 1;
     String str = ""; //搜索或者店铺街传的参数
@@ -42,22 +41,50 @@ public class ShopFragment extends MyFragment implements RefreshLayout.OnRefreshL
      * 搜索的时候 传的参数是keyword<br>
      * 店铺街传的参数就是排序 sort<br>
      */
-    public ShopFragment(Where where, String str) {
-        this.where = where;
-        this.str = str;
+    public static ShopFragment getInstanceForSeach(String str) {
+        ShopFragment fragment = new ShopFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("where", WhereS.search);
+        bundle.putString("str", str);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    public static ShopFragment getInstanceForStreet(String str) {
+        ShopFragment fragment = new ShopFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("where", WhereS.street);
+        bundle.putString("str", str);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     /**
      * 来自我的喜欢
      */
-    public ShopFragment(Where where) {
-        this.where = where;
+    public static ShopFragment getInstanceForLove() {
+        ShopFragment fragment = new ShopFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("where", WhereS.love);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    void getBundleData(Bundle bundle) {
+        this.where = bundle.getInt("where");
+        switch (this.where) {
+            case WhereS.search:
+            case WhereS.street:
+                this.str = bundle.getString("str");
+                break;
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
         if (null == view) {
+            getBundleData(getArguments());
             view = inflater.inflate(R.layout.fragment_shop, null);
             InitView();
             getData();
@@ -100,15 +127,15 @@ public class ShopFragment extends MyFragment implements RefreshLayout.OnRefreshL
 
     private void getData() {
         switch (where) {
-            case search: //来自搜索
+            case WhereS.search: //来自搜索
                 shop_refresh.setRefreshble(false);
                 MyHttp.searchShop(http, 1, PageSize, PageNum, str, "", this);
                 break;
-            case love: //来自喜欢
+            case WhereS.love: //来自喜欢
                 shop_refresh.setRefreshble(false);
-                MyHttp.loveShop(http,2,PageNum,PageSize,this);
+                MyHttp.loveShop(http, 2, PageNum, PageSize, this);
                 break;
-            case street: //来自店铺街
+            case WhereS.street: //来自店铺街
                 shop_refresh.setRefreshble(false);
                 MyHttp.searchShop(http, 3, PageSize, PageNum, "", str, this);
                 break;
@@ -169,20 +196,10 @@ public class ShopFragment extends MyFragment implements RefreshLayout.OnRefreshL
     public void gotoTop() {
     }
 
-    /**
-     * 店铺的ArticleFragment出现在什么地方<p>
-     * search ------- 搜索<br>
-     * love --------- 喜欢(收藏)<br>
-     * street ------- 店铺街
-     */
-    public enum Where {
-        search, love, street
-    }
-
     @Override
     public void onStop() {
         super.onStop();
-        if (shop_refresh!=null&&shop_refresh.isRefreshing) {
+        if (shop_refresh != null && shop_refresh.isRefreshing) {
             shop_refresh.setResultState(RefreshLayout.ResultState.close);
         }
     }

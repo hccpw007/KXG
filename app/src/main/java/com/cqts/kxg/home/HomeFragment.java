@@ -107,7 +107,6 @@ public class HomeFragment extends MyFragment implements View.OnClickListener, Re
         adapter = new HomeAdapter(homeBannerAdapter, homeTableAdapter,
                 homeArticleClassifyAdapter, articleListAdapter);
         recyclerview.addItemDecoration(newGridDecoration);
-
         recyclerview.setLayoutManager(manager);
         recyclerview.setAdapter(adapter);
         home_refresh.setRC(recyclerview, new RefreshLayout.TopOrBottom() {

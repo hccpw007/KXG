@@ -32,7 +32,7 @@ public class ArticleActivity extends MyActivity implements RadioGroup.OnCheckedC
         radiogroup.setOnCheckedChangeListener(this);
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction beginTransaction = fm.beginTransaction();
-        articleFragment = new ArticleFragment(ArticleFragment.Where.home, getIntent()
+        articleFragment = ArticleFragment.getInstanceForHome(getIntent()
                 .getStringExtra("cat_id"), sort);
         beginTransaction.add(R.id.framelayout, articleFragment);
         beginTransaction.commit();

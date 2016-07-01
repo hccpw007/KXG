@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.base.BaseValue;
 import com.base.http.HttpForVolley;
+import com.base.utils.GridDecoration;
 import com.base.views.AutoTextView;
 import com.base.utils.MyGridDecoration;
 import com.base.views.MyHeadImageView;

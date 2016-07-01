@@ -161,11 +161,12 @@ public class UpdateUtils implements MyHttp.MyHttpResult, View.OnClickListener, H
                     is.close();
                     fos.close();
                 } catch (Exception e) {
-                    Toast.makeText(context,"更新错误",Toast.LENGTH_SHORT).show();
-                    if (apkFile.exists()) {
+                    if (null != apkFile && apkFile.exists()) {
                         apkFile.delete();
                     }
-                    alertDialog.dismiss();
+                    if (null != alertDialog) {
+                        alertDialog.dismiss();
+                    }
                 }
             }
         }).start();
