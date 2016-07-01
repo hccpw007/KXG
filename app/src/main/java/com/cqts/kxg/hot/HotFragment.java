@@ -15,6 +15,7 @@ import com.cqts.kxg.R;
 import com.cqts.kxg.home.ArticleFragment;
 import com.cqts.kxg.home.SearchActivity;
 import com.cqts.kxg.main.MyFragment;
+import com.cqts.kxg.nine.NineFragment;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,17 @@ public class HotFragment extends MyFragment implements MyViewPager.OnMyPageChang
     private TextView hot_tv1;
     private TextView hot_tv2;
     private TextView hot_tv3;
+
+    public static HotFragment fragment;
+
+    public static HotFragment getInstance() {
+        if (fragment == null) {
+            fragment = new HotFragment();
+            Bundle bundle = new Bundle();
+            fragment.setArguments(bundle);
+        }
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

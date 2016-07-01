@@ -88,11 +88,11 @@ public class NgtAty extends FragmentActivity implements OnMyPageChangeListener,
     }
 
     private void InitFragment() {
-        list.add(new HomeFragment());
-        list.add(new NineFragment());
-        list.add(new HotFragment());
-        list.add(new ClassifyFragment());
-        list.add(new CenterFragment());
+        list.add(HomeFragment.getInstance());
+        list.add(NineFragment.getInstance());
+        list.add(HotFragment.getInstance());
+        list.add(ClassifyFragment.getInstance());
+        list.add(CenterFragment.getInstance());
         ngt_pager.setFragemnt(getSupportFragmentManager(), list);
         ngt_pager.setOnMyPageChangeListener(this);
         checkedFragment = list.get(0);

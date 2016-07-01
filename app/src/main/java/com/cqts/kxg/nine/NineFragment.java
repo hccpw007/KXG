@@ -20,6 +20,7 @@ import com.cqts.kxg.R;
 import com.cqts.kxg.bean.NineInfo;
 import com.cqts.kxg.bean.GoodsInfo;
 import com.cqts.kxg.adapter.GoodsAdapter;
+import com.cqts.kxg.home.HomeFragment;
 import com.cqts.kxg.main.MyFragment;
 import com.cqts.kxg.utils.MyHttp;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -41,6 +42,17 @@ public class NineFragment extends MyFragment {
     int pageNum = 1;
     int pageSize = 50;
     boolean isCanLoadMore = true; //是否可以加载更多
+
+    public static NineFragment fragment;
+
+    public static NineFragment getInstance() {
+        if (fragment == null) {
+            fragment = new NineFragment();
+            Bundle bundle = new Bundle();
+            fragment.setArguments(bundle);
+        }
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -19,6 +19,7 @@ import com.cqts.kxg.adapter.ClassifyRVAdapter;
 import com.cqts.kxg.bean.ClassifyListInfo;
 import com.cqts.kxg.bean.ClassifyListInfo.ClassifyChildInfo;
 import com.cqts.kxg.home.SearchActivity;
+import com.cqts.kxg.hot.HotFragment;
 import com.cqts.kxg.main.MyFragment;
 import com.cqts.kxg.utils.MyHttp;
 import com.cqts.kxg.utils.SPutils;
@@ -33,6 +34,17 @@ public class ClassifyFragment extends MyFragment implements View.OnClickListener
     private ListView classify_list;
     private ClassifyListAdapter listAdapter;
     private ClassifyRVAdapter adapter2;
+
+    public static ClassifyFragment fragment;
+
+    public static ClassifyFragment getInstance() {
+        if (fragment == null) {
+            fragment = new ClassifyFragment();
+            Bundle bundle = new Bundle();
+            fragment.setArguments(bundle);
+        }
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

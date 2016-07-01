@@ -44,6 +44,17 @@ public class HomeFragment extends MyFragment implements View.OnClickListener, Re
 
     private static final int urlNum = 4; //当前页面是刷新的url数量
 
+    public static HomeFragment fragment;
+
+    public static HomeFragment getInstance() {
+        if (fragment == null) {
+            fragment = new HomeFragment();
+            Bundle bundle = new Bundle();
+            fragment.setArguments(bundle);
+        }
+        return fragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,7 +84,7 @@ public class HomeFragment extends MyFragment implements View.OnClickListener, Re
     }
 
     private void initRecyclerView() {
-        ArticleAdapter articleListAdapter = new ArticleAdapter(this,articleInfos);
+        ArticleAdapter articleListAdapter = new ArticleAdapter(this, articleInfos);
         ArticleClassifyAdapter homeArticleClassifyAdapter = new ArticleClassifyAdapter(sceneInfos);
         HomeBannerAdapter homeBannerAdapter = new HomeBannerAdapter(bannerInfos);
         HomeTableAdapter homeTableAdapter = new HomeTableAdapter(homeTableInfos);
@@ -163,6 +174,7 @@ public class HomeFragment extends MyFragment implements View.OnClickListener, Re
             home_refresh.setResultState(RefreshLayout.ResultState.success);
         }
     }
+
     @Override
     public void onRefresh() {
         pageNum = 1;

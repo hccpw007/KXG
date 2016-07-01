@@ -23,6 +23,7 @@ import com.cqts.kxg.R;
 import com.cqts.kxg.adapter.GoodsAdapter;
 import com.cqts.kxg.bean.EarnInfo;
 import com.cqts.kxg.bean.GoodsInfo;
+import com.cqts.kxg.classify.ClassifyFragment;
 import com.cqts.kxg.home.WebShopActivity;
 import com.cqts.kxg.main.MyApplication;
 import com.cqts.kxg.main.MyFragment;
@@ -53,6 +54,17 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
     private ArrayList<GoodsInfo> goodsInfos = new ArrayList<>();
     private GoodsAdapter adapter;
     private LinearLayout money_layout,moneytable_layout;
+
+    public static CenterFragment fragment;
+
+    public static CenterFragment getInstance() {
+        if (fragment == null) {
+            fragment = new CenterFragment();
+            Bundle bundle = new Bundle();
+            fragment.setArguments(bundle);
+        }
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

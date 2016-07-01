@@ -178,7 +178,7 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
      */
     private void setShare() {
         SharePop.getInstance().showPop(this, shareLayout, articleInfo.title, articleInfo
-                        .article_url+"&share=1",
+                        .article_url + "&share=1",
                 articleInfo.share_content, bitmap, new SharePop.ShareResult() {
                     @Override
                     public void shareResult(int result) {
@@ -251,18 +251,22 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
     }
 
     void getBitmap() {
-        ImageRequest imageRequest = new ImageRequest(articleInfo.share_img,
-                new Response.Listener<Bitmap>() {
-                    @Override
-                    public void onResponse(Bitmap response) {
-                        bitmap = response;
-                    }
-                }, 0, 0, Bitmap.Config.RGB_565, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        });
-        BaseValue.mQueue.add(imageRequest);
+        try {
+            ImageRequest imageRequest = new ImageRequest(articleInfo.share_img,
+                    new Response.Listener<Bitmap>() {
+                        @Override
+                        public void onResponse(Bitmap response) {
+                            bitmap = response;
+                        }
+                    }, 0, 0, Bitmap.Config.RGB_565, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                }
+            });
+            BaseValue.mQueue.add(imageRequest);
+        } catch (Exception e) {
+
+        }
     }
 }
 
