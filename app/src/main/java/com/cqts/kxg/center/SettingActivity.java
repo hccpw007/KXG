@@ -15,6 +15,7 @@ import com.cqts.kxg.main.MyApplication;
 import com.cqts.kxg.main.WebActivity;
 import com.cqts.kxg.utils.MyUrls;
 import com.cqts.kxg.utils.SPutils;
+import com.cqts.kxg.utils.UMengUtils;
 import com.cqts.kxg.views.SharePop;
 
 public class SettingActivity extends MyActivity implements View.OnClickListener {
@@ -89,6 +90,7 @@ public class SettingActivity extends MyActivity implements View.OnClickListener 
                 startActivity(intent);
                 break;
             case R.id.exit_btn: //退出当前账户
+                UMengUtils.setSignOff();
                 MyApplication.userInfo = null;
                 MyApplication.token = "";
                 SPutils.setToken("");

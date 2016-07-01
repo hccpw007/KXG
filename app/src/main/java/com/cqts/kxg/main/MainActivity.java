@@ -11,6 +11,7 @@ import com.cqts.kxg.bean.SigninInfo;
 import com.cqts.kxg.bean.UserInfo;
 import com.cqts.kxg.utils.MyHttp;
 import com.cqts.kxg.utils.SPutils;
+import com.cqts.kxg.utils.UMengUtils;
 
 public class MainActivity extends MyActivity implements MyHttp.MyHttpResult, Handler.Callback {
     public static final int REFRESHTOKEN = 1;
@@ -36,7 +37,6 @@ public class MainActivity extends MyActivity implements MyHttp.MyHttpResult, Han
             return;
         }
         MyHttp.refreshToken(http, REFRESHTOKEN, token, this);
-
     }
 
     private void InitView() {
@@ -59,6 +59,7 @@ public class MainActivity extends MyActivity implements MyHttp.MyHttpResult, Han
                 MyHttp.getUserInfo(http, GETUSERINFO,this);
                 break;
             case GETUSERINFO: //获得userinfo
+                UMengUtils.setSignIn();
                 MyApplication.userInfo = (UserInfo) bean;
                 break;
         }

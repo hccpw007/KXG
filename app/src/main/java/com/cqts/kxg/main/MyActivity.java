@@ -2,7 +2,6 @@ package com.cqts.kxg.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -10,6 +9,7 @@ import com.base.BaseActivity;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.UserInfo;
 import com.cqts.kxg.center.LoginActivity;
+import com.cqts.kxg.utils.UMengUtils;
 
 /**
  * Created by Administrator on 2016/5/3.
@@ -77,5 +77,18 @@ public class MyActivity extends BaseActivity {
 
     public UserInfo getUserInfo(){
         return MyApplication.userInfo;
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        UMengUtils.setOnPageStart(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        UMengUtils.setOnonPageEnd(this);
     }
 }

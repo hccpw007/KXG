@@ -16,6 +16,7 @@ import com.cqts.kxg.main.MyApplication;
 import com.cqts.kxg.main.NgtAty;
 import com.cqts.kxg.utils.MyHttp;
 import com.cqts.kxg.utils.SPutils;
+import com.cqts.kxg.utils.UMengUtils;
 
 /**
  * 登录
@@ -138,6 +139,7 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
                 if (TextUtils.isEmpty(MyApplication.userInfo.mobile_phone)){
                     startActivityForResult(new Intent(LoginActivity.this,BindPhoneActivity.class).putExtra("userName",userName),1);
                 }else {
+                    UMengUtils.setSignIn();
                     SPutils.setToken(MyApplication.token);
                     finish();
                 }
@@ -150,6 +152,7 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1){
             if (resultCode == RESULT_OK){ //绑定手机成功
+                UMengUtils.setSignIn();
                 SPutils.setToken(MyApplication.token);
                 finish();
             }else {

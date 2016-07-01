@@ -14,10 +14,11 @@ import com.base.views.MyViewPager;
 import com.cqts.kxg.R;
 import com.cqts.kxg.home.ArticleFragment;
 import com.cqts.kxg.home.SearchActivity;
+import com.cqts.kxg.main.MyFragment;
 
 import java.util.ArrayList;
 
-public class HotFragment extends BaseFragment implements MyViewPager.OnMyPageChangeListener, View
+public class HotFragment extends MyFragment implements MyViewPager.OnMyPageChangeListener, View
         .OnClickListener {
     private ArrayList<BaseFragment> list = new ArrayList<>();
     private MyViewPager hot_viewpager;

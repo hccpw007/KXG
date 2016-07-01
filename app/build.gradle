@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "24.0.0 rc2"
+    buildToolsVersion '24.0.0'
 
     defaultConfig {
         applicationId "com.cqts.kxg"
         minSdkVersion 15
-        versionCode 14
+        versionCode 15
         versionName "1.0"
     }
     buildTypes {
@@ -24,4 +24,6 @@ dependencies {
     compile files('libs/android-support-v4.jar')
     //    compile 'com.android.support:support-v4:22.2.1'
     compile files('libs/wx_sdk.jar')
+    compile 'com.umeng.analytics:analytics:latest.integration'
+    compile files('libs/umeng-analytics-v6.0.1.jar')
 }

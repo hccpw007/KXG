@@ -15,6 +15,7 @@ import com.base.views.MyViewPager;
 import com.cqts.kxg.R;
 import com.cqts.kxg.adapter.IndexAdapter;
 import com.cqts.kxg.utils.SPutils;
+import com.cqts.kxg.utils.UMengUtils;
 
 /**
  * 引导页
@@ -85,4 +86,18 @@ public class IndexActivity extends Activity implements MyViewPager.OnMyPageChang
         }
         return super.onKeyDown(keyCode, event);
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        UMengUtils.setOnPageStart(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        UMengUtils.setOnonPageEnd(this);
+    }
+
 }

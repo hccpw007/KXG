@@ -45,6 +45,14 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppBaseTheme">
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5774d55167e58e5221001a2e" >
+        </meta-data>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="kxg" >
+        </meta-data>
 
         <!-- 微信分享回调 -->
         <activity

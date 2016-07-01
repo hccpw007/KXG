@@ -19,13 +19,14 @@ import com.cqts.kxg.adapter.ClassifyRVAdapter;
 import com.cqts.kxg.bean.ClassifyListInfo;
 import com.cqts.kxg.bean.ClassifyListInfo.ClassifyChildInfo;
 import com.cqts.kxg.home.SearchActivity;
+import com.cqts.kxg.main.MyFragment;
 import com.cqts.kxg.utils.MyHttp;
 import com.cqts.kxg.utils.SPutils;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
-public class ClassifyFragment extends BaseFragment implements View.OnClickListener {
+public class ClassifyFragment extends MyFragment implements View.OnClickListener {
     private ArrayList<ClassifyListInfo> classifyListInfos = new ArrayList<ClassifyListInfo>();
     private ArrayList<ClassifyChildInfo> classifyChildInfos = new ArrayList<ClassifyChildInfo>();
     private RecyclerView classify_rv;

@@ -15,6 +15,7 @@ import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.main.MyApplication;
 import com.cqts.kxg.utils.MyHttp;
 import com.cqts.kxg.utils.SPutils;
+import com.cqts.kxg.utils.UMengUtils;
 
 public class Register2Activity extends MyActivity implements View.OnClickListener {
     private TextView register2_phone_tv;
@@ -153,6 +154,7 @@ public class Register2Activity extends MyActivity implements View.OnClickListene
                     showToast(msg);
                     return;
                 }
+                UMengUtils.setSignIn();
                 MyApplication.userInfo = (UserInfo) bean;
                 SPutils.setToken(MyApplication.token);
                 LoginActivity.instance.finish();

@@ -25,6 +25,7 @@ import com.cqts.kxg.hot.HotFragment;
 import com.cqts.kxg.home.HomeFragment;
 import com.cqts.kxg.nine.NineFragment;
 import com.cqts.kxg.utils.MyUrls;
+import com.cqts.kxg.utils.UMengUtils;
 import com.cqts.kxg.utils.UpdateUtils;
 
 /**
@@ -100,8 +101,6 @@ public class NgtAty extends FragmentActivity implements OnMyPageChangeListener,
     @Override
     public void OnMyPageSelected(int arg0) {
         ngt_rb[arg0].setChecked(true);
-        list.get(arg0).onStart();
-        list.get(arg0).onShow();
     }
 
     @Override
@@ -160,6 +159,8 @@ public class NgtAty extends FragmentActivity implements OnMyPageChangeListener,
             } else if (clickCount == 2) {
                 clickSecondTime = System.currentTimeMillis();
                 if (clickSecondTime - clickFirstTime <= 2000) {
+                    UMengUtils.setSignOff();
+                    UMengUtils.setKillProcess(this);
                     System.exit(0);
                 } else {
                     clickCount = 1;

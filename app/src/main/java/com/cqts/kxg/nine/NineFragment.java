@@ -20,13 +20,14 @@ import com.cqts.kxg.R;
 import com.cqts.kxg.bean.NineInfo;
 import com.cqts.kxg.bean.GoodsInfo;
 import com.cqts.kxg.adapter.GoodsAdapter;
+import com.cqts.kxg.main.MyFragment;
 import com.cqts.kxg.utils.MyHttp;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NineFragment extends BaseFragment {
+public class NineFragment extends MyFragment {
     private ImageView nine_img;
     private RecyclerView nine_rv;
     List<GoodsInfo> goods_list = new ArrayList<GoodsInfo>();

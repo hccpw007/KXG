@@ -11,6 +11,7 @@ import com.base.BaseFragment;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.UserInfo;
 import com.cqts.kxg.center.LoginActivity;
+import com.cqts.kxg.utils.UMengUtils;
 
 /**
  * Created by Administrator on 2016/6/3.
@@ -48,7 +49,6 @@ public class MyFragment extends BaseFragment {
                 httpFail.toHttpAgain();
             }
         });
-
     }
 
     public void setHttpNotData(final HttpFail httpFail) {
@@ -94,5 +94,17 @@ public class MyFragment extends BaseFragment {
 
     public UserInfo getUserInfo(){
         return MyApplication.userInfo;
+    }
+
+    @Override
+    public void onShow() {
+        super.onShow();
+        UMengUtils.setOnPageStart(getActivity());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        UMengUtils.setOnonPageEnd(getActivity());
     }
 }
