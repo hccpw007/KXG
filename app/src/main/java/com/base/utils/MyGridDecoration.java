@@ -114,12 +114,11 @@ public class MyGridDecoration extends RecyclerView.ItemDecoration {
     @Override
     public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
         super.onDrawOver(c, parent, state);
-        RecyclerView.Adapter adapter = parent.getAdapter(); //获得RecyclerView的Adapter
-        int itemSize = adapter.getItemCount(); //总共有多少个item
-        ViewGroup.LayoutParams layoutParams = parent.getLayoutParams();
-
         if (isInScroll) {
             try {
+                RecyclerView.Adapter adapter = parent.getAdapter(); //获得RecyclerView的Adapter
+                int itemSize = adapter.getItemCount(); //总共有多少个item
+                ViewGroup.LayoutParams layoutParams = parent.getLayoutParams();
                 GridLayoutManager layoutManager = (GridLayoutManager) parent.getLayoutManager();
                 int spanCount = layoutManager.getSpanCount();
                 int itemNum;
@@ -128,17 +127,18 @@ public class MyGridDecoration extends RecyclerView.ItemDecoration {
                 } else {
                     itemNum = itemSize / spanCount + 1;
                 }
-
+                int height = 0;
                 View childAt = parent.getChildAt(0);
                 if (!isFrame) {
-                    layoutParams.height = childAt.getMeasuredHeight() * itemNum + hSize *
+                   height = childAt.getMeasuredHeight() * itemNum + hSize *
                             (itemNum - 1);
                 } else {
-                    layoutParams.height = childAt.getMeasuredHeight() * itemNum + hSize *
+                    height = childAt.getMeasuredHeight() * itemNum + hSize *
                             (itemNum - 1) + hSize * 2;
                 }
 
-                if ( this.RCheight != layoutParams.height){
+                if ( this.RCheight != height){
+                    layoutParams.height = height;
                     parent.setLayoutParams(layoutParams);
                     this.RCheight = layoutParams.height;
                 }

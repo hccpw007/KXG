@@ -43,7 +43,7 @@ public class ArticleFragment extends MyFragment implements RefreshLayout.OnRefre
     public static ArticleFragment getInstanceForHOt(int hotType) {
         ArticleFragment fragment = new ArticleFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("where", WhereS.hot);
+        bundle.putInt("where", Where.hot);
         bundle.putInt("hotType", hotType);
         fragment.setArguments(bundle);
         return fragment;
@@ -55,7 +55,7 @@ public class ArticleFragment extends MyFragment implements RefreshLayout.OnRefre
     public static ArticleFragment getInstanceForSearch(String keyword) {
         ArticleFragment fragment = new ArticleFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("where", WhereS.search);
+        bundle.putInt("where", Where.search);
         bundle.putString("keyword", keyword);
         fragment.setArguments(bundle);
         return fragment;
@@ -67,7 +67,7 @@ public class ArticleFragment extends MyFragment implements RefreshLayout.OnRefre
     public static ArticleFragment getInstanceForHome(String cat_id, String sort) {
         ArticleFragment fragment = new ArticleFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("where", WhereS.home);
+        bundle.putInt("where", Where.home);
         bundle.putString("cat_id", cat_id);
         bundle.putString("sort", sort);
         fragment.setArguments(bundle);
@@ -87,7 +87,7 @@ public class ArticleFragment extends MyFragment implements RefreshLayout.OnRefre
     public static ArticleFragment getInstanceForLove() {
         ArticleFragment fragment = new ArticleFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("where", WhereS.love);
+        bundle.putInt("where", Where.love);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -95,14 +95,14 @@ public class ArticleFragment extends MyFragment implements RefreshLayout.OnRefre
     void getBundleData(Bundle bundle) {
         this.where = bundle.getInt("where");
         switch (this.where) {
-            case WhereS.hot:
+            case Where.hot:
                 this.hotType = bundle.getInt("hotType");
                 break;
-            case WhereS.home:
+            case Where.home:
                 this.cat_id = bundle.getString("cat_id");
                 this.sort = bundle.getString("sort");
                 break;
-            case WhereS.search:
+            case Where.search:
                 this.keyword = bundle.getString("keyword");
                 break;
         }
@@ -154,18 +154,18 @@ public class ArticleFragment extends MyFragment implements RefreshLayout.OnRefre
 
     private void getData() {
         switch (where) {
-            case WhereS.hot: //来自热门
+            case Where.hot: //来自热门
                 MyHttp.articleHot(http, 1, PageSize, PageNum, hotType, this);
                 break;
-            case WhereS.search: //来自搜索
+            case Where.search: //来自搜索
                 article_refresh.setRefreshble(false);
                 MyHttp.searchArticle(http, 2, PageSize, PageNum, keyword, this);
                 break;
-            case WhereS.love: //来自喜欢
+            case Where.love: //来自喜欢
                 article_refresh.setRefreshble(false);
                 MyHttp.loveArticle(http, 3, PageNum, PageSize, this);
                 break;
-            case WhereS.home: //来住首页
+            case Where.home: //来住首页
                 article_refresh.setRefreshble(false);
                 MyHttp.articleListing(http, 4, PageSize, PageNum, cat_id, sort, this);
                 break;

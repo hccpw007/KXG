@@ -159,7 +159,6 @@ public class NgtAty extends FragmentActivity implements OnMyPageChangeListener,
             } else if (clickCount == 2) {
                 clickSecondTime = System.currentTimeMillis();
                 if (clickSecondTime - clickFirstTime <= 2000) {
-                    UMengUtils.setSignOff();
                     UMengUtils.setKillProcess(this);
                     System.exit(0);
                 } else {

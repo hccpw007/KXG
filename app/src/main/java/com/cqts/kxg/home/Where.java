@@ -3,7 +3,7 @@ package com.cqts.kxg.home;
 /**
  * Created by admin on 2016/7/1.
  */
-public class WhereS {
+public class Where {
     public static final int hot = 1;
     public static final int search = 2;
     public static final int love = 3;

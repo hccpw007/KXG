@@ -43,7 +43,7 @@ public class GoodsFragment extends MyFragment implements RefreshLayout.OnRefresh
     public static GoodsFragment getInstanceForLove() {
         GoodsFragment fragment = new GoodsFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("where", WhereS.love);
+        bundle.putInt("where", Where.love);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -55,7 +55,7 @@ public class GoodsFragment extends MyFragment implements RefreshLayout.OnRefresh
                                                        String cat_id) {
         GoodsFragment fragment = new GoodsFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("where", WhereS.search);
+        bundle.putInt("where", Where.search);
         bundle.putString("keyword", keyword);
         bundle.putString("sort", sort);
         bundle.putString("order", order);
@@ -77,7 +77,7 @@ public class GoodsFragment extends MyFragment implements RefreshLayout.OnRefresh
     void getBundleData(Bundle bundle) {
         this.where = bundle.getInt("where");
         switch (this.where) {
-            case WhereS.search:
+            case Where.search:
                 this.keyword = bundle.getString("keyword");
                 this.sort = bundle.getString("sort");
                 this.order = bundle.getString("order");
@@ -133,12 +133,12 @@ public class GoodsFragment extends MyFragment implements RefreshLayout.OnRefresh
 
     private void getData() {
         switch (where) {
-            case WhereS.search: //来自搜索
+            case Where.search: //来自搜索
                 goods_refresh.setRefreshble(false);
                 MyHttp.searchGoods(http, null, PageSize, PageNum, keyword, sort, order, cat_id,
                         this);
                 break;
-            case WhereS.love: //来自喜欢
+            case Where.love: //来自喜欢
                 goods_refresh.setRefreshble(false);
                 MyHttp.loveGoods(http, null, PageNum, PageSize, this);
                 break;

@@ -1,6 +1,5 @@
 package com.cqts.kxg.home;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -44,7 +43,7 @@ public class ShopFragment extends MyFragment implements RefreshLayout.OnRefreshL
     public static ShopFragment getInstanceForSeach(String str) {
         ShopFragment fragment = new ShopFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("where", WhereS.search);
+        bundle.putInt("where", Where.search);
         bundle.putString("str", str);
         fragment.setArguments(bundle);
         return fragment;
@@ -53,7 +52,7 @@ public class ShopFragment extends MyFragment implements RefreshLayout.OnRefreshL
     public static ShopFragment getInstanceForStreet(String str) {
         ShopFragment fragment = new ShopFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("where", WhereS.street);
+        bundle.putInt("where", Where.street);
         bundle.putString("str", str);
         fragment.setArguments(bundle);
         return fragment;
@@ -65,7 +64,7 @@ public class ShopFragment extends MyFragment implements RefreshLayout.OnRefreshL
     public static ShopFragment getInstanceForLove() {
         ShopFragment fragment = new ShopFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("where", WhereS.love);
+        bundle.putInt("where", Where.love);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -73,8 +72,8 @@ public class ShopFragment extends MyFragment implements RefreshLayout.OnRefreshL
     void getBundleData(Bundle bundle) {
         this.where = bundle.getInt("where");
         switch (this.where) {
-            case WhereS.search:
-            case WhereS.street:
+            case Where.search:
+            case Where.street:
                 this.str = bundle.getString("str");
                 break;
         }
@@ -127,15 +126,15 @@ public class ShopFragment extends MyFragment implements RefreshLayout.OnRefreshL
 
     private void getData() {
         switch (where) {
-            case WhereS.search: //来自搜索
+            case Where.search: //来自搜索
                 shop_refresh.setRefreshble(false);
                 MyHttp.searchShop(http, 1, PageSize, PageNum, str, "", this);
                 break;
-            case WhereS.love: //来自喜欢
+            case Where.love: //来自喜欢
                 shop_refresh.setRefreshble(false);
                 MyHttp.loveShop(http, 2, PageNum, PageSize, this);
                 break;
-            case WhereS.street: //来自店铺街
+            case Where.street: //来自店铺街
                 shop_refresh.setRefreshble(false);
                 MyHttp.searchShop(http, 3, PageSize, PageNum, "", str, this);
                 break;
