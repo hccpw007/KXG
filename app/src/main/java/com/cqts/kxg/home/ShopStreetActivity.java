@@ -23,6 +23,7 @@ public class ShopStreetActivity extends MyActivity implements RadioGroup.OnCheck
     private ShopFragment shopFragment1;
     private ShopFragment shopFragment2;
     ImageView openshopImg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,8 +65,8 @@ public class ShopStreetActivity extends MyActivity implements RadioGroup.OnCheck
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction beginTransaction = fm.beginTransaction();
 
-        shopFragment1 =  ShopFragment.getInstanceForStreet("");
-        shopFragment2 =  ShopFragment.getInstanceForStreet("views");
+        shopFragment1 = ShopFragment.getInstanceForStreet("");
+        shopFragment2 = ShopFragment.getInstanceForStreet("views");
         beginTransaction.add(R.id.framelayout, shopFragment1);
         beginTransaction.add(R.id.framelayout, shopFragment2);
         beginTransaction.commit();
@@ -87,11 +88,14 @@ public class ShopStreetActivity extends MyActivity implements RadioGroup.OnCheck
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.search_img:
-                startActivity(new Intent(this,SearchActivity.class));
+                startActivity(new Intent(this, SearchActivity.class));
                 break;
             case R.id.openshop_img:
-                Intent intent =new Intent(this, WebActivity.class);
-                intent.putExtra("title","我要开店");
+                if (null == MyUrls.getInstance().getMyUrl(this)) {
+                    return;
+                }
+                Intent intent = new Intent(this, WebActivity.class);
+                intent.putExtra("title", "我要开店");
                 intent.putExtra("url", MyUrls.getInstance().getMyUrl(this).openShop);
                 startActivity(intent);
                 break;

@@ -24,6 +24,7 @@ import com.cqts.kxg.R;
 import com.cqts.kxg.adapter.GoodsAdapter;
 import com.cqts.kxg.bean.EarnInfo;
 import com.cqts.kxg.bean.GoodsInfo;
+import com.cqts.kxg.bean.MyUrlInfo;
 import com.cqts.kxg.classify.ClassifyFragment;
 import com.cqts.kxg.home.WebShopActivity;
 import com.cqts.kxg.main.MyApplication;
@@ -54,7 +55,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
             table11, table12;
     private ArrayList<GoodsInfo> goodsInfos = new ArrayList<>();
     private GoodsAdapter adapter;
-    private LinearLayout money_layout,moneytable_layout;
+    private LinearLayout money_layout, moneytable_layout;
 
     public static CenterFragment fragment;
 
@@ -159,7 +160,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 }
                 break;
             case R.id.table2://文章赚钱
-                if (needLogin()) {
+                if (needLogin() && null != MyUrls.getInstance().getMyUrl(getActivity())) {
                     Intent intent = new Intent(getActivity(), WebActivityActivity.class);
                     intent.putExtra("title", "文章赚钱");
                     intent.putExtra("url", MyUrls.getInstance().getMyUrl(getActivity()).activity);
@@ -167,7 +168,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 }
                 break;
             case R.id.table3://我要提现
-                if (needLogin()) {
+                if (needLogin()&& null != MyUrls.getInstance().getMyUrl(getActivity())) {
                     Intent intent = new Intent(getActivity(), WebActivity.class);
                     intent.putExtra("title", "提现");
                     intent.putExtra("url", MyUrls.getInstance().getMyUrl(getActivity()).withdraw +
@@ -201,13 +202,16 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 }
                 break;
             case R.id.table8://常见问题
+                if (null == MyUrls.getInstance().getMyUrl(getActivity())){
+                    return;
+                }
                 Intent intent1 = new Intent(getActivity(), WebActivity.class);
                 intent1.putExtra("title", "常见问题");
                 intent1.putExtra("url", MyUrls.getInstance().getMyUrl(getActivity()).problem);
                 startActivity(intent1);
                 break;
             case R.id.table9://新手任务
-                if (needLogin()) {
+                if (needLogin()&& null != MyUrls.getInstance().getMyUrl(getActivity())) {
                     Intent intent = new Intent(getActivity(), WebActivity.class);
                     intent.putExtra("title", "新手任务");
                     intent.putExtra("url", MyUrls.getInstance().getMyUrl(getActivity()).noviceTask
@@ -219,21 +223,25 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 startActivity(new Intent(getActivity(), RankingActivity.class));
                 break;
             case R.id.table11://话费充值
+                if (null == MyUrls.getInstance().getMyUrl(getActivity())){
+                    return;
+                }
                 Intent intent = new Intent(getActivity(), WebActivity.class);
                 intent.putExtra("title", "话费充值");
                 intent.putExtra("url", MyUrls.getInstance().getMyUrl(getActivity()).recharge);
                 startActivity(intent);
                 break;
             case R.id.table12://我的店铺
-                if (needLogin()) {
+                if (needLogin()&&null != MyUrls.getInstance().getMyUrl(getActivity())) {
                     if (!TextUtils.isEmpty(getUserInfo().store)) {
                         startActivity(new Intent(getActivity(), WebShopActivity.class).putExtra
                                 ("title", "我的店铺").putExtra("url", getUserInfo().store));
                     } else {
                         showToast("您还没有店铺!");
-                        Intent intent2 =new Intent(getActivity(), WebActivity.class);
-                        intent2.putExtra("title","我要开店");
-                        intent2.putExtra("url", MyUrls.getInstance().getMyUrl(getActivity()).openShop);
+                        Intent intent2 = new Intent(getActivity(), WebActivity.class);
+                        intent2.putExtra("title", "我要开店");
+                        intent2.putExtra("url", MyUrls.getInstance().getMyUrl(getActivity())
+                                .openShop);
                         startActivity(intent2);
                     }
                 }
@@ -274,7 +282,8 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
         name_tv.setVisibility(View.VISIBLE);
         login_tv.setVisibility(View.GONE);
         money_tv.setText(String.format("%.2f", getUserInfo().app_money));
-        name_tv.setText(TextUtils.isEmpty(getUserInfo().alias)?getUserInfo().user_name:getUserInfo().alias);
+        name_tv.setText(TextUtils.isEmpty(getUserInfo().alias) ? getUserInfo().user_name :
+                getUserInfo().alias);
 
         DisplayImageOptions build = new DisplayImageOptions.Builder().cacheInMemory(true)
                 .cacheOnDisk(true).showImageOnFail(R.mipmap.center_head)

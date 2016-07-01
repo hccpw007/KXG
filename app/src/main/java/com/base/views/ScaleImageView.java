@@ -28,22 +28,15 @@ public class ScaleImageView extends ImageView {
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    }
-
-    @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        if (getMeasuredHeight()!= getMeasuredWidth()*myScale){
-            ViewGroup.LayoutParams layoutParams = getLayoutParams();
-            layoutParams.height = (int) (getMeasuredWidth()*myScale);
+        if (myScale != 0 && getMeasuredHeight() != getMeasuredWidth() * myScale) {
+            try {
+                ViewGroup.LayoutParams layoutParams = getLayoutParams();
+                layoutParams.height = (int) (getMeasuredWidth() * myScale);
+            } catch (Exception e) {
+            }
         }
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
     }
 
     //获得参数

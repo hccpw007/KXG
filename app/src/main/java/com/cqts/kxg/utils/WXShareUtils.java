@@ -38,10 +38,10 @@ public class WXShareUtils {
         WXMediaMessage msg = new WXMediaMessage(webpage);
         Bitmap scaledBitmap;
         if (null!= thumb){ //如果有图片,这添加图片
-            scaledBitmap = Bitmap.createScaledBitmap(thumb,100, 100, true);
+            scaledBitmap = Bitmap.createScaledBitmap(thumb,80, 80, true);
         }else {
             scaledBitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher);
-            scaledBitmap = Bitmap.createScaledBitmap(scaledBitmap,100, 100, true);
+            scaledBitmap = Bitmap.createScaledBitmap(scaledBitmap,80, 80, true);
         }
         msg.thumbData = bmpToByteArray(scaledBitmap,true);
         msg.title = title;

@@ -32,12 +32,17 @@ public class MyHeadImageView extends ImageView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        Bitmap img = getImg();
-        canvas.drawBitmap(img, 0, 0, null);
+        try {
+            Bitmap img = getImg();
+            canvas.drawBitmap(img, 0, 0, null);
+        } catch (Exception e) {
+
+        }
     }
 
     /**
      * 获取头像图片
+     *
      * @return
      */
     public Bitmap getImg() {
@@ -60,7 +65,8 @@ public class MyHeadImageView extends ImageView {
         int frame = 10;
 
         //创建一个画布,大小是最终需要的大小(正方形)
-        Bitmap target = Bitmap.createBitmap(length + frame * 2, length + frame * 2, Bitmap.Config.ARGB_8888);
+        Bitmap target = Bitmap.createBitmap(length + frame * 2, length + frame * 2, Bitmap.Config
+                .ARGB_8888);
 
         //创建画布
         Canvas canvas = new Canvas(target);

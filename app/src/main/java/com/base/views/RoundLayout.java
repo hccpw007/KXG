@@ -25,7 +25,7 @@ public class RoundLayout extends LinearLayout {
     private int bgColor;
     Context context;
     AttributeSet attrs;
-    public  Path roundPath;
+    public Path roundPath;
     private int measuredHeight;
 
     public RoundLayout(Context context) {
@@ -46,32 +46,42 @@ public class RoundLayout extends LinearLayout {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
-        if (roundPath == null && roundLayoutRadius > 0 ) {
-            setWillNotDraw(false);//如果你继承的是ViewGroup,注意此行,否则draw方法是不会回调的;
-            roundPath = new Path();
-            RectF rectF = new RectF();
-            measuredHeight = getMeasuredHeight();
-            rectF.set(0f, 0f, getMeasuredWidth(), getMeasuredHeight());
-            //添加一个圆角矩形到path中, 如果要实现任意形状的View, 只需要手动添加path就行
-            roundPath.addRoundRect(rectF, roundLayoutRadius, roundLayoutRadius, Path.Direction.CW);
+        try {
+            if (roundPath == null && roundLayoutRadius > 0) {
+                setWillNotDraw(false);//如果你继承的是ViewGroup,注意此行,否则draw方法是不会回调的;
+                roundPath = new Path();
+                RectF rectF = new RectF();
+                measuredHeight = getMeasuredHeight();
+                rectF.set(0f, 0f, getMeasuredWidth(), getMeasuredHeight());
+                //添加一个圆角矩形到path中, 如果要实现任意形状的View, 只需要手动添加path就行
+                roundPath.addRoundRect(rectF, roundLayoutRadius, roundLayoutRadius, Path
+                        .Direction.CW);
+            }
+
+            if (roundPath != null && measuredHeight != getMeasuredHeight()) {
+                setWillNotDraw(false);//如果你继承的是ViewGroup,注意此行,否则draw方法是不会回调的;
+                roundPath = new Path();
+                RectF rectF = new RectF();
+                measuredHeight = getMeasuredHeight();
+                rectF.set(0f, 0f, getMeasuredWidth(), getMeasuredHeight());
+                //添加一个圆角矩形到path中, 如果要实现任意形状的View, 只需要手动添加path就行
+                roundPath.addRoundRect(rectF, roundLayoutRadius, roundLayoutRadius, Path
+                        .Direction.CW);
+            }
+        } catch (Exception e) {
         }
 
-        if (roundPath != null&& measuredHeight!= getMeasuredHeight()){
-            setWillNotDraw(false);//如果你继承的是ViewGroup,注意此行,否则draw方法是不会回调的;
-            roundPath = new Path();
-            RectF rectF = new RectF();
-            measuredHeight = getMeasuredHeight();
-            rectF.set(0f, 0f, getMeasuredWidth(), getMeasuredHeight());
-            //添加一个圆角矩形到path中, 如果要实现任意形状的View, 只需要手动添加path就行
-            roundPath.addRoundRect(rectF, roundLayoutRadius, roundLayoutRadius, Path.Direction.CW);
-        }
     }
 
     @Override
     public void draw(Canvas canvas) {
-        if (roundPath != null) {
-            canvas.drawColor(bgColor);
-            canvas.clipPath(roundPath);
+        try {
+            if (roundPath != null) {
+                canvas.drawColor(bgColor);
+                canvas.clipPath(roundPath);
+            }
+        } catch (Exception e) {
+
         }
         super.draw(canvas);
     }
