@@ -164,7 +164,7 @@ public class UpdateUtils implements MyHttp.MyHttpResult, View.OnClickListener, H
                     if (null != apkFile && apkFile.exists()) {
                         apkFile.delete();
                     }
-                    if (null != alertDialog) {
+                    if (null != alertDialog&&alertDialog.isShowing()) {
                         alertDialog.dismiss();
                     }
                 }
@@ -216,10 +216,12 @@ public class UpdateUtils implements MyHttp.MyHttpResult, View.OnClickListener, H
 
     public void setClose() {
         isCanUpdate = false;
-        if (apkFile.exists()) {
+        if (null!=apkFile&&apkFile.exists()) {
             apkFile.delete();
         }
-        alertDialog.dismiss();
+        if (null != alertDialog&&alertDialog.isShowing()) {
+            alertDialog.dismiss();
+        }
     }
 
     @Override

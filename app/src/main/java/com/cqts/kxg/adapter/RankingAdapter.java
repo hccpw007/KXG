@@ -51,8 +51,8 @@ public class RankingAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
-        if (convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_ranking,null);
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_ranking, null);
             holder = new ViewHolder();
             holder.headImg = (MyHeadImageView) convertView.findViewById(R.id.head_img);
             holder.rankingImg = (ImageView) convertView.findViewById(R.id.ranking_img);
@@ -60,43 +60,46 @@ public class RankingAdapter extends BaseAdapter {
             holder.moneyTv = (TextView) convertView.findViewById(R.id.money_tv);
             holder.rankingTv = (TextView) convertView.findViewById(R.id.ranking_tv);
             convertView.setTag(holder);
-        }else {
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        ImageLoader.getInstance().displayImage(rankingInfos.get(position).headimg,holder.headImg,
+        ImageLoader.getInstance().displayImage(rankingInfos.get(position).headimg, holder.headImg,
                 BaseValue.getOptions(R.mipmap.center_head));
         holder.rankingTv.setTextColor(context.getResources().getColor(R.color.mygray));
-        holder.rankingTv.setText((position+1)+"");
-        holder.moneyTv.setText("￥"+rankingInfos.get(position).app_money);
+        holder.rankingTv.setText((position + 1) + "");
+        holder.moneyTv.setText("￥" + rankingInfos.get(position).app_money);
 
-        if (rankingInfos.get(position).alias.isEmpty()){
-            holder.nameTv.setText(rankingInfos.get(position).user_name.substring(0,1)+"**");
-        }else {
+        if (rankingInfos.get(position).alias.isEmpty()) {
+            holder.nameTv.setText(rankingInfos.get(position).user_name.substring(0, 1) + "**");
+        } else {
             holder.nameTv.setText(rankingInfos.get(position).alias);
         }
 
         holder.rankingImg.setVisibility(View.GONE);
-        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) holder.headImg.getLayoutParams();
-        layoutParams.removeRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        layoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
-
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) holder.headImg
+                .getLayoutParams();
+        try {
+            layoutParams.removeRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+            layoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
+        } catch (Exception e) {
+        }
         //第1名
-        if (position == 0){
+        if (position == 0) {
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
             holder.rankingImg.setVisibility(View.VISIBLE);
             holder.rankingImg.setImageResource(R.mipmap.ranking_1);
             holder.rankingTv.setTextColor(0xffff2233);
         }
         //第2名
-        if (position == 1){
+        if (position == 1) {
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
             holder.rankingImg.setVisibility(View.VISIBLE);
             holder.rankingImg.setImageResource(R.mipmap.ranking_2);
             holder.rankingTv.setTextColor(0xffff6022);
         }
         //第3名
-        if (position == 2){
+        if (position == 2) {
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
             holder.rankingImg.setVisibility(View.VISIBLE);
             holder.rankingImg.setImageResource(R.mipmap.ranking_3);
@@ -107,7 +110,7 @@ public class RankingAdapter extends BaseAdapter {
     }
 
 
-    class ViewHolder{
+    class ViewHolder {
         MyHeadImageView headImg;
         ImageView rankingImg;
         TextView nameTv;

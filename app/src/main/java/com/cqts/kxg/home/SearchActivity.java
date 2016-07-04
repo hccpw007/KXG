@@ -3,6 +3,7 @@ package com.cqts.kxg.home;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -158,7 +159,9 @@ public class SearchActivity extends MyActivity implements MyTagView.OnTagClickLi
             showToast(msg);
             return;
         }
-
+        if(TextUtils.isEmpty(data)||data.length()<3){
+            return;
+        }
         data = data.replace("[", "");
         data = data.replace("]", "");
         data = data.replace("\"", "");

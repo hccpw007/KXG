@@ -72,7 +72,9 @@ public class NgtAty extends FragmentActivity implements OnMyPageChangeListener,
     @Override
     protected void onResume() {
         super.onResume();
-        checkedFragment.onShow();
+        if (null!=checkedFragment){
+            checkedFragment.onShow();
+        }
     }
 
     private void InitView() {

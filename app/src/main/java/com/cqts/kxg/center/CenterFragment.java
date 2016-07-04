@@ -168,7 +168,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 }
                 break;
             case R.id.table3://我要提现
-                if (needLogin()&& null != MyUrls.getInstance().getMyUrl(getActivity())) {
+                if (needLogin() && null != MyUrls.getInstance().getMyUrl(getActivity())) {
                     Intent intent = new Intent(getActivity(), WebActivity.class);
                     intent.putExtra("title", "提现");
                     intent.putExtra("url", MyUrls.getInstance().getMyUrl(getActivity()).withdraw +
@@ -202,7 +202,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 }
                 break;
             case R.id.table8://常见问题
-                if (null == MyUrls.getInstance().getMyUrl(getActivity())){
+                if (null == MyUrls.getInstance().getMyUrl(getActivity())) {
                     return;
                 }
                 Intent intent1 = new Intent(getActivity(), WebActivity.class);
@@ -211,7 +211,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 startActivity(intent1);
                 break;
             case R.id.table9://新手任务
-                if (needLogin()&& null != MyUrls.getInstance().getMyUrl(getActivity())) {
+                if (needLogin() && null != MyUrls.getInstance().getMyUrl(getActivity())) {
                     Intent intent = new Intent(getActivity(), WebActivity.class);
                     intent.putExtra("title", "新手任务");
                     intent.putExtra("url", MyUrls.getInstance().getMyUrl(getActivity()).noviceTask
@@ -223,7 +223,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 startActivity(new Intent(getActivity(), RankingActivity.class));
                 break;
             case R.id.table11://话费充值
-                if (null == MyUrls.getInstance().getMyUrl(getActivity())){
+                if (null == MyUrls.getInstance().getMyUrl(getActivity())) {
                     return;
                 }
                 Intent intent = new Intent(getActivity(), WebActivity.class);
@@ -232,7 +232,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.table12://我的店铺
-                if (needLogin()&&null != MyUrls.getInstance().getMyUrl(getActivity())) {
+                if (needLogin() && null != MyUrls.getInstance().getMyUrl(getActivity())) {
                     if (!TextUtils.isEmpty(getUserInfo().store)) {
                         startActivity(new Intent(getActivity(), WebShopActivity.class).putExtra
                                 ("title", "我的店铺").putExtra("url", getUserInfo().store));
@@ -255,12 +255,14 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
     @Override
     public void onShow() {
         super.onShow();
-        setMessage();//刷新消息
-        if (!isLogined()) {
-            showUnLogined();
-        } else {
-            showLogined();
-
+        try {
+            setMessage();//刷新消息
+            if (!isLogined()) {
+                showUnLogined();
+            } else {
+                showLogined();
+            }
+        } catch (Exception e) {
         }
     }
 
@@ -345,6 +347,9 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                     return;
                 }
                 String data = response.optString("data");
+                if (TextUtils.isEmpty(data) || data.length() < 3) {
+                    return;
+                }
                 data = data.replace("[", "");
                 data = data.replace("]", "");
                 data = data.replace("\"", "");
