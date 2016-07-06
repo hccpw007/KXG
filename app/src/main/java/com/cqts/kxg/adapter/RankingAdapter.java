@@ -77,30 +77,20 @@ public class RankingAdapter extends BaseAdapter {
         }
 
         holder.rankingImg.setVisibility(View.GONE);
-        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) holder.headImg
-                .getLayoutParams();
-        try {
-            layoutParams.removeRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-            layoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
-        } catch (Exception e) {
-        }
         //第1名
         if (position == 0) {
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
             holder.rankingImg.setVisibility(View.VISIBLE);
             holder.rankingImg.setImageResource(R.mipmap.ranking_1);
             holder.rankingTv.setTextColor(0xffff2233);
         }
         //第2名
         if (position == 1) {
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
             holder.rankingImg.setVisibility(View.VISIBLE);
             holder.rankingImg.setImageResource(R.mipmap.ranking_2);
             holder.rankingTv.setTextColor(0xffff6022);
         }
         //第3名
         if (position == 2) {
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
             holder.rankingImg.setVisibility(View.VISIBLE);
             holder.rankingImg.setImageResource(R.mipmap.ranking_3);
             holder.rankingTv.setTextColor(0xffffa922);

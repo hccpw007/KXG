@@ -99,12 +99,12 @@ public class MyFragment extends BaseFragment {
     @Override
     public void onShow() {
         super.onShow();
-        UMengUtils.setOnPageStart(getActivity());
+        UMengUtils.setOnPageStart(this);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        UMengUtils.setOnonPageEnd(getActivity());
+        UMengUtils.setOnonPageEnd(this);
     }
 }

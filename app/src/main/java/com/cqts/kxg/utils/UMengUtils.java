@@ -1,6 +1,7 @@
 package com.cqts.kxg.utils;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import com.cqts.kxg.main.MyApplication;
 import com.umeng.analytics.MobclickAgent;
@@ -28,13 +29,26 @@ public class UMengUtils {
         } catch (Exception e) {
         }
     }
-
+    public static void setOnPageStart(Fragment context) {
+        try {
+            MobclickAgent.onResume(context.getActivity());
+            MobclickAgent.onPageStart(context.getClass().getName());
+        } catch (Exception e) {
+        }
+    }
     /**
      * 关闭页面
      */
     public static void setOnonPageEnd(Context context) {
         try {
             MobclickAgent.onPause(context);
+            MobclickAgent.onPageEnd(context.getClass().getName());
+        } catch (Exception e) {
+        }
+    }
+    public static void setOnonPageEnd(Fragment context) {
+        try {
+            MobclickAgent.onPause(context.getActivity());
             MobclickAgent.onPageEnd(context.getClass().getName());
         } catch (Exception e) {
         }

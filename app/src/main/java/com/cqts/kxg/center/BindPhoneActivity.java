@@ -21,6 +21,8 @@ public class BindPhoneActivity extends MyActivity implements View.OnClickListene
     private String userName;
     private String phoneNum;
     private String smsCode;
+    private TextView pass_tv;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +39,12 @@ public class BindPhoneActivity extends MyActivity implements View.OnClickListene
         smscode_et = (MyEditText) findViewById(R.id.smscode_et);
         smscount_tv = (TextView) findViewById(R.id.smscount_tv);
         bind_btn = (Button) findViewById(R.id.bind_btn);
+        pass_tv = (TextView) findViewById(R.id.pass_tv);
 
         username_tv.setText(userName);
         smscount_tv.setOnClickListener(this);
         bind_btn.setOnClickListener(this);
+        pass_tv.setOnClickListener(this);
         MyApplication.downTimer.setTextView(smscount_tv);
 
         phone_et.addMyTextChangedListener(this);
@@ -54,6 +58,9 @@ public class BindPhoneActivity extends MyActivity implements View.OnClickListene
                 break;
             case R.id.bind_btn: //绑定手机
                 bindPhoneNum();
+                break;
+            case R.id.pass_tv: //跳过
+                finish();
                 break;
         }
     }
@@ -103,7 +110,6 @@ public class BindPhoneActivity extends MyActivity implements View.OnClickListene
                     return;
                 }
                 getUserInfo().mobile_phone = phoneNum;
-                setResult(RESULT_OK);
                 finish();
             }
         });

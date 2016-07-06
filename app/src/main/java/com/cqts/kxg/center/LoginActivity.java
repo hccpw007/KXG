@@ -135,31 +135,14 @@ public class LoginActivity extends MyActivity implements View.OnClickListener {
                     showToast(msg);
                     return;
                 }
-                MyApplication.userInfo = (UserInfo) bean;
-                if (TextUtils.isEmpty(MyApplication.userInfo.mobile_phone)){
-                    startActivityForResult(new Intent(LoginActivity.this,BindPhoneActivity.class).putExtra("userName",userName),1);
-                }else {
-                    UMengUtils.setSignIn();
-                    SPutils.setToken(MyApplication.token);
-                    finish();
-                }
-            }
-        });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1){
-            if (resultCode == RESULT_OK){ //绑定手机成功
                 UMengUtils.setSignIn();
                 SPutils.setToken(MyApplication.token);
+                MyApplication.userInfo = (UserInfo) bean;
+                if (TextUtils.isEmpty(MyApplication.userInfo.mobile_phone)){
+                    startActivity(new Intent(LoginActivity.this,BindPhoneActivity.class).putExtra("userName",userName));
+                }
                 finish();
-            }else {
-                MyApplication.userInfo = null;
-                MyApplication.token = "";
-                SPutils.setToken("");
             }
-        }
+        });
     }
 }
