@@ -164,4 +164,17 @@
         android:text="绑  定"
         android:textSize="18sp"/>
 
+    <TextView
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="right"
+        android:id="@+id/pass_tv"
+        android:layout_marginLeft="4dp"
+        android:padding="2dp"
+        android:background="@drawable/shape_login_register_bg"
+        android:textColor="@color/myred"
+        style="@style/text_14sp_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="跳过"/>
 </LinearLayout>
