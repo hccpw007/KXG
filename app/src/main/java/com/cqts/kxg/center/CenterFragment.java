@@ -20,6 +20,7 @@ import com.base.utils.GridDecoration;
 import com.base.views.AutoTextView;
 import com.base.utils.MyGridDecoration;
 import com.base.views.MyHeadImageView;
+import com.base.zxing.PlanarYUVLuminanceSource;
 import com.cqts.kxg.R;
 import com.cqts.kxg.adapter.GoodsAdapter;
 import com.cqts.kxg.bean.EarnInfo;
@@ -234,8 +235,12 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
             case R.id.table12://我的店铺
                 if (needLogin() && null != MyUrls.getInstance().getMyUrl(getActivity())) {
                     if (!TextUtils.isEmpty(getUserInfo().store)) {
+
+                        int id_start = getUserInfo().store.indexOf("?id=");
+                        String shop_id = getUserInfo().store.substring(id_start + 4, getUserInfo().store.length());
+                        System.out.println(shop_id);
                         startActivity(new Intent(getActivity(), WebShopActivity.class).putExtra
-                                ("title", "我的店铺").putExtra("url", getUserInfo().store));
+                                ("title", "我的店铺").putExtra("url", getUserInfo().store).putExtra("shop_id",shop_id));
                     } else {
                         showToast("您还没有店铺!");
                         Intent intent2 = new Intent(getActivity(), WebActivity.class);

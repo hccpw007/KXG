@@ -3,6 +3,7 @@ package com.cqts.kxg.center;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -40,6 +41,10 @@ public class SafeActivity extends MyActivity implements View.OnClickListener {
                 startActivity(new Intent(this, InformationActivity.class));
                 break;
             case R.id.changename_layout: // 修改密码
+                if (TextUtils.isEmpty(getUserInfo().mobile_phone)){
+                    showToast("未绑定手机号不能修改密码");
+                    return;
+                }
                 startActivity(new Intent(this, Pswd1Activity.class).putExtra("act", Pswd1Activity
                         .CHANGEPSWD));
                 finish();

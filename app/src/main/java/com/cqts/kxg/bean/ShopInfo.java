@@ -12,4 +12,5 @@ public class ShopInfo {
       public String user_name;//  "CA店主 ",
       public String goods_num;//  120
       public String url;//  120
+      public String share_url;//  分享图片地址
 }

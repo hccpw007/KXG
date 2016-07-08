@@ -1,6 +1,8 @@
 package com.cqts.kxg.center;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -88,9 +90,10 @@ public class SettingActivity extends MyActivity implements View.OnClickListener 
                 if (null == MyUrls.getInstance().getMyUrl(this)) {
                     return;
                 }
+                String versionName = getVersionName();
                 Intent intent = new Intent(this, WebActivity.class);
                 intent.putExtra("title", "关于开心购");
-                intent.putExtra("url", MyUrls.getInstance().getMyUrl(this).about);
+                intent.putExtra("url", MyUrls.getInstance().getMyUrl(this).about+"?version="+versionName);
                 startActivity(intent);
                 break;
             case R.id.exit_btn: //退出当前账户
@@ -103,5 +106,21 @@ public class SettingActivity extends MyActivity implements View.OnClickListener 
             default:
                 break;
         }
+    }
+
+
+    /**
+     * 获得当前APP的外部版本号
+     */
+    public  String getVersionName() {
+        String versionName = "1.0";
+        PackageManager packageManager = getPackageManager();
+        try {
+            PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(), 0);
+            versionName = packageInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return versionName;
     }
 }

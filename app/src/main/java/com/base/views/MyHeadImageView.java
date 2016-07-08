@@ -90,12 +90,12 @@ public class MyHeadImageView extends ImageView {
         }
 
         //更改paint的显示模式  改变上一个mode的模式
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER));
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OVER));
 
         paint.setColor(Color.WHITE);
         paint.setAntiAlias(true);
-        paint.setStyle(Paint.Style.STROKE);//设置空心
-        paint.setStrokeWidth(frame);
+//        paint.setStyle(Paint.Style.STROKE);//设置空心
+//        paint.setStrokeWidth(frame);
         //画圆环
         canvas.drawCircle(length / 2 + frame, length / 2 + frame, (length + frame) / 2 - 1, paint);
 

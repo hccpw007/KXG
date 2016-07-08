@@ -47,6 +47,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.MyviewHolder>{
                 Intent intent = new Intent(context, WebShopActivity.class);
                 intent.putExtra("title", shopInfos.get(i).supplier_name);
                 intent.putExtra("url", shopInfos.get(i).url);
+                intent.putExtra("shop_id", shopInfos.get(i).supplier_id);
                 context.startActivity(intent);
             }
         });

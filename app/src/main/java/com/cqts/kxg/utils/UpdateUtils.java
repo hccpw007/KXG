@@ -175,7 +175,7 @@ public class UpdateUtils implements MyHttp.MyHttpResult, View.OnClickListener, H
     /**
      * 获得当前APP的版本号
      */
-    private int getVersion() {
+    public int getVersion() {
         int versionCode = 0;
         PackageManager packageManager = context.getPackageManager();
         try {

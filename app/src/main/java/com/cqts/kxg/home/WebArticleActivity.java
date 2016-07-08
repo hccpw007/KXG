@@ -74,7 +74,7 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
         shareLayout.setOnClickListener(this);
 
         collectTv.setText(articleInfo.love);
-        shareTv.setText(articleInfo.share_sum);
+        shareTv.setText(articleInfo.share_sum + "");
 
         is_love = articleInfo.is_love;
         if (is_love != 1) { //未收藏
@@ -108,7 +108,7 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
 
                         start = url.indexOf("&share_sum=");
                         end = url.indexOf("&love=");
-                        String share_sum = url.substring(start + 11, end);
+                        int share_sum = Integer.valueOf(url.substring(start + 11, end)).intValue();
                         articleInfo.share_sum = share_sum;
 
                         start = url.indexOf("&love=");
@@ -184,6 +184,8 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
                     public void shareResult(int result) {
                         if (result == SharePop.ShareResult.SUCCESS) { //分享成功
                             if (getUserInfo() != null) {
+                                articleInfo.share_sum++;
+                                shareTv.setText(articleInfo.share_sum + "");
                                 MyHttp.articleShare(http, null, articleInfo.article_id,
                                         "", null);
                             }

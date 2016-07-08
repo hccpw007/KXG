@@ -1,25 +1,37 @@
 package com.cqts.kxg.home;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 
 import com.base.views.MyWebView;
 import com.cqts.kxg.R;
+import com.cqts.kxg.bean.ShopInfo;
 import com.cqts.kxg.center.LoginActivity;
 import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.main.MyApplication;
+import com.cqts.kxg.utils.MyHttp;
+import com.cqts.kxg.views.SharePop;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
-public class WebShopActivity extends MyActivity {
+public class WebShopActivity extends MyActivity implements View.OnClickListener {
     private String title = "";
     private String url = "";
+    private String shop_id = "";
     private MyWebView webview;
     int type = 0; //用来判定是否是从商品页面返回的type,如果是2表示是是,这不刷新页面
+    private ImageView share_img;
+    private ShopInfo shopInfo;
+    private Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +39,24 @@ public class WebShopActivity extends MyActivity {
         setContentView(R.layout.activity_web);
         title = getIntent().getStringExtra("title");
         url = getIntent().getStringExtra("url");
+        shop_id = getIntent().getStringExtra("shop_id");
+        getDetailData();
         InitView();
         setSwipeBackEnable(false);
+    }
+
+    //获取店铺详情
+    private void getDetailData() {
+        MyHttp.shopDetail(http, null, shop_id, new MyHttp.MyHttpResult() {
+            @Override
+            public void httpResult(Integer which, int code, String msg, Object bean) {
+                if (code != 0) {
+                    return;
+                }
+                shopInfo = (ShopInfo) bean;
+                bitmap = ImageLoader.getInstance().loadImageSync(shopInfo.logo);
+            }
+        });
     }
 
     @Override
@@ -41,6 +69,8 @@ public class WebShopActivity extends MyActivity {
 
     private void InitView() {
         setMyTitle(title);
+        share_img = (ImageView) findViewById(R.id.share_img);
+        share_img.setOnClickListener(this);
         webview = (MyWebView) findViewById(R.id.webview);
         WebSettings settings = webview.getSettings();
         settings.setJavaScriptEnabled(true);
@@ -66,6 +96,7 @@ public class WebShopActivity extends MyActivity {
                         startActivityForResult(intent, 2);
                         return true;
                     }
+
                     view.loadUrl(url);
                     return true;
                 } catch (UnsupportedEncodingException e) {
@@ -75,6 +106,18 @@ public class WebShopActivity extends MyActivity {
             }
         });
         webview.loadUrl(url + "&token=" + MyApplication.token);
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        //分享
+        if (shopInfo==null|| TextUtils.isEmpty(shopInfo.share_url)){
+            getDetailData();
+            return;
+        }
+        String shareTitle = (isLogined() ? getUserInfo().alias : "我") + " 向你推荐一个商品";
+        SharePop.getInstance().showPop(this,share_img,shareTitle,shopInfo.share_url,shopInfo.supplier_name,bitmap,null);
     }
 
     @Override

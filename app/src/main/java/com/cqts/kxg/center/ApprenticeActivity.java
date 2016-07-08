@@ -55,7 +55,7 @@ public class ApprenticeActivity extends MyActivity implements View.OnClickListen
     private void InitRC1() {
         GridLayoutManager manager = new GridLayoutManager(this, 6);
         MyGridDecoration gridDecoration = new MyGridDecoration(0, 0, Color.WHITE, true);
-        adapter1 = new ApprenticeAdapter(signup);
+        adapter1 = new ApprenticeAdapter(task);
         recyclerview1.setLayoutManager(manager);
         recyclerview1.addItemDecoration(gridDecoration);
         recyclerview1.setAdapter(adapter1);
@@ -64,7 +64,7 @@ public class ApprenticeActivity extends MyActivity implements View.OnClickListen
     private void InitRC2() {
         GridLayoutManager manager = new GridLayoutManager(this, 6);
         MyGridDecoration gridDecoration = new MyGridDecoration(0, 0, Color.WHITE, true);
-        adapter2 = new ApprenticeAdapter(task);
+        adapter2 = new ApprenticeAdapter(signup);
         recyclerview2.setLayoutManager(manager);
         recyclerview2.addItemDecoration(gridDecoration);
         recyclerview2.setAdapter(adapter2);

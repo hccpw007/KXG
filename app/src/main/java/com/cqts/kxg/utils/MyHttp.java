@@ -1,7 +1,6 @@
 package com.cqts.kxg.utils;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
@@ -44,7 +43,8 @@ import java.util.List;
  */
 public class MyHttp {
     private static HashMap<String, String> httpMap = new HashMap<>();
-    private static String url = "https://api.kxg99.com/";
+    private static String url = "https://api.kxg99.com/"; //正式
+//    private static String url = "http://api.test.kxg99.com/"; //测试
 
     private MyHttp() {
     }
@@ -712,6 +712,31 @@ public class MyHttp {
         String httpUrl = url + "article/detail";
         httpMap.clear();
         httpMap.put("article_id", article_id);
+        httpMap.put("token", MyApplication.token);
         toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, ArticleInfo.class);
+    }
+
+    /**
+     * 获取商品详情<p>
+     */
+    public static void goodsDetail(HttpForVolley http, Integer which, String goods_id,
+                                   MyHttpResult myHttpResult) {
+        String httpUrl = url + "goods/detail";
+        httpMap.clear();
+        httpMap.put("goods_id", goods_id);
+        httpMap.put("token", MyApplication.token);
+        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, GoodsInfo.class);
+    }
+
+    /**
+     * 获取店铺详情<p>
+     */
+    public static void shopDetail(HttpForVolley http, Integer which, String shop_id,
+                                   MyHttpResult myHttpResult) {
+        String httpUrl = url + "shop/detail";
+        httpMap.clear();
+        httpMap.put("shop_id", shop_id);
+        httpMap.put("token", MyApplication.token);
+        toBean(Request.Method.GET, http, which, httpMap, httpUrl, myHttpResult, ShopInfo.class);
     }
 }

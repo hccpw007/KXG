@@ -92,8 +92,11 @@ public class MyFragment extends BaseFragment {
         return true;
     }
 
-    public UserInfo getUserInfo(){
-        return MyApplication.userInfo;
+    public UserInfo getUserInfo() {
+        if (needLogin()) {
+            return MyApplication.userInfo;
+        }
+        return null;
     }
 
     @Override

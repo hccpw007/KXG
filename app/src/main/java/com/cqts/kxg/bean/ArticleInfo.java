@@ -16,7 +16,7 @@ public class ArticleInfo implements Serializable{
     public String view;//  0,
     public String add_time;//  1458759530,
     public String article_url;// public String http:\/\/www.kxg99.com\/mobile\/article.php?id=135",
-    public String share_sum;//  4,
+    public int share_sum;//  4,
     public String cover_img;// public String "
     public String share_content;// public String "
     public String share_img;// public String "

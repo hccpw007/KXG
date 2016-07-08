@@ -1,6 +1,7 @@
 package com.cqts.kxg.home;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -10,14 +11,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
+import com.base.BaseValue;
 import com.base.http.HttpForVolley;
 import com.base.views.MyWebView;
 import com.cqts.kxg.R;
+import com.cqts.kxg.bean.GoodsInfo;
 import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.main.MyApplication;
 import com.cqts.kxg.utils.MyHttp;
 import com.cqts.kxg.utils.MyUrls;
 import com.cqts.kxg.views.FavoriteAnimation;
+import com.cqts.kxg.views.SharePop;
 
 import org.json.JSONObject;
 
@@ -37,6 +44,9 @@ public class WebGoodsActivity extends MyActivity implements View.OnClickListener
     boolean canClick = true;
     private int is_love;
     private FavoriteAnimation animation;
+    private GoodsInfo goodsInfo;
+    private ImageView shareImg;
+    private Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +56,22 @@ public class WebGoodsActivity extends MyActivity implements View.OnClickListener
         title = getIntent().getStringExtra("title");
         url = getIntent().getStringExtra("url");
         id = getIntent().getStringExtra("id");
+        getDetailData();
         InitView();
         InitWebView();
+    }
+
+    private void getDetailData() {
+        MyHttp.goodsDetail(http, null, id, new MyHttp.MyHttpResult() {
+            @Override
+            public void httpResult(Integer which, int code, String msg, Object bean) {
+                if (code != 0) {
+                    return;
+                }
+                goodsInfo = (GoodsInfo) bean;
+                getBitmap();
+            }
+        });
     }
 
     @Override
@@ -73,8 +97,10 @@ public class WebGoodsActivity extends MyActivity implements View.OnClickListener
         collectImg = (ImageView) findViewById(R.id.collect_img);
         collectTv = (TextView) findViewById(R.id.collect_tv);
         tobuyTv = (TextView) findViewById(R.id.tobuy_tv);
+        shareImg = (ImageView) findViewById(R.id.share_img);
 
         collectLayout.setOnClickListener(this);
+        shareImg.setOnClickListener(this);
         tobuyTv.setOnClickListener(this);
     }
 
@@ -86,13 +112,19 @@ public class WebGoodsActivity extends MyActivity implements View.OnClickListener
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 try {
                     url = URLDecoder.decode(url, "utf-8");
-                    if (url.contains("$$push_shop")) {//跳转到商品
+                    if (url.contains("$$push_shop")) {//跳转到商店
                         Intent intent = new Intent(WebGoodsActivity.this, WebShopActivity.class);
                         int start = url.indexOf("supplier_name=");
                         int end = url.indexOf("$$push_shop");
                         String shop_name = url.substring(start + 14, end);
+
+                        int id_start = url.indexOf("?id=");
+                        int id_end = url.indexOf("&supplier_name=");
+                        String shop_id = url.substring(id_start + 4, id_end);
+
                         intent.putExtra("url", url);
                         intent.putExtra("title", URLDecoder.decode(shop_name, "utf-8"));
+                        intent.putExtra("shop_id", URLDecoder.decode(shop_id, "utf-8"));
                         startActivity(intent);
                         return true;
                     }
@@ -109,21 +141,34 @@ public class WebGoodsActivity extends MyActivity implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        if (!needLogin()) {
-            return;
-        }
         switch (v.getId()) {
             case R.id.collect_layout://收藏
-                setLove();
-                break;
-            case R.id.tobuy_tv://去淘宝购买
-                if (null ==MyUrls.getInstance().getMyUrl(this)){
+                if (!needLogin()) {
                     return;
                 }
-                String urlStr = MyUrls.getInstance().getMyUrl(this).jump+"?id="+id+"&token="+MyApplication.token;
-                Intent intent =new Intent(this, WebBuyActivity.class);
-                intent.putExtra("title",title);
-                intent.putExtra("url",urlStr);
+                setLove();
+                break;
+            case R.id.share_img://分享
+                if (goodsInfo == null) {
+                    getDetailData();
+                    return;
+                }
+                String shareTitle = (isLogined() ? getUserInfo().alias : "我") + " 向你推荐一个商品";
+                SharePop.getInstance().showPop(this, v, shareTitle, goodsInfo.share_url,
+                        goodsInfo.goods_name, bitmap, null);
+                break;
+            case R.id.tobuy_tv://去淘宝购买
+                if (!needLogin()) {
+                    return;
+                }
+                if (null == MyUrls.getInstance().getMyUrl(this)) {
+                    return;
+                }
+                String urlStr = MyUrls.getInstance().getMyUrl(this).jump + "?id=" + id +
+                        "&token=" + MyApplication.token;
+                Intent intent = new Intent(this, WebBuyActivity.class);
+                intent.putExtra("title", title);
+                intent.putExtra("url", urlStr);
                 startActivity(intent);
                 break;
         }
@@ -179,5 +224,24 @@ public class WebGoodsActivity extends MyActivity implements View.OnClickListener
             collectTv.setText("喜欢");
         }
         collectImg.startAnimation(animation);
+    }
+
+    void getBitmap() {
+        try {
+            ImageRequest imageRequest = new ImageRequest(goodsInfo.goods_thumb,
+                    new Response.Listener<Bitmap>() {
+                        @Override
+                        public void onResponse(Bitmap response) {
+                            bitmap = response;
+                        }
+                    }, 0, 0, Bitmap.Config.RGB_565, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                }
+            });
+            BaseValue.mQueue.add(imageRequest);
+        } catch (Exception e) {
+
+        }
     }
 }
