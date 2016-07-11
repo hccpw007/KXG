@@ -10,6 +10,10 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
+import com.base.BaseValue;
 import com.base.views.MyWebView;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.ShopInfo;
@@ -54,7 +58,7 @@ public class WebShopActivity extends MyActivity implements View.OnClickListener 
                     return;
                 }
                 shopInfo = (ShopInfo) bean;
-                bitmap = ImageLoader.getInstance().loadImageSync(shopInfo.logo);
+                getBitmap();
             }
         });
     }
@@ -124,5 +128,24 @@ public class WebShopActivity extends MyActivity implements View.OnClickListener 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         type = requestCode;
+    }
+
+    void getBitmap() {
+        try {
+            ImageRequest imageRequest = new ImageRequest(shopInfo.logo,
+                    new Response.Listener<Bitmap>() {
+                        @Override
+                        public void onResponse(Bitmap response) {
+                            bitmap = response;
+                        }
+                    }, 0, 0, Bitmap.Config.RGB_565, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                }
+            });
+            BaseValue.mQueue.add(imageRequest);
+        } catch (Exception e) {
+
+        }
     }
 }

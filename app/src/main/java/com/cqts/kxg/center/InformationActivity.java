@@ -3,6 +3,7 @@ package com.cqts.kxg.center;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -56,8 +57,9 @@ public class InformationActivity extends MyActivity implements View.OnClickListe
         name_layout.setOnClickListener(this);
         nickname_layout.setOnClickListener(this);
         sex_layout.setOnClickListener(this);
-
-        name_tv.setText(getUserInfo().user_name);
+        if (null!=name_tv&&null!=getUserInfo()&&!TextUtils.isEmpty(getUserInfo().user_name)){
+            name_tv.setText(getUserInfo().user_name);
+        }
         ImageLoader.getInstance().displayImage(getUserInfo().headimg,head_img, BaseValue.getOptions(R.mipmap.center_head));
         setSex();
     }
