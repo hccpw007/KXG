@@ -62,9 +62,6 @@ public class SetAliasActivity extends MyActivity implements View.OnClickListener
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        for (int i = 0; i <bytes.length ; i++) {
-            System.out.println(bytes[i]);
-        }
 
         if (nickname.isEmpty()||bytes.length<4) {
             showToast("请输入昵称（4-20个字符）");

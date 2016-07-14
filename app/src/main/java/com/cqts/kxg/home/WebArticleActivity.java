@@ -92,7 +92,6 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 try {
                     url = URLDecoder.decode(url, "utf-8");
-                    System.out.println(url);
                     if (url.contains("$$push_article")) { //跳转到文章
                         ArticleInfo articleInfo = new ArticleInfo();
 

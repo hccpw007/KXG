@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,10 +10,22 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".TestActivity">
-    <CheckBox
-        android:button="@color/transparency"
-        android:checked="true"
-        android:background="@drawable/sl_classify_bg"
-        android:layout_width="200dp"
-        android:layout_height="200dp"/>
-</RelativeLayout>
+
+    <Button
+        android:id="@+id/show_login"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="登录" />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="登出" />
+
+    <Button
+        android:id="@+id/showQrLogin"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="扫码登录" />
+</LinearLayout>

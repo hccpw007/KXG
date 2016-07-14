@@ -117,7 +117,7 @@
             android:background="@drawable/bg_goodsdetails_tobuy"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
-            android:text="去淘宝购买"
+            android:text="去购买"
             android:textColor="@color/white"
             android:textSize="17sp"/>
     </LinearLayout>

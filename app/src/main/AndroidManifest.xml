@@ -68,13 +68,16 @@
         <!-- ======================业务Activity ======================= -->
         <!-- ======================业务Activity ======================= -->
         <!-- ======================业务Activity ======================= -->
+        <activity
+            android:name=".TestActivity"
+            android:theme="@style/SwipeBackTheme">
+        </activity>
 
         <activity
             android:name=".main.MainActivity"
             android:theme="@style/AppBaseTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -110,10 +113,6 @@
         </activity>
         <activity
             android:name=".center.Pswd2Activity"
-            android:theme="@style/SwipeBackTheme">
-        </activity>
-        <activity
-            android:name=".TestActivity"
             android:theme="@style/SwipeBackTheme">
         </activity>
         <activity

@@ -10,7 +10,12 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.alibaba.sdk.android.AlibabaSDK;
+import com.alibaba.sdk.android.login.LoginService;
+import com.alibaba.sdk.android.trade.TradeService;
+import com.alibaba.sdk.android.trade.page.ItemDetailPage;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
@@ -19,12 +24,20 @@ import com.base.http.HttpForVolley;
 import com.base.views.MyWebView;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.GoodsInfo;
+import com.cqts.kxg.main.MainActivity;
 import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.main.MyApplication;
 import com.cqts.kxg.utils.MyHttp;
 import com.cqts.kxg.utils.MyUrls;
 import com.cqts.kxg.views.FavoriteAnimation;
 import com.cqts.kxg.views.SharePop;
+import com.taobao.tae.sdk.callback.CallbackContext;
+import com.taobao.tae.sdk.callback.LoginCallback;
+import com.taobao.tae.sdk.callback.LogoutCallback;
+import com.taobao.tae.sdk.callback.TradeProcessCallback;
+import com.taobao.tae.sdk.model.Session;
+import com.taobao.tae.sdk.model.TaokeParams;
+import com.taobao.tae.sdk.model.TradeResult;
 
 import org.json.JSONObject;
 
@@ -157,19 +170,20 @@ public class WebGoodsActivity extends MyActivity implements View.OnClickListener
                 SharePop.getInstance().showPop(this, v, shareTitle, goodsInfo.share_url,
                         goodsInfo.goods_name, bitmap, null);
                 break;
-            case R.id.tobuy_tv://去淘宝购买
-                if (!needLogin()) {
-                    return;
-                }
-                if (null == MyUrls.getInstance().getMyUrl(this)) {
-                    return;
-                }
-                String urlStr = MyUrls.getInstance().getMyUrl(this).jump + "?id=" + id +
-                        "&token=" + MyApplication.token;
-                Intent intent = new Intent(this, WebBuyActivity.class);
-                intent.putExtra("title", title);
-                intent.putExtra("url", urlStr);
-                startActivity(intent);
+            case R.id.tobuy_tv://去购买
+                goShoping();
+//                if (!needLogin()) {
+//                    return;
+//                }
+//                if (null == MyUrls.getInstance().getMyUrl(this)) {
+//                    return;
+//                }
+//                String urlStr = MyUrls.getInstance().getMyUrl(this).jump + "?id=" + id +
+//                        "&token=" + MyApplication.token;
+//                Intent intent = new Intent(this, WebBuyActivity.class);
+//                intent.putExtra("title", title);
+//                intent.putExtra("url", urlStr);
+//                startActivity(intent);
                 break;
         }
     }
@@ -243,5 +257,69 @@ public class WebGoodsActivity extends MyActivity implements View.OnClickListener
         } catch (Exception e) {
 
         }
+    }
+
+    //登录
+    public void showLogin() {
+        AlibabaSDK.getService(LoginService.class).showLogin(this, new com.alibaba.sdk.android
+                .login.callback.LoginCallback() {
+            @Override
+            public void onSuccess(com.alibaba.sdk.android.session.model.Session session) {
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        CallbackContext.onActivityResult(requestCode, resultCode, data);
+    }
+
+
+    private void goShoping() {
+        if (goodsInfo == null) {
+            getDetailData();
+            return;
+        }
+
+        if (goodsInfo.goods_type == 0) {  //自营产品
+            if (!needLogin()) {
+                return;
+            }
+            String urlStr = goodsInfo.jump + "&token=" + MyApplication.token;
+            Intent intent = new Intent(this, WebBuyActivity.class);
+            intent.putExtra("title", title);
+            intent.putExtra("url", urlStr);
+            startActivity(intent);
+        }
+
+        if (goodsInfo.goods_type == 1 || goodsInfo.goods_type == 2) {
+            showItemDetailPage();
+        }
+    }
+
+    //天猫淘宝详情页
+    public void showItemDetailPage() {
+        if (!MyApplication.isAliSDKInit) {
+            MyApplication.aliSDKInit(this);
+            return;
+        }
+        TradeService tradeService = AlibabaSDK.getService(TradeService.class);
+        ItemDetailPage itemDetailPage = new ItemDetailPage(goodsInfo.goods_sn, null);
+        TaokeParams taokeParams = new TaokeParams(); //若非淘客taokeParams设置为null即可
+        taokeParams.pid = "mm_114951381_0_0";
+        tradeService.show(itemDetailPage, null, this, null, new com.alibaba.sdk.android.trade
+                .callback.TradeProcessCallback() {
+            @Override
+            public void onPaySuccess(com.alibaba.sdk.android.trade.model.TradeResult tradeResult) {
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+            }
+        });
     }
 }

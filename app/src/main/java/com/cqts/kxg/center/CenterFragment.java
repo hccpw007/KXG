@@ -238,7 +238,6 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
 
                         int id_start = getUserInfo().store.indexOf("?id=");
                         String shop_id = getUserInfo().store.substring(id_start + 4, getUserInfo().store.length());
-                        System.out.println(shop_id);
                         startActivity(new Intent(getActivity(), WebShopActivity.class).putExtra
                                 ("title", "我的店铺").putExtra("url", getUserInfo().store).putExtra("shop_id",shop_id));
                     } else {

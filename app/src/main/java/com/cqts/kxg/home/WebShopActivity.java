@@ -82,6 +82,7 @@ public class WebShopActivity extends MyActivity implements View.OnClickListener 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 try {
+                    url = url.replaceAll("%(?![0-9a-fA-F]{2})", "%25");
                     url = URLDecoder.decode(url, "utf-8");
                     if (url.contains("$$login")) { //需要登录
                         startActivityForResult(new Intent(WebShopActivity.this, LoginActivity
@@ -94,7 +95,7 @@ public class WebShopActivity extends MyActivity implements View.OnClickListener 
                         int end = url.indexOf("$$push_goods");
                         String goods_name = url.substring(start + 11, end);
                         intent.putExtra("url", url);
-                        intent.putExtra("title", URLDecoder.decode(goods_name, "utf-8"));
+                        intent.putExtra("title", goods_name);
                         intent.putExtra("id", url.substring(url.indexOf("id=") + 3, url.indexOf
                                 ("&goods_name=")));
                         startActivityForResult(intent, 2);

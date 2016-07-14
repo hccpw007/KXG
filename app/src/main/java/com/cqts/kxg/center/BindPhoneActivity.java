@@ -103,7 +103,6 @@ public class BindPhoneActivity extends MyActivity implements View.OnClickListene
             public void httpResult(Integer which, int code, String msg, Object bean) {
                 phone_et.setEnabled(true);
                 bind_btn.setEnabled(true);
-                 System.out.println(code+"===code");
 
                 showToast(msg);
                 if (code != 0) {

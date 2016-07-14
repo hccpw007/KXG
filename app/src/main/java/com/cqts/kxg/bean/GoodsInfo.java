@@ -21,4 +21,6 @@ public class GoodsInfo {
     public long supplier_id;//  4527,
     public String url;//  "http://www.kxg99.com/mobile/goods.php?id=648"
     public String share_url;//  "http://www.kxg99.com/mobile/goods.php?id=648"
+    public int goods_type;// 0自营1:淘宝 2天猫
+    public String jump;// 0自营1:淘宝 2天猫
 }

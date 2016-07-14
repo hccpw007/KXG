@@ -26,4 +26,5 @@ dependencies {
     compile files('libs/wx_sdk.jar')
     compile 'com.umeng.analytics:analytics:latest.integration'
     compile files('libs/umeng-analytics-v6.0.1.jar')
+    compile project(':OneSDK')
 }

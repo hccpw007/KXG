@@ -15,7 +15,9 @@
         android:src="@mipmap/toleft_white"/>
 
     <TextView
-        android:maxLength="8"
+        android:layout_marginLeft="100dp"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:id="@+id/title_middle_text"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
