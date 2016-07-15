@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.base.utils.DataCleanManager;
 import com.cqts.kxg.R;
+import com.cqts.kxg.main.MainActivity;
 import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.main.MyApplication;
 import com.cqts.kxg.main.WebActivity;
@@ -19,6 +20,7 @@ import com.cqts.kxg.utils.MyUrls;
 import com.cqts.kxg.utils.SPutils;
 import com.cqts.kxg.utils.UMengUtils;
 import com.cqts.kxg.views.SharePop;
+import com.tencent.connect.share.QQShare;
 
 public class SettingActivity extends MyActivity implements View.OnClickListener {
     private LinearLayout layout1;
@@ -84,7 +86,7 @@ public class SettingActivity extends MyActivity implements View.OnClickListener 
                         ().alias + "\"")) + "推荐给你“开心购久久app”，注册后有红包哦！";
                 String url = getUserInfo().invite_link + getUserInfo().invite_code;
                 String text = "您可以在这里浏览购买数百万商品，更有9.9包邮等特价专区！";
-                SharePop.getInstance().showPop(this, layout4, title, url, text, null, null);
+                SharePop.getInstance().showPop(this, layout4, title, url, text, null, null,null);
                 break;
             case R.id.layout5: //关于开心购
                 if (null == MyUrls.getInstance().getMyUrl(this)) {

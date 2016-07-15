@@ -27,4 +27,7 @@ dependencies {
     compile 'com.umeng.analytics:analytics:latest.integration'
     compile files('libs/umeng-analytics-v6.0.1.jar')
     compile project(':OneSDK')
+    compile files('libs/QQShare1.jar')
+    compile files('libs/QQShare2.jar')
+    compile files('libs/WBShare.jar')
 }

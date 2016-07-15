@@ -178,11 +178,11 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
     private void setShare() {
         SharePop.getInstance().showPop(this, shareLayout, articleInfo.title, articleInfo
                         .article_url + "&share=1",
-                articleInfo.share_content, bitmap, new SharePop.ShareResult() {
+                articleInfo.share_content, bitmap,articleInfo.share_img, new SharePop.ShareResult() {
                     @Override
                     public void shareResult(int result) {
                         if (result == SharePop.ShareResult.SUCCESS) { //分享成功
-                            if (getUserInfo() != null) {
+                            if (isLogined()) {
                                 articleInfo.share_sum++;
                                 shareTv.setText(articleInfo.share_sum + "");
                                 MyHttp.articleShare(http, null, articleInfo.article_id,
@@ -268,6 +268,12 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
         } catch (Exception e) {
 
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        SharePop.getInstance().onActivityResult(requestCode,resultCode,data);
     }
 }
 

@@ -11,13 +11,13 @@
         android:layout_weight="1"/>
 
     <LinearLayout
-        android:paddingTop="30dp"
-        android:paddingBottom="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:gravity="bottom"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="20dp"
+        android:paddingTop="30dp">
 
         <ImageView
             android:id="@+id/friend_img"
@@ -36,6 +36,39 @@
             android:src="@mipmap/share_2"/>
 
         <ImageView
+            android:id="@+id/xl_img"
+            android:layout_width="0px"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/share_3"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:paddingBottom="20dp">
+
+        <ImageView
+            android:id="@+id/qq_img"
+            android:layout_width="0px"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/share_5"/>
+
+        <ImageView
+            android:id="@+id/qqzone_img"
+            android:layout_width="0px"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/share_4"/>
+
+        <ImageView
             android:id="@+id/copy_img"
             android:layout_width="0px"
             android:layout_height="70dp"
@@ -45,16 +78,12 @@
     </LinearLayout>
 
     <View
-        android:background="@color/mygray"
         android:layout_width="match_parent"
-        android:layout_height="1px"/>
+        android:layout_height="1px"
+        android:background="@color/myline"/>
+
     <TextView
-        android:background="@color/white"
-        android:textSize="20sp"
-        style="@style/text_16sp_black"
-        android:gravity="center"
-        android:text="取消"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/cancel_tv"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="取消"/>
 </LinearLayout>

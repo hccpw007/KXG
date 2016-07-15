@@ -122,13 +122,14 @@ public class WebShopActivity extends MyActivity implements View.OnClickListener 
             return;
         }
         String shareTitle = (isLogined() ? getUserInfo().alias : "我") + " 向你推荐一个店铺";
-        SharePop.getInstance().showPop(this,share_img,shareTitle,shopInfo.share_url,shopInfo.supplier_name,bitmap,null);
+        SharePop.getInstance().showPop(this,share_img,shareTitle,shopInfo.share_url,shopInfo.supplier_name,bitmap,shopInfo.logo,null);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         type = requestCode;
+        SharePop.getInstance().onActivityResult(requestCode,resultCode,data);
     }
 
     void getBitmap() {

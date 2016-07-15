@@ -168,7 +168,7 @@ public class WebGoodsActivity extends MyActivity implements View.OnClickListener
                 }
                 String shareTitle = (isLogined() ? getUserInfo().alias : "我") + " 向你推荐一个商品";
                 SharePop.getInstance().showPop(this, v, shareTitle, goodsInfo.share_url,
-                        goodsInfo.goods_name, bitmap, null);
+                        goodsInfo.goods_name, bitmap,goodsInfo.goods_thumb, null);
                 break;
             case R.id.tobuy_tv://去购买
                 goShoping();
@@ -276,6 +276,7 @@ public class WebGoodsActivity extends MyActivity implements View.OnClickListener
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         CallbackContext.onActivityResult(requestCode, resultCode, data);
+        SharePop.getInstance().onActivityResult(requestCode,resultCode,data);
     }
 
 
@@ -322,4 +323,5 @@ public class WebGoodsActivity extends MyActivity implements View.OnClickListener
             }
         });
     }
+
 }

@@ -17,7 +17,7 @@ import java.io.ByteArrayOutputStream;
 /**
  * 微信分享工具
  */
-public class WXShareUtils {
+public class ShareUtilsWX {
     /**
      * 微信分享<p>
      * type:分享类型, 1 = 微信分享  2 = 朋友圈分享 3 = 微信收藏

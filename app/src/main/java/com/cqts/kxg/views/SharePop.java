@@ -1,7 +1,9 @@
 package com.cqts.kxg.views;
 
+import android.app.Activity;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.Gravity;
@@ -10,25 +12,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cqts.kxg.R;
-import com.cqts.kxg.utils.WXShareUtils;
+import com.cqts.kxg.utils.ShareUtilsQQ;
+import com.cqts.kxg.utils.ShareUtilsWB;
+import com.cqts.kxg.utils.ShareUtilsWB2;
+import com.cqts.kxg.utils.ShareUtilsWX;
+import com.sina.weibo.sdk.api.share.WeiboShareSDK;
+import com.tencent.tauth.Tencent;
 
 /**
  * 分享POP
  */
 public class SharePop implements View.OnClickListener {
     public final static int TAG_SETTING = 1, TAG_APPRENTICE = 2, TAG_ARTICLE = 3;
-    private Context context;
+    private Activity context;
     private String url;
     private String title = "";
     private String text;
+    private String image_url;
     private ShareResult shareResult;
     private PopupWindow window;
     private static SharePop instance;
     private Bitmap image;
+    private Tencent tencent;
 
     public static SharePop getInstance() {
         if (instance == null) {
@@ -41,25 +49,31 @@ public class SharePop implements View.OnClickListener {
         return instance;
     }
 
-    public SharePop showPop(Context context, View view, String title, String url, String text,
-                            Bitmap image,
-                            ShareResult payResult) {
+    public SharePop showPop(Activity context, View view, String title, String url, String text,
+                            Bitmap image, String image_url,
+                            ShareResult shareResult) {
         this.image = image;
-        this.shareResult = payResult;
+        this.image_url = image_url;
+        this.shareResult = shareResult;
         this.title = title;
         this.context = context;
         this.url = url;
         this.text = text;
+        tencent = Tencent.createInstance("1105448613", context.getApplicationContext());
         View inflate = LayoutInflater.from(context).inflate(R.layout.pop_share, null);
         ImageView wx_img = (ImageView) inflate.findViewById(R.id.wx_img);
         ImageView friend_img = (ImageView) inflate.findViewById(R.id.friend_img);
         ImageView copy_img = (ImageView) inflate.findViewById(R.id.copy_img);
-        TextView cancel_tv = (TextView) inflate.findViewById(R.id.cancel_tv);
+        ImageView xl_img = (ImageView) inflate.findViewById(R.id.xl_img);
+        ImageView qq_img = (ImageView) inflate.findViewById(R.id.qq_img);
+        ImageView qqzone_img = (ImageView) inflate.findViewById(R.id.qqzone_img);
 
         wx_img.setOnClickListener(this);
-        cancel_tv.setOnClickListener(this);
+        qqzone_img.setOnClickListener(this);
         friend_img.setOnClickListener(this);
         copy_img.setOnClickListener(this);
+        xl_img.setOnClickListener(this);
+        qq_img.setOnClickListener(this);
 
         window = new PopupWindow(inflate, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup
                 .LayoutParams.MATCH_PARENT);
@@ -75,10 +89,19 @@ public class SharePop implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.wx_img: //微信分享
-                WXShareUtils.wxShare(context, 1, title, url, text, image);
+                ShareUtilsWX.wxShare(context, 1, title, url, text, image);
                 break;
             case R.id.friend_img: //朋友圈分享
-                WXShareUtils.wxShare(context, 2, title, url, text, image);
+                ShareUtilsWX.wxShare(context, 2, title, url, text, image);
+                break;
+            case R.id.xl_img: //新浪微博
+                new ShareUtilsWB2().wbShare(context,image);
+                break;
+            case R.id.qq_img: //QQ分享
+                ShareUtilsQQ.ShareQQ(tencent, context, title, text, url, image_url);
+                break;
+            case R.id.qqzone_img: //QQ空间分享
+                ShareUtilsQQ.ShareQQZone(tencent, context, title, text, url, image_url);
                 break;
             case R.id.copy_img: //复制到剪切板
                 ClipboardManager cmb = (ClipboardManager) context
@@ -89,18 +112,29 @@ public class SharePop implements View.OnClickListener {
             default:
                 break;
         }
-        window.dismiss();
+//        window.dismiss();
     }
 
-
     public void setResult(int result) {
+        switch (result) {
+            case ShareResult.SUCCESS:
+                Toast.makeText(context, "分享成功", Toast.LENGTH_SHORT).show();
+                break;
+            case ShareResult.CANCEL:
+                Toast.makeText(context, "分享取消", Toast.LENGTH_SHORT).show();
+                break;
+            case ShareResult.FAILED:
+                Toast.makeText(context, "分享失败", Toast.LENGTH_SHORT).show();
+                break;
+        }
+
         if (shareResult != null) {
             shareResult.shareResult(result);
         }
     }
 
     /**
-     * 支付结果接口,在支付的Activity实现方法
+     * 分享结果接口,在支付的Activity实现方法
      */
     public interface ShareResult {
         public static int SUCCESS = -1;
@@ -116,5 +150,15 @@ public class SharePop implements View.OnClickListener {
          *               FAILED -4 支付失败<br>
          */
         public void shareResult(int result);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        try {
+            if (null != window && window.isShowing()) {
+                tencent.onActivityResultData(requestCode, resultCode, data, ShareUtilsQQ.listener);
+                window.dismiss();
+            }
+        } catch (Exception e) {
+        }
     }
 }

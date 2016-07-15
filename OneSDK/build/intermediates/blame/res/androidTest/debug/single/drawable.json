@@ -12,12 +12,12 @@
         "source": "E:\\studio-project\\KXG\\OneSDK\\build\\intermediates\\bundles\\debug\\res\\drawable\\yw_1222.jpg"
     },
     {
-        "merged": "E:\\studio-project\\KXG\\OneSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\com_taobao_tae_sdk_web_view_title_bar_back.9.png",
-        "source": "E:\\studio-project\\KXG\\OneSDK\\build\\intermediates\\bundles\\debug\\res\\drawable\\com_taobao_tae_sdk_web_view_title_bar_back.9.png"
-    },
-    {
         "merged": "E:\\studio-project\\KXG\\OneSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\com_taobao_tae_sdk_web_view_menu_item_bg.xml",
         "source": "E:\\studio-project\\KXG\\OneSDK\\build\\intermediates\\bundles\\debug\\res\\drawable\\com_taobao_tae_sdk_web_view_menu_item_bg.xml"
+    },
+    {
+        "merged": "E:\\studio-project\\KXG\\OneSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\com_taobao_tae_sdk_web_view_title_bar_back.9.png",
+        "source": "E:\\studio-project\\KXG\\OneSDK\\build\\intermediates\\bundles\\debug\\res\\drawable\\com_taobao_tae_sdk_web_view_title_bar_back.9.png"
     },
     {
         "merged": "E:\\studio-project\\KXG\\OneSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\com_taobao_tae_sdk_web_view_title_bar_close.9.png",

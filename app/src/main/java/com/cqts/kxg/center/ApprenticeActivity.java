@@ -170,7 +170,7 @@ public class ApprenticeActivity extends MyActivity implements View.OnClickListen
                         ().alias + "\"")) + "推荐给你“开心购久久app”，注册后有红包哦！";
                 String url = getUserInfo().invite_link + getUserInfo().invite_code;
                 String text = "您可以在这里浏览购买数百万商品，更有9.9包邮等特价专区！";
-                SharePop.getInstance().showPop(this, shareBtn, title, url, text, null, null);
+                SharePop.getInstance().showPop(this, shareBtn, title, url, text, null, null, null);
                 break;
             default:
                 break;

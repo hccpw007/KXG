@@ -1,5 +1,13 @@
-package com.cqts.kxg;
+package com.cqts.kxg.utils;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+
+import com.cqts.kxg.R;
 import com.sina.weibo.sdk.api.ImageObject;
 import com.sina.weibo.sdk.api.TextObject;
 import com.sina.weibo.sdk.api.WeiboMultiMessage;
@@ -11,14 +19,10 @@ import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.sina.weibo.sdk.auth.WeiboAuthListener;
 import com.sina.weibo.sdk.exception.WeiboException;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
-
-public class TestActivity extends Activity {
+/**
+ * 微博分享
+ */
+public class ShareUtilsWB2 {
     public static String APP_KEY = "2751214706";
     private static final String PREFERENCES_NAME = "com_weibo_sdk_android";
     private static final String KEY_UID = "uid";
@@ -29,23 +33,16 @@ public class TestActivity extends Activity {
             + "friendships_groups_read,friendships_groups_write,statuses_to_me_read,"
             + "follow_app_official_microblog," + "invitation_write";
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        sendMultiMessage(null);
-    }
-
-    private void sendMultiMessage(Bitmap bitmap) {
+    public  void wbShare(Activity context, Bitmap bitmap) {
         if (bitmap == null) {
-            bitmap = BitmapFactory.decodeResource(getResources(),
+            bitmap = BitmapFactory.decodeResource(context.getResources(),
                     R.mipmap.ic_launcher);
         }
         ImageObject imageObject = new ImageObject();
         imageObject.setImageObject(bitmap);
         TextObject textObject = new TextObject();
         textObject.text = "http://www.baidu.com";
-        IWeiboShareAPI	mWeiboShareAPI = WeiboShareSDK.createWeiboAPI(this, APP_KEY);
+        IWeiboShareAPI	mWeiboShareAPI = WeiboShareSDK.createWeiboAPI(context, APP_KEY);
         mWeiboShareAPI.registerApp();
         // 1. 初始化微博的分享消息
         WeiboMultiMessage weiboMessage = new WeiboMultiMessage();
@@ -57,14 +54,14 @@ public class TestActivity extends Activity {
         request.transaction = String.valueOf(System.currentTimeMillis());
         request.multiMessage = weiboMessage;
         // 3. 发送请求消息到微博，唤起微博分享界面
-        AuthInfo authInfo = new AuthInfo(this, APP_KEY, "http://www.sina.com",
+        AuthInfo authInfo = new AuthInfo(context, APP_KEY, "http://www.sina.com",
                 SCOPE);
-        Oauth2AccessToken accessToken = readAccessToken(getApplicationContext());
+        Oauth2AccessToken accessToken = readAccessToken(context.getApplicationContext());
         String token = "";
         if (accessToken != null) {
             token = accessToken.getToken();
         }
-        mWeiboShareAPI.sendRequest(this, request, authInfo, token,
+        mWeiboShareAPI.sendRequest(context, request, authInfo, token,
                 new WeiboAuthListener() {
                     @Override
                     public void onWeiboException(WeiboException arg0) {
