@@ -3,8 +3,6 @@ package com.cqts.kxg;
 import com.sina.weibo.sdk.api.ImageObject;
 import com.sina.weibo.sdk.api.TextObject;
 import com.sina.weibo.sdk.api.WeiboMultiMessage;
-import com.sina.weibo.sdk.api.share.BaseResponse;
-import com.sina.weibo.sdk.api.share.IWeiboHandler;
 import com.sina.weibo.sdk.api.share.IWeiboShareAPI;
 import com.sina.weibo.sdk.api.share.SendMultiMessageToWeiboRequest;
 import com.sina.weibo.sdk.api.share.WeiboShareSDK;
@@ -15,13 +13,12 @@ import com.sina.weibo.sdk.exception.WeiboException;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
-public class TestActivity extends Activity implements IWeiboHandler.Response {
+public class TestActivity extends Activity {
     public static String APP_KEY = "2751214706";
     private static final String PREFERENCES_NAME = "com_weibo_sdk_android";
     private static final String KEY_UID = "uid";
@@ -37,10 +34,12 @@ public class TestActivity extends Activity implements IWeiboHandler.Response {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        System.out.println("1");
         sendMultiMessage(null);
     }
 
     private void sendMultiMessage(Bitmap bitmap) {
+        System.out.println("2");
         if (bitmap == null) {
             bitmap = BitmapFactory.decodeResource(getResources(),
                     R.mipmap.center_table8);
@@ -93,20 +92,5 @@ public class TestActivity extends Activity implements IWeiboHandler.Response {
         token.setRefreshToken(pref.getString(KEY_REFRESH_TOKEN, ""));
         token.setExpiresTime(pref.getLong(KEY_EXPIRES_IN, 0));
         return token;
-    }
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        System.out.println("12312");
-        // 从当前应用唤起微博并进行分享后，返回到当前应用时，需要在此处调用该函数
-        // 来接收微博客户端返回的数据；执行成功，返回 true，并调用
-        // {@link IWeiboHandler.Response#onResponse}；失败返回 false，不调用上述回调
-//        mWeiboShareAPI.handleWeiboResponse(intent, this);
-    }
-
-    @Override
-    public void onResponse(BaseResponse baseResponse) {
-        System.out.println("123");
     }
 }

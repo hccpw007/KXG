@@ -36,7 +36,7 @@ public class ShareUtilsWB2 {
     public static final String SCOPE = "email,direct_messages_read,direct_messages_write,"
             + "friendships_groups_read,friendships_groups_write,statuses_to_me_read,"
             + "follow_app_official_microblog," + "invitation_write";
-    private IWeiboShareAPI mWeiboShareAPI;
+    public IWeiboShareAPI mWeiboShareAPI;
     private static ShareUtilsWB2 instance;
 
     public static  ShareUtilsWB2 getInstance() {
@@ -44,6 +44,9 @@ public class ShareUtilsWB2 {
             instance = new ShareUtilsWB2();
         }
             return instance;
+    }
+
+    private ShareUtilsWB2() {
     }
 
     public void wbShare(Activity context, Bitmap bitmap) {
@@ -102,19 +105,5 @@ public class ShareUtilsWB2 {
         token.setRefreshToken(pref.getString(KEY_REFRESH_TOKEN, ""));
         token.setExpiresTime(pref.getLong(KEY_EXPIRES_IN, 0));
         return token;
-    }
-
-    public void onNewIntent(Intent intent) {
-        // 从当前应用唤起微博并进行分享后，返回到当前应用时，需要在此处调用该函数
-        // 来接收微博客户端返回的数据；执行成功，返回 true，并调用
-        // {@link IWeiboHandler.Response#onResponse}；失败返回 false，不调用上述回调
-        System.out.println("1111111111111111=============");
-        System.out.println(mWeiboShareAPI == null);
-         mWeiboShareAPI.handleWeiboResponse(intent, new IWeiboHandler.Response() {
-            @Override
-            public void onResponse(BaseResponse baseResponse) {
-                System.out.println("214124");
-            }
-        });
     }
 }

@@ -28,13 +28,17 @@ import com.cqts.kxg.utils.ShareUtilsWB2;
 import com.cqts.kxg.views.FavoriteAnimation;
 import com.cqts.kxg.views.SharePop;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.sina.weibo.sdk.api.share.BaseRequest;
+import com.sina.weibo.sdk.api.share.BaseResponse;
+import com.sina.weibo.sdk.api.share.IWeiboHandler;
+import com.sina.weibo.sdk.constant.WBConstants;
 
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
-public class WebArticleActivity extends MyActivity implements View.OnClickListener {
+public class WebArticleActivity extends MyActivity implements View.OnClickListener, IWeiboHandler.Response {
     private String title = "";
     private String url = "";
     private ArticleInfo articleInfo;
@@ -280,12 +284,27 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-
         // 从当前应用唤起微博并进行分享后，返回到当前应用时，需要在此处调用该函数
         // 来接收微博客户端返回的数据；执行成功，返回 true，并调用
         // {@link IWeiboHandler.Response#onResponse}；失败返回 false，不调用上述回调
-        System.out.println("============");
-        ShareUtilsWB2.getInstance().onNewIntent(intent);
+        ShareUtilsWB2.getInstance().mWeiboShareAPI.handleWeiboResponse(intent,this);
+    }
+
+    @Override
+    public void onResponse(BaseResponse baseResp) {
+        if(baseResp!= null){
+            switch (baseResp.errCode) {
+                case WBConstants.ErrorCode.ERR_OK:
+                    showToast("成功");
+                    break;
+                case WBConstants.ErrorCode.ERR_CANCEL:
+                    showToast("取消");
+                    break;
+                case WBConstants.ErrorCode.ERR_FAIL:
+                    showToast("失败");
+                    break;
+            }
+        }
     }
 }
 
