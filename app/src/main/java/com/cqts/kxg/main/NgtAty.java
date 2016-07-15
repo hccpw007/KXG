@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
 import android.view.WindowManager;
@@ -31,7 +32,7 @@ import com.cqts.kxg.utils.UpdateUtils;
 /**
  * 主页 导航页
  */
-public class NgtAty extends FragmentActivity implements OnMyPageChangeListener,
+public class NgtAty extends MyActivity implements OnMyPageChangeListener,
         OnCheckedChangeListener {
     private ArrayList<BaseFragment> list = new ArrayList<BaseFragment>();
     public MyViewPager ngt_pager;
@@ -49,15 +50,7 @@ public class NgtAty extends FragmentActivity implements OnMyPageChangeListener,
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-        //通知栏和虚拟按键透明(xml需要设置属性)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            //通知栏透明
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            //虚拟按键透明
-            // getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        }
+        setSwipeBackEnable(false);
         setContentView(R.layout.activity_ngt);
         InitView();
         InitFragment();

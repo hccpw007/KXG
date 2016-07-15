@@ -16,6 +16,7 @@ public class BaseApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+
 		BaseValue.setInit(this); //初始化全局常量
 		SupportHttps.setInit();// 初始化https
 		RefreshLayout.setInit();// 初始化下拉刷新
