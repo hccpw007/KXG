@@ -37,6 +37,9 @@ public class SharePop implements View.OnClickListener {
     private static SharePop instance;
     private Bitmap image;
     private Tencent tencent;
+    private int clickId = 0;
+    private ImageView qq_img;
+    private ImageView qqzone_img;
 
     public static SharePop getInstance() {
         if (instance == null) {
@@ -65,8 +68,8 @@ public class SharePop implements View.OnClickListener {
         ImageView friend_img = (ImageView) inflate.findViewById(R.id.friend_img);
         ImageView copy_img = (ImageView) inflate.findViewById(R.id.copy_img);
         ImageView xl_img = (ImageView) inflate.findViewById(R.id.xl_img);
-        ImageView qq_img = (ImageView) inflate.findViewById(R.id.qq_img);
-        ImageView qqzone_img = (ImageView) inflate.findViewById(R.id.qqzone_img);
+        qq_img = (ImageView) inflate.findViewById(R.id.qq_img);
+        qqzone_img = (ImageView) inflate.findViewById(R.id.qqzone_img);
 
         wx_img.setOnClickListener(this);
         qqzone_img.setOnClickListener(this);
@@ -87,6 +90,7 @@ public class SharePop implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        clickId = v.getId();
         switch (v.getId()) {
             case R.id.wx_img: //微信分享
                 ShareUtilsWX.wxShare(context, 1, title, url, text, image);
@@ -95,7 +99,7 @@ public class SharePop implements View.OnClickListener {
                 ShareUtilsWX.wxShare(context, 2, title, url, text, image);
                 break;
             case R.id.xl_img: //新浪微博
-                new ShareUtilsWB2().wbShare(context,image);
+                ShareUtilsWB2.getInstance().wbShare(context, image);
                 break;
             case R.id.qq_img: //QQ分享
                 ShareUtilsQQ.ShareQQ(tencent, context, title, text, url, image_url);
@@ -112,7 +116,7 @@ public class SharePop implements View.OnClickListener {
             default:
                 break;
         }
-//        window.dismiss();
+        window.dismiss();
     }
 
     public void setResult(int result) {
@@ -154,9 +158,10 @@ public class SharePop implements View.OnClickListener {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         try {
-            if (null != window && window.isShowing()) {
+            if (null != window && (clickId == qq_img.getId() || clickId ==
+                    qqzone_img.getId())) {
                 tencent.onActivityResultData(requestCode, resultCode, data, ShareUtilsQQ.listener);
-                window.dismiss();
+                clickId = 0;
             }
         } catch (Exception e) {
         }

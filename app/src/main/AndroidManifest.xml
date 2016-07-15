@@ -104,15 +104,15 @@
         <!-- ======================业务Activity ======================= -->
         <activity
             android:name=".TestActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
 
         <activity
             android:name=".main.MainActivity"
             android:theme="@style/AppBaseTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity
             android:name=".main.NgtAty"
@@ -207,6 +207,7 @@
                 <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".home.WebGoodsActivity"
