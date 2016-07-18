@@ -2,7 +2,6 @@ package com.cqts.kxg.home;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -11,7 +10,6 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -21,14 +19,11 @@ import com.base.http.HttpForVolley;
 import com.base.views.MyWebView;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.ArticleInfo;
-import com.cqts.kxg.center.LoginActivity;
 import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.utils.MyHttp;
-import com.cqts.kxg.utils.ShareUtilsWB2;
+import com.cqts.kxg.utils.ShareUtilsWB;
 import com.cqts.kxg.views.FavoriteAnimation;
 import com.cqts.kxg.views.SharePop;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.sina.weibo.sdk.api.share.BaseRequest;
 import com.sina.weibo.sdk.api.share.BaseResponse;
 import com.sina.weibo.sdk.api.share.IWeiboHandler;
 import com.sina.weibo.sdk.constant.WBConstants;
@@ -38,7 +33,7 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
-public class WebArticleActivity extends MyActivity implements View.OnClickListener, IWeiboHandler.Response {
+public class WebArticleActivity extends MyActivity implements View.OnClickListener {
     private String title = "";
     private String url = "";
     private ArticleInfo articleInfo;
@@ -52,6 +47,7 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
     private int is_love;
     private FavoriteAnimation animation;
     private Bitmap bitmap;
+    private int clickViewId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,11 +162,11 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
+        clickViewId = v.getId();
         switch (v.getId()) {
             case R.id.collect_layout://收藏  取消收藏
                 setLove();
                 break;
-
             case R.id.share_layout: //分享
                 setShare();
                 break;
@@ -183,7 +179,8 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
     private void setShare() {
         SharePop.getInstance().showPop(this, shareLayout, articleInfo.title, articleInfo
                         .article_url + "&share=1",
-                articleInfo.share_content, bitmap,articleInfo.share_img, new SharePop.ShareResult() {
+                articleInfo.share_content, bitmap, articleInfo.share_img, new SharePop
+                        .ShareResult() {
                     @Override
                     public void shareResult(int result) {
                         if (result == SharePop.ShareResult.SUCCESS) { //分享成功
@@ -278,32 +275,9 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        SharePop.getInstance().onActivityResult(requestCode,resultCode,data);
-    }
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        // 从当前应用唤起微博并进行分享后，返回到当前应用时，需要在此处调用该函数
-        // 来接收微博客户端返回的数据；执行成功，返回 true，并调用
-        // {@link IWeiboHandler.Response#onResponse}；失败返回 false，不调用上述回调
-        ShareUtilsWB2.getInstance().mWeiboShareAPI.handleWeiboResponse(intent,this);
-    }
-
-    @Override
-    public void onResponse(BaseResponse baseResp) {
-        if(baseResp!= null){
-            switch (baseResp.errCode) {
-                case WBConstants.ErrorCode.ERR_OK:
-                    showToast("成功");
-                    break;
-                case WBConstants.ErrorCode.ERR_CANCEL:
-                    showToast("取消");
-                    break;
-                case WBConstants.ErrorCode.ERR_FAIL:
-                    showToast("失败");
-                    break;
-            }
+        if (clickViewId == R.id.share_layout) {
+            SharePop.getInstance().onActivityResult(requestCode, resultCode, data);
+            clickViewId = 0;
         }
     }
 }

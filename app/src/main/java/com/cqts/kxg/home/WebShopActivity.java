@@ -9,6 +9,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -21,26 +22,31 @@ import com.cqts.kxg.center.LoginActivity;
 import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.main.MyApplication;
 import com.cqts.kxg.utils.MyHttp;
+import com.cqts.kxg.utils.ShareUtilsWB;
 import com.cqts.kxg.views.SharePop;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.sina.weibo.sdk.api.share.BaseResponse;
+import com.sina.weibo.sdk.api.share.IWeiboHandler;
+import com.sina.weibo.sdk.constant.WBConstants;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
-public class WebShopActivity extends MyActivity implements View.OnClickListener {
+public class WebShopActivity extends MyActivity implements View.OnClickListener{
     private String title = "";
     private String url = "";
     private String shop_id = "";
     private MyWebView webview;
     int type = 0; //用来判定是否是从商品页面返回的type,如果是2表示是是,这不刷新页面
-    private ImageView share_img;
+    private LinearLayout share_img;
     private ShopInfo shopInfo;
     private Bitmap bitmap;
+    private int clickeViewId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_web);
+        setContentView(R.layout.activity_webshop);
         title = getIntent().getStringExtra("title");
         url = getIntent().getStringExtra("url");
         shop_id = getIntent().getStringExtra("shop_id");
@@ -73,7 +79,7 @@ public class WebShopActivity extends MyActivity implements View.OnClickListener 
 
     private void InitView() {
         setMyTitle(title);
-        share_img = (ImageView) findViewById(R.id.share_img);
+        share_img = (LinearLayout) findViewById(R.id.share_img);
         share_img.setOnClickListener(this);
         webview = (MyWebView) findViewById(R.id.webview);
         WebSettings settings = webview.getSettings();
@@ -117,6 +123,7 @@ public class WebShopActivity extends MyActivity implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         //分享
+        clickeViewId = v.getId();
         if (shopInfo==null|| TextUtils.isEmpty(shopInfo.share_url)){
             getDetailData();
             return;
@@ -129,7 +136,10 @@ public class WebShopActivity extends MyActivity implements View.OnClickListener 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         type = requestCode;
-        SharePop.getInstance().onActivityResult(requestCode,resultCode,data);
+        if (clickeViewId == share_img.getId()){
+            SharePop.getInstance().onActivityResult(requestCode,resultCode,data);
+            clickeViewId = 0;
+        }
     }
 
     void getBitmap() {

@@ -1,5 +1,6 @@
 package com.cqts.kxg.center;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -22,15 +23,19 @@ import com.cqts.kxg.bean.EaringApprenticeInfo;
 import com.cqts.kxg.bean.MyApprenticeInfo;
 import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.utils.MyHttp;
+import com.cqts.kxg.utils.ShareUtilsWB;
 import com.cqts.kxg.views.SharePop;
 import com.google.zxing.WriterException;
+import com.sina.weibo.sdk.api.share.BaseResponse;
+import com.sina.weibo.sdk.api.share.IWeiboHandler;
+import com.sina.weibo.sdk.constant.WBConstants;
 
 import java.util.ArrayList;
 
 /**
  * 收徒弟页面
  */
-public class ApprenticeActivity extends MyActivity implements View.OnClickListener {
+public class ApprenticeActivity extends MyActivity implements View.OnClickListener{
     private TextView table1Tv, table2Tv, table3Tv, table4Tv;
     private MyEditText invitationEt;
     private Button shareBtn;

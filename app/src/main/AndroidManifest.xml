@@ -104,6 +104,12 @@
         <!-- ======================业务Activity ======================= -->
         <activity
             android:name=".TestActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN"/>-->
+                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+                <!--<action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />-->
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--</intent-filter>-->
         </activity>
 
         <activity
@@ -203,11 +209,6 @@
         <activity
             android:name=".home.WebArticleActivity"
             android:theme="@style/SwipeBackTheme">
-            <intent-filter>
-                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-
         </activity>
         <activity
             android:name=".home.WebGoodsActivity"
@@ -232,6 +233,14 @@
         <activity
             android:name=".center.WebActivityActivity"
             android:theme="@style/SwipeBackTheme">
+        </activity>
+        <activity
+            android:name=".utils.ShareUtilsWB"
+            android:theme="@style/SwipeBackTheme">
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
     </application>
 

@@ -1,19 +1,30 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias '重庆唐森网络科技有限公司'
+            keyPassword 'cqtswlkjyxgs'
+            storeFile file('E:/keys')
+            storePassword 'cqtswl'
+        }
+    }
     compileSdkVersion 22
     buildToolsVersion '24.0.0'
-
     defaultConfig {
         applicationId "com.cqts.kxg"
         minSdkVersion 15
-        versionCode 21
-        versionName "1.4"
+        versionCode 22
+        versionName "1.5"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
+            signingConfig signingConfigs.config
         }
     }
 }
@@ -26,8 +37,8 @@ dependencies {
     compile files('libs/wx_sdk.jar')
     compile 'com.umeng.analytics:analytics:latest.integration'
     compile files('libs/umeng-analytics-v6.0.1.jar')
-    compile project(':OneSDK')
     compile files('libs/QQShare1.jar')
     compile files('libs/QQShare2.jar')
     compile files('libs/WBShare.jar')
+    compile project(':OneSDK')
 }

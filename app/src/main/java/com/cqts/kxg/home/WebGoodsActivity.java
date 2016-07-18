@@ -29,8 +29,12 @@ import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.main.MyApplication;
 import com.cqts.kxg.utils.MyHttp;
 import com.cqts.kxg.utils.MyUrls;
+import com.cqts.kxg.utils.ShareUtilsWB;
 import com.cqts.kxg.views.FavoriteAnimation;
 import com.cqts.kxg.views.SharePop;
+import com.sina.weibo.sdk.api.share.BaseResponse;
+import com.sina.weibo.sdk.api.share.IWeiboHandler;
+import com.sina.weibo.sdk.constant.WBConstants;
 import com.taobao.tae.sdk.callback.CallbackContext;
 import com.taobao.tae.sdk.callback.LoginCallback;
 import com.taobao.tae.sdk.callback.LogoutCallback;
@@ -45,7 +49,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
 public class WebGoodsActivity extends MyActivity implements View.OnClickListener, HttpForVolley
-        .HttpTodo, MyHttp.MyHttpResult {
+        .HttpTodo, MyHttp.MyHttpResult{
     private String title = "";
     private String url = "";
     private String id = "";
@@ -58,9 +62,9 @@ public class WebGoodsActivity extends MyActivity implements View.OnClickListener
     private int is_love;
     private FavoriteAnimation animation;
     private GoodsInfo goodsInfo;
-    private ImageView shareImg;
+    private LinearLayout shareImg;
     private Bitmap bitmap;
-
+    int clickViewId = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,7 +114,7 @@ public class WebGoodsActivity extends MyActivity implements View.OnClickListener
         collectImg = (ImageView) findViewById(R.id.collect_img);
         collectTv = (TextView) findViewById(R.id.collect_tv);
         tobuyTv = (TextView) findViewById(R.id.tobuy_tv);
-        shareImg = (ImageView) findViewById(R.id.share_img);
+        shareImg = (LinearLayout) findViewById(R.id.share_img);
 
         collectLayout.setOnClickListener(this);
         shareImg.setOnClickListener(this);
@@ -154,6 +158,7 @@ public class WebGoodsActivity extends MyActivity implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
+        clickViewId = v.getId();
         switch (v.getId()) {
             case R.id.collect_layout://收藏
                 if (!needLogin()) {
@@ -172,18 +177,6 @@ public class WebGoodsActivity extends MyActivity implements View.OnClickListener
                 break;
             case R.id.tobuy_tv://去购买
                 goShoping();
-//                if (!needLogin()) {
-//                    return;
-//                }
-//                if (null == MyUrls.getInstance().getMyUrl(this)) {
-//                    return;
-//                }
-//                String urlStr = MyUrls.getInstance().getMyUrl(this).jump + "?id=" + id +
-//                        "&token=" + MyApplication.token;
-//                Intent intent = new Intent(this, WebBuyActivity.class);
-//                intent.putExtra("title", title);
-//                intent.putExtra("url", urlStr);
-//                startActivity(intent);
                 break;
         }
     }
@@ -275,8 +268,13 @@ public class WebGoodsActivity extends MyActivity implements View.OnClickListener
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        CallbackContext.onActivityResult(requestCode, resultCode, data);
-        SharePop.getInstance().onActivityResult(requestCode,resultCode,data);
+        if (clickViewId == R.id.tobuy_tv){ //去购买
+            CallbackContext.onActivityResult(requestCode, resultCode, data);
+        }
+        if (clickViewId ==R.id.share_img ){ //分享
+            SharePop.getInstance().onActivityResult(requestCode,resultCode,data);
+        }
+        clickViewId = 0;
     }
 
 

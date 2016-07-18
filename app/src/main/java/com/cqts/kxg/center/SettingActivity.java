@@ -18,11 +18,15 @@ import com.cqts.kxg.main.MyApplication;
 import com.cqts.kxg.main.WebActivity;
 import com.cqts.kxg.utils.MyUrls;
 import com.cqts.kxg.utils.SPutils;
+import com.cqts.kxg.utils.ShareUtilsWB;
 import com.cqts.kxg.utils.UMengUtils;
 import com.cqts.kxg.views.SharePop;
+import com.sina.weibo.sdk.api.share.BaseResponse;
+import com.sina.weibo.sdk.api.share.IWeiboHandler;
+import com.sina.weibo.sdk.constant.WBConstants;
 import com.tencent.connect.share.QQShare;
 
-public class SettingActivity extends MyActivity implements View.OnClickListener {
+public class SettingActivity extends MyActivity implements View.OnClickListener{
     private LinearLayout layout1;
     private LinearLayout layout2;
     private LinearLayout layout3;

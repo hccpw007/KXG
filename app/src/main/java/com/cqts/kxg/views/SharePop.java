@@ -6,20 +6,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cqts.kxg.R;
 import com.cqts.kxg.utils.ShareUtilsQQ;
 import com.cqts.kxg.utils.ShareUtilsWB;
-import com.cqts.kxg.utils.ShareUtilsWB2;
 import com.cqts.kxg.utils.ShareUtilsWX;
-import com.sina.weibo.sdk.api.share.WeiboShareSDK;
 import com.tencent.tauth.Tencent;
 
 /**
@@ -70,7 +70,9 @@ public class SharePop implements View.OnClickListener {
         ImageView xl_img = (ImageView) inflate.findViewById(R.id.xl_img);
         qq_img = (ImageView) inflate.findViewById(R.id.qq_img);
         qqzone_img = (ImageView) inflate.findViewById(R.id.qqzone_img);
+        TextView cancel_tv = (TextView)inflate. findViewById(R.id.cancel_tv);
 
+        cancel_tv.setOnClickListener(this);
         wx_img.setOnClickListener(this);
         qqzone_img.setOnClickListener(this);
         friend_img.setOnClickListener(this);
@@ -99,7 +101,7 @@ public class SharePop implements View.OnClickListener {
                 ShareUtilsWX.wxShare(context, 2, title, url, text, image);
                 break;
             case R.id.xl_img: //新浪微博
-                ShareUtilsWB2.getInstance().wbShare(context, image);
+                ShareUtilsWB.wbShare(context,title, text, url, image);
                 break;
             case R.id.qq_img: //QQ分享
                 ShareUtilsQQ.ShareQQ(tencent, context, title, text, url, image_url);
