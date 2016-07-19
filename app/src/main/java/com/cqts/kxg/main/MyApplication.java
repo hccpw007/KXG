@@ -40,12 +40,10 @@ public class MyApplication extends BaseApplication {
         AlibabaSDK.asyncInit(context, new InitResultCallback() {
             @Override
             public void onSuccess() {
-                System.out.println("aliSDKInit");
                 isAliSDKInit = true;
             }
             @Override
             public void onFailure(int i, String s) {
-                System.out.println("aliSDKInit=========");
             }
         });
     }
