@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.base.http.HttpForVolley;
+import com.base.utils.IsWifi;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.UpdateInfo;
 
@@ -66,7 +67,7 @@ public class UpdateUtils implements MyHttp.MyHttpResult, View.OnClickListener, H
             return;
         }
         showForceDialog();
-        if (updateInfo.forcibly) { //需要强制更新
+        if (updateInfo.forcibly&& IsWifi.isWifi(context)) { //需要强制更新
             alertDialog.setContentView(goingView);
             setStartUpdate();
         }
@@ -125,12 +126,16 @@ public class UpdateUtils implements MyHttp.MyHttpResult, View.OnClickListener, H
                         sdpath = Environment.getRootDirectory().getParentFile().getPath() + "/";
                     }
                     String mSavePath = sdpath + "download";
-                    String apkFilePath = mSavePath + "/开心购99_" + updateInfo.version + ".apk";
+                    String apkFilePath = mSavePath + "/开心购99.apk";
                     File file = new File(mSavePath);
                     if (!file.exists()) {
                         file.mkdirs();
                     }
                     apkFile = new File(apkFilePath);
+                    if (null != apkFile && apkFile.exists()) { //删除原有安装包
+                        apkFile.delete();
+                        apkFile = new File(apkFilePath);
+                    }
                     URL url = new URL(updateInfo.url);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.connect();
