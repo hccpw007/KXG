@@ -9,7 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.alibaba.sdk.android.AlibabaSDK;
+import com.alibaba.sdk.android.callback.CallbackContext;
+import com.alibaba.sdk.android.login.LoginService;
+import com.alibaba.sdk.android.login.callback.LogoutCallback;
 import com.base.utils.DataCleanManager;
 import com.cqts.kxg.R;
 import com.cqts.kxg.main.MainActivity;
@@ -26,7 +31,7 @@ import com.sina.weibo.sdk.api.share.IWeiboHandler;
 import com.sina.weibo.sdk.constant.WBConstants;
 import com.tencent.connect.share.QQShare;
 
-public class SettingActivity extends MyActivity implements View.OnClickListener{
+public class SettingActivity extends MyActivity implements View.OnClickListener {
     private LinearLayout layout1;
     private LinearLayout layout2;
     private LinearLayout layout3;
@@ -90,7 +95,7 @@ public class SettingActivity extends MyActivity implements View.OnClickListener{
                         ().alias + "\"")) + "推荐给你“开心购久久app”，注册后有红包哦！";
                 String url = getUserInfo().invite_link + getUserInfo().invite_code;
                 String text = "您可以在这里浏览购买数百万商品，更有9.9包邮等特价专区！";
-                SharePop.getInstance().showPop(this, layout4, title, url, text, null, null,null);
+                SharePop.getInstance().showPop(this, layout4, title, url, text, null, null, null);
                 break;
             case R.id.layout5: //关于开心购
                 if (null == MyUrls.getInstance().getMyUrl(this)) {
@@ -99,11 +104,16 @@ public class SettingActivity extends MyActivity implements View.OnClickListener{
                 String versionName = getVersionName();
                 Intent intent = new Intent(this, WebActivity.class);
                 intent.putExtra("title", "关于开心购");
-                intent.putExtra("url", MyUrls.getInstance().getMyUrl(this).about+"?version="+versionName);
+                intent.putExtra("url", MyUrls.getInstance().getMyUrl(this).about + "?version=" +
+                        versionName);
                 startActivity(intent);
                 break;
             case R.id.exit_btn: //退出当前账户
-                UMengUtils.setSignOff();
+                try {
+                    baiChuanLogout(); // 百川退出
+                    UMengUtils.setSignOff(); //友盟退出
+                } catch (Exception e) {
+                }
                 MyApplication.userInfo = null;
                 MyApplication.token = "";
                 SPutils.setToken("");
@@ -118,7 +128,7 @@ public class SettingActivity extends MyActivity implements View.OnClickListener{
     /**
      * 获得当前APP的外部版本号
      */
-    public  String getVersionName() {
+    public String getVersionName() {
         String versionName = "1.0";
         PackageManager packageManager = getPackageManager();
         try {
@@ -128,5 +138,45 @@ public class SettingActivity extends MyActivity implements View.OnClickListener{
             e.printStackTrace();
         }
         return versionName;
+    }
+
+
+    //百川登录需要的回调
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        CallbackContext.onActivityResult(requestCode, resultCode, data);
+//    }
+
+    //百川登录
+    public void baiChuanLogin() {
+        AlibabaSDK.getService(LoginService.class).showLogin(this, new com.alibaba.sdk.android
+                .login.callback.LoginCallback() {
+            @Override
+            public void onSuccess(com.alibaba.sdk.android.session.model.Session session) {
+                System.out.println("百川登录成功");
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                System.out.println("百川登录失败");
+            }
+        });
+    }
+
+    //百川登出
+    public void baiChuanLogout() {
+        LoginService loginService = AlibabaSDK.getService(LoginService.class);
+        loginService.logout(this, new LogoutCallback() {
+            @Override
+            public void onFailure(int code, String msg) {
+                System.out.println("百川登出失败===="+msg);
+            }
+
+            @Override
+            public void onSuccess() {
+                System.out.println("百川登出成功");
+            }
+        });
     }
 }

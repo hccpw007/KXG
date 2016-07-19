@@ -14,7 +14,9 @@ import com.base.BaseValue;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.HomeSceneInfo;
 import com.cqts.kxg.home.ArticleActivity;
+import com.cqts.kxg.main.MyApplication;
 import com.cqts.kxg.main.WebActivity;
+import com.cqts.kxg.utils.LoginUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -34,7 +36,7 @@ public class ArticleClassifyAdapter extends RecyclerView.Adapter<ArticleClassify
 
     @Override
     public classifyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        if (context == null){
+        if (context == null) {
             context = viewGroup.getContext();
         }
         return new classifyViewHolder(LayoutInflater.from(context).inflate(R
@@ -43,7 +45,7 @@ public class ArticleClassifyAdapter extends RecyclerView.Adapter<ArticleClassify
 
     @Override
     public void onBindViewHolder(classifyViewHolder classifyViewHolder, final int i) {
-        if (sceneInfos.size() < i+1) return;
+        if (sceneInfos.size() < i + 1) return;
 
         classifyViewHolder.item_tv.setText(sceneInfos.get(i).cat_name);
         ImageLoader.getInstance().displayImage(sceneInfos.get(i).cover_img,
@@ -52,8 +54,15 @@ public class ArticleClassifyAdapter extends RecyclerView.Adapter<ArticleClassify
         classifyViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!TextUtils.isEmpty(sceneInfos.get(i).url)){ //充话费和携程旅游
-                    context.startActivity(new Intent(context, WebActivity.class).putExtra("title",sceneInfos.get(i).cat_name).putExtra("url",sceneInfos.get(i).url));
+                if (!TextUtils.isEmpty(sceneInfos.get(i).url)) { //充话费和携程旅游
+                    if (!LoginUtils.isLogin()){
+                        LoginUtils.login(context);
+                        return;
+                    }
+                    Intent intent = new Intent(context, WebActivity.class);
+                    intent.putExtra("title", sceneInfos.get(i).cat_name);
+                    intent.putExtra("url", sceneInfos.get(i).url+"&token="+ MyApplication.token);
+                    context.startActivity(intent);
                     return;
                 }
                 Intent intent = new Intent(context, ArticleActivity.class);

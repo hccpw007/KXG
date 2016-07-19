@@ -251,21 +251,6 @@ public class WebGoodsActivity extends MyActivity implements View.OnClickListener
 
         }
     }
-
-    //登录
-    public void showLogin() {
-        AlibabaSDK.getService(LoginService.class).showLogin(this, new com.alibaba.sdk.android
-                .login.callback.LoginCallback() {
-            @Override
-            public void onSuccess(com.alibaba.sdk.android.session.model.Session session) {
-            }
-
-            @Override
-            public void onFailure(int i, String s) {
-            }
-        });
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (clickViewId == R.id.tobuy_tv){ //去购买
@@ -310,7 +295,7 @@ public class WebGoodsActivity extends MyActivity implements View.OnClickListener
         ItemDetailPage itemDetailPage = new ItemDetailPage(goodsInfo.goods_sn, null);
         TaokeParams taokeParams = new TaokeParams(); //若非淘客taokeParams设置为null即可
         taokeParams.pid = "mm_114951381_0_0";
-        tradeService.show(itemDetailPage, null, this, null, new com.alibaba.sdk.android.trade
+        tradeService.show(itemDetailPage, taokeParams, this, null, new com.alibaba.sdk.android.trade
                 .callback.TradeProcessCallback() {
             @Override
             public void onPaySuccess(com.alibaba.sdk.android.trade.model.TradeResult tradeResult) {
