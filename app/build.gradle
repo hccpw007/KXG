@@ -27,6 +27,17 @@ android {
             signingConfig signingConfigs.config
         }
     }
+
+    //多渠道打包
+    productFlavors {
+        kxg {} //官方
+        share {}//分享推荐下载
+        web {}//web引导下载
+        productFlavors.all { flavor ->
+            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+        }
+    }
+
 }
 
 dependencies {

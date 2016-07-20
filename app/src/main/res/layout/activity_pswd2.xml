@@ -85,6 +85,7 @@
             android:text="设置密码"/>
 
         <com.base.views.MyEditText
+            android:digits="0123456789abcdefghjigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             style="@style/text_15sp_black"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
