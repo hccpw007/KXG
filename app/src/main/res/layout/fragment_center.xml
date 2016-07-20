@@ -136,12 +136,12 @@
             android:background="@color/myline"/>
 
         <LinearLayout
-            android:id="@+id/moneytable_layout"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/money_table1"
                 android:layout_width="0px"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -171,6 +171,7 @@
                 android:background="@color/myline"/>
 
             <LinearLayout
+                android:id="@+id/money_table2"
                 android:layout_width="0px"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -201,6 +202,7 @@
                 android:background="@color/myline"/>
 
             <LinearLayout
+                android:id="@+id/money_table3"
                 android:layout_width="0px"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -230,6 +232,7 @@
                 android:background="@color/myline"/>
 
             <LinearLayout
+                android:id="@+id/money_table4"
                 android:layout_width="0px"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

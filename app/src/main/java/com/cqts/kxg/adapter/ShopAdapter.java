@@ -6,15 +6,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.base.views.MyOvalImageView;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.ShopInfo;
 import com.cqts.kxg.home.WebShopActivity;
-import com.cqts.kxg.main.WebActivity;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.util.List;
 
@@ -25,9 +25,12 @@ import java.util.List;
 public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.MyviewHolder>{
     Context context;
     List<ShopInfo> shopInfos;
-    DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).showImageOnLoading(R.mipmap.center_head)
+    DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true)
+            .showImageOnLoading(R.color.transparency)
+            .showImageForEmptyUri(R.mipmap.center_head)
+            .showImageOnFail(R.mipmap.center_head)
+            .displayer(new RoundedBitmapDisplayer(200))
             .build();
-
     public ShopAdapter(Context context, List<ShopInfo> shopInfos) {
         this.context = context;
         this.shopInfos = shopInfos;
@@ -64,7 +67,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.MyviewHolder>{
     }
 
     public class MyviewHolder extends RecyclerView.ViewHolder {
-        MyOvalImageView item_img;
+        ImageView item_img;
         TextView item_shopname_tv;
         TextView item_name_tv;
         TextView item_views_tv;
@@ -72,7 +75,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.MyviewHolder>{
         TextView item_into_tv;
         public MyviewHolder(View itemView) {
             super(itemView);
-            item_img = (MyOvalImageView) itemView.findViewById(R.id.item_img);
+            item_img = (ImageView) itemView.findViewById(R.id.item_img);
             item_shopname_tv = (TextView) itemView.findViewById(R.id.item_shopname_tv);
             item_name_tv = (TextView) itemView.findViewById(R.id.item_name_tv);
             item_views_tv = (TextView) itemView.findViewById(R.id.item_views_tv);

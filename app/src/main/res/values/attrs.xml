@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--圆角矩形的参数-->
-    <declare-styleable name="MyOvalImageView">
-        <attr name="myradius" format="dimension"/>
-    </declare-styleable>
-    <!--圆角矩形的参数-->
     <declare-styleable name="RoundLayout">
         <attr name="mylayoutbg" format="color"/>
         <attr name="mylayoutradius" format="dimension"/>

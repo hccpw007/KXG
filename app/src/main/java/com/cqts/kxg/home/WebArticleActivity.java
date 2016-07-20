@@ -177,8 +177,11 @@ public class WebArticleActivity extends MyActivity implements View.OnClickListen
      * 分享文章并请求接口调用收益
      */
     private void setShare() {
+        if (!needLogin()) {
+            return;
+        }
         SharePop.getInstance().showPop(this, shareLayout, articleInfo.title, articleInfo
-                        .article_url + "&share=1",
+                        .article_url + "&share=1&share_uid="+getUserInfo().user_id,
                 articleInfo.share_content, bitmap, articleInfo.share_img, new SharePop
                         .ShareResult() {
                     @Override

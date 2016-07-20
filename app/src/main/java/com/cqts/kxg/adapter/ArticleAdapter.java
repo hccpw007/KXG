@@ -11,14 +11,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.base.BaseValue;
 import com.base.http.HttpForVolley;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.ArticleInfo;
 import com.cqts.kxg.home.WebArticleActivity;
 import com.cqts.kxg.main.MyActivity;
 import com.cqts.kxg.main.MyFragment;
-import com.cqts.kxg.main.WebActivity;
 import com.cqts.kxg.utils.MyHttp;
 import com.cqts.kxg.views.FavoriteAnimation;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -27,7 +25,6 @@ import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -186,6 +183,4 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
             item_collect_tv = (TextView) itemView.findViewById(R.id.item_collect_tv);
         }
     }
-
-
 }

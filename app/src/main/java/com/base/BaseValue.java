@@ -65,7 +65,7 @@ public class BaseValue {
 
     public static DisplayImageOptions getOptions(int defaultimg){
         return new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).showImageOnFail(defaultimg)
-                .showImageOnLoading(R.color.transparency).displayer(new RoundedBitmapDisplayer(20))
+                .showImageOnLoading(R.color.transparency)
                .showImageForEmptyUri(defaultimg).build();
     }
 }

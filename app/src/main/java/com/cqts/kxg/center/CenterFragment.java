@@ -56,9 +56,13 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
             table11, table12;
     private ArrayList<GoodsInfo> goodsInfos = new ArrayList<>();
     private GoodsAdapter adapter;
-    private LinearLayout money_layout, moneytable_layout;
+    private LinearLayout money_layout;
 
     public static CenterFragment fragment;
+    private LinearLayout money_table1;
+    private LinearLayout money_table2;
+    private LinearLayout money_table3;
+    private LinearLayout money_table4;
 
     public static CenterFragment getInstance() {
         if (fragment == null) {
@@ -95,7 +99,10 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
         message_tv = (AutoTextView) view.findViewById(R.id.message_tv);
         goods_rclv = (RecyclerView) view.findViewById(R.id.goods_rclv);
         money_layout = (LinearLayout) view.findViewById(R.id.money_layout);
-        moneytable_layout = (LinearLayout) view.findViewById(R.id.moneytable_layout);
+        money_table1 = (LinearLayout) view.findViewById(R.id.money_table1);
+        money_table2 = (LinearLayout) view.findViewById(R.id.money_table2);
+        money_table3 = (LinearLayout) view.findViewById(R.id.money_table3);
+        money_table4 = (LinearLayout) view.findViewById(R.id.money_table4);
 
         table1 = (LinearLayout) view.findViewById(R.id.table1);
         table2 = (LinearLayout) view.findViewById(R.id.table2);
@@ -110,7 +117,10 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
         table11 = (LinearLayout) view.findViewById(R.id.table11);
         table12 = (LinearLayout) view.findViewById(R.id.table12);
 
-        moneytable_layout.setOnClickListener(this);
+        money_table1.setOnClickListener(this);
+        money_table2.setOnClickListener(this);
+        money_table3.setOnClickListener(this);
+        money_table4.setOnClickListener(this);
         login_tv.setOnClickListener(this);
         money_layout.setOnClickListener(this);
         name_tv.setOnClickListener(this);
@@ -156,6 +166,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 }
                 break;
             case R.id.table1://收徒赚钱
+            case R.id.money_table3://收徒赚钱
                 if (needLogin()) {
                     startActivity(new Intent(getActivity(), ApprenticeActivity.class));
                 }
@@ -179,7 +190,9 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 break;
             case R.id.table4://收益详情
             case R.id.money_layout://账户余额
-            case R.id.moneytable_layout://收徒金额信息
+            case R.id.money_table1://收徒金额信息
+            case R.id.money_table2://收徒金额信息
+            case R.id.money_table4://收徒金额信息
                 if (needLogin()) {
                     startActivity(new Intent(getActivity(), EarningsActivity.class));
                 }
@@ -227,10 +240,12 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 if (null == MyUrls.getInstance().getMyUrl(getActivity())) {
                     return;
                 }
-                Intent intent = new Intent(getActivity(), WebActivity.class);
-                intent.putExtra("title", "话费充值");
-                intent.putExtra("url", MyUrls.getInstance().getMyUrl(getActivity()).recharge);
-                startActivity(intent);
+                if (needLogin()){
+                    Intent intent = new Intent(getActivity(), WebActivity.class);
+                    intent.putExtra("title", "话费充值");
+                    intent.putExtra("url", MyUrls.getInstance().getMyUrl(getActivity()).recharge+"&token="+ MyApplication.token);
+                    startActivity(intent);
+                }
                 break;
             case R.id.table12://我的店铺
                 if (needLogin() && null != MyUrls.getInstance().getMyUrl(getActivity())) {
@@ -249,7 +264,6 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                         startActivity(intent2);
                     }
                 }
-
                 break;
             default:
                 break;

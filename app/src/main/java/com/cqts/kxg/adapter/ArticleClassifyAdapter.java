@@ -17,7 +17,9 @@ import com.cqts.kxg.home.ArticleActivity;
 import com.cqts.kxg.main.MyApplication;
 import com.cqts.kxg.main.WebActivity;
 import com.cqts.kxg.utils.LoginUtils;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.util.ArrayList;
 
@@ -29,9 +31,14 @@ public class ArticleClassifyAdapter extends RecyclerView.Adapter<ArticleClassify
 
     ArrayList<HomeSceneInfo> sceneInfos;
     private Context context;
+    private  DisplayImageOptions options;
 
     public ArticleClassifyAdapter(ArrayList<HomeSceneInfo> sceneInfos) {
         this.sceneInfos = sceneInfos;
+        options = new DisplayImageOptions.Builder().cacheInMemory(true)
+                .cacheOnDisk(true).showImageOnFail(R.mipmap.home_articleclassify)
+                .showImageOnLoading(R.color.transparency).displayer(new RoundedBitmapDisplayer(200))
+                .showImageForEmptyUri(R.mipmap.home_articleclassify).build();
     }
 
     @Override
@@ -46,11 +53,9 @@ public class ArticleClassifyAdapter extends RecyclerView.Adapter<ArticleClassify
     @Override
     public void onBindViewHolder(classifyViewHolder classifyViewHolder, final int i) {
         if (sceneInfos.size() < i + 1) return;
-
         classifyViewHolder.item_tv.setText(sceneInfos.get(i).cat_name);
         ImageLoader.getInstance().displayImage(sceneInfos.get(i).cover_img,
-                classifyViewHolder.item_img,
-                BaseValue.getOptions(R.mipmap.home_articleclassify));
+                classifyViewHolder.item_img,options);
         classifyViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

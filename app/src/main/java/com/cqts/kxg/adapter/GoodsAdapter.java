@@ -9,12 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.base.utils.OVBitmapTransform;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.GoodsInfo;
 import com.cqts.kxg.home.WebGoodsActivity;
-import com.cqts.kxg.main.WebActivity;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -26,9 +26,12 @@ public class GoodsAdapter extends RecyclerView.Adapter<GoodsAdapter.MyViewHolder
     List<GoodsInfo> goods_list;
     DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).showImageOnLoading(R.color.white)
             .build();
+    private final OVBitmapTransform transform;
+
     public GoodsAdapter(Context context, List<GoodsInfo> goods_list) {
         this.context = context;
         this.goods_list = goods_list;
+        transform = new OVBitmapTransform(context,10,10,0,0);
     }
 
     @Override
@@ -39,8 +42,8 @@ public class GoodsAdapter extends RecyclerView.Adapter<GoodsAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(MyViewHolder myViewHolder, final int i) {
-        ImageLoader.getInstance().displayImage(goods_list.get(i).goods_thumb, myViewHolder
-                .item_nine_img,defaultOptions);
+        Glide.with(context).load(goods_list.get(i).goods_thumb).centerCrop().bitmapTransform(transform).into(myViewHolder
+                .item_nine_img);
         myViewHolder.item_info_tv.setText(goods_list.get(i).goods_name);
         myViewHolder.item_money_tv.setText("¥" + goods_list.get(i).shop_price);
         myViewHolder.item_love_tv.setText(goods_list.get(i).click_count + "");
@@ -54,6 +57,9 @@ public class GoodsAdapter extends RecyclerView.Adapter<GoodsAdapter.MyViewHolder
                 context.startActivity(intent);
             }
         });
+
+
+
     }
 
     @Override

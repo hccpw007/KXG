@@ -13,7 +13,9 @@ import android.widget.TextView;
 import com.base.BaseValue;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.MyApprenticeInfo;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,12 @@ public class ApprenticeAdapter extends RecyclerView.Adapter<ApprenticeAdapter
 
     ArrayList<MyApprenticeInfo.Apprentice> apprentices;
     private Context context;
+    DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true)
+            .showImageOnLoading(R.color.transparency)
+            .showImageForEmptyUri(R.mipmap.center_head)
+            .showImageOnFail(R.mipmap.center_head)
+            .displayer(new RoundedBitmapDisplayer(200))
+            .build();
 
     public ApprenticeAdapter(ArrayList<MyApprenticeInfo.Apprentice> apprentices) {
         this.apprentices = apprentices;
@@ -50,7 +58,7 @@ public class ApprenticeAdapter extends RecyclerView.Adapter<ApprenticeAdapter
         classifyViewHolder.item_tv.setText(s);
         ImageLoader.getInstance().displayImage(apprentices.get(i).headimg,
                 classifyViewHolder.item_img,
-                BaseValue.getOptions(R.mipmap.center_head));
+                defaultOptions);
     }
 
     @Override
