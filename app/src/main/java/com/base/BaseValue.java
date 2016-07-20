@@ -13,6 +13,7 @@ import com.cqts.kxg.R;
 import com.cqts.kxg.views.SharePop;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 public class BaseValue {
 
@@ -64,7 +65,7 @@ public class BaseValue {
 
     public static DisplayImageOptions getOptions(int defaultimg){
         return new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).showImageOnFail(defaultimg)
-                .showImageOnLoading(R.color.transparency)
+                .showImageOnLoading(R.color.transparency).displayer(new RoundedBitmapDisplayer(20))
                .showImageForEmptyUri(defaultimg).build();
     }
 }

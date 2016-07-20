@@ -21,7 +21,9 @@ import com.cqts.kxg.main.MyFragment;
 import com.cqts.kxg.main.WebActivity;
 import com.cqts.kxg.utils.MyHttp;
 import com.cqts.kxg.views.FavoriteAnimation;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import org.json.JSONObject;
 
@@ -37,8 +39,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
     MyFragment myFragment;
     private HttpForVolley http;
     boolean canClick = true;
-
-
+    private DisplayImageOptions build;
 
     public ArticleAdapter(Context context, List<ArticleInfo> articleInfos) {
         this.context = context;
@@ -49,6 +50,8 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
         this.articleInfos = articleInfos;
         this.myFragment = myFragment;
         this.context = myFragment.getActivity();
+        build = new DisplayImageOptions.Builder().cacheInMemory(true)
+                .cacheOnDisk(true).displayer(new RoundedBitmapDisplayer(20)).build();
     }
 
     @Override
@@ -58,12 +61,12 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
     }
 
     boolean needLogin() {
-        if (myFragment != null && myFragment.needLogin()) {
+        if (http == null&&myFragment != null && myFragment.needLogin()) {
             http = myFragment.http;
             return true;
         }
 
-        if (myFragment == null && ((MyActivity) context).needLogin()) {
+        if (http == null&&myFragment == null && ((MyActivity) context).needLogin()) {
             http = ((MyActivity) context).http;
             return true;
         }
@@ -159,7 +162,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
         myViewHolder.item_collect_tv.setText(articleInfos.get(i).love);
         myViewHolder.item_tv.setText(articleInfos.get(i).title);
         ImageLoader.getInstance().displayImage(articleInfos.get(i).cover_img, myViewHolder
-                .item_img, BaseValue.getOptions(R.mipmap.solid_article));
+                .item_img, build);
     }
 
     @Override
