@@ -8,7 +8,7 @@
     android:clipToPadding="true"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".center.Register1Activity">
+    tools:context=".center.Register2Activity">
 
     <include
         layout="@layout/include_title"/>
