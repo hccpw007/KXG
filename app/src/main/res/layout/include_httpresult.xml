@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="糟糕!信号被外星人拦截!请刷新试试吧"
+            android:text="网络连接错误,请检查网络后重试"
             android:textColor="@color/mygray"
             android:textSize="13sp"/>
 
@@ -38,10 +38,11 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/shape_intoshop"
             android:padding="5dp"
-            android:text="刷新一下试试"/>
+            android:text="刷新试试"/>
     </LinearLayout>
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/include_nodatalayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -59,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="糟糕!数据被外星人拦截!请刷新试试吧"
+            android:text="此页面暂无数据"
             android:textColor="@color/mygray"
             android:textSize="13sp"/>
 
@@ -70,7 +71,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/shape_intoshop"
             android:padding="5dp"
-            android:text="刷新一下试试"/>
+            android:text="刷新试试"/>
     </LinearLayout>
 
 </RelativeLayout>

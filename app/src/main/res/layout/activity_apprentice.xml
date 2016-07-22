@@ -176,8 +176,8 @@
                     android:layout_marginTop="10dp"
                     android:layout_toRightOf="@id/qr_img"
                     android:maxLines="5"
-                    android:text="好友使用您的邀请码成功注册，您即得0.20元现金奖励，其完成新
-手任务后您再得0.20元现金奖励，且以后他赚的钱你都会有10%分成收益哦！"
+                    android:text="好友使用您的邀请码成功注册，您即得0.50元现金奖励，其完成新
+手任务后您再得0.20元现金奖励，且以后他赚的钱你都会有分成收益哦！"
                     android:textColor="@color/mygray"/>
 
                 <LinearLayout
@@ -393,7 +393,7 @@
                 android:layout_marginTop="10dp"
                 android:lineSpacingMultiplier="1.2"
                 android:maxLines="100"
-                android:text="1、邀请新用户注册（必须使用您的邀请码）您得0.20 元，其完成新手任务您再得0.20元。"
+                android:text="1、邀请新用户注册（必须使用您的邀请码）您得0.50 元，其完成新手任务您再得0.20元。"
                 android:textColor="@color/mygray"/>
 
             <TextView
@@ -404,8 +404,8 @@
                 android:layout_marginRight="15dp"
                 android:lineSpacingMultiplier="1.2"
                 android:maxLines="100"
-                android:text="2、您永久性获取徒弟的10%分红，您的徒弟再收徒弟，也会给您10%的永久分红，他也
-会获得10%的永久分红。 "
+                android:text="2、您永久性获取徒弟的分红，您的徒弟再收徒弟，也会给您永久分红，他也
+会获得10%的永久分红。"
                 android:textColor="@color/mygray"/>
 
             <TextView

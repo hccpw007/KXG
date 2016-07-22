@@ -240,10 +240,11 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                 if (null == MyUrls.getInstance().getMyUrl(getActivity())) {
                     return;
                 }
-                if (needLogin()){
+                if (needLogin()) {
                     Intent intent = new Intent(getActivity(), WebActivity.class);
                     intent.putExtra("title", "话费充值");
-                    intent.putExtra("url", MyUrls.getInstance().getMyUrl(getActivity()).recharge+"&token="+ MyApplication.token);
+                    intent.putExtra("url", MyUrls.getInstance().getMyUrl(getActivity()).recharge
+                            + "&token=" + MyApplication.token);
                     startActivity(intent);
                 }
                 break;
@@ -252,9 +253,11 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
                     if (!TextUtils.isEmpty(getUserInfo().store)) {
 
                         int id_start = getUserInfo().store.indexOf("?id=");
-                        String shop_id = getUserInfo().store.substring(id_start + 4, getUserInfo().store.length());
+                        String shop_id = getUserInfo().store.substring(id_start + 4, getUserInfo
+                                ().store.length());
                         startActivity(new Intent(getActivity(), WebShopActivity.class).putExtra
-                                ("title", "我的店铺").putExtra("url", getUserInfo().store).putExtra("shop_id",shop_id));
+                                ("title", "我的店铺").putExtra("url", getUserInfo().store).putExtra
+                                ("shop_id", shop_id));
                     } else {
                         showToast("您还没有店铺!");
                         Intent intent2 = new Intent(getActivity(), WebActivity.class);
@@ -272,14 +275,21 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
 
     @Override
     public void onShow() {
+        System.out.println("center_onshow");
+        System.out.println("isLogined() == "+isLogined());
+        System.out.println("UserInfo == "+(MyApplication.userInfo == null));
         super.onShow();
         try {
-            setMessage();//刷新消息
-            if (!isLogined()) {
-                showUnLogined();
-            } else {
+            if (isLogined()) {
+                System.out.println("showLogined==start");
                 showLogined();
+                System.out.println("showLogined==end");
+            } else {
+                System.out.println("showUnLogined==start");
+                showUnLogined();
+                System.out.println("showUnLogined==end");
             }
+            setMessage();//刷新消息
         } catch (Exception e) {
         }
     }

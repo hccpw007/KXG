@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.KeyEvent;
 
+import com.base.BaseApplication;
+import com.base.BaseValue;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.SigninInfo;
 import com.cqts.kxg.bean.UserInfo;
@@ -18,6 +20,7 @@ public class MainActivity extends MyActivity implements MyHttp.MyHttpResult, Han
     public static final int GETUSERINFO = 2;
     public static MainActivity instance;
     Handler handler = new Handler(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,13 +28,15 @@ public class MainActivity extends MyActivity implements MyHttp.MyHttpResult, Han
         instance = this;
         setSwipeBackEnable(false);
         InitView();
-        AutoLogin();
     }
+
+
 
     /**
      * 自动登录
      */
     private void AutoLogin() {
+        handler.sendEmptyMessageDelayed(1, 2000);
         String token = SPutils.getToken();
         if (token.isEmpty() || token.length() < 2) {
             return;
@@ -40,7 +45,15 @@ public class MainActivity extends MyActivity implements MyHttp.MyHttpResult, Han
     }
 
     private void InitView() {
-        handler.sendEmptyMessageDelayed(1, 3000);
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                while (!MyApplication.isMyInit) {
+                }
+                AutoLogin();
+            }
+        }.start();
     }
 
     @Override
@@ -56,7 +69,7 @@ public class MainActivity extends MyActivity implements MyHttp.MyHttpResult, Han
                 MyApplication.signinInfo = signinInfo;
                 MyApplication.token = signinInfo.getToken();
                 SPutils.setToken(signinInfo.getToken());
-                MyHttp.getUserInfo(http, GETUSERINFO,this);
+                MyHttp.getUserInfo(http, GETUSERINFO, this);
                 break;
             case GETUSERINFO: //获得userinfo
                 UMengUtils.setSignIn();
@@ -67,10 +80,10 @@ public class MainActivity extends MyActivity implements MyHttp.MyHttpResult, Han
 
     @Override
     public boolean handleMessage(Message msg) {
-        if (SPutils.getFirst()){
-            startActivity(new Intent(this,IndexActivity.class));
-        }else {
-            startActivity(new Intent(this,NgtAty.class));
+        if (SPutils.getFirst()) {
+            startActivity(new Intent(this, IndexActivity.class));
+        } else {
+            startActivity(new Intent(this, NgtAty.class));
         }
         finish();
         return false;

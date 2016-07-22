@@ -29,6 +29,7 @@ import com.base.BaseValue;
 import com.base.utils.Logger;
 
 public class HttpForVolley {
+    public static final String APIVersion = "1";
     private StringRequest request;
     Activity activity;
     Fragment fragment;
@@ -56,6 +57,13 @@ public class HttpForVolley {
         if (null != request && url.equals(request.getUrl())) {
             request.cancel();
         }
+        //增加接口版本号
+        if (url.contains("?")) {
+            url = url + "&";
+        } else {
+            url = url + "?";
+        }
+        url = url+"apiversion="+APIVersion;
         toHttp(Method, which, httpMap, url, todo);
     }
 
@@ -140,7 +148,7 @@ public class HttpForVolley {
         //组装get参数
         if (Method == Request.Method.GET) {
             if (httpMap != null && httpMap.size() > 0) {
-                url = url + "?";
+                url = url + "&";
                 for (String key : httpMap.keySet()) {
                     url = url + key + "=" + httpMap.get(key) + "&";
                 }

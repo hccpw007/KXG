@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.base.BaseValue;
 import com.cqts.kxg.R;
 import com.cqts.kxg.bean.HomeSceneInfo;
+import com.cqts.kxg.classify.ClassifyGoodsActivity;
 import com.cqts.kxg.home.ArticleActivity;
 import com.cqts.kxg.main.MyApplication;
 import com.cqts.kxg.main.WebActivity;
@@ -26,14 +26,14 @@ import java.util.ArrayList;
 /**
  * 首页文章分类
  */
-public class ArticleClassifyAdapter extends RecyclerView.Adapter<ArticleClassifyAdapter
+public class HomeClassifyAdapter extends RecyclerView.Adapter<HomeClassifyAdapter
         .classifyViewHolder> {
 
     ArrayList<HomeSceneInfo> sceneInfos;
     private Context context;
-    private  DisplayImageOptions options;
+    private DisplayImageOptions options;
 
-    public ArticleClassifyAdapter(ArrayList<HomeSceneInfo> sceneInfos) {
+    public HomeClassifyAdapter(ArrayList<HomeSceneInfo> sceneInfos) {
         this.sceneInfos = sceneInfos;
         options = new DisplayImageOptions.Builder().cacheInMemory(true)
                 .cacheOnDisk(true).showImageOnFail(R.mipmap.home_articleclassify)
@@ -55,24 +55,39 @@ public class ArticleClassifyAdapter extends RecyclerView.Adapter<ArticleClassify
         if (sceneInfos.size() < i + 1) return;
         classifyViewHolder.item_tv.setText(sceneInfos.get(i).cat_name);
         ImageLoader.getInstance().displayImage(sceneInfos.get(i).cover_img,
-                classifyViewHolder.item_img,options);
+                classifyViewHolder.item_img, options);
         classifyViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!TextUtils.isEmpty(sceneInfos.get(i).url)) { //充话费和携程旅游
-                    if (!LoginUtils.isLogin()){
+                if (sceneInfos.get(i).cat_id == -1) {//携程
+                    Intent intent = new Intent(context, WebActivity.class);
+                    intent.putExtra("title", sceneInfos.get(i).cat_name);
+                    String url = sceneInfos.get(i).url;
+                    intent.putExtra("url", url);
+                    context.startActivity(intent);
+                    return;
+                }
+                if (sceneInfos.get(i).cat_id == -2) {//生活圈
+                    if (!LoginUtils.isLogin()) {
                         LoginUtils.login(context);
                         return;
                     }
                     Intent intent = new Intent(context, WebActivity.class);
                     intent.putExtra("title", sceneInfos.get(i).cat_name);
-                    intent.putExtra("url", sceneInfos.get(i).url+"&token="+ MyApplication.token);
+                    String url = sceneInfos.get(i).url;
+                    if (url.contains("?")) {
+                        url = url + "&";
+                    } else {
+                        url = url + "?";
+                    }
+                    intent.putExtra("url", url + "token=" + MyApplication.token);
                     context.startActivity(intent);
                     return;
                 }
-                Intent intent = new Intent(context, ArticleActivity.class);
+
+                Intent intent = new Intent(context, ClassifyGoodsActivity.class);
                 intent.putExtra("title", sceneInfos.get(i).cat_name);
-                intent.putExtra("cat_id", sceneInfos.get(i).cat_id);
+                intent.putExtra("cat_id", sceneInfos.get(i).cat_id + "");
                 context.startActivity(intent);
             }
         });

@@ -43,7 +43,7 @@ import java.util.List;
  */
 public class MyHttp {
     private static HashMap<String, String> httpMap = new HashMap<>();
-    private static String url = "https://api.kxg99.com/"; //正式
+        private static String url = "https://api.kxg99.com/"; //正式
 //    private static String url = "http://api.test.kxg99.com/"; //测试
 
     private MyHttp() {
@@ -226,7 +226,7 @@ public class MyHttp {
 
     /**
      * 快捷登陆<p>
-     * <p/>
+     * <p>
      * 接口和注册一样需要先获取图形验证码，然后获取短信验证码<p>
      * mobile_phone 手机号码<br>
      * captcha 短信验证码<br>
@@ -732,7 +732,7 @@ public class MyHttp {
      * 获取店铺详情<p>
      */
     public static void shopDetail(HttpForVolley http, Integer which, String shop_id,
-                                   MyHttpResult myHttpResult) {
+                                  MyHttpResult myHttpResult) {
         String httpUrl = url + "shop/detail";
         httpMap.clear();
         httpMap.put("shop_id", shop_id);

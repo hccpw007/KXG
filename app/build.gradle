@@ -14,8 +14,8 @@ android {
     defaultConfig {
         applicationId "com.cqts.kxg"
         minSdkVersion 15
-        versionCode 27
-        versionName "1.5"
+        versionCode 28
+        versionName "1.6"
     }
     buildTypes {
         release {
@@ -52,4 +52,5 @@ dependencies {
     compile files('libs/QQShare2.jar')
     compile files('libs/WBShare.jar')
     compile project(':OneSDK')
+    compile 'com.jakewharton:butterknife:5.1.1'
 }

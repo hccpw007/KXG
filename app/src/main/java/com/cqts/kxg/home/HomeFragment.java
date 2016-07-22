@@ -15,7 +15,7 @@ import com.base.utils.GridDecoration;
 import com.cqts.kxg.R;
 import com.cqts.kxg.adapter.ArticleAdapter;
 import com.cqts.kxg.adapter.HomeAdapter;
-import com.cqts.kxg.adapter.ArticleClassifyAdapter;
+import com.cqts.kxg.adapter.HomeClassifyAdapter;
 import com.cqts.kxg.adapter.HomeBannerAdapter;
 import com.cqts.kxg.adapter.HomeTableAdapter;
 import com.cqts.kxg.bean.ArticleInfo;
@@ -85,7 +85,7 @@ public class HomeFragment extends MyFragment implements View.OnClickListener, Re
 
     private void initRecyclerView() {
         ArticleAdapter articleListAdapter = new ArticleAdapter(this, articleInfos);
-        ArticleClassifyAdapter homeArticleClassifyAdapter = new ArticleClassifyAdapter(sceneInfos);
+        HomeClassifyAdapter homeArticleClassifyAdapter = new HomeClassifyAdapter(sceneInfos);
         HomeBannerAdapter homeBannerAdapter = new HomeBannerAdapter(bannerInfos);
         HomeTableAdapter homeTableAdapter = new HomeTableAdapter(homeTableInfos);
 

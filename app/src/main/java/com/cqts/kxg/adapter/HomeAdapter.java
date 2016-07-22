@@ -10,12 +10,12 @@ public class HomeAdapter extends RecyclerView.Adapter {
     public static final int listType = 4;
 
     ArticleAdapter articleListAdapter;
-    ArticleClassifyAdapter homeArticleClassifyAdapter;
+    HomeClassifyAdapter homeArticleClassifyAdapter;
     HomeBannerAdapter homeBannerAdapter;
     HomeTableAdapter homeTableAdapter;
 
     public HomeAdapter(HomeBannerAdapter homeBannerAdapter, HomeTableAdapter homeTableAdapter,
-                       ArticleClassifyAdapter homeArticleClassifyAdapter, ArticleAdapter
+                       HomeClassifyAdapter homeArticleClassifyAdapter, ArticleAdapter
                                articleListAdapter) {
         this.homeBannerAdapter = homeBannerAdapter;
         this.homeTableAdapter = homeTableAdapter;
@@ -61,7 +61,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
                         position);
                 break;
             case classifyType:
-                homeArticleClassifyAdapter.onBindViewHolder((ArticleClassifyAdapter
+                homeArticleClassifyAdapter.onBindViewHolder((HomeClassifyAdapter
                         .classifyViewHolder) viewHolder, position - 1);
                 break;
             case listType:

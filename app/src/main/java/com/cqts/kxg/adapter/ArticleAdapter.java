@@ -58,16 +58,18 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
     }
 
     boolean needLogin() {
-        if (http == null&&myFragment != null && myFragment.needLogin()) {
+        if (http != null) {
+            return false;
+        }
+        if (http == null && myFragment != null && myFragment.needLogin()) {
             http = myFragment.http;
-            return true;
+            return false;
         }
-
-        if (http == null&&myFragment == null && ((MyActivity) context).needLogin()) {
+        if (http == null && myFragment == null && ((MyActivity) context).needLogin()) {
             http = ((MyActivity) context).http;
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -77,14 +79,14 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
 
             @Override
             public void onClick(View v) {
-                if (!canClick){
+                System.out.println(canClick);
+                if (!canClick) {
                     return;
                 }
-
-                if (!needLogin()) {
+                if (needLogin()) {
                     return;
                 }
-
+                System.out.println(canClick);
                 final MyHttp.MyHttpResult myHttpResult = new MyHttp.MyHttpResult() {
                     @Override
                     public void httpResult(Integer which, int code, String msg, Object bean) {
@@ -121,10 +123,11 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
                         int is_love = response.optJSONObject("data").optInt("is_love");
                         myViewHolder.itemView.setTag(is_love);
 
-                        if (is_love == 0){ //未收藏
+                        if (is_love == 0) { //未收藏
                             myViewHolder.item_collect_img.setImageResource(R.mipmap.home_taoxin);
-                        }else {//已收藏
-                            myViewHolder.item_collect_img.setImageResource(R.mipmap.home_taoxin_hover);
+                        } else {//已收藏
+                            myViewHolder.item_collect_img.setImageResource(R.mipmap
+                                    .home_taoxin_hover);
                         }
 
                         MyHttp.articleLove(http, 2, articleInfos.get(i).article_id, is_love,
@@ -150,9 +153,9 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
 
         int is_love = articleInfos.get(i).is_love;
 
-        if (is_love == 0){ //未收藏
+        if (is_love == 0) { //未收藏
             myViewHolder.item_collect_img.setImageResource(R.mipmap.home_taoxin);
-        }else {//已收藏
+        } else {//已收藏
             myViewHolder.item_collect_img.setImageResource(R.mipmap.home_taoxin_hover);
         }
 
