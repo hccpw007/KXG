@@ -26,6 +26,7 @@ public class ShareUtilsWX {
         //注册微信
         String APP_ID = "wx68d4f6f1109e4f94";
         IWXAPI api = WXAPIFactory.createWXAPI(context, APP_ID, true);
+        SendMessageToWX.Req req = new SendMessageToWX.Req();
         api.registerApp(APP_ID);
 
         boolean IsWXAppInstalledAndSupported = api
@@ -46,12 +47,14 @@ public class ShareUtilsWX {
         msg.thumbData = bmpToByteArray(scaledBitmap,true);
         msg.title = title;
         msg.description = text;
-        SendMessageToWX.Req req = new SendMessageToWX.Req();
-
         if (type == 1) {
             req.scene = SendMessageToWX.Req.WXSceneSession; //微信分享
         }
         if (type == 2) {
+            if (title.contains("向你推荐一个店铺")){
+                msg.title = text;
+                msg.description = title;
+            }
             req.scene = SendMessageToWX.Req.WXSceneTimeline; //朋友圈分享
         }
         if (type == 3) {
