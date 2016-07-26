@@ -275,6 +275,7 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
 
     @Override
     public void onShow() {
+        System.out.println("view == null? ---"+(null == view));
         System.out.println("center_onshow");
         System.out.println("isLogined() == "+isLogined());
         System.out.println("UserInfo == "+(MyApplication.userInfo == null));
@@ -309,19 +310,26 @@ public class CenterFragment extends MyFragment implements View.OnClickListener {
     }
 
     private void showLogined() {
+        System.out.println("1");
         name_tv.setVisibility(View.VISIBLE);
+        System.out.println("2");
         login_tv.setVisibility(View.GONE);
+        System.out.println("3");
         money_tv.setText(String.format("%.2f", getUserInfo().app_money));
+        System.out.println("4");
         name_tv.setText(TextUtils.isEmpty(getUserInfo().alias) ? getUserInfo().user_name :
                 getUserInfo().alias);
-
+        System.out.println("5");
         DisplayImageOptions build = new DisplayImageOptions.Builder().cacheInMemory(true)
                 .cacheOnDisk(true).showImageOnFail(R.mipmap.center_head)
                 .showImageForEmptyUri(R.mipmap.center_head).build();
+        System.out.println("6");
         ImageLoader.getInstance().displayImage(getUserInfo().headimg, head_img, build);
+        System.out.println("7");
         MyHttp.userEarning(http, null, new MyHttp.MyHttpResult() {
             @Override
             public void httpResult(Integer which, int code, String msg, Object bean) {
+                System.out.println("8");
                 if (code != 0) {
                     showToast(msg);
                     return;

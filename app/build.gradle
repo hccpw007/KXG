@@ -54,5 +54,4 @@ dependencies {
     compile files('libs/WBShare.jar')
     compile project(':OneSDK')
     compile 'com.jakewharton:butterknife:5.1.1'
-    compile project(':PushSDK')
 }
